@@ -9,10 +9,9 @@
     (throw (AssertionError. "Invalid DNA strand."))))
 
 (defn to-rna [dna]
-  (loop [dna dna
-         rna []]
-    (let [nucleotide (transcribe (first dna))]
-      (if-let [remaining (not-empty (rest dna))]
-        (recur remaining
-               (conj rna nucleotide))
-        (apply str (conj rna nucleotide))))))
+  (loop [to-convert dna rna (transient [])]
+    (let [nucleotide (transcribe (first to-convert))
+          rna        (conj! rna nucleotide)]
+      (if-let [remaining (not-empty (rest to-convert))]
+        (recur remaining rna)
+        (apply str (persistent! rna))))))
