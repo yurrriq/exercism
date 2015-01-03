@@ -11,7 +11,8 @@
 (defn to-rna [dna]
   (loop [dna dna
          rna []]
-    (if-let [remaining (not-empty (rest dna))]
-      (recur remaining
-             (conj rna (transcribe (first dna))))
-      (apply str (conj rna (transcribe (first dna)))))))
+    (let [nucleotide (transcribe (first dna))]
+      (if-let [remaining (not-empty (rest dna))]
+        (recur remaining
+               (conj rna nucleotide))
+        (apply str (conj rna nucleotide))))))
