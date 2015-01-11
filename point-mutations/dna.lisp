@@ -3,12 +3,14 @@
   (:export #:hamming-distance))
 (in-package #:dna)
 
-;; This is a rather direct port of my Clojure solution. 
+;; Overfastidiously, I find `(= (length x) (length y))` ehgo unpleasant.
+;; I know mapping `#'length` and `apply`ing `'=` is overkill, especially when
+;; there are only two `args`, but `length=` is much more elegant-looking to me.
+(defun length= (&rest args)
+  "Returns `T` iff the length of each `args` is equal, otherwise `nil`."
+  (apply '= (mapcar #'length args)))
+
 (defun hamming-distance (dna1 dna2)
   "Determine number of mutations between DNA strands by computing the Hamming Distance."
-  (when (apply '= (mapcar 'length (list dna1 dna2)))
-    (reduce #'(lambda (n different?) (if different? (incf n) n))
-            (mapcar #'(lambda (a b) (not (char= a b)))
-                    (coerce dna1 'list)
-                    (coerce dna2 'list))
-            :initial-value 0)))
+  (when (length= dna1 dna2)
+    (count t (map 'list #'char/= dna1 dna2))))
