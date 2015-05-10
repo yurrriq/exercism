@@ -1,0 +1,74 @@
+#+SETUPFILE:   ../setup.org
+#+TITLE:       Exercism.io: Haskell
+#+DESCRIPTION: My solutions to Excercism.io in Haskell.
+#+OPTIONS: html-postamble:nil toc:nil
+#+HTML_MATHJAX: align:"left" scale:"100" mathml:t path:"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+
+** Leap
+
+Write a program that will take a year and report if it is a leap year.
+
+The tricky thing here is that a leap year occurs:
+
+#+BEGIN_EXAMPLE
+on every year that is evenly divisible by 4
+  except every year that is evenly divisible by 100
+    unless the year is also evenly divisible by 400
+#+END_EXAMPLE
+
+For example, 1997 is not a leap year, but 1996 is.  1900 is not a leap
+year, but 2000 is.
+
+If your language provides a method in the standard library that does
+this look-up, pretend it doesn't exist and implement it yourself.
+
+*** Notes
+
+For a delightful, four minute explanation of the whole leap year
+phenomenon, go watch [[http://www.youtube.com/watch?v%3DxX96xng7sAE][this youtube video]]
+
+*** Source
+
+JavaRanch Cattle Drive, exercise 3 [[http://www.javaranch.com/leap.jsp][view source]]
+
+*** Solution
+
+#+BEGIN_SRC haskell :tangle LeapYear.hs :padline no
+module LeapYear (isLeapYear) where
+#+END_SRC
+
+~isLeapYear~ takes an ~Integral~ and returns a ~Bool~, satisfying the equation:
+
+$$\text{isLeapYear}(year) = \begin{cases}
+True & 400\ \vert\ year \\
+False & 100\ \vert\ year \\
+True & 4\ \vert\ year \\
+False & True \\
+\end{cases}$$
+
+#+BEGIN_SRC haskell :tangle LeapYear.hs
+isLeapYear :: Integral a => a -> Bool
+isLeapYear year
+  | 400 `divides` year = True
+  | 100 `divides` year = False
+  | 4   `divides` year = True
+  | otherwise          = False
+#+END_SRC
+
+~divides~ is an infix function that takes two ~Integral~ numbers
+and satisfies the equation:
+
+$$d\ \text{divides}\ n = (n\ \text{rem}\ d \equiv 0)$$
+
+#+BEGIN_SRC haskell :tangle LeapYear.hs
+divides :: Integral a => a -> a -> Bool
+d `divides` n = n `rem` d == 0
+#+END_SRC
+
+*** Tests
+#+BEGIN_SRC sh
+runhaskell leap_test.hs
+#+END_SRC
+#+BEGIN_EXAMPLE
+Cases: 4  Tried: 4  Errors: 0  Failures: 0
+#+END_EXAMPLE
