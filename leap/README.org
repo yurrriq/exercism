@@ -1,11 +1,21 @@
 #+SETUPFILE:   ../setup.org
 #+TITLE:       Exercism.io: Haskell
+#+DATE:
 #+DESCRIPTION: My solutions to Excercism.io in Haskell.
 #+OPTIONS: html-postamble:nil toc:nil
 #+HTML_MATHJAX: align:"left" scale:"100" mathml:t path:"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [twoside]
+#+LATEX_HEADER: \usepackage{fancyhdr}
+#+LATEX_HEADER: \pagestyle{fancy}
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usepackage{upquote}
+#+LATEX_HEADER: \usemintedstyle{emacs}
+
+#+LATEX: \thispagestyle{empty}
+#+LATEX: \newpage
 
 ** Leap
-
 Write a program that will take a year and report if it is a leap year.
 
 The tricky thing here is that a leap year occurs:
@@ -23,16 +33,15 @@ If your language provides a method in the standard library that does
 this look-up, pretend it doesn't exist and implement it yourself.
 
 *** Notes
-
 For a delightful, four minute explanation of the whole leap year
 phenomenon, go watch [[http://www.youtube.com/watch?v%3DxX96xng7sAE][this youtube video]]
 
 *** Source
-
 JavaRanch Cattle Drive, exercise 3 [[http://www.javaranch.com/leap.jsp][view source]]
 
+#+LATEX: \vfill
+#+LATEX: \pagebreak
 *** Solution
-
 #+BEGIN_SRC haskell :tangle LeapYear.hs :padline no
 module LeapYear (isLeapYear) where
 #+END_SRC
