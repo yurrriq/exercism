@@ -1,21 +1,11 @@
-#+SETUPFILE:   ../setup.org
-#+TITLE:       Exercism.io: Haskell
+#+SETUPFILE:   ../../org/setup.org
+#+TITLE:       Exercism.io → Haskell → Leap
 #+DATE:
 #+DESCRIPTION: My solutions to Excercism.io in Haskell.
 #+OPTIONS: html-postamble:nil toc:nil
 #+HTML_MATHJAX: align:"left" scale:"100" mathml:t path:"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
-#+LATEX_CLASS: article
-#+LATEX_CLASS_OPTIONS: [twoside]
-#+LATEX_HEADER: \usepackage{fancyhdr}
-#+LATEX_HEADER: \pagestyle{fancy}
-#+LATEX_HEADER: \usepackage{minted}
-#+LATEX_HEADER: \usepackage{upquote}
-#+LATEX_HEADER: \usemintedstyle{emacs}
 
-#+LATEX: \thispagestyle{empty}
-#+LATEX: \newpage
-
-** Leap
+* Leap
 Write a program that will take a year and report if it is a leap year.
 
 The tricky thing here is that a leap year occurs:
@@ -32,28 +22,29 @@ year, but 2000 is.
 If your language provides a method in the standard library that does
 this look-up, pretend it doesn't exist and implement it yourself.
 
-*** Notes
+** Notes
 For a delightful, four minute explanation of the whole leap year
 phenomenon, go watch [[http://www.youtube.com/watch?v%3DxX96xng7sAE][this youtube video]]
 
-*** Source
+** Source
 JavaRanch Cattle Drive, exercise 3 [[http://www.javaranch.com/leap.jsp][view source]]
 
-#+LATEX: \vfill
-#+LATEX: \pagebreak
-*** Solution
+
+** Solution
 #+BEGIN_SRC haskell :tangle LeapYear.hs :padline no
 module LeapYear (isLeapYear) where
 #+END_SRC
 
 ~isLeapYear~ takes an ~Integral~ and returns a ~Bool~, satisfying the equation:
 
-$$\text{isLeapYear}(year) = \begin{cases}
-True & 400\ \vert\ year \\
-False & 100\ \vert\ year \\
-True & 4\ \vert\ year \\
-False & True \\
-\end{cases}$$
+\[
+  \text{isLeapYear}(year) = \begin{cases}
+     True   & \text{if } 400\ \vert\ year \\
+     False  & \text{if } 100\ \vert\ year \\
+     True   & \text{if }   4\ \vert\ year \\
+     False  & \text{otherwise}
+  \end{cases}
+\]
 
 #+BEGIN_SRC haskell :tangle LeapYear.hs
 isLeapYear :: Integral a => a -> Bool
@@ -74,8 +65,8 @@ divides :: Integral a => a -> a -> Bool
 d `divides` n = n `rem` d == 0
 #+END_SRC
 
-*** Tests
-#+BEGIN_SRC sh
+** Tests
+#+BEGIN_SRC fish
 runhaskell leap_test.hs
 #+END_SRC
 #+BEGIN_EXAMPLE
