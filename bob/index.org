@@ -1,11 +1,11 @@
-#+SETUPFILE:   ../setup.org
-#+TITLE:       Exercism.io: Erlang
+#+SETUPFILE:   ../../org/setup.org
+#+TITLE:       Exercism.io → Erlang → Bob
 #+DATE:
 #+DESCRIPTION: My solutions to Excercism.io in Haskell.
 #+OPTIONS: html-postamble:nil toc:nil
 #+HTML_MATHJAX: align:"left" scale:"100" mathml:t path:"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
 
-** Bob
+* Bob
 Bob is a lackadaisical teenager. In conversation, his responses are very limited.
 
 Bob answers 'Sure.' if you ask him a question.
@@ -17,7 +17,7 @@ anything.
 
 He answers 'Whatever.' to anything else.
 
-*** Instructions
+** Instructions
 Run the test file, and fix each of the errors in turn. When you get the
 first test to pass, go to the first pending or skipped test, and make
 that pass as well. When all of the tests are passing, feel free to
@@ -33,10 +33,10 @@ specification.
 
 Have fun!
 
-*** Source
+** Source
 Inspired by the 'Deaf Grandma' exercise in Chris Pine's Learn to Program tutorial. [[http://pine.fm/LearnToProgram/?Chapter%3D06][view source]]
 
-*** Solution
+** Solution
 #+BEGIN_SRC erlang :tangle bob.erl :padline no
 -module(bob).
 -export([response_for/1]).
@@ -58,7 +58,7 @@ response_for(Prompt) ->
     end.
 #+END_SRC
 
-*** Tests
+** Tests
 #+BEGIN_SRC fish
 erlc bob*.erl; and erl -noshell -eval "eunit:test(bob_tests, [verbose])" -s init stop
 #+END_SRC
