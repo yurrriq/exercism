@@ -73,7 +73,7 @@ toRNA = map (\case 'G' -> 'C'; 'C' -> 'G'; 'T' -> 'A'; 'A' -> 'U')
 I always appreciate a good one-liner.
 
 For fun, a took this opportunity to start learning how to
-document Haskell code using [[https://github.com/haskell/haddock][Haddock]]. The results are [[file:~/src/yurrriq/exercism/haskell/doc/DNA.html][here]].
+document Haskell code using [[https://github.com/haskell/haddock][Haddock]]. The results are [[../doc/DNA.html][here]].
 
 #+BEGIN_SRC haskell :tangle DNA.hs :exports none
 {- $usage
