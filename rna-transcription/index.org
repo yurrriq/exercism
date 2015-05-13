@@ -1,0 +1,93 @@
+#+SETUPFILE:   ../../org/setup.org
+#+TITLE:       Exercism.io → Haskell → RNA Transcription
+#+DATE:
+#+DESCRIPTION: My solutions to Excercism.io in Haskell.
+#+OPTIONS: html-postamble:nil toc:nil
+#+HTML_MATHJAX: align:"left" scale:"100" mathml:t path:"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+#+LINK_HOME: ../../index.html
+#+LINK_UP:   ../index.html
+#+INFOJS_OPT: path:../../js/org-info.js view:showall toc:nil ltoc:nil tdepth:2 mouse:#dddddd
+
+* RNA Transcription
+Write a program that, given a DNA strand, returns its RNA complement (per RNA transcription).
+
+Both DNA and RNA strands are a sequence of nucleotides.
+
+The four nucleotides found in DNA are adenine (**A**), cytosine (**C**),
+guanine (**G**) and thymine (**T**).
+
+The four nucleotides found in RNA are adenine (**A**), cytosine (**C**),
+guanine (**G**) and uracil (**U**).
+
+Given a DNA strand, its transcribed RNA strand is formed by replacing
+each nucleotide with its complement:
+
+- =G= -> =C=
+- =C= -> =G=
+- =T= -> =A=
+- =A= -> =U=
+
+** Source
+Rosalind [[http://rosalind.info/problems/rna][view source]]
+
+** Solution
+#+BEGIN_SRC haskell :tangle DNA.hs :padline no
+{-# LANGUAGE LambdaCase #-}
+#+END_SRC
+
+I used the [[https://downloads.haskell.org/~ghc/7.8.3/docs/html/users_guide/syntax-extns.html#lambda-case][~LambdaCase~ syntactic extension]] for brevity
+and to fully adopt the [[http://en.wikipedia.org/wiki/Tacit_programming][point-free style]].
+
+#+BEGIN_SRC haskell
+\case { ... } ==> \x -> case x of { ... }
+#+END_SRC
+
+Apparently it took the Haskell team [[https://unknownparallel.wordpress.com/2012/07/09/the-long-and-epic-journey-of-lambdacase-2/][quite a while]] to settle on the syntax.
+
+#+BEGIN_SRC haskell :tangle DNA.hs :padline no :exports none
+{-|
+Module      : DNA
+Copyright   : (c) Eric Bailey, 2015
+License     : MIT
+
+Maintainer  : Eric Bailey
+Stability   :  experimental
+Portability :  portable
+
+Transcription of DNA to RNA.
+-}
+module DNA (
+  toRNA
+  -- * Usage
+  -- $usage
+  ) where
+
+-- | Given a DNA strand, returns its RNA complement (per RNA transcription).
+#+END_SRC
+
+#+BEGIN_SRC haskell :tangle DNA.hs :padline no
+toRNA :: String -> String
+toRNA = map (\case 'G' -> 'C'; 'C' -> 'G'; 'T' -> 'A'; 'A' -> 'U')
+#+END_SRC
+
+I always appreciate a good one-liner.
+
+For fun, a took this opportunity to start learning how to
+document Haskell code using [[https://github.com/haskell/haddock][Haddock]]. The results are [[file:~/src/yurrriq/exercism/haskell/doc/DNA.html][here]].
+
+#+BEGIN_SRC haskell :tangle DNA.hs :exports none
+{- $usage
+>>> toRNA "A"
+"U"
+>>> toRNA "GATTACA"
+"CUAAUGU"
+-}
+#+END_SRC
+
+** Tests
+#+BEGIN_SRC fish
+runhaskell rna-transcription_test.hs
+#+END_SRC
+#+BEGIN_EXAMPLE
+Cases: 5  Tried: 5  Errors: 0  Failures: 0
+#+END_EXAMPLE
