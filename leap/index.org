@@ -4,6 +4,9 @@
 #+DESCRIPTION: My solutions to Excercism.io in Haskell.
 #+OPTIONS: html-postamble:nil toc:nil
 #+HTML_MATHJAX: align:"left" scale:"100" mathml:t path:"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+#+LINK_HOME: ../../index.html
+#+LINK_UP:   ../index.html
+#+INFOJS_OPT: path:../../js/org-info.js view:showall toc:nil ltoc:nil tdepth:2 mouse:#dddddd
 
 * Leap
 Write a program that will take a year and report if it is a leap year.
@@ -28,7 +31,6 @@ phenomenon, go watch [[http://www.youtube.com/watch?v%3DxX96xng7sAE][this youtub
 
 ** Source
 JavaRanch Cattle Drive, exercise 3 [[http://www.javaranch.com/leap.jsp][view source]]
-
 
 ** Solution
 #+BEGIN_SRC haskell :tangle LeapYear.hs :padline no

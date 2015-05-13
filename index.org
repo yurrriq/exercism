@@ -1,0 +1,15 @@
+#+TITLE:  Exercism.io → Haskell
+#+DATE:
+#+AUTHOR: Eric Bailey
+#+DESCRIPTION: My solutions to Excercism.io in Haskell.
+#+OPTIONS: html-postamble:nil toc:nil
+#+HTML_DOCTYPE: html5
+#+HTML_HEAD: <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/style.min.css">
+#+HTML_MATHJAX: align:"left" scale:"100" mathml:t path:"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+#+LINK_HOME: ../../index.html
+#+LINK_UP:   ../index.html
+#+INFOJS_OPT: path:../../js/org-info.js view:showall toc:nil ltoc:nil tdepth:2 mouse:#dddddd
+
+* Haskell
++ [[file:leap/index.org][Leap]]
