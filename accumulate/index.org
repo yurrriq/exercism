@@ -33,13 +33,6 @@ Elixir specific: it's perfectly fine to use ~Enum.reduce~ or
 
 Check out [[http://help.exercism.io/getting-started-with-haskell.html][Exercism Help]] for instructions to get started writing Haskell.
 
-** Running Tests
-Use `runhaskell` (included in the Haskell Platform) to compile and run your
-Haskell code.
-#+BEGIN_SRC fish
-runhaskell -Wall accumulate_test.hs
-#+END_SRC
-
 ** Source
 Conversation with James Edward Gray II [[https://twitter.com/jeg2][view source]]
 
