@@ -5,16 +5,17 @@
      :base-directory "~/src/yurrriq/exercism/"
      :base-extension "org"
      :publishing-directory "~/src/yurrriq/exercism/_site/"
-     :exlude ""
+     :exclude "\\(README\\|setup\\).org"
      :recursive t
      :auto-sitemap t
      :sitemap-fileame "sitemap.org"
-     :sitemap-title "Sitemap"
+     :sitemap-title "My Exercism.io Solutions"
      :export-creator-info nil
      :export-author-info nil
      :table-of-contents t
      :section-numbers nil
-     :html-postamble "<p class=\"postamble\">Last update %d.</p>"
+     :html-doctype "html5"
+     :html-poinistamble "<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js\"></script>"
      :style-include-default nil
      :publishing-function org-html-publish-to-html))
   (add-to-list
