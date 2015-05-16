@@ -5,8 +5,8 @@ Copyright   : (c) Eric Bailey, 2015
 License     : MIT
 
 Maintainer  : Eric Bailey
-Stability   :  experimental
-Portability :  portable
+Stability   : experimental
+Portability : portable
 
 Transcription of DNA to RNA.
 -}
