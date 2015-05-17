@@ -25,7 +25,7 @@ data Sublist
   = Equal
   -- | The first list is a fully contained, in order, in the second list.
   | Sublist
-  -- | The first fully contains, in order, the second list.
+  -- | The first list fully contains, in order, the second list.
   | Superlist
   -- | Neither list fully contains the other.
   | Unequal
