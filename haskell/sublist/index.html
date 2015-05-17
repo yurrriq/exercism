@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Exercism.io → Haskell</title>
-<!-- 2015-05-17 Sun 16:10 -->
+<title>Exercism.io → Haskell → Sublist</title>
+<!-- 2015-05-17 Sun 16:04 -->
 <meta  charset="utf-8">
 <meta  name="generator" content="Org-mode">
 <meta  name="author" content="Eric Bailey">
@@ -89,7 +89,7 @@
   /*]]>*/-->
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../css/style.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/style.min.css">
 
 <script type="text/javascript" src="../../js/org-info.js">
 /**
@@ -208,32 +208,172 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+            config: ["MMLorHTML.js"], jax: ["input/TeX"],
+        //  jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "left",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
 </head>
 <body>
 <div id="content">
-<h1 class="title">Exercism.io → Haskell</h1>
+<h1 class="title">Exercism.io → Haskell → Sublist</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">Haskell</a></li>
+<li><a href="#sec-1">Sublist</a>
+<ul>
+<li><a href="#sec-1-1">Examples</a></li>
+<li><a href="#sec-1-2">Solution</a></li>
+<li><a href="#sec-1-3">Tests</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">Haskell</h2>
+<h2 id="sec-1">Sublist</h2>
 <div class="outline-text-2" id="text-1">
-<ul class="org-ul">
-<li><a href="leap/index.html">Leap</a>
-</li>
-<li><a href="accumulate/index.html">Accumulate</a>
-</li>
-<li><a href="rna-transcription/index.html">RNA Transcription</a>
-</li>
-<li><a href="sublist/index.html">Sublist</a>
-</li>
-</ul>
+<p>
+Write a function to determine if a list is a sublist of another list.
+</p>
+
+<p>
+Write a function that given two lists determines if the first list is
+contained within the second list, if the second list is contained within
+the first list, if both lists are contained within each other or if none
+of these are true.
+</p>
+
+<p>
+Specifically, a list A is a sublist of list B if by dropping 0 or more elements
+from the front of B and 0 or more elements from the back of B you get a list
+that's completely equal to A.
+</p>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1">Examples</h3>
+<div class="outline-text-3" id="text-1-1">
+\begin{align*}
+  [1, 2, 3]       &\subseteq [1, 2, 3, 4, 5] \\
+  [3, 4, 5]       &\subseteq [1, 2, 3, 4, 5] \\
+  [3, 4]          &\subseteq [1, 2, 3, 4, 5] \\
+  [1, 2, 3]       &\equiv    [1, 2, 3] \\
+  [1, 2, 3, 4, 5] &\supseteq [2, 3, 4] \\
+  [1, 2, 4]       &\not=     [1, 2, 3, 4, 5]
+\end{align*}
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2">Solution</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+For the sake of convenience I imported <code>isInfixOf</code> from <code>Data.List</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-haskell"><span style="color: #F92672;">import</span> <span style="color: #66D9EF;">Data.List</span>
+</pre>
+</div>
+
+<p>
+Then I set up the <code>Sublist</code> data type.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-haskell"><span style="color: #F92672;">data</span> <span style="color: #66D9EF;">Sublist</span>
+  <span style="color: #75715E;">-- | The two lists are equal.</span>
+  <span style="color: #FD971F;">=</span> <span style="color: #66D9EF;">Equal</span>
+  <span style="color: #75715E;">-- | The first list is a fully contained, in order, in the second list.</span>
+  <span style="color: #FD971F;">|</span> <span style="color: #66D9EF;">Sublist</span>
+  <span style="color: #75715E;">-- | The first list fully contains, in order, the second list.</span>
+  <span style="color: #FD971F;">|</span> <span style="color: #66D9EF;">Superlist</span>
+  <span style="color: #75715E;">-- | Neither list fully contains the other.</span>
+  <span style="color: #FD971F;">|</span> <span style="color: #66D9EF;">Unequal</span>
+  <span style="color: #F92672;">deriving</span> (<span style="color: #66D9EF;">Show</span><span style="color: #FD971F;">,</span> <span style="color: #66D9EF;">Eq</span>)
+</pre>
+</div>
+
+<p>
+Which is used as the return type for <code>sublist</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-haskell"><span style="color: #A6E22E;">sublist</span> <span style="color: #A6E22E;">::</span> <span style="color: #66D9EF;">Eq</span> a <span style="color: #FD971F;">=</span> [a] <span style="color: #FD971F;">-&gt;</span> [a] <span style="color: #FD971F;">-&gt;</span> <span style="color: #66D9EF;">Sublist</span>
+</pre>
+</div>
+
+<p>
+With <code>isInfixOf</code>, the implementation of <code>sublist</code> is trivial.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-haskell"><span style="color: #A6E22E;">sublist</span> a b
+  <span style="color: #FD971F;">|</span> a <span style="color: #FD971F;">==</span> b          <span style="color: #FD971F;">=</span> <span style="color: #66D9EF;">Equal</span>
+  <span style="color: #FD971F;">|</span> a <span style="color: #FD971F;">`isInfixOf`</span> b <span style="color: #FD971F;">=</span> <span style="color: #66D9EF;">Sublist</span>
+  <span style="color: #FD971F;">|</span> b <span style="color: #FD971F;">`isInfixOf`</span> a <span style="color: #FD971F;">=</span> <span style="color: #66D9EF;">Superlist</span>
+  <span style="color: #FD971F;">|</span> otherwise       <span style="color: #FD971F;">=</span> <span style="color: #66D9EF;">Unequal</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3">Tests</h3>
+<div class="outline-text-3" id="text-1-3">
+<div class="org-src-container">
+
+<pre class="src src-fish">runhaskell sublist_test.hs
+</pre>
+</div>
+<pre class="example">
+Cases: 18  Tried: 18  Errors: 0  Failures: 0
+</pre>
+</div>
 </div>
 </div>
 </div>
