@@ -1,0 +1,80 @@
+#+SETUPFILE:   ../../org/setup.org
+#+TITLE:       Exercism.io → Haskell → Gigasecond
+#+DATE:
+#+DESCRIPTION: My solutions to Excercism.io in Haskell.
+#+OPTIONS: html-postamble:nil toc:nil
+#+HTML_MATHJAX: align:"left" scale:"100" mathml:t path:"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+#+LINK_HOME: ../../index.html
+#+LINK_UP:   ../index.html
+#+INFOJS_OPT: path:../../js/org-info.js view:showall toc:nil ltoc:nil tdepth:2 mouse:#dddddd
+
+* Gigasecond
+Write a program that will calculate the date that someone turned or will celebrate their 1 Gs anniversary.
+
+A gigasecond is one billion ($10^9$) seconds.
+
+** Source
+Chapter 9 in Chris Pine's online Learn to Program tutorial. [[http://pine.fm/LearnToProgram/?Chapter%3D09][view source]]
+
+** Solution
+#+BEGIN_SRC haskell :tangle Gigasecond.hs :padline no :exports none
+{-|
+Module      : Gigasecond
+Copyright   : (c) Eric Bailey, 2015
+License     : MIT
+
+Maintainer  : Eric Bailey
+Stability   : experimental
+Portability : portable
+
+Calculating when someone turned or will turn 1 Gs old.
+-}
+
+module Gigasecond (
+  fromDay
+  -- * Usage
+  -- $usage
+  ) where
+#+END_SRC
+
+First, I imported the type, ~UTCTime~, and function, ~addUTCTime~,
+from ~Data.Time.Clock~.
+#+BEGIN_SRC haskell :tangle Gigasecond.hs
+import Data.Time.Clock (UTCTime, addUTCTime)
+#+END_SRC
+
+#+BEGIN_SRC haskell :tangle Gigasecond.hs :exports none
+-- | Given a time, returns the time a gigasecond later.
+#+END_SRC
+
+Then the task at hand is as simple as adding =1000000000= seconds to a given
+~UTCTime~.
+#+BEGIN_SRC haskell :tangle Gigasecond.hs :padline no
+fromDay :: UTCTime -> UTCTime
+fromDay = addUTCTime 1000000000
+#+END_SRC
+
+#+BEGIN_SRC haskell :tangle Gigasecond.hs :exports none
+{- $usage
+>>> import Data.Time.Format (readTime)
+>>> import System.Locale (defaultTimeLocale, iso8601DateFormat)
+>>> let fromString = readTime defaultTimeLocale (iso8601DateFormat (Just "%T%Z")) :: String -> UTCTime
+2020-10-18 04:21:40 UTC
+-}
+#+END_SRC
+
+** Tests
+I added my birthday (in UTC) to ~gigasecondTests~.
+#+BEGIN_SRC haskell
+-- Note: This is psuedocode.
+gigasecondTests ++
+  [ testCase "from feb 8 1989" $
+    dt "2020-10-18T04:21:40Z" @=? fromDay (dt "1989-02-09T02:35:00Z") ]
+#+END_SRC
+
+#+BEGIN_SRC fish
+runhaskell gigasecond_test.hs
+#+END_SRC
+#+BEGIN_EXAMPLE
+Cases: 4  Tried: 4  Errors: 0  Failures: 0
+#+END_EXAMPLE

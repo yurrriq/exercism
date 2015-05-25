@@ -29,4 +29,6 @@ gigasecondTests =
   , testCase "from jul 19 1959" $
     dt "1991-03-27T01:46:40Z" @=? fromDay (dt "1959-07-19T00:00:00Z")
     -- customize this to test your birthday and find your gigasecond date:
+  , testCase "from feb 8 1989" $
+    dt "2020-10-18T04:21:40Z" @=? fromDay (dt "1989-02-09T02:35:00Z")
   ]
