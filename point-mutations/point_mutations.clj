@@ -8,7 +8,7 @@
 (comment
   ;; Slower
   (count (filter true? (map not= a b)))
-  
+
   ;; Slowest
   ;; https://gist.github.com/mihneadb/4318257
   (count (filter true? (map (partial reduce not=) (map vector a b)))))
