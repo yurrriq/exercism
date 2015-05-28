@@ -24,7 +24,7 @@ sumOfMultiples = (sum .) . (. fromOneToExclusive) . anyDivides
 -- | Given a number, @x@, returns the list of numbers from 1 to @x - 1@.
 fromOneToExclusive :: Integral a => a -> [a]
 fromOneToExclusive = enumFromTo 1 . pred
-                 
+
 -- | Given two lists of numbers, @xs@ and @ys@, returns a possibly empty list
 -- of every @y@ in @ys@ such that some @x@ in @xs@ 'divides' @y@.
 --
