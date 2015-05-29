@@ -1,16 +1,16 @@
+{-# LANGUAGE LambdaCase, ViewPatterns #-}
+
 module Bob (responseFor) where
 
-import Prelude hiding (null)
 import Control.Monad (ap)
-import Data.Char (isUpper, toUpper)
-import Data.Text (null, pack, strip)
+import Data.Char (isSpace, isUpper, toUpper)
 
 responseFor :: String -> String
-responseFor prompt
-  | isYelled   prompt = "Whoa, chill out!"
-  | isSilent   prompt = "Fine. Be that way!"
-  | isQuestion prompt = "Sure."
-  | otherwise         = "Whatever."
-  where isYelled      = ap ((&&) . any isUpper) ((==) =<< map toUpper)
-        isSilent      = null . strip . pack
-        isQuestion    = ('?' ==) . last
+responseFor = \case
+  ((isYelled)   -> True) -> "Whoa, chill out!"
+  ((isSilent)   -> True) -> "Fine. Be that way!"
+  ((isQuestion) -> True) -> "Sure."
+  _                      -> "Whatever."
+  where isYelled   = ap ((&&) . any isUpper) ((==) =<< map toUpper)
+        isSilent   = (==) =<< filter isSpace
+        isQuestion = ('?' ==) . last
