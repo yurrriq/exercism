@@ -53,7 +53,7 @@ filterCaseSensitiveAnagramsFor a =
   filter (\\b -> (map toLower b) \`isCaseSensitiveAnagramOf\` a)
 
 isCaseSensitiveAnagramOf :: String -> String -> Bool
-x \`isCaseSensitiveAnagramOf\` y = (x /= y) && (sort x == sort y)
+x \`isCaseSensitiveAnagramOf\` y = (x /= y) && (x `hasSameLettersAs` y)
 
 hasSameLettersAs :: String -> String -> Bool
 x \`hasSameLettersAs\` y = sort x == sort y
