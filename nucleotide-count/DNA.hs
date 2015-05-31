@@ -29,5 +29,5 @@ nucleotideCounts = fromListWith (+) .
 
 -- | Given a nucleotide, returns it if valid, otherwise throws an exception.
 valid :: Char -> Char
-valid c | not $ c `elem` "ACGT" = error $ "invalid nucleotide " ++ show c
-        | otherwise   = c
+valid c | c `elem` "ACGT" = c
+        | otherwise       = error $ "invalid nucleotide " ++ show c
