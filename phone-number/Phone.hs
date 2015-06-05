@@ -7,9 +7,9 @@ areaCode = take 3 . number
 
 number :: String -> String
 number x
-  | numDigits == 10                  = digits
+  | numDigits == 10                = digits
   | numDigits == 11 && head x == '1' = tail digits
-  | otherwise                        = "0000000000"
+  | otherwise                     = "0000000000"
   where digits    = filter isDigit x
         numDigits = length digits
 
