@@ -1,16 +1,15 @@
-module ListOps
-  ( length
-  , reverse
-  , map
-  , filter
-  , foldr
-  , foldl'
-  , (++)
-  , concat
+module ListOps (
+  (++),
+  concat,
+  filter,
+  foldl',
+  foldr,
+  length,
+  map,
+  reverse
   ) where
 
-import Prelude hiding
-  ( length, reverse, map, filter, foldr, (++), concat )
+import Prelude hiding ((++), concat, filter, foldr, length, map, reverse)
 
 foldl' :: (b -> a -> b) -> b -> [a] -> b
 foldl' = undefined
