@@ -34,9 +34,16 @@ foldr f y = go
   where go [] = y
         go (x:xs) = f x $ go xs
 
+-- | Illustration of the fold
+--
+-- @
+--  length = go 0
+--   where go acc []      = acc
+--         go !acc (_:xs) = go (acc + 1) xs
+-- @
+--
 length :: (Num b) => [a] -> b
-length [] = 0
-length (_:xs) = 1 + length xs
+length = foldl' (const . (1 +)) 0
 
 map :: (a -> b) -> [a] -> [b]
 map f = foldr g []
