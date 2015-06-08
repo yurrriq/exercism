@@ -24,13 +24,16 @@ import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
 
 -- | A school is a map from grade to list of students.
-data School  = School { toMap :: Map Grade [Student]}
+newtype School = School { unSchool :: Map Grade [Student]}
 
 -- | A grade is an integer.
-type Grade   = Int
+type Grade     = Int
 
 -- | A student is represented by their first name, as a string.
-type Student = String
+type Student   = String
+
+-- | A roster is a list of pairs of a 'Grade' and a list of 'Student's.
+type Roster    = [(Grade, [Student])]
 
 -- | The empty 'School'.
 empty :: School
@@ -40,17 +43,17 @@ empty = School $ Map.fromList []
 -- to the existing list of 'Student's in @n@ at @s@, or sets the list to @[x]@
 -- if none exists.
 add :: Grade -> Student -> School -> School
-add n x = School . Map.insertWith (++) n [x] . toMap 
+add n x = School . Map.insertWith (++) n [x] . unSchool
 
 -- | Given a 'Grade' @n@ and a 'School' @s@, returns the list of 'Student's
 -- in @n@ at @s@.
 grade :: Grade -> School -> [Student]
-grade = sort .: Map.findWithDefault [] .:. toMap
+grade = sort .: Map.findWithDefault [] .:. unSchool
 
--- | Given a 'School', returns a list of pairs of a 'Grade' and a list of
--- 'Student's, sorted in ascending order by 'Grade' then by 'Student'.
-sorted :: School -> [(Grade, [Student])]
-sorted = Map.toAscList . Map.map sort . toMap
+-- | Given a 'School', returns a 'Roster', sorted in ascending order
+-- by 'Grade' then by 'Student'.
+sorted :: School -> Roster
+sorted = Map.toAscList . Map.map sort . unSchool
 
 -- | From "Data.Function.Pointless"
 --
