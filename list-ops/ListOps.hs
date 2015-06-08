@@ -34,13 +34,13 @@ foldr f y = go
   where go [] = y
         go (x:xs) = f x $ go xs
 
-length :: [a] -> Int
-length = foldr (const (1 +)) 0
+length :: (Num b) => [a] -> b
+length [] = 0
+length (_:xs) = 1 + length xs
 
 map :: (a -> b) -> [a] -> [b]
 map f = foldr g []
   where g =  (:) . f
 
 reverse :: [a] -> [a]
-reverse xs = foldr f id xs []
-  where f = flip (.) . (:)
+reverse = foldl (flip (:)) []
