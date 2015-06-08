@@ -10,11 +10,9 @@ module ListOps (
   reverse
   ) where
 
+import Control.Monad (ap)
+import Data.Bool (bool)
 import Prelude hiding ((++), concat, filter, foldr, length, map, reverse)
-
-if' :: Bool -> a -> a -> a
-if' True  x _ = x
-if' False _ y = y
 
 (++) :: [a] -> [a] -> [a]
 xs ++ ys = foldr (:) ys xs
@@ -24,7 +22,7 @@ concat = foldr (++) []
 
 filter :: (a -> Bool) -> [a] -> [a]
 filter p = foldr f []
-  where f x = if' (p x) =<< (x :)
+  where f = ap (bool id . (:)) p
 
 foldl' :: (b -> a -> b) -> b -> [a] -> b
 foldl' f = lgo
