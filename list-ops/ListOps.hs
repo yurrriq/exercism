@@ -26,8 +26,8 @@ filter p = foldr f []
 
 foldl' :: (b -> a -> b) -> b -> [a] -> b
 foldl' f = lgo
-  where lgo z []      = z
-        lgo !z (x:xs) = lgo (f z x) xs
+  where lgo acc []      = acc
+        lgo !acc (x:xs) = lgo (f acc x) xs
 
 foldr :: (a -> b -> b) -> b -> [a] -> b
 foldr f y = go
