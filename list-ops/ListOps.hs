@@ -43,4 +43,4 @@ map f = foldr g []
   where g =  (:) . f
 
 reverse :: [a] -> [a]
-reverse = foldl (flip (:)) []
+reverse = foldl' (flip (:)) []
