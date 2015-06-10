@@ -13,7 +13,6 @@ module Robot (Robot, mkRobot, resetName, robotName) where
 
 import Control.Concurrent.STM
 import Control.Monad (liftM)
-import Data.Char (isDigit)
 import System.Random (randomRIO)
 
 -- | A robot has a name that can be read ('robotName') and reset ('resetName').
@@ -23,8 +22,8 @@ data Robot = Robot { name :: TVar String }
 mkRobot :: IO Robot
 mkRobot = liftM Robot $ randomName >>= atomically . newTVar
 
--- | Given a 'Robot', generates a randome name and atomically overwrites the
--- given 'Robot''s name.
+-- | Given a 'Robot' @r@, generates a random name and atomically overwrites
+-- @r@'s name.
 resetName :: Robot -> IO ()
 resetName = (randomName >>=) . resetName'
   where resetName' :: Robot -> String -> IO ()
@@ -34,14 +33,11 @@ resetName = (randomName >>=) . resetName'
 robotName :: Robot -> IO String
 robotName = atomically . readTVar . name
 
-randomChar :: Char -> IO Char
-randomChar x
-  | isDigit x = randomRIO ('0','9')
-  | otherwise = randomRIO ('A','Z')
-
 -- | Generates a random robot name, such as RX837 or BC811.
 randomName :: IO String
-randomName = mapM randomChar "AA000"
+randomName = mapM randomRIO [a, a, d, d, d]
+  where a = ('A', 'Z')
+        d = ('0', '9')
 
 -- | From "Data.Function.Pointless"
 --
