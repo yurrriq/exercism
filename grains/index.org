@@ -1,0 +1,42 @@
+#+SETUPFILE:   ../../org/setup.org
+#+TITLE:       Exercism.io → Scheme → Grains
+#+DATE:
+#+DESCRIPTION: My solutions to Excercism.io in Scheme.
+#+OPTIONS: html-postamble:nil toc:nil
+#+HTML_MATHJAX: align:"left" scale:"100" mathml:t path:"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+#+LINK_HOME: ../../index.html
+#+LINK_UP:   ../index.html
+#+INFOJS_OPT: path:../../js/org-info.js view:showall toc:nil ltoc:nil tdepth:2 mouse:#dddddd
+
+#+BEGIN_SRC scheme :tangle grains.scm :padline no
+(define-module (grains)
+  #:export (square total)
+  #:autoload (srfi srfi-1) (iota))
+#+END_SRC
+
+The definition of ~square~ is simple.
+
+\[
+  \text{square}\ n = (n - 1)^2
+\]
+
+#+BEGIN_SRC scheme :tangle grains.scm
+(define (square n)
+  (expt 2 (1- n)))
+#+END_SRC
+
+~total~ can be implemented simply as follows:
+#+BEGIN_SRC scheme :exports code
+(define (total)
+  (reduce + 0 (map square (iota 64 1))))
+#+END_SRC
+
+Since I've been hacking in Haskell lately,
+I got to thinking ~(reduce + 0 (map f coll))~ would traverse ~coll~ twice.
+
+So, I instead decided to implement ~total~ in one traversal:
+#+BEGIN_SRC scheme :tangle grains.scm
+;; Traverses the list only once.
+(define (total)
+  (reduce (lambda (n acc) (+ acc (square n))) 0 (iota 64 1)))
+#+END_SRC
