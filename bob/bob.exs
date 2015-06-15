@@ -22,7 +22,7 @@ defmodule Prompt do
   end
 
   defp some_upper?(input) do
-    String.match?(input, ~r/[A-Z]/)
+    String.match?(input, ~r/\p{Lu}/u)
   end
 end
 
