@@ -22,7 +22,7 @@ data Weekday = Someday
              deriving (Enum, Eq, Show)
 
 -- | Enumerator for specifying an occurrence of a 'Weekday' in a month.
-data Schedule = First | Second | Third | Fourth | Teenth | Last 
+data Schedule = First | Second | Third | Fourth | Teenth | Last
               deriving (Enum, Eq)
 
 -- | A year is an 'Integer'.
@@ -43,7 +43,7 @@ firstWeekDate = toWeekDate .: (flip flip 1 . fromGregorian)
 -- | Given a predicate @p@ and a list @xs@, returns the first @x@ in @xs@ where
 -- @p x@ evaluates to @True@.
 --
--- __Note__: This is unsafe. @filter xs@ must return a non-empty list. 
+-- __Note__: This is unsafe. @filter xs@ must return a non-empty list.
 findFirst :: (a -> Bool) -> [a] -> a
 findFirst = head .: filter
 
