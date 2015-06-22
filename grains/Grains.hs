@@ -1,3 +1,5 @@
+-- -*- compile-command: "runhaskell grains_test.hs" -*-
+
 {-|
 Module      : Grains
 Copyright   : (c) Eric Bailey, 2015
@@ -27,7 +29,7 @@ square = (2 ^) . subtract 1
 
 -- | Returns the total number of grains on the entire chessboard.
 total :: Integer
-total = sum (map square [1..64])
+total  = pred $ square 65
 
 {- $recursive
 @
