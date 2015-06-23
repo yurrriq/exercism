@@ -14,7 +14,7 @@
 
 (defun transcribe (nucleotide)
   "Given a DNA nucleotide, returns its RNA complement,
-  or signals an error when an invalid nucleotide is encountered."
+  or signals an error when an invalid nucleotide is given."
   (or (cdr (assoc nucleotide dna->rna))
       (signal 'error)))
 
