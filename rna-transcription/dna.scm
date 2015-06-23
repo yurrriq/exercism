@@ -11,7 +11,7 @@
 
 (define (complement nucleotide)
   "Given a DNA nucleotide, returns its RNA complement,
-  or shows an error message when an invalid nucleotide is encountered."
+  or shows an error message when an invalid nucleotide is given."
   (define (invalid nucleotide)
     (error (format #f "Invalid nucleotide: ~a" nucleotide)))
   (or (hash-ref hash-dna->rna nucleotide)
