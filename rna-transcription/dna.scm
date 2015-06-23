@@ -2,21 +2,20 @@
   #:export (to-rna)
   #:use-module (ice-9 hash-table))
 
-(define hash-dna->rna
-  (alist->hash-table
-   '((#\G . #\C)
-     (#\C . #\G)
-     (#\T . #\A)
-     (#\A . #\U))))
+(define dna->rna
+  '((#\G . #\C)
+    (#\C . #\G)
+    (#\T . #\A)
+    (#\A . #\U)))
 
 (define (complement nucleotide)
   "Given a DNA nucleotide, returns its RNA complement,
   or shows an error message when an invalid nucleotide is given."
   (define (invalid nucleotide)
     (error (format #f "Invalid nucleotide: ~a" nucleotide)))
-  (or (hash-ref hash-dna->rna nucleotide)
+  (or (cdr (assoc nucleotide dna->rna))
       (invalid nucleotide)))
 
 (define (to-rna dna)
   "Given a DNA strand, returns its transcribed RNA strand."
-  (list->string (map complement (string->list dna))))
+  (string-map complement dna))
