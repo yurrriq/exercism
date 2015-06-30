@@ -17,7 +17,7 @@ import Data.Map.Strict (Map, (!))
 import qualified Data.Map.Strict as Map
 
 -- | Given a letter, returns its 'Value'.
--- 
+--
 -- __Note__: Throws if the given character is non-alphabetic.
 scoreLetter :: Char -> Int
 scoreLetter = (points !) . toUpper
