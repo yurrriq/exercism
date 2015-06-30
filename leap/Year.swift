@@ -1,9 +1,9 @@
 //
 //  Year.swift
-//  LeapYear
+//  exercism
 //
 //  Created by Eric Bailey on 6/29/15.
-//  Copyright (c) 2015 Eric Bailey. All rights reserved.
+//
 //
 
 class Year {
