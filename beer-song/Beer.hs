@@ -12,7 +12,6 @@ Lyrics to 99 Bottles of Beer on the Wall.
 -}
 module Beer where
 
-import Control.Applicative ((<*>), pure)
 import Control.Monad (ap)
 import Data.Bool (bool)
 import Data.Char (toUpper)
