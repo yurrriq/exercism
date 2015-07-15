@@ -2,3 +2,4 @@ coffeescript/hello-world/hello_world.spec.coffee
 coffeescript/hello-world/README.md
 coffeescript
 *.beam
+haskell/exercism/.stack-work
