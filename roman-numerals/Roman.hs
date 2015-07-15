@@ -1,6 +1,21 @@
-module Roman (numerals) where
+{-|
+Module      : Roman
+Copyright   : (c) Eric Bailey, 2015
+License     : MIT
 
+Maintainer  : Eric Bailey
+Stability   : experimental
+Portability : portable
+
+Converting decimal numbers to Roman numerals.
+-}
+
+module Roman (Arabic, Roman, numerals) where
+
+-- | An 'Arabic' number is an 'Int'.
 type Arabic = Int
+
+-- | A 'Roman' numeral is a 'String'.
 type Roman  = String
 
 conversions :: [(Arabic, Roman)]
@@ -12,6 +27,7 @@ conversions = [(1000,  "M"), (900, "CM"),
                (5,     "V"), (4,   "IV"),
                (1,     "I")]
 
+-- | Given an Arabic number, returns its Roman numeral representation.
 numerals :: Arabic -> Roman
 numerals = go ("" ++) conversions
   where go :: ShowS -> [(Arabic, Roman)] -> Arabic -> Roman

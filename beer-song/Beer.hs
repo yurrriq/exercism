@@ -10,11 +10,12 @@ Portability : portable
 
 Lyrics to 99 Bottles of Beer on the Wall.
 -}
+
 module Beer where
 
-import Control.Monad (ap)
-import Data.Bool (bool)
-import Data.Char (toUpper)
+import           Control.Monad (ap)
+import           Data.Bool     (bool)
+import           Data.Char     (toUpper)
 
 -- | Given a number, returns the specified verse of the beer song.
 verse :: Int -> String

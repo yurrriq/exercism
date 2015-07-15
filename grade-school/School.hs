@@ -9,18 +9,11 @@ Portability : portable
 
 Altering and sorting grade school rosters.
 -}
-module School (
-  School,
-  Grade,
-  Student,
-  empty,
-  add,
-  grade,
-  sorted
-  ) where
 
-import Data.List (sort)
-import Data.Map.Strict (Map)
+module School (School, Grade, Roster, Student, empty, add, grade, sorted) where
+
+import           Data.List       (sort)
+import           Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
 
 -- | A school is a map from grade to list of students.

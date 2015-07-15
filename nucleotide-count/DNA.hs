@@ -9,9 +9,10 @@ Portability : portable
 
 Calculating nucleotide frequencies in DNA strings.
 -}
+
 module DNA where
 
-import Data.Map.Strict (Map, fromListWith)
+import           Data.Map.Strict (Map, fromListWith)
 
 -- | A nucleotide is a character.
 type Nucleotide = Char

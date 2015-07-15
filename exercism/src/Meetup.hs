@@ -1,0 +1,1 @@
+../../meetup/Meetup.hs

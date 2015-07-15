@@ -1,0 +1,1 @@
+../../grade-school/School.hs

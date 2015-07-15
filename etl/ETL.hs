@@ -9,10 +9,11 @@ Portability : portable
 
 Converting Scrabble scoring systems.
 -}
-module ETL (Letter, NewData, OldData, transform) where
 
-import qualified Data.Char as Char
-import Data.Map.Strict (Map)
+module ETL (Letter, NewData, NewDatum, OldData, OldDatum, transform) where
+
+import qualified Data.Char       as Char
+import           Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
 
 -- | A letter is a one-character-long string.

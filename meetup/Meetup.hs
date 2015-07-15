@@ -9,11 +9,12 @@ Portability : portable
 
 Calculating the date of meetups.
 -}
-module Meetup (Weekday(..), Schedule(..), meetupDay) where
 
-import Data.Function (on)
-import Data.Time.Calendar
-import Data.Time.Calendar.WeekDate
+module Meetup (Weekday(..), Schedule(..), Month, WeekDate, Year, meetupDay) where
+
+import           Data.Function               (on)
+import           Data.Time.Calendar
+import           Data.Time.Calendar.WeekDate
 
 -- | Days of the week enumerator.
 data Weekday = Someday

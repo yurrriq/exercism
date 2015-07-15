@@ -9,11 +9,12 @@ Portability : portable
 
 Managing robot factory settings.
 -}
+
 module Robot (Robot, mkRobot, resetName, robotName) where
 
-import Control.Concurrent.STM
-import Control.Monad (liftM)
-import System.Random (randomRIO)
+import           Control.Concurrent.STM
+import           Control.Monad          (liftM)
+import           System.Random          (randomRIO)
 
 -- | A robot has a name that can be read ('robotName') and reset ('resetName').
 data Robot = Robot { name :: TVar String }
