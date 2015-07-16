@@ -17,5 +17,5 @@
 
 
 ;; Local Variables:
-;; compile-command: "guile raindrops-test.scm
+;; compile-command: "guile raindrops-test.scm"
 ;; End:
