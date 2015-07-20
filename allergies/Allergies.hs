@@ -15,7 +15,7 @@ data Allergen = Eggs
               deriving (Bounded, Enum, Eq, Show)
 
 allergens :: [Allergen]
-allergens = [(minBound :: Allergen) ..]
+allergens = [minBound..]
 
 isAllergicTo :: Allergen -> Int -> Bool
 isAllergicTo = flip testBit . fromEnum
