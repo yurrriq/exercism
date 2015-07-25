@@ -10,10 +10,12 @@ Portability : portable
 Accessing thread-safe bank accounts.
 -}
 
-module BankAccount where
+module BankAccount (BankAccount,
+                    openAccount, closeAccount,
+                    getBalance, incrementBalance) where
 
-import           Control.Concurrent.STM (STM, TVar, atomically, newTVar,
-                                         readTVar, writeTVar)
+import           Control.Concurrent.STM (STM, TVar, atomically, modifyTVar,
+                                         newTVar, readTVar, writeTVar)
 
 -- | A 'BankAccount' holds a shared memory location, representing a 'Balance'
 -- that supports atomic memory transactions.
@@ -44,20 +46,22 @@ openAccount = atomically $ BankAccount <$> newTVar initialBalance
 closeAccount :: BankAccount -> IO ()
 closeAccount = atomically . (`writeTVar` Nothing) . balance
 
--- | Given a 'BankAccount', call 'balance' on it, and atomically read the
--- current value.
+-- | Given a 'BankAccount', call 'readBalance' on it, atomically.
 getBalance :: BankAccount -> IO Balance
-getBalance = atomically . readTVar . balance
+getBalance = atomically . readBalance
 
--- | Given a 'BankAccount' and an 'Amount' (potentially negative) to add to its
--- 'Balance', atomically add the amount to the balance and return the updated
--- 'Balance'.
+-- | Given a 'BankAccount' and a function @f@ from 'Balance' to 'Balance',
+-- mutate the contents of the 'balance' of the bank account by @f@.
+modifyBalance :: BankAccount -> (Balance -> Balance) -> STM ()
+modifyBalance = modifyTVar . balance
+
+-- | Given a 'BankAccount', call 'balance' on it, and read the current value.
+readBalance :: BankAccount -> STM Balance
+readBalance = readTVar . balance
+
+-- | Given a 'BankAccount' and an 'Amount' (potentially negative), atomically
+-- add the amount to the account's 'balance' and return the updated 'Balance'.
 incrementBalance :: BankAccount -> Amount -> IO Balance
-incrementBalance account = atomically . incrementBalance' (balance account)
-  where incrementBalance' :: TVar Balance -> Amount -> STM Balance
-        incrementBalance' initial delta = increment initial delta >>= update initial
-          where
-            increment :: TVar Balance -> Amount -> STM Balance
-            increment old  = (<$> readTVar old) . fmap . (+)
-            update :: TVar Balance -> Balance -> STM Balance
-            update old new = writeTVar old new >> return new
+incrementBalance account amount = atomically $
+                                  modifyBalance account (fmap (+ amount)) >>
+                                  readBalance account
