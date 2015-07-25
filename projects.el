@@ -15,7 +15,7 @@
      :table-of-contents t
      :section-numbers nil
      :html-doctype "html5"
-     :html-poinistamble "<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js\"></script>"
+     :html-postamble "<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js\"></script>"
      :style-include-default nil
      :publishing-function org-html-publish-to-html))
   (add-to-list
