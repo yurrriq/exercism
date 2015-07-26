@@ -16,6 +16,7 @@ module BankAccount (BankAccount,
 
 import           Control.Concurrent.STM (STM, TVar, atomically, modifyTVar,
                                          newTVar, readTVar, writeTVar)
+import           Control.DeepSeq        (($!!))
 
 -- | A 'BankAccount' holds a shared memory location, representing a 'Balance'
 -- that supports atomic memory transactions.
@@ -63,5 +64,5 @@ readBalance = readTVar . balance
 -- add the amount to the account's 'balance' and return the updated 'Balance'.
 incrementBalance :: BankAccount -> Amount -> IO Balance
 incrementBalance account amount = atomically $
-                                  modifyBalance account (fmap (+ amount)) >>
+                                  (modifyBalance account $!! fmap (+ amount)) >>
                                   readBalance account
