@@ -1,1 +1,19 @@
-target
+# Leiningen
+# https://github.com/github/gitignore/blob/master/Leiningen.gitignore
+pom.xml
+pom.xml.asc
+*jar
+/lib/
+/classes/
+*/target/
+/checkouts/
+.lein-deps-sum
+.lein-repl-history
+.lein-plugins/
+.lein-failures
+
+/docs/
+.nrepl-port
+profiles.clj
+.lein-env
+.nrepl-history
