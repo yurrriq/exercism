@@ -2,7 +2,7 @@
   (:require [clojure.string :refer [capitalize join]]))
 
 (defn verse
-  ([n] 
+  ([n]
    (str (capitalize (verse n :first)) ", "
         (verse n :second)
         (verse n :next)))
