@@ -10,3 +10,7 @@
 	path = haskell
 	url = git@github.com:yurrriq/exercism.git
 	branch = haskell
+[submodule "erlang"]
+	path = erlang
+	url = git@github.com:yurrriq/exercism.git
+	branch = erlang
