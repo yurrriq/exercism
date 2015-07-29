@@ -2,3 +2,7 @@
 	path = _site
 	url = git@github.com:yurrriq/exercism.git
 	branch = gh-pages
+[submodule "clojure"]
+	path = clojure
+	url = git@github.com:yurrriq/exercism.git
+	branch = clojure
