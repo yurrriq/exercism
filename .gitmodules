@@ -46,3 +46,7 @@
 	path = csharp
 	url = git@github.com:yurrriq/exercism.git
 	branch = csharp
+[submodule "go"]
+	path = go
+	url = git@github.com:yurrriq/exercism.git
+	branch = go
