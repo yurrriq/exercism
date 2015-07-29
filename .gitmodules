@@ -6,3 +6,7 @@
 	path = clojure
 	url = git@github.com:yurrriq/exercism.git
 	branch = clojure
+[submodule "haskell"]
+	path = haskell
+	url = git@github.com:yurrriq/exercism.git
+	branch = haskell
