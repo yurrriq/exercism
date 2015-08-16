@@ -1,6 +1,7 @@
-import Test.HUnit (Assertion, (@=?), runTestTT, Test(..), Counts(..))
-import System.Exit (ExitCode(..), exitWith)
-import Queens (boardString, canAttack)
+import           Queens      (boardString, canAttack)
+import           System.Exit (ExitCode (..), exitWith)
+import           Test.HUnit  (Assertion, Counts (..), Test (..), runTestTT,
+                              (@=?))
 
 exitProperly :: IO Counts -> IO ()
 exitProperly m = do
@@ -50,7 +51,7 @@ boardWithJustB = concat [ "B _ _ _ _ _ _ _\n"
                         , "_ _ _ _ _ _ _ _\n"
                         , "_ _ _ _ _ _ _ _\n"
                         , "_ _ _ _ _ _ _ _\n"
-                        ]               
+                        ]
 
 queenTests :: [Test]
 queenTests =
@@ -74,4 +75,3 @@ attackCases = [
     (True, (0, 6), (1, 7)),
     (True, (4, 1), (6, 3)),
     (True, (2, 2), (1, 3))]
-
