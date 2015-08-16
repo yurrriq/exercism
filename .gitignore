@@ -1,8 +1,8 @@
 *.beam
 .eunit
 bin/expm
-ebin/*.app
-ebin/*.beam
+*/ebin/*.app
+*/ebin/*.beam
 .rebar
 erl_crash.dump
 *.sw[po]
