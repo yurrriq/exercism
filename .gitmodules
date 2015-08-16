@@ -58,3 +58,7 @@
 	path = javascript
 	url = git@github.com:yurrriq/exercism.git
 	branch = javascript
+[submodule "exercism"]
+	path = lfe
+	url = git@github.com:yurrriq/exercism.git
+	branch = lfe
