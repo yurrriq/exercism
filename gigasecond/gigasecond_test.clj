@@ -12,8 +12,7 @@
 (deftest from-jul-19-1959
   (is (= [1991 3 27] (gigasecond/from 1959 7 19))))
 
-; customize this to test your birthday and find your gigasecond date:
-; (deftest your-birthday
-;   (is (= [year2 month2 day2] (gigasecond/from year1 month1 day1))))
+(deftest lovecraft-birthday
+  (is (= [1922 4 29] (gigasecond/from 1890 8 20))))
 
 (run-tests)
