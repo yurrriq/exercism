@@ -1,35 +1,35 @@
 (ns triangle
   "Determining the type of a triangle."
   {:author "Eric Bailey"}
+  (:require [clojure.core.typed :refer [Int U ann defalias]])
+  (:import (clojure.lang Keyword))
   (:refer-clojure :exclude [type]))
 
-;; == PRIVATE API ==============================================================
+;; == TYPE ALIASES =============================================================
 
-(def ^:private otherwise
-  "A needlessly Haskell-y function that takes any number of arguments and
-  returns `true`."
-  (constantly true))
-
-(defn- picks
-  "Given a collection, return a list of vector pairs, consisting of each element
-  and a list of every other element.
-
-  See also: [Answer on Stack Overflow](http://stackoverflow.com/a/12872133)"
-  [coll]
-  (let [n    (dec (count coll))
-        coll (cycle coll)]
-    (for [i (range (inc n))]
-      [(nth coll i) (take n (drop (inc i) coll))])))
+(defalias Side         Int)
+(defalias TriangleType (U ':equilateral ':illogical ':isosceles ':scalene))
 
 
 ;; == PUBLIC API ===============================================================
 
+(ann type [Side Side Side -> TriangleType])
 (defn type
   "Given three sides, return a keyword—`:equilateral`, `:illogical`,
   `:isosceles`, or `:scalene`—describing the quality of the given triangle."
   [a b c]
-  (if (= a b c) :equilateral
-      (condp #(%1 %2) (picks [a b c])
-        #(some (fn [[x yz]] (>= x (apply + yz))) %) :illogical
-        #(some (fn [[x yz]] (some #{x} yz)) %)      :isosceles
-        otherwise                                  :scalene)))
+  (cond
+    (= a b c)                   :equilateral
+    (or (>= a (+ b c))
+        (>= b (+ c a))
+        (>= c (+ a b)))         :illogical
+    (= 2 (count (set [a b c]))) :isosceles
+    :else                       :scalene))
+
+
+;; == EMACS CONFIG =============================================================
+
+;; Local Variables:
+;; mode: clojure
+;; eval: (typed-clojure-mode)
+;; End:
