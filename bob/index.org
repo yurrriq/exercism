@@ -1,0 +1,155 @@
+#+SETUPFILE:   ../../org/setup.org
+#+TITLE:       Exercism.io → Clojure → Bob
+#+DATE:
+#+DESCRIPTION: My solutions to Excercism.io in Clojure.
+#+OPTIONS: html-postamble:nil toc:nil
+#+HTML_MATHJAX: align:"left" scale:"100" mathml:t path:"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+#+LINK_HOME: ../../index.html
+#+LINK_UP:   ../index.html
+#+INFOJS_OPT: path:../../js/org-info.js view:showall toc:nil ltoc:nil tdepth:3 mouse:#dddddd
+
+* Bob
+Bob is a lackadaisical teenager. In conversation, his responses are very
+limited.
+
+Bob answers 'Sure.' if you ask him a question.
+
+He answers 'Whoa, chill out!' if you yell at him.
+
+He says 'Fine. Be that way!' if you address him without actually saying
+anything.
+
+He answers 'Whatever.' to anything else.
+
+** Source
+Inspired by the [[http://pine.fm/LearnToProgram/?Chapter%3D06]['Deaf Grandma']] exercise in Chris Pine's Learn to Program
+tutorial.
+
+** Solution
+:PROPERTIES:
+:noweb: yes
+:END:
+#+BEGIN_SRC clojure :tangle bob.clj :padline no
+(ns bob
+  "Mimicking the conversational ineptitude of a lackadaisical teenager."
+  {:author "Eric Bailey"})
+#+END_SRC
+
+Given a prompt, ~response-for~ returns Bob's lackadaisical response.
+
+#+BEGIN_SRC clojure :exports code
+(<<response-for_signature>> ...)
+#+END_SRC
+
+*** ~cond~
+TODO: discuss ~cond~
+
+#+NAME: response-for_body
+#+BEGIN_SRC clojure :exports none
+  (cond
+    <<test-silent>> "Fine. Be that way!"
+    <<test-yelled>> "Whoa, chill out!"
+    <<test-question>> "Sure."
+    <<whatever>>)
+#+END_SRC
+
+*** Did you even saying anything?
+According to the specification, if you don't even say anything to Bob, the
+response should be =Fine. Be that way!=
+
+To check if ~prompt~ consists entirely of whitespace, we can use [[http://clojuredocs.org/clojure.core/re-matches][~re-matches~]]
+with the regular expression ~^\s*$~, i.e. match if it starts with zero or more
+whitespace characters and then ends, with nothing else between.
+# See [[table-test-silent][Table 1]] for a deconstruction of the pattern.
+
+#+NAME: test-silent
+#+BEGIN_SRC clojure :exports code
+(re-matches #"^\s*$" prompt)
+#+END_SRC
+
+# #+NAME: table-test-silent
+# #+CAPTION: The regular expression to check for a silent prompt.
+# #+ATTR_HTML: :border 2 :rules all :frame border
+# | Code  | Meaning                            |
+# |-------+------------------------------------|
+# | ~^~   | starts with                        |
+# | ~\s*~ | zero or more whitespace characters |
+# | ~$~   | then ends                          |
+
+*** ARE YOU YELLING‽
+If the prompt is yelled, Bob should respond with =Whoa, chill out!=
+
+#+NAME: test-yelled
+#+BEGIN_SRC clojure :exports none
+(and <<test-alphabetic>>
+     <<test-equal-uppercased>>)
+#+END_SRC
+
+To determine whether ~prompt~ is yelled, we first need to check if it contains
+at least one alphabetic character, case insensitive:
+
+#+NAME: test-alphabetic
+#+BEGIN_SRC clojure
+(re-find #"[a-zA-Z]" prompt)
+#+END_SRC
+
+and if so, check if ~prompt~ is equal to itself with every character uppercased:
+
+#+NAME: test-equal-uppercased
+#+BEGIN_SRC clojure
+(= prompt (clojure.string/upper-case prompt))
+#+END_SRC
+
+*** What's that?
+If you ask Bob a question, he invariably answers, =Sure.= i.e. if ~prompt~ ends
+with =?=.
+
+The code to check very closely resembles English.
+#+NAME: test-question
+#+BEGIN_SRC clojure :exports code
+(.endsWith prompt "?")
+#+END_SRC
+
+We could modify the [[http://clojure.org/Java%2520Interop-The%2520Dot%2520special%2520form-(.%2520instance-expr%2520(method-symbol%2520args*))%2520or][syntax]] a bit to get even more English-looking:
+
+#+BEGIN_SRC clojure :exports code
+(. prompt (endsWith "?"))
+#+END_SRC
+
+As a matter of taste, I prefer [[test-question][the former]].
+
+*** Whatever
+If none of the tests above hold, Bob responds, =Whatever.=
+
+#+NAME: whatever
+#+BEGIN_SRC clojure :exports code
+:else "Whatever."
+#+END_SRC
+
+*** All together now
+Finally, we end up with the following definition of ~response-for~:
+
+#+NAME: response-for_signature
+#+BEGIN_SRC clojure :exports none
+defn response-for [prompt]
+#+END_SRC
+
+#+BEGIN_SRC clojure :tangle bob.clj :exports none
+(<<response-for_signature>>
+  "Given a prompt, return a teenager's response."
+<<response-for_body>>)
+#+END_SRC
+
+#+BEGIN_SRC clojure
+(<<response-for_signature>>
+<<response-for_body>>)
+#+END_SRC
+
+** Tests
+#+BEGIN_SRC bash
+lein test bob
+#+END_SRC
+#+BEGIN_EXAMPLE
+Ran 14 tests containing 14 assertions.
+0 failures, 0 errors.
+#+END_EXAMPLE

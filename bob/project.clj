@@ -1,6 +1,6 @@
-(defproject bob "0.1.0-SNAPSHOT"
-  :description "bob exercise."
-  :url "https://github.com/exercism/xclojure/tree/master/bob"
+(defproject bob "0.2.0"
+  :description  "bob exercise."
+  :url          "https://yurrriq.github.io/exercism/clojure/bob"
   :source-paths [""]
-  :test-paths [""]
+  :test-paths   [""]
   :dependencies [[org.clojure/clojure "1.7.0"]])
