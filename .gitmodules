@@ -62,3 +62,7 @@
 	path = lfe
 	url = git@github.com:yurrriq/exercism.git
 	branch = lfe
+[submodule "elisp"]
+	path = elisp
+	url = git@github.com:yurrriq/exercism.git
+	branch = elisp
