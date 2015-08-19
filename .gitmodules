@@ -86,3 +86,7 @@
 	path = python
 	url = git@github.com:yurrriq/exercism.git
 	branch = python
+[submodule "ruby"]
+	path = ruby
+	url = git@github.com:yurrriq/exercism.git
+	branch = ruby
