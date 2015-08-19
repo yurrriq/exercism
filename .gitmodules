@@ -90,3 +90,7 @@
 	path = ruby
 	url = git@github.com:yurrriq/exercism.git
 	branch = ruby
+[submodule "rust"]
+	path = rust
+	url = git@github.com:yurrriq/exercism.git
+	branch = rust
