@@ -4,4 +4,4 @@
   :source-paths [""]
   :test-paths   [""]
   :dependencies [[org.clojure/clojure "1.7.0"]
-                 [org.clojure/core.typed "0.3.9"]])
+                 [org.clojure/core.typed "0.3.11"]])

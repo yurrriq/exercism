@@ -1,8 +1,6 @@
 (ns etl-test
-  (:require [clojure.test :refer :all]))
-
-(load-file "etl.clj")
-
+  (:require [clojure.core.typed :refer [check-ns]]
+            [clojure.test :refer :all]))
 
 (deftest transform-one-value
   (is (= {"world" 1}
@@ -31,5 +29,8 @@
            5  (re-seq #"\w" "K")
            8  (re-seq #"\w" "JX")
            10 (re-seq #"\w" "QZ")}))))
+
+(deftest type-annotations
+  (is (check-ns 'etl)))
 
 (run-tests)

@@ -1,7 +1,6 @@
 (ns roman-numerals-test
-  (:require [clojure.test :refer :all]))
-
-(load-file "roman_numerals.clj")
+  (:require [clojure.core.typed :refer [check-ns]]
+            [clojure.test :refer :all]))
 
 (deftest one
   (is (= "I" (roman-numerals/numerals 1))))
@@ -56,5 +55,8 @@
 
 (deftest three-thousand
   (is (= "MMM" (roman-numerals/numerals 3000))))
+
+(deftest type-annotations
+  (is (check-ns 'roman-numerals)))
 
 (run-tests)

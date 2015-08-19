@@ -1,7 +1,6 @@
 (ns triangle-test
-  (:require [clojure.test :refer :all]))
-
-(load-file "triangle.clj")
+  (:require [clojure.core.typed :refer [check-ns]]
+            [clojure.test :refer :all]))
 
 (deftest equilateral-1
   (is (= :equilateral (triangle/type 2 2 2))))
@@ -17,5 +16,8 @@
   (is (= :illogical (triangle/type 1 1 50))))
 (deftest invalid-2
   (is (= :illogical (triangle/type 1 2 1))))
+
+(deftest type-annotations
+  (is (check-ns 'triangle)))
 
 (run-tests)
