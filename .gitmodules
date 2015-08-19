@@ -74,3 +74,7 @@
 	path = objective-c
 	url = git@github.com:yurrriq/exercism.git
 	branch = objective-c
+[submodule "perl5"]
+	path = perl5
+	url = git@github.com:yurrriq/exercism.git
+	branch = perl5
