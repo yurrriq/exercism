@@ -70,3 +70,7 @@
 	path = lua
 	url = git@github.com:yurrriq/exercism.git
 	branch = lua
+[submodule "objective-c"]
+	path = objective-c
+	url = git@github.com:yurrriq/exercism.git
+	branch = objective-c
