@@ -82,3 +82,7 @@
 	path = plsql
 	url = git@github.com:yurrriq/exercism.git
 	branch = plsql
+[submodule "python"]
+	path = python
+	url = git@github.com:yurrriq/exercism.git
+	branch = python
