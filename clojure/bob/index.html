@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Exercism.io → Clojure → Bob</title>
+<!-- 2015-08-19 Wed 18:16 -->
+<meta  charset="utf-8">
+<meta  name="generator" content="Org-mode">
+<meta  name="author" content="Eric Bailey">
+<meta  name="description" content="My solutions to Excercism.io in Clojure."
+>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/style.min.css">
+
+<script type="text/javascript" src="../../js/org-info.js">
+/**
+ *
+ * @source: ../../js/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in ../../js/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in ../../js/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "3");
+org_html_manager.set("LINK_HOME", "");
+org_html_manager.set("LINK_UP", "");
+org_html_manager.set("LOCAL_TOC", "0");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "#dddddd");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "0");
+org_html_manager.set("VIEW", "showall");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Exercism.io → Clojure → Bob</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Bob</a>
+<ul>
+<li><a href="#sec-1-1">Source</a></li>
+<li><a href="#sec-1-2">Solution</a>
+<ul>
+<li><a href="#sec-1-2-1"><code>cond</code></a></li>
+<li><a href="#sec-1-2-2">Did you even saying anything?</a></li>
+<li><a href="#sec-1-2-3">ARE YOU YELLING‽</a></li>
+<li><a href="#sec-1-2-4">What's that?</a></li>
+<li><a href="#sec-1-2-5">Whatever</a></li>
+<li><a href="#sec-1-2-6">All together now</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-3">Tests</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Bob</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Bob is a lackadaisical teenager. In conversation, his responses are very
+limited.
+</p>
+
+<p>
+Bob answers 'Sure.' if you ask him a question.
+</p>
+
+<p>
+He answers 'Whoa, chill out!' if you yell at him.
+</p>
+
+<p>
+He says 'Fine. Be that way!' if you address him without actually saying
+anything.
+</p>
+
+<p>
+He answers 'Whatever.' to anything else.
+</p>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1">Source</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Inspired by the <a href="http://pine.fm/LearnToProgram/?Chapter=06">'Deaf Grandma'</a> exercise in Chris Pine's Learn to Program
+tutorial.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2">Solution</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #A1EFE4;">(</span><span style="color: #F92672;">ns</span> <span style="color: #66D9EF;">bob</span>
+  <span style="color: #75715E;">"Mimicking the conversational ineptitude of a lackadaisical teenager."</span>
+  <span style="color: #E6DB74;">{</span><span style="color: #AE81FF;">:author</span> <span style="color: #E6DB74;">"Eric Bailey"</span><span style="color: #E6DB74;">}</span><span style="color: #A1EFE4;">)</span>
+</pre>
+</div>
+
+<p>
+Given a prompt, <code>response-for</code> returns Bob's lackadaisical response.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #A1EFE4;">(</span><span style="color: #F92672;">defn</span> <span style="color: #A6E22E;">response-for</span> <span style="color: #E6DB74;">[</span>prompt<span style="color: #E6DB74;">]</span> ...<span style="color: #A1EFE4;">)</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1"><code>cond</code></h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+TODO: discuss <code>cond</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2">Did you even saying anything?</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+According to the specification, if you don't even say anything to Bob, the
+response should be <code>Fine. Be that way!</code>
+</p>
+
+<p>
+To check if <code>prompt</code> consists entirely of whitespace, we can use <a href="http://clojuredocs.org/clojure.core/re-matches"><code>re-matches</code></a>
+with the regular expression <code>^\s*$</code>, i.e. match if it starts with zero or more
+whitespace characters and then ends, with nothing else between.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-clojure" id="test-silent"><span style="color: #A1EFE4;">(</span>re-matches #<span style="color: #E6DB74;">"^\s*$"</span> prompt<span style="color: #A1EFE4;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-3" class="outline-4">
+<h4 id="sec-1-2-3">ARE YOU YELLING‽</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+If the prompt is yelled, Bob should respond with <code>Whoa, chill out!</code>
+</p>
+
+<p>
+To determine whether <code>prompt</code> is yelled, we first need to check if it contains
+at least one alphabetic character, case insensitive:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure" id="test-alphabetic"><span style="color: #A1EFE4;">(</span>re-find #<span style="color: #E6DB74;">"[a-zA-Z]"</span> prompt<span style="color: #A1EFE4;">)</span>
+</pre>
+</div>
+
+<p>
+and if so, check if <code>prompt</code> is equal to itself with every character uppercased:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure" id="test-equal-uppercased"><span style="color: #A1EFE4;">(</span>= prompt <span style="color: #E6DB74;">(</span><span style="color: #66D9EF;">clojure.string</span>/upper-case prompt<span style="color: #E6DB74;">)</span><span style="color: #A1EFE4;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-4" class="outline-4">
+<h4 id="sec-1-2-4">What's that?</h4>
+<div class="outline-text-4" id="text-1-2-4">
+<p>
+If you ask Bob a question, he invariably answers, <code>Sure.</code> i.e. if <code>prompt</code> ends
+with <code>?</code>.
+</p>
+
+<p>
+The code to check very closely resembles English.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-clojure" id="test-question"><span style="color: #A1EFE4;">(</span><span style="color: #F92672;">.endsWith</span> prompt <span style="color: #E6DB74;">"?"</span><span style="color: #A1EFE4;">)</span>
+</pre>
+</div>
+
+<p>
+We could modify the <a href="http://clojure.org/Java%2520Interop-The%2520Dot%2520special%2520form-(.%2520instance-expr%2520(method-symbol%2520args*))%2520or">syntax</a> a bit to get even more English-looking:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #A1EFE4;">(</span><span style="color: #F92672;">.</span> prompt <span style="color: #E6DB74;">(</span><span style="color: #F92672;">endsWith</span> <span style="color: #E6DB74;">"?"</span><span style="color: #E6DB74;">)</span><span style="color: #A1EFE4;">)</span>
+</pre>
+</div>
+
+<p>
+As a matter of taste, I prefer <a href="#test-question">the former</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-5" class="outline-4">
+<h4 id="sec-1-2-5">Whatever</h4>
+<div class="outline-text-4" id="text-1-2-5">
+<p>
+If none of the tests above hold, Bob responds, <code>Whatever.</code>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure" id="whatever"><span style="color: #AE81FF;">:else</span> <span style="color: #E6DB74;">"Whatever."</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-6" class="outline-4">
+<h4 id="sec-1-2-6">All together now</h4>
+<div class="outline-text-4" id="text-1-2-6">
+<p>
+Finally, we end up with the following definition of <code>response-for</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #A1EFE4;">(</span><span style="color: #F92672;">defn</span> <span style="color: #A6E22E;">response-for</span> <span style="color: #E6DB74;">[</span>prompt<span style="color: #E6DB74;">]</span>
+  <span style="color: #E6DB74;">(</span><span style="color: #F92672;">cond</span>
+    <span style="color: #66D9EF;">(</span>re-matches #<span style="color: #E6DB74;">"^\s*$"</span> prompt<span style="color: #66D9EF;">)</span> <span style="color: #E6DB74;">"Fine. Be that way!"</span>
+    <span style="color: #66D9EF;">(</span><span style="color: #F92672;">and</span> <span style="color: #FD971F;">(</span>re-find #<span style="color: #E6DB74;">"[a-zA-Z]"</span> prompt<span style="color: #FD971F;">)</span>
+         <span style="color: #FD971F;">(</span>= prompt <span style="color: #A6E22E;">(</span><span style="color: #66D9EF;">clojure.string</span>/upper-case prompt<span style="color: #A6E22E;">)</span><span style="color: #FD971F;">)</span><span style="color: #66D9EF;">)</span> <span style="color: #E6DB74;">"Whoa, chill out!"</span>
+    <span style="color: #66D9EF;">(</span><span style="color: #F92672;">.endsWith</span> prompt <span style="color: #E6DB74;">"?"</span><span style="color: #66D9EF;">)</span> <span style="color: #E6DB74;">"Sure."</span>
+    <span style="color: #AE81FF;">:else</span> <span style="color: #E6DB74;">"Whatever."</span><span style="color: #E6DB74;">)</span><span style="color: #A1EFE4;">)</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3">Tests</h3>
+<div class="outline-text-3" id="text-1-3">
+<div class="org-src-container">
+
+<pre class="src src-bash">lein test bob
+</pre>
+</div>
+<pre class="example">
+Ran 14 tests containing 14 assertions.
+0 failures, 0 errors.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
