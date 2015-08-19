@@ -45,5 +45,5 @@
 
 ;; Local Variables:
 ;; mode: clojure
-;; eval: (typed-clojure-mode)
+;; mode: typed-clojure
 ;; End:
