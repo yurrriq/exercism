@@ -20,4 +20,3 @@
   (is (= nil (point-mutations/hamming-distance "AAAC" "TAGGGGAGGCTAGCGGTAGGAC")))
   (is (= nil (point-mutations/hamming-distance "GACTACGGACAGGGTAACATAG" "GACA"))))
 
-(run-tests)

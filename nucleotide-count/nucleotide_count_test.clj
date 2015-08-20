@@ -30,4 +30,3 @@
 (deftest type-annotations
   (is (check-ns 'nucleotide-count)))
 
-(run-tests)

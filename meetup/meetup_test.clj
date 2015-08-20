@@ -274,4 +274,3 @@
 (deftest last-sunday-of-april-2013
   (is (= [2013 4 28] (meetup/meetup 4 2013 :sunday :last))))
 
-(run-tests)

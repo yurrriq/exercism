@@ -29,4 +29,3 @@
 (deftest type-annotations
   (is (check-ns 'robot-name)))
 
-(run-tests)

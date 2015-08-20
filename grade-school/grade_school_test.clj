@@ -51,5 +51,4 @@
              (grade-school/sorted)
              (keys)))))
 
-(run-tests)
 

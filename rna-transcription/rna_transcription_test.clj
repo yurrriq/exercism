@@ -19,4 +19,3 @@
 (deftest it-validates-dna-strands
   (is (thrown? AssertionError (rna-transcription/to-rna "XCGFGGTDTTAA"))))
 
-(run-tests)

@@ -30,4 +30,3 @@
 (deftest capital-word-is-not-own-anagram
   (is (= [] (anagram/anagrams-for "BANANA" ["banana"]))))
 
-(run-tests)

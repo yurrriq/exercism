@@ -23,4 +23,3 @@
 (deftest type-annotations
   (is (check-ns 'scrabble-score)))
 
-(run-tests)

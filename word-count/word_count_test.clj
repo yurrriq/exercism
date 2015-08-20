@@ -25,4 +25,3 @@
   (is (= {"go" 3}
          (word-count/word-count "go Go GO"))))
 
-(run-tests)

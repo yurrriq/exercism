@@ -18,4 +18,3 @@
   (is (= song-8-6 (beer-song/sing 8 6)))
   (is (= song-3-0 (beer-song/sing 3))))
 
-(run-tests)

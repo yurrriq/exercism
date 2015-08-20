@@ -20,4 +20,3 @@
 (deftest type-annotations
   (is (check-ns 'triangle)))
 
-(run-tests)

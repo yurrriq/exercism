@@ -25,4 +25,3 @@
 (deftest invalid-binary-is-decimal-0
   (is (= 0 (binary/to-decimal "carrot"))))
 
-(run-tests)

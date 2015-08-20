@@ -25,4 +25,3 @@
 (deftest pretty-print-with-full-us-phone-number
   (is (= "(123) 456-7890" (phone-number/pretty-print "11234567890"))))
 
-(run-tests)
