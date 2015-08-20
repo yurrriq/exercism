@@ -86,11 +86,11 @@ If the prompt is yelled, Bob should respond with =Whoa, chill out!=
 #+END_SRC
 
 To determine whether ~prompt~ is yelled, we first need to check if it contains
-at least one alphabetic character, case insensitive:
+at least one uppercase alphabetic character:
 
 #+NAME: test-alphabetic
 #+BEGIN_SRC clojure
-(re-find #"[a-zA-Z]" prompt)
+(re-find #"[A-Z]" prompt)
 #+END_SRC
 
 and if so, check if ~prompt~ is equal to itself with every character uppercased:
