@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>Exercism.io → Clojure → Bob</title>
-<!-- 2015-08-19 Wed 18:16 -->
+<!-- 2015-08-19 Wed 22:23 -->
 <meta  charset="utf-8">
 <meta  name="generator" content="Org-mode">
 <meta  name="author" content="Eric Bailey">
@@ -333,12 +333,12 @@ If the prompt is yelled, Bob should respond with <code>Whoa, chill out!</code>
 
 <p>
 To determine whether <code>prompt</code> is yelled, we first need to check if it contains
-at least one alphabetic character, case insensitive:
+at least one uppercase alphabetic character:
 </p>
 
 <div class="org-src-container">
 
-<pre class="src src-clojure" id="test-alphabetic"><span style="color: #A1EFE4;">(</span>re-find #<span style="color: #E6DB74;">"[a-zA-Z]"</span> prompt<span style="color: #A1EFE4;">)</span>
+<pre class="src src-clojure" id="test-alphabetic"><span style="color: #A1EFE4;">(</span>re-find #<span style="color: #E6DB74;">"[A-Z]"</span> prompt<span style="color: #A1EFE4;">)</span>
 </pre>
 </div>
 
@@ -414,7 +414,7 @@ Finally, we end up with the following definition of <code>response-for</code>:
 <pre class="src src-clojure"><span style="color: #A1EFE4;">(</span><span style="color: #F92672;">defn</span> <span style="color: #A6E22E;">response-for</span> <span style="color: #E6DB74;">[</span>prompt<span style="color: #E6DB74;">]</span>
   <span style="color: #E6DB74;">(</span><span style="color: #F92672;">cond</span>
     <span style="color: #66D9EF;">(</span>re-matches #<span style="color: #E6DB74;">"^\s*$"</span> prompt<span style="color: #66D9EF;">)</span> <span style="color: #E6DB74;">"Fine. Be that way!"</span>
-    <span style="color: #66D9EF;">(</span><span style="color: #F92672;">and</span> <span style="color: #FD971F;">(</span>re-find #<span style="color: #E6DB74;">"[a-zA-Z]"</span> prompt<span style="color: #FD971F;">)</span>
+    <span style="color: #66D9EF;">(</span><span style="color: #F92672;">and</span> <span style="color: #FD971F;">(</span>re-find #<span style="color: #E6DB74;">"[A-Z]"</span> prompt<span style="color: #FD971F;">)</span>
          <span style="color: #FD971F;">(</span>= prompt <span style="color: #A6E22E;">(</span><span style="color: #66D9EF;">clojure.string</span>/upper-case prompt<span style="color: #A6E22E;">)</span><span style="color: #FD971F;">)</span><span style="color: #66D9EF;">)</span> <span style="color: #E6DB74;">"Whoa, chill out!"</span>
     <span style="color: #66D9EF;">(</span><span style="color: #F92672;">.endsWith</span> prompt <span style="color: #E6DB74;">"?"</span><span style="color: #66D9EF;">)</span> <span style="color: #E6DB74;">"Sure."</span>
     <span style="color: #AE81FF;">:else</span> <span style="color: #E6DB74;">"Whatever."</span><span style="color: #E6DB74;">)</span><span style="color: #A1EFE4;">)</span>
