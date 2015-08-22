@@ -32,6 +32,7 @@ validate(Nucleotide) ->
     false -> erlang:error("Invalid nucleotide")
   end.
 
+
 %% Local Variables:
 %% compile-command: "erlc *.erl; and erl -noshell -eval 'eunit:test(dna_tests, [verbose])' -s init stop"
 %% erlang-indent-level: 2
