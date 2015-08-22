@@ -16,7 +16,7 @@
 
 (defn convert
   "Given a number `n`, convert it to a string, the contents of which
-  depends on the `n`'s prime factors.
+  depends on `n`'s prime factors.
 
   - If 3 divides `n`, output 'Pling'.
   - If 5 divides `n`, output 'Plang'.
