@@ -5,4 +5,4 @@
   :test-paths   [""]
   :dependencies [[org.clojure/clojure    "1.7.0"]
                  [org.clojure/core.typed "0.3.11"]
-                 [funcool/cats           "0.6.1"]])
+                 [funcool/cats           "0.7.0-SNAPSHOT"]])

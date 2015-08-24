@@ -1,9 +1,12 @@
 (ns binary
   "Converting binary number strings to their decimal equivalents."
-  {:author "Eric Bailey"})
+  {:author "Eric Bailey"}
+  (:require [clojure.core.typed :refer [Nilable Num Str U ann fn inst]])
+  (:refer-clojure :exclude [fn]))
 
 ;; == NILABLE VERSION ==========================================================
 
+(ann to-decimal [Str -> Num])
 (defn to-decimal
   "Given a string representing a binary number, return its decimal equivalent.
 
@@ -12,11 +15,12 @@
   its numeric value to double the current result.  Otherwise, when any character
   other than `\0` or `\1` is present, return 0."
   [string]
-  (-> (reduce (fn [sum c]
-                (when sum
-                  (some-> (case c \1 1, \0 0, nil)
-                    (+ (* 2 sum)))))
-              0 string)
+  (-> ((inst reduce (Nilable Num) Character)
+       (fn [sum :- (Nilable Num), c :- Character] :- (Nilable Num)
+         (when sum
+           (some-> (case c \1 1, \0 0, nil)
+             (+ (* 2 sum)))))
+       0 string)
       (or 0)))
 
 

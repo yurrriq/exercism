@@ -1,5 +1,6 @@
 (ns binary-test
-  (:require [clojure.test :refer :all]))
+  (:require [clojure.core.typed :refer [check-ns]]
+            [clojure.test :refer :all]))
 
 (deftest binary-1-is-decimal-1
   (is (= 1 (binary/to-decimal "1"))))
@@ -25,3 +26,5 @@
 (deftest invalid-binary-is-decimal-0
   (is (= 0 (binary/to-decimal "carrot"))))
 
+(deftest type-annotations
+  (is (check-ns 'binary)))
