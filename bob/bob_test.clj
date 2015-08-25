@@ -1,5 +1,6 @@
 (ns bob-test
-  (:require [clojure.test :refer :all]))
+  (:require [clojure.core.typed :refer [check-ns]]
+            [clojure.test :refer :all]))
 
 (deftest responds-to-something
   (is (= "Whatever." (bob/response-for "Tom-ay-to, tom-aaaah-to."))))
@@ -43,3 +44,5 @@
 (deftest responds-to-number-question
   (is (= "Sure." (bob/response-for "4?"))))
 
+(deftest type-annotations
+  (is (check-ns 'bob)))
