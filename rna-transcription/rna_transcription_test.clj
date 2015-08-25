@@ -1,5 +1,6 @@
 (ns rna-transcription-test
-  (:require [clojure.test :refer :all]))
+  (:require [clojure.core.typed :refer [check-ns]]
+            [clojure.test :refer :all]))
 
 (deftest transcribes-cytosine-to-guanine
   (is (= "G" (rna-transcription/to-rna "C"))))
@@ -19,3 +20,5 @@
 (deftest it-validates-dna-strands
   (is (thrown? AssertionError (rna-transcription/to-rna "XCGFGGTDTTAA"))))
 
+(deftest type-annotations
+  (is (check-ns 'rna-transcription)))
