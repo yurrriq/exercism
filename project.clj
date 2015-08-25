@@ -2,6 +2,7 @@
                 (clojure.string/split #"\n")
                 (->> (remove #{"README.org" "project.clj" "target"
                                ;; Removed until solved
+                               "allergies"
                                "prime-factors"}))
                 vec)]
   (defproject xclojure "0.1.0"
