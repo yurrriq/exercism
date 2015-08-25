@@ -1,6 +1,7 @@
-(defproject phone-number "0.1.0-SNAPSHOT"
-  :description "phone-number exercise."
-  :url "https://github.com/exercism/xclojure/tree/master/phone-number"
+(defproject phone-number "0.2.0"
+  :description  "phone-number exercise."
+  :url          "https://github.com/yurrriq/exercism/tree/clojure/phone-number"
   :source-paths [""]
-  :test-paths [""]
-  :dependencies [[org.clojure/clojure "1.7.0"]])
+  :test-paths   [""]
+  :dependencies [[org.clojure/clojure    "1.7.0"]
+                 [org.clojure/core.typed "0.3.11"]])
