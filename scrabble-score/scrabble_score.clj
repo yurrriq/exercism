@@ -29,8 +29,8 @@
 (ann points (Map Character Score))
 (def ^:private points
   (reduce-kv (fn [char->score :- (Map Character Score)
-                  score       :- Score
-                  letters     :- String]
+                 score       :- Score
+                 letters     :- String]
                (merge char->score (zipmap letters (repeat score))))
              {} legend))
 
@@ -47,7 +47,7 @@
 (ann score-word [Word -> Score])
 (defn score-word [word]
   (reduce (fn [score  :- Score
-               letter :- Character]
+              letter :- Character]
             (+ score (score-letter letter)))
           0 word))
 
