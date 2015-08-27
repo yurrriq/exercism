@@ -5,14 +5,16 @@
   (:require [clojure.core.typed :refer [Int Map U ann fn defalias]])
   (:import (clojure.lang Seqable)))
 
-;; == TYPE ALIASES =============================================================
+;; ==== TYPE ALIASES ===========================================================
 
 (defalias Letter (U Character String))
+
 (defalias Score  Int)
+
 (defalias Word   String)
 
 
-;; == PRIVATE API ==============================================================
+;; ==== PRIVATE API ============================================================
 
 (ann legend (Map Score String))
 (def ^:private legend
@@ -27,13 +29,13 @@
 (ann points (Map Character Score))
 (def ^:private points
   (reduce-kv (fn [char->score :- (Map Character Score)
-                 score       :- Score
-                 letters     :- String]
+                  score       :- Score
+                  letters     :- String]
                (merge char->score (zipmap letters (repeat score))))
              {} legend))
 
 
-;; == PUBLIC API ===============================================================
+;; ==== PUBLIC API =============================================================
 
 (ann ->char [Letter -> Character])
 (defn- ->char [x] (if (char? x) x (.charAt ^String x 0)))
@@ -45,14 +47,14 @@
 (ann score-word [Word -> Score])
 (defn score-word [word]
   (reduce (fn [score  :- Score
-              letter :- Character]
+               letter :- Character]
             (+ score (score-letter letter)))
           0 word))
 
 
-;; == EMACS CONFIG =============================================================
+;; ==== EMACS CONFIG ===========================================================
 
 ;; Local Variables:
 ;; mode: clojure
-;; eval: (typed-clojure-mode)
+;; mode: typed-clojure
 ;; End:
