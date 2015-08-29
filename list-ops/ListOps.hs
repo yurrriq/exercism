@@ -68,7 +68,7 @@ length = foldl' (const . (1 +)) 0
 -- | DIY 'Data.List.map'
 map :: (a -> b) -> [a] -> [b]
 map f = foldr g []
-  where g =  (:) . f
+  where g = (:) . f
 
 -- | DIY 'Data.List.reverse'
 reverse :: [a] -> [a]
