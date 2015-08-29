@@ -13,7 +13,7 @@ movements:
 
 Robots are placed on a hypothetical infinite grid, facing a particular
 direction (north, east, south, or west) at a set of {x,y} coordinates,
-e.g., {3,8}.
+e.g. {3,8}.
 
 ## Step 2
 
