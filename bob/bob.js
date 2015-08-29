@@ -1,14 +1,17 @@
-//
-// This is only a SKELETON file for the "Bob" exercise. It's been provided as a
-// convenience to get you started writing code faster.
-//
+// Very hackish: no bounds checks, etc...
+function cond() {
+  for (var i = 0; i < arguments.length; i++) {
+    if (arguments[i][0]) { return arguments[i][1] }
+  }
+}
 
-var Bob = function() {};
-
-Bob.prototype.hey = function(input) {
-//
-// YOUR CODE GOES HERE
-//
-};
-
-module.exports = Bob;
+module.exports = function() {
+  this.hey = function(s) {
+    return cond(
+      [!/\S/.test(s),                             'Fine. Be that way!'],
+      [(/[A-Z]/.test(s) && s == s.toUpperCase()), 'Whoa, chill out!'  ],
+      [/\?$/.test(s),                             'Sure.'             ],
+      [true,                                      'Whatever.'         ]
+    )
+  }
+}
