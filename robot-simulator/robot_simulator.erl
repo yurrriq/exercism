@@ -1,69 +1,70 @@
 -module(robot_simulator).
 
+-behaviour(gen_server).
+
 %% Creation and read-only API
 -export([create/0, direction/1, position/1]).
 
 %% Mutating API
 -export([place/3, control/2, advance/1, left/1, right/1]).
 
+%% gen_server callbacks
+-export([init/1, handle_call/3, handle_cast/2, handle_info/2,
+         terminate/2, code_change/3]).
 
-create() -> erlang:spawn(fun() -> loop(undefined, {undefined, undefined}) end).
+%% robot record with default values as undefined
+-record(robot, {direction = undefined,
+                position  = {undefined, undefined}}).
+
+
+create() ->
+  {ok, Pid} = gen_server:start_link(?MODULE, [], []),
+  Pid.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                               READ-ONLY API                                %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-direction(Robot) -> get_property(Robot, direction).
+direction(Pid) -> get_property(Pid, direction).
 
-position(Robot) -> get_property(Robot, position).
+position(Pid)  -> get_property(Pid, position).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                MUTATING API                                %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-place(Robot, Direction, Position) -> Robot ! {place, Direction, Position}.
+place(Pid, Direction, Position) ->
+  gen_server:cast(Pid, {place, Direction, Position}).
 
-control(Robot, Instructions) ->
-  lists:foreach(fun ($A) -> advance(Robot);
-                    ($L) -> left(Robot);
-                    ($R) -> right(Robot);
+control(Pid, Instructions) ->
+  lists:foreach(fun ($A) -> advance(Pid);
+                    ($L) -> left(Pid);
+                    ($R) -> right(Pid);
                     (_)  -> noop
                 end,
                 Instructions).
 
-advance(Robot) -> Robot ! advance.
+advance(Pid) -> gen_server:cast(Pid, advance).
 
-left(Robot)    -> Robot ! {turn, left}.
+left(Pid)    -> gen_server:cast(Pid, {turn, left}).
 
-right(Robot)   -> Robot ! {turn, right}.
+right(Pid)   -> gen_server:cast(Pid, {turn, right}).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                PRIVATE API                                 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-get_property(Robot, Property) ->
-  Robot ! {Property, erlang:self()},
-  receive
-    {Property, Value} -> Value
-  end.
-
-loop(Direction, Position) ->
-  receive
-    advance ->
-      loop(Direction, advance(Direction, Position));
-    {place, NewDirection, NewPosition} ->
-      loop(NewDirection, NewPosition);
-    {turn, Turn} ->
-      loop(turn(Direction, Turn), Position);
-    {direction, Robot} ->
-      Robot ! {direction, Direction},
-      loop(Direction, Position);
-    {position, Robot} ->
-      Robot ! {position, Position},
-      loop(Direction, Position)
+%% This is a hack for the tests. In real life, I'd return {ok, Value} and not
+%% define this helper function at all.
+get_property(Pid, Property) ->
+  try
+    {ok, Value} = gen_server:call(Pid, Property),
+    Value
+  catch
+    _Class:_Exception -> error
   end.
 
 advance(north, {X, Y}) -> {X,     Y + 1};
@@ -79,6 +80,42 @@ turn(south, right) -> west;
 turn(south, left)  -> east;
 turn(west,  right) -> north;
 turn(west,  left)  -> south.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                            GEN_SERVER CALLBACKS                            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+init([Direction, Position]) ->
+  {ok, #robot{direction = Direction,
+              position  = Position}};
+init([]) ->
+  {ok, #robot{}}.
+
+handle_call(direction, _From, Robot) ->
+  #robot{direction = Direction} = Robot,
+  {reply, {ok, Direction}, Robot};
+handle_call(position, _From, Robot) ->
+  #robot{position = Position} = Robot,
+  {reply, {ok, Position}, Robot}.
+
+handle_cast(advance, Robot) ->
+  #robot{direction = Direction,
+         position  = Position} = Robot,
+  {noreply, Robot#robot{position = advance(Direction, Position)}};
+handle_cast({place, Direction, Position}, Robot) ->
+  {noreply, Robot#robot{direction = Direction,
+                        position  = Position}};
+handle_cast({turn, Turn}, Robot) ->
+  #robot{direction = Direction} = Robot,
+  {noreply, Robot#robot{direction = turn(Direction, Turn)}}.
+
+handle_info(timeout, State)         -> {noreply, State}.
+
+terminate(_Reason, _State)          -> ok.
+
+code_change(_OldVsn, State, _Extra) -> {ok, State}.
+
 
 
 
