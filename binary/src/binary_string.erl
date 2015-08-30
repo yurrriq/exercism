@@ -18,29 +18,25 @@
 %% @doc Given a string representing a binary number,
 %% return its decimal equivalent.
 %%
-%% Perform a right-associative fold, keeping track of the index
-%% as well as the `Total'.
+%% Perform a left-associative fold with an initial value of `0',
+%% pattern matching on each character.
 %%
-%% If any character other than `$0' or `$1' is found, return `0'.
-%% Otherwise, at each step, add one to `Index'. If the character is `$0',
-%% leave `Total' unchanged otherwise when it is `$1', add `2^Index' to it.
-%% That is, each step returns `{Index + 1, NewTotal}'.
+%% If any character other than `$0' or `$1' is encountered, return `0'.
 %%
-%% If no invalid charcters are encountered, the final `NewTotal' is returned.
+%% Otherwise, at each step perform a left arithmetic shift by 1 on the previous
+%% value. If the character is `$1', also add one to the result.
+%%
+%% NB: The bit-shifting algorithm works since `0 bsl 1 =:= 0' and
+%% `N bsl 1 =:= N * 2'.
 -spec to_decimal(string()) -> integer().
-to_decimal(String) ->
-  try
-    element(2, lists:foldr(fun to_decimal/2, {0, 0}, String))
-  catch
-    _:_ -> 0
-  end.
+to_decimal(String) -> to_decimal(String, 0).
 
 %%====================================================================
 %% Internal functions
 %%====================================================================
 
--spec to_decimal(48 | 49, {integer(), integer()}) -> {integer(), integer()}.
-to_decimal($0, {Index, Total}) ->
-  {Index + 1, Total};
-to_decimal($1, {Index, Total}) ->
-  {Index + 1, Total + trunc(math:pow(2, Index))}.
+-spec to_decimal(string(), integer()) -> integer().
+to_decimal([], D)     -> D;
+to_decimal([$0|T], D) -> to_decimal(T, D bsl 1);
+to_decimal([$1|T], D) -> to_decimal(T, 1 + (D bsl 1));
+to_decimal(_, _)      -> 0.
