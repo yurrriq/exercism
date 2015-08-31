@@ -1,4 +1,4 @@
-(defproject allergies "0.1.0-SNAPSHOT"
+(defproject allergies "0.1.0"
   :description  "allergies exercise."
   :url          "https://github.com/yurrriq/exercism/tree/clojure/allergies"
   :source-paths [""]
