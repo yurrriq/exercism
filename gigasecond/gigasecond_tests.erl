@@ -1,9 +1,9 @@
 -module(gigasecond_tests).
 -include_lib("eunit/include/eunit.hrl").
 
-% To run tests:
-% erl -make
-% erl -noshell -eval "eunit:test(gigasecond, [verbose])" -s init stop
+%% To run tests:
+%% erl -make
+%% erl -noshell -eval "eunit:test(gigasecond, [verbose])" -s init stop
 
 one_test() ->
   Gs = gigasecond:from({2011, 4, 25}),
@@ -21,9 +21,7 @@ four_with_seconds_test() ->
   Gs = gigasecond:from({{1959, 7, 19}, {23, 59, 59}}),
   ?assertEqual({{1991, 3, 28}, {1, 46, 39}}, Gs).
 
-% modify the test to test your 1 Gs anniversary
-% with_your_birthday_test() ->
-%   YourBirthday = {Year, Month, Day},
-%   Gs = gigasecond:from(YourBirthday),
-%   ?assertEqual({2009, 1, 31, 1, 46, 39}, Gs).
-
+with_lovecraft_birthday_test() ->
+  HPLBirthday = {1890, 8, 20},
+  Gs = gigasecond:from(HPLBirthday),
+  ?assertEqual({{1922,4,29},{1,46,40}}, Gs).
