@@ -1,27 +1,49 @@
 (ns beer-song
-  (:require [clojure.string :refer [capitalize join]]))
+  (:require [clojure.string :as string]))
+
+
+;;;; ==== PRIVATE API ==========================================================
+
+(defn- bottles [n]
+  (case n
+    0 "no more bottles"
+    1 "1 bottle"
+    (str n " bottles")))
+
+(defn- of-beer [s] (str s " of beer"))
+
+(defn- bottles-of-beer [n] (-> n bottles of-beer))
+
+(def ^:private buy-more "Go to the store and buy some more, ")
+
+(defn- on-the-wall [s] (str s " on the wall"))
+
+(defn- pass-around [s] (str s " and pass it around, "))
+
+(defn- pause [s] (str s ", "))
+
+(defn- stop [s] (str s ".\n"))
+
+(defn- take-down [n] (str "Take " (if (= n 1) "it" "one") " down"))
+
+(defn- take-and-pass-or-buy [n]
+  (if (zero? n)
+    buy-more
+    (-> n take-down pass-around)))
+
+
+;;;; ==== PUBLIC API -==========================================================
 
 (defn verse
-  ([n]
-   (str (capitalize (verse n :first)) ", "
-        (verse n :second)
-        (verse n :next)))
+  ([n] (apply str (map #(verse n %) [:A :b :c])))
   ([n position]
-   (let [s? (if (not= n 1) "s" "")
-         n? (if (= n 0) "no more" n)
-         one? (if (= n 1) "it" "one")]
-     (case position
-       :first  (format "%s bottle%s of beer on the wall" n? s?)
-       :second (format  "%s bottle%s of beer.\n" n? s?)
-       :next   (str
-                 (if (> n 0)
-                   (format "Take %s down and pass it around, " one?)
-                   "Go to the store and buy some more, ")
-                 (verse (if (= n 0) 99 (dec n)) :first)
-                 ".\n")
-       (verse n)))))
+   (case position
+     :A (-> (verse n :a) (cond-> (zero? n) string/capitalize) pause)
+     :a (-> n bottles-of-beer on-the-wall)
+     :b (-> n bottles-of-beer stop)
+     :c (str (take-and-pass-or-buy n) (verse n :d))
+     :d (-> (dec n) (mod 100) (verse :a) stop))))
 
-(defn sing [start & end]
-  (join "\n"
-        (for [n (reverse (range (or (first end) 0) (inc start)))]
-          (verse n))))
+(defn sing
+  ([start]     (sing start 0))
+  ([start end] (string/join "\n" (map verse (range start (dec end) -1)))))
