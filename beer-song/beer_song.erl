@@ -6,10 +6,10 @@
 verse(N) -> lists:map(fun (I) -> string:concat(line(I, N), ".\n") end, [0, 1]).
 
 -spec line(0 | 1, integer()) -> string().
+line(1, 0) -> buy_more(on_the_wall(99));
 line(0, N) -> string:join([apply(fun (0, S) -> capitalize(S); (_, S) -> S end,
                                  [N, on_the_wall(N)]),
                            bottles_of_beer(N)], ", ");
-line(1, 0) -> buy_more(on_the_wall(99));
 line(1, N) -> string:concat(pass_around(take_down(N)), on_the_wall(N-1)).
 
 -spec sing(integer()) -> string().
