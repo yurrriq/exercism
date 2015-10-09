@@ -50,13 +50,13 @@ create() ->
 %% @see left/1
 %% @see right/1
 -spec direction(pid()) -> bearing().
-direction(Pid) -> get_property(Pid, direction).
+direction(Pid) -> gen_server:call(Pid, direction).
 
 %% @doc Given a robot pid, synchronously get and return its current position.
 %%
 %% @see advance/1
 -spec position(pid()) -> coordinates().
-position(Pid)  -> get_property(Pid, position).
+position(Pid)  -> gen_server:call(Pid, position).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -126,16 +126,6 @@ right(Pid)   -> gen_server:cast(Pid, {turn, right}).
 %%                                PRIVATE API                                 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% This is a hack for the tests. In real life, I'd return {ok, Value} and not
-%% define this helper function at all.
-get_property(Pid, Property) ->
-  try
-    {ok, Value} = gen_server:call(Pid, Property),
-    Value
-  catch
-    _Class:_Exception -> error
-  end.
-
 -spec advance(direction(), coordinates()) -> coordinates().
 advance(north, {X, Y}) -> {X,     Y + 1};
 advance(east,  {X, Y}) -> {X + 1, Y};
@@ -167,10 +157,10 @@ init([]) ->
 %% @private
 handle_call(direction, _From, Robot) ->
   #robot{direction = Direction} = Robot,
-  {reply, {ok, Direction}, Robot};
+  {reply, Direction, Robot};
 handle_call(position, _From, Robot) ->
   #robot{position = Position} = Robot,
-  {reply, {ok, Position}, Robot}.
+  {reply, Position, Robot}.
 
 %% @private
 handle_cast(advance, Robot) ->
@@ -192,14 +182,3 @@ terminate(_Reason, _State)          -> ok.
 
 %% @private
 code_change(_OldVsn, State, _Extra) -> {ok, State}.
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                                EMACS CONFIG                                %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% Local Variables:
-%% erlang-indent-level: 2
-%% End:
