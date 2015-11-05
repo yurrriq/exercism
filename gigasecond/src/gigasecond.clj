@@ -11,5 +11,5 @@
    (doto (GregorianCalendar. (TimeZone/getTimeZone "US/Central"))
      (.set Calendar/YEAR   year)
      (.set Calendar/MONTH  (dec month))
-     (.set Calendar/DATE   day)
+     (.set Calendar/DATE   (dec day))
      (.add Calendar/SECOND 1e9))))
