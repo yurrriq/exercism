@@ -2,9 +2,8 @@
   (:refer-clojure :exclude (replace))
   (:require [clojure.walk :refer (postwalk)]
             [clojure.string :refer (capitalize replace)]
-            [clojure.test :refer :all]))
-
-(load-file "bank_account.clj")
+            [clojure.test :refer :all]
+            [bank-account]))
 
 ;; The BankAccount module should support four calls:
 ;;
@@ -55,5 +54,4 @@
       (pcalls add-10 add-10 add-10)))
   (is (= 30 (get-balance))))
 
-(run-tests)
 (shutdown-agents) ;; for the pcalls above so the test exits

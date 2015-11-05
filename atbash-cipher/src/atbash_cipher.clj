@@ -36,11 +36,3 @@
        (partition-all 5)
        (map (partial apply str))
        (string/join " ")))
-
-
-;;;; ==== EMACS CONFIG =========================================================
-
-;; Local Variables:
-;; mode: clojure
-;; mode: typed-clojure
-;; End:

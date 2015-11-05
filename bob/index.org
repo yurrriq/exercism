@@ -29,7 +29,7 @@ tutorial.
 :PROPERTIES:
 :noweb: yes
 :END:
-#+BEGIN_SRC clojure :tangle bob.clj :padline no
+#+BEGIN_SRC clojure :tangle src/bob.clj :padline no
 (ns bob
   "Mimicking the conversational ineptitude of a lackadaisical teenager."
   {:author "Eric Bailey"})
@@ -134,7 +134,7 @@ Finally, we end up with the following definition of ~response-for~:
 defn response-for [prompt]
 #+END_SRC
 
-#+BEGIN_SRC clojure :tangle bob.clj :exports none
+#+BEGIN_SRC clojure :tangle src/bob.clj :exports none
 (<<response-for_signature>>
   "Given a prompt, return a teenager's response."
 <<response-for_body>>)
