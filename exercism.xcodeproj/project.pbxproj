@@ -13,6 +13,8 @@
 		532F28091B42803B001482A1 /* Bob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532F28081B42803B001482A1 /* Bob.swift */; };
 		6CDB5BB81C312BBB000F4E89 /* HammingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDB5BB61C312BBB000F4E89 /* HammingTest.swift */; };
 		6CDB5BBB1C312BDF000F4E89 /* Hamming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDB5BBA1C312BDF000F4E89 /* Hamming.swift */; };
+		6CDB5BC01C312F49000F4E89 /* WordCountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDB5BBE1C312F49000F4E89 /* WordCountTest.swift */; };
+		6CDB5BC21C312F91000F4E89 /* WordCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDB5BC11C312F91000F4E89 /* WordCount.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		532F28081B42803B001482A1 /* Bob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bob.swift; sourceTree = "<group>"; };
 		6CDB5BB61C312BBB000F4E89 /* HammingTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HammingTest.swift; sourceTree = "<group>"; };
 		6CDB5BBA1C312BDF000F4E89 /* Hamming.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hamming.swift; sourceTree = "<group>"; };
+		6CDB5BBE1C312F49000F4E89 /* WordCountTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordCountTest.swift; sourceTree = "<group>"; };
+		6CDB5BC11C312F91000F4E89 /* WordCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordCount.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,7 @@
 				532F27FC1B427FCE001482A1 /* leap */,
 				532F28031B427FD8001482A1 /* bob */,
 				6CDB5BB51C312BBB000F4E89 /* hamming */,
+				6CDB5BBC1C312F49000F4E89 /* word-count */,
 				532F27F51B427F90001482A1 /* Supporting Files */,
 			);
 			path = exercism;
@@ -97,6 +102,15 @@
 				6CDB5BBA1C312BDF000F4E89 /* Hamming.swift */,
 			);
 			path = hamming;
+			sourceTree = SOURCE_ROOT;
+		};
+		6CDB5BBC1C312F49000F4E89 /* word-count */ = {
+			isa = PBXGroup;
+			children = (
+				6CDB5BBE1C312F49000F4E89 /* WordCountTest.swift */,
+				6CDB5BC11C312F91000F4E89 /* WordCount.swift */,
+			);
+			path = "word-count";
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
@@ -168,9 +182,11 @@
 				532F28021B427FCE001482A1 /* Year.swift in Sources */,
 				6CDB5BB81C312BBB000F4E89 /* HammingTest.swift in Sources */,
 				532F28001B427FCE001482A1 /* LeapTest.swift in Sources */,
+				6CDB5BC01C312F49000F4E89 /* WordCountTest.swift in Sources */,
 				532F28061B427FD8001482A1 /* BobTest.swift in Sources */,
 				6CDB5BBB1C312BDF000F4E89 /* Hamming.swift in Sources */,
 				532F28091B42803B001482A1 /* Bob.swift in Sources */,
+				6CDB5BC21C312F91000F4E89 /* WordCount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
