@@ -111,6 +111,7 @@
 		532F27E81B427F6E001482A1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0630;
 				TargetAttributes = {
 					532F27F11B427F90001482A1 = {
@@ -285,6 +286,7 @@
 				532F27FA1B427F90001482A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
