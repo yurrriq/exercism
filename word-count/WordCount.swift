@@ -2,7 +2,7 @@
 //  WordCount.swift
 //  exercism
 //
-//  Created by Mo Hacker on 12/28/15.
+//  Created by Eric Bailey on 12/28/15.
 //
 //
 
