@@ -53,7 +53,7 @@ TODO: discuss ~cond~
     <<whatever>>)
 #+END_SRC
 
-*** Did you even saying anything?
+*** Did you even say anything?
 According to the specification, if you don't even say anything to Bob, the
 response should be =Fine. Be that way!=
 

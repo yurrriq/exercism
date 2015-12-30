@@ -1,7 +1,7 @@
 (ns etl-test
   (:require [clojure.core.typed :refer [check-ns]]
             [clojure.test :refer :all]
-            [etl]))
+            etl))
 
 (deftest transform-one-value
   (is (= {"world" 1}
