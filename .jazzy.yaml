@@ -1,0 +1,14 @@
+swift_version: 2.1.1
+
+module: 'Exercism: Swift'
+module_version: 2.1.1
+
+author_name: 'Eric Bailey'
+author_url:  'https://exercism.io/yurrriq'
+
+github_url: 'https://github.com/yurrriq/exercism/tree/swift'
+github_file_prefix: 'https://github.com/yurrriq/exercism/blob/swift'
+
+docset_path: 'docsets/Exercism Swift.docset'
+
+min_acl: private
