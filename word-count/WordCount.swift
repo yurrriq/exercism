@@ -9,13 +9,13 @@
 import Foundation
 
 /// A `Word` is a `String`.
-typealias Word = String
+public typealias Word = String
 
 /// A `Count` is an `Int`.
-typealias Count = Int
+public typealias Count = Int
 
 
-struct WordCount {
+public struct WordCount {
 
   let words: String
 
@@ -23,7 +23,7 @@ struct WordCount {
     self.words = words
   }
 
-  func count() -> [Word: Count] {
+  public func count() -> [Word: Count] {
     let nonAlphanumeric = NSCharacterSet.alphanumericCharacterSet().invertedSet
     let substrings      = words.componentsSeparatedByCharactersInSet(nonAlphanumeric)
 

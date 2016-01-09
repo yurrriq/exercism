@@ -11,9 +11,13 @@ import Foundation
 class Bob {
 
   class func hey(input: String) -> String {
-    if input.isSilent   { return "Fine, be that way." }
-    if input.isYelled   { return "Woah, chill out!"   }
-    if input.isQuestion { return "Sure."              }
+    if input.isSilent {
+      return "Fine, be that way."
+    } else if input.isYelled {
+      return "Woah, chill out!"
+    } else if input.isQuestion {
+      return "Sure."
+    }
 
     return "Whatever."
   }

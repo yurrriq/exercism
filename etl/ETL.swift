@@ -28,7 +28,7 @@ public typealias NewDatum = (Letter, Score)
  Doing the `Transform` step of an Extract-Transform-Load,
  i.e. extract some Scrabble scores from a legacy system.
 
- 
+
  Extract-Transform-Load (ETL) is a fancy way of saying,
  > We have some crufty, legacy data over in this system,
  > and now we need it in this shiny new system over here,

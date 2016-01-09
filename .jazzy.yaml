@@ -1,7 +1,6 @@
 swift_version: 2.1.1
 
 module: 'Exercism: Swift'
-module_version: 2.1.1
 
 author_name: 'Eric Bailey'
 author_url:  'https://exercism.io/yurrriq'

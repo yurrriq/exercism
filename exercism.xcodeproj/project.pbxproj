@@ -15,7 +15,7 @@
 		6CDB5BBB1C312BDF000F4E89 /* Hamming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDB5BBA1C312BDF000F4E89 /* Hamming.swift */; };
 		6CDB5BC01C312F49000F4E89 /* WordCountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDB5BBE1C312F49000F4E89 /* WordCountTest.swift */; };
 		6CDB5BC21C312F91000F4E89 /* WordCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDB5BC11C312F91000F4E89 /* WordCount.swift */; };
-		6CE4C11C1C33BDB800FA35E9 /* EtlTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE4C11A1C33BDB800FA35E9 /* EtlTest.swift */; };
+		6CE4C11C1C33BDB800FA35E9 /* ETLTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE4C11A1C33BDB800FA35E9 /* ETLTest.swift */; };
 		6CE4C11F1C33BDF800FA35E9 /* ETL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE4C11E1C33BDF800FA35E9 /* ETL.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,7 +30,7 @@
 		6CDB5BBA1C312BDF000F4E89 /* Hamming.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hamming.swift; sourceTree = "<group>"; };
 		6CDB5BBE1C312F49000F4E89 /* WordCountTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordCountTest.swift; sourceTree = "<group>"; };
 		6CDB5BC11C312F91000F4E89 /* WordCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordCount.swift; sourceTree = "<group>"; };
-		6CE4C11A1C33BDB800FA35E9 /* EtlTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EtlTest.swift; sourceTree = "<group>"; };
+		6CE4C11A1C33BDB800FA35E9 /* ETLTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETLTest.swift; sourceTree = "<group>"; };
 		6CE4C11E1C33BDF800FA35E9 /* ETL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETL.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,12 +64,12 @@
 		532F27F41B427F90001482A1 /* exercism */ = {
 			isa = PBXGroup;
 			children = (
-				532F27F51B427F90001482A1 /* Supporting Files */,
 				532F27FC1B427FCE001482A1 /* leap */,
 				532F28031B427FD8001482A1 /* bob */,
 				6CDB5BB51C312BBB000F4E89 /* hamming */,
 				6CDB5BBC1C312F49000F4E89 /* word-count */,
 				6CE4C1191C33BDB800FA35E9 /* etl */,
+				532F27F51B427F90001482A1 /* Supporting Files */,
 			);
 			path = exercism;
 			sourceTree = "<group>";
@@ -121,7 +121,7 @@
 		6CE4C1191C33BDB800FA35E9 /* etl */ = {
 			isa = PBXGroup;
 			children = (
-				6CE4C11A1C33BDB800FA35E9 /* EtlTest.swift */,
+				6CE4C11A1C33BDB800FA35E9 /* ETLTest.swift */,
 				6CE4C11E1C33BDF800FA35E9 /* ETL.swift */,
 			);
 			path = etl;
@@ -137,6 +137,7 @@
 				532F27EE1B427F90001482A1 /* Sources */,
 				532F27EF1B427F90001482A1 /* Frameworks */,
 				532F27F01B427F90001482A1 /* Resources */,
+				6C111E061C40D76D00387DE0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -188,6 +189,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6C111E061C40D76D00387DE0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\necho \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		532F27EE1B427F90001482A1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -200,7 +217,7 @@
 				532F28061B427FD8001482A1 /* BobTest.swift in Sources */,
 				6CDB5BBB1C312BDF000F4E89 /* Hamming.swift in Sources */,
 				532F28091B42803B001482A1 /* Bob.swift in Sources */,
-				6CE4C11C1C33BDB800FA35E9 /* EtlTest.swift in Sources */,
+				6CE4C11C1C33BDB800FA35E9 /* ETLTest.swift in Sources */,
 				6CDB5BC21C312F91000F4E89 /* WordCount.swift in Sources */,
 				6CE4C11F1C33BDF800FA35E9 /* ETL.swift in Sources */,
 			);
