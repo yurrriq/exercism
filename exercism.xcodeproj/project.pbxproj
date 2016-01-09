@@ -15,6 +15,8 @@
 		6C111E051C40D3B000387DE0 /* AnagramTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C111E031C40D3B000387DE0 /* AnagramTest.swift */; };
 		6C111E0F1C40DF4000387DE0 /* NucleotideCountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C111E0D1C40DF4000387DE0 /* NucleotideCountTest.swift */; };
 		6C111E121C40DFAF00387DE0 /* DNA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C111E111C40DFAF00387DE0 /* DNA.swift */; };
+		6C794D911C4178D500696A41 /* PhoneNumberTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C794D8F1C4178D500696A41 /* PhoneNumberTest.swift */; };
+		6C794D941C4178EB00696A41 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C794D931C4178EB00696A41 /* PhoneNumber.swift */; };
 		6CDB5BB81C312BBB000F4E89 /* HammingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDB5BB61C312BBB000F4E89 /* HammingTest.swift */; };
 		6CDB5BBB1C312BDF000F4E89 /* Hamming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDB5BBA1C312BDF000F4E89 /* Hamming.swift */; };
 		6CDB5BC01C312F49000F4E89 /* WordCountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDB5BBE1C312F49000F4E89 /* WordCountTest.swift */; };
@@ -34,6 +36,8 @@
 		6C111E031C40D3B000387DE0 /* AnagramTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnagramTest.swift; path = anagram/AnagramTest.swift; sourceTree = SOURCE_ROOT; };
 		6C111E0D1C40DF4000387DE0 /* NucleotideCountTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NucleotideCountTest.swift; sourceTree = "<group>"; };
 		6C111E111C40DFAF00387DE0 /* DNA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNA.swift; sourceTree = "<group>"; };
+		6C794D8F1C4178D500696A41 /* PhoneNumberTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberTest.swift; sourceTree = "<group>"; };
+		6C794D931C4178EB00696A41 /* PhoneNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
 		6CDB5BB61C312BBB000F4E89 /* HammingTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HammingTest.swift; sourceTree = "<group>"; };
 		6CDB5BBA1C312BDF000F4E89 /* Hamming.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hamming.swift; sourceTree = "<group>"; };
 		6CDB5BBE1C312F49000F4E89 /* WordCountTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordCountTest.swift; sourceTree = "<group>"; };
@@ -79,6 +83,7 @@
 				6CE4C1191C33BDB800FA35E9 /* etl */,
 				6C111DFB1C40CFDC00387DE0 /* anagram */,
 				6C111E0C1C40DF4000387DE0 /* nucleotide-count */,
+				6C794D8E1C4178D500696A41 /* phone-number */,
 				532F27F51B427F90001482A1 /* Supporting Files */,
 			);
 			path = exercism;
@@ -126,6 +131,15 @@
 				6C111E111C40DFAF00387DE0 /* DNA.swift */,
 			);
 			path = "nucleotide-count";
+			sourceTree = SOURCE_ROOT;
+		};
+		6C794D8E1C4178D500696A41 /* phone-number */ = {
+			isa = PBXGroup;
+			children = (
+				6C794D8F1C4178D500696A41 /* PhoneNumberTest.swift */,
+				6C794D931C4178EB00696A41 /* PhoneNumber.swift */,
+			);
+			path = "phone-number";
 			sourceTree = SOURCE_ROOT;
 		};
 		6CDB5BB51C312BBB000F4E89 /* hamming */ = {
@@ -251,7 +265,9 @@
 				6CDB5BC21C312F91000F4E89 /* WordCount.swift in Sources */,
 				6CE4C11F1C33BDF800FA35E9 /* ETL.swift in Sources */,
 				6C111E051C40D3B000387DE0 /* AnagramTest.swift in Sources */,
+				6C794D911C4178D500696A41 /* PhoneNumberTest.swift in Sources */,
 				6C111E0F1C40DF4000387DE0 /* NucleotideCountTest.swift in Sources */,
+				6C794D941C4178EB00696A41 /* PhoneNumber.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
