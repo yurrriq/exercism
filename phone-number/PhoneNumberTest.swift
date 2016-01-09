@@ -8,7 +8,7 @@ class PhoneNumberTest: XCTestCase {
     let startingNumber = "1234567890"
     let expected       = "1234567890"
     let number         = PhoneNumber(startingNumber: startingNumber)
-    let result         = number.number()
+    let result         = number.number
     XCTAssertEqual(result, expected)
   }
 
@@ -16,7 +16,7 @@ class PhoneNumberTest: XCTestCase {
     let startingNumber = "(123) 456-7890"
     let expected       = "1234567890"
     let number         = PhoneNumber(startingNumber: startingNumber)
-    let result         = number.number()
+    let result         = number.number
     XCTAssertEqual(result, expected)
   }
 
@@ -24,7 +24,7 @@ class PhoneNumberTest: XCTestCase {
     let startingNumber = "123.456.7890"
     let expected       = "1234567890"
     let number         = PhoneNumber(startingNumber: startingNumber)
-    let result         = number.number()
+    let result         = number.number
     XCTAssertEqual(result, expected)
   }
 
@@ -32,7 +32,7 @@ class PhoneNumberTest: XCTestCase {
     let startingNumber = "11234567890"
     let expected       = "1234567890"
     let number         = PhoneNumber(startingNumber: startingNumber)
-    let result         = number.number()
+    let result         = number.number
     XCTAssertEqual(result, expected)
   }
 
@@ -40,7 +40,7 @@ class PhoneNumberTest: XCTestCase {
     let startingNumber = "21234567890"
     let expected       = "0000000000"
     let number         = PhoneNumber(startingNumber: startingNumber)
-    let result         = number.number()
+    let result         = number.number
     XCTAssertEqual(result, expected)
   }
 
@@ -48,7 +48,7 @@ class PhoneNumberTest: XCTestCase {
     let startingNumber = "123456789"
     let expected       = "0000000000"
     let number         = PhoneNumber(startingNumber: startingNumber)
-    let result         = number.number()
+    let result         = number.number
     XCTAssertEqual(result, expected)
   }
 
@@ -56,7 +56,7 @@ class PhoneNumberTest: XCTestCase {
     let startingNumber = "1234567890"
     let expected       = "123"
     let number         = PhoneNumber(startingNumber: startingNumber)
-    let result         = number.areaCode()
+    let result         = number.areaCode
     XCTAssertEqual(result, expected)
   }
 
