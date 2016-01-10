@@ -83,11 +83,8 @@ private extension String {
    */
   subscript (range: Range<Int>) -> String {
     get {
-      let start = startIndex.advancedBy(range.startIndex)
-      guard start < endIndex else { return "" }
-
-      let end   = min(endIndex, start.advancedBy(range.endIndex - range.startIndex))
-
+      let start = min(endIndex.predecessor(), startIndex.advancedBy(range.startIndex))
+      let end   = min(endIndex,               start.advancedBy(range.endIndex - range.startIndex))
       return self[Range(start: start, end: end)]
     }
   }
