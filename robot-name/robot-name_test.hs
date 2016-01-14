@@ -1,9 +1,9 @@
-import Test.HUnit (Assertion, (@?), (@=?), runTestTT, Test(..), Counts(..))
-import System.Exit (ExitCode(..), exitWith)
-import Robot (robotName, mkRobot, resetName)
-import Text.Regex (mkRegex)
-import Text.Regex.Base (matchTest)
-import Control.Applicative ((<$>))
+import           Robot           (mkRobot, resetName, robotName)
+import           System.Exit     (ExitCode (..), exitWith)
+import           Test.HUnit      (Assertion, Counts (..), Test (..), runTestTT,
+                                  (@=?), (@?))
+import           Text.Regex      (mkRegex)
+import           Text.Regex.Base (matchTest)
 
 exitProperly :: IO Counts -> IO ()
 exitProperly m = do
