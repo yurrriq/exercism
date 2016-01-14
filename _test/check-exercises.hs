@@ -62,6 +62,7 @@ getAssignments dir = filterM isAssignmentDir
       '_':_  -> return False
       "bin"  -> return False
       "docs" -> return False
+      "minesweeper" -> return False
       _      -> isDirectory <$> getFileStatus (dir </> path)
 
 main :: IO ()
