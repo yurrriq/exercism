@@ -1,6 +1,7 @@
-import Test.HUnit (Assertion, (@=?), runTestTT, Test(..), Counts(..))
-import System.Exit (ExitCode(..), exitWith)
-import LeapYear (isLeapYear)
+import           LeapYear    (isLeapYear)
+import           System.Exit (ExitCode (..), exitWith)
+import           Test.HUnit  (Assertion, Counts (..), Test (..), runTestTT,
+                              (@=?))
 
 exitProperly :: IO Counts -> IO ()
 exitProperly m = do
