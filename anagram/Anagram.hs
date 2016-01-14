@@ -18,9 +18,9 @@ module Anagram (
   -- $alternate
   ) where
 
-import Control.Monad (ap)
-import Data.Char (toLower)
-import Data.List (sort)
+import           Control.Monad (ap)
+import           Data.Char     (toLower)
+import           Data.List     (sort)
 
 -- | Given a string and a list of strings, returns a sublist where
 -- each string is an anagram for the given string.
@@ -53,7 +53,7 @@ filterCaseSensitiveAnagramsFor a =
   filter (\\b -> (map toLower b) \`isCaseSensitiveAnagramOf\` a)
 
 isCaseSensitiveAnagramOf :: String -> String -> Bool
-x \`isCaseSensitiveAnagramOf\` y = (x /= y) && (x `hasSameLettersAs` y)
+x \`isCaseSensitiveAnagramOf\` y = (x /= y) && (x \`hasSameLettersAs\` y)
 
 hasSameLettersAs :: String -> String -> Bool
 x \`hasSameLettersAs\` y = sort x == sort y
