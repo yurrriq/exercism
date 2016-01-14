@@ -1,12 +1,12 @@
-import Test.HUnit (Assertion, (@=?), runTestTT, Test(..), Counts(..))
-import System.Exit (ExitCode(..), exitWith)
-import Gigasecond (fromDay)
-import Data.Time.Clock (UTCTime)
-import Data.Time.Format (readTime)
-import System.Locale (defaultTimeLocale, iso8601DateFormat)
+import           Data.Time.Clock  (UTCTime)
+import           Data.Time.Format (defaultTimeLocale, parseTimeOrError)
+import           Gigasecond       (fromDay)
+import           System.Exit      (ExitCode (..), exitWith)
+import           Test.HUnit       (Assertion, Counts (..), Test (..), runTestTT,
+                                   (@=?))
 
 dt :: String -> UTCTime
-dt = readTime defaultTimeLocale (iso8601DateFormat (Just "%T%Z"))
+dt = parseTimeOrError True defaultTimeLocale "%FT%T%Z"
 
 exitProperly :: IO Counts -> IO ()
 exitProperly m = do
