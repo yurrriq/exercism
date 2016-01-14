@@ -1,1 +1,0 @@
-../../accumulate/Accumulate.hs

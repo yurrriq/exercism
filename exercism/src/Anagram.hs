@@ -1,1 +1,0 @@
-../../anagram/Anagram.hs
