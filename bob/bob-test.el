@@ -63,4 +63,4 @@
    (string= "Sure." (response-for "4?"))))
 
 (provide 'bob-test)
-;;;bob-test.el ends here
+;;; bob-test.el ends here
