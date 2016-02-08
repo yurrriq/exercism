@@ -7,4 +7,4 @@ clean:
 	@$(RM) -r *.beam
 
 test: clean compile
-	@erl -pa . -eval 'eunit:test(trinary_tests), init:stop().'
+	@erl -noshell -eval 'eunit:test(trinary_tests, [verbose])' -s init stop
