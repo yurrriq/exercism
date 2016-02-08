@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Module largest_series_product</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module largest_series_product</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>Calculating the largest product of a
+   series of consecutive digits of length <code>N</code>.
+
+<p><b>Authors:</b> Eric Bailey.</p>
+
+<h2><a name="description">Description</a></h2>Calculating the largest product of a
+   series of consecutive digits of length <code>N</code>.
+<h2><a name="types">Data Types</a></h2>
+
+<h3 class="typedecl"><a name="type-char_digit">char_digit()</a></h3>
+<p><b>abstract datatype</b>: <tt>char_digit()</tt></p>
+<p>A character representing a digit, i.e. <code>$0..$9</code>.</p>
+
+<h3 class="typedecl"><a name="type-digit">digit()</a></h3>
+<p><b>abstract datatype</b>: <tt>digit()</tt></p>
+<p>A single digit integer, i.e. <code>0..9</code>.</p>
+
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#digit-1">digit/1*</a></td><td>Convert a <code><a href="#type-char_digit">char_digit()</a></code> to the corresponding <code><a href="#type-digit">digit()</a></code>.</td></tr>
+<tr><td valign="top"><a href="#digits-1">digits/1*</a></td><td>Convert a string of <a href="#type-char_digit">digits</a>
+  to a list of <a href="#type-digit">digits</a>.</td></tr>
+<tr><td valign="top"><a href="#droplast-2">droplast/2*</a></td><td>Drop the last <code>Len</code> elements of <code>List1</code>.</td></tr>
+<tr><td valign="top"><a href="#from_string-2">from_string/2</a></td><td>Given a <code>String</code> of digits, calculate the largest product
+  for a series of consecutive digits of length <code>Len</code>.</td></tr>
+<tr><td valign="top"><a href="#max1-1">max1/1*</a></td><td>Return the first element of <code>List</code> that compares greater than or equal
+  to all other elements of <code>List</code>.</td></tr>
+<tr><td valign="top"><a href="#product-1">product/1*</a></td><td>Return the product of the elements in <code>List</code>.</td></tr>
+<tr><td valign="top"><a href="#slices-2">slices/2*</a></td><td>Return every distinct <code>Len</code>-element sub-list of <code>Len</code>.</td></tr>
+<tr><td valign="top"><a href="#tails-1">tails/1*</a></td><td>Return all tails of <code>List</code>, longest first.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="digit-1">digit/1 *</a></h3>
+<div class="spec">
+<p><tt>digit(Char) -&gt; Digit</tt>
+<ul class="definitions"><li><tt>Char = <a href="#type-char_digit">char_digit()</a></tt></li><li><tt>Digit = <a href="#type-digit">digit()</a></tt></li></ul></p>
+</div><p>Convert a <code><a href="#type-char_digit">char_digit()</a></code> to the corresponding <code><a href="#type-digit">digit()</a></code>.</p>
+
+<h3 class="function"><a name="digits-1">digits/1 *</a></h3>
+<div class="spec">
+<p><tt>digits(String) -&gt; Digits</tt>
+<ul class="definitions"><li><tt>String = [<a href="#type-char_digit">char_digit()</a>]</tt></li><li><tt>Digits = [<a href="#type-digit">digit()</a>]</tt></li></ul></p>
+</div><p>Convert a string of <a href="#type-char_digit">digits</a>
+  to a list of <a href="#type-digit">digits</a>.</p>
+<p><b>See also:</b> <a href="#digit-1">digit/1</a>.</p>
+
+<h3 class="function"><a name="droplast-2">droplast/2 *</a></h3>
+<div class="spec">
+<p><tt>droplast(List1, Len) -&gt; List2</tt>
+<ul class="definitions"><li><tt>List1 = [T]</tt></li><li><tt>List2 = [T]</tt></li><li><tt>Len = non_neg_integer()</tt></li><li><tt>T = term()</tt></li></ul></p>
+</div><p>Drop the last <code>Len</code> elements of <code>List1</code>.
+  If the list is empty or <code>Len</code> exceeds the length of the list,
+  return the empty list.</p>
+
+<h3 class="function"><a name="from_string-2">from_string/2</a></h3>
+<div class="spec">
+<p><tt>from_string(String, Len) -&gt; Product</tt>
+<ul class="definitions"><li><tt>String = [<a href="#type-char_digit">char_digit()</a>]</tt></li><li><tt>Len = non_neg_integer()</tt></li><li><tt>Product = integer()</tt></li></ul></p>
+</div><p>Given a <code>String</code> of digits, calculate the largest product
+  for a series of consecutive digits of length <code>Len</code>.</p>
+
+<h3 class="function"><a name="max1-1">max1/1 *</a></h3>
+<div class="spec">
+<p><tt>max1(List) -&gt; Max</tt>
+<ul class="definitions"><li><tt>List = [T]</tt></li><li><tt>Max = T</tt></li><li><tt>T = term()</tt></li></ul></p>
+</div><p>Return the first element of <code>List</code> that compares greater than or equal
+  to all other elements of <code>List</code>. If <code>List</code> is empty, return <code>1</code>.</p>
+
+<h3 class="function"><a name="product-1">product/1 *</a></h3>
+<div class="spec">
+<p><tt>product(List) -&gt; number()</tt>
+<ul class="definitions"><li><tt>List = [number()]</tt></li></ul></p>
+</div><p>Return the product of the elements in <code>List</code>.</p>
+
+<h3 class="function"><a name="slices-2">slices/2 *</a></h3>
+<div class="spec">
+<p><tt>slices(List, Len) -&gt; Slices</tt>
+<ul class="definitions"><li><tt>List = [T]</tt></li><li><tt>Slices = [[T]]</tt></li><li><tt>Len = non_neg_integer()</tt></li><li><tt>T = term()</tt></li></ul></p>
+</div><p>Return every distinct <code>Len</code>-element sub-list of <code>Len</code>.</p>
+
+<h3 class="function"><a name="tails-1">tails/1 *</a></h3>
+<div class="spec">
+<p><tt>tails(List) -&gt; Tails</tt>
+<ul class="definitions"><li><tt>List = [T]</tt></li><li><tt>Tails = [[T]]</tt></li><li><tt>T = term()</tt></li></ul></p>
+</div><p>Return all tails of <code>List</code>, longest first. For example,
+  <pre>  tails("abc") =:= ["abc","bc","c",[]].</pre></p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Feb 8 2016, 03:43:46.</i></p>
+</body>
+</html>
