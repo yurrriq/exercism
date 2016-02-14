@@ -15,6 +15,8 @@
 		6C111E051C40D3B000387DE0 /* AnagramTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C111E031C40D3B000387DE0 /* AnagramTest.swift */; };
 		6C111E0F1C40DF4000387DE0 /* NucleotideCountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C111E0D1C40DF4000387DE0 /* NucleotideCountTest.swift */; };
 		6C111E121C40DFAF00387DE0 /* DNA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C111E111C40DFAF00387DE0 /* DNA.swift */; };
+		6C5F4B1A1C6FFD0E007F607A /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5F4B171C6FFD0E007F607A /* Robot.swift */; };
+		6C5F4B1B1C6FFD0E007F607A /* RobotNameTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5F4B181C6FFD0E007F607A /* RobotNameTest.swift */; };
 		6C794D911C4178D500696A41 /* PhoneNumberTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C794D8F1C4178D500696A41 /* PhoneNumberTest.swift */; };
 		6C794D941C4178EB00696A41 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C794D931C4178EB00696A41 /* PhoneNumber.swift */; };
 		6C794D981C41980700696A41 /* GradeSchoolTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C794D961C41980700696A41 /* GradeSchoolTest.swift */; };
@@ -38,6 +40,8 @@
 		6C111E031C40D3B000387DE0 /* AnagramTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnagramTest.swift; path = anagram/AnagramTest.swift; sourceTree = SOURCE_ROOT; };
 		6C111E0D1C40DF4000387DE0 /* NucleotideCountTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NucleotideCountTest.swift; sourceTree = "<group>"; };
 		6C111E111C40DFAF00387DE0 /* DNA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNA.swift; sourceTree = "<group>"; };
+		6C5F4B171C6FFD0E007F607A /* Robot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Robot.swift; sourceTree = "<group>"; };
+		6C5F4B181C6FFD0E007F607A /* RobotNameTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RobotNameTest.swift; sourceTree = "<group>"; };
 		6C794D8F1C4178D500696A41 /* PhoneNumberTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberTest.swift; sourceTree = "<group>"; };
 		6C794D931C4178EB00696A41 /* PhoneNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
 		6C794D961C41980700696A41 /* GradeSchoolTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradeSchoolTest.swift; sourceTree = "<group>"; };
@@ -89,6 +93,7 @@
 				6C111E0C1C40DF4000387DE0 /* nucleotide-count */,
 				6C794D8E1C4178D500696A41 /* phone-number */,
 				6C794D951C41980700696A41 /* grade-school */,
+				6C5F4B151C6FFD0E007F607A /* robot-name */,
 				532F27F51B427F90001482A1 /* Supporting Files */,
 			);
 			path = exercism;
@@ -136,6 +141,15 @@
 				6C111E111C40DFAF00387DE0 /* DNA.swift */,
 			);
 			path = "nucleotide-count";
+			sourceTree = SOURCE_ROOT;
+		};
+		6C5F4B151C6FFD0E007F607A /* robot-name */ = {
+			isa = PBXGroup;
+			children = (
+				6C5F4B171C6FFD0E007F607A /* Robot.swift */,
+				6C5F4B181C6FFD0E007F607A /* RobotNameTest.swift */,
+			);
+			path = "robot-name";
 			sourceTree = SOURCE_ROOT;
 		};
 		6C794D8E1C4178D500696A41 /* phone-number */ = {
@@ -266,6 +280,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C5F4B1B1C6FFD0E007F607A /* RobotNameTest.swift in Sources */,
+				6C5F4B1A1C6FFD0E007F607A /* Robot.swift in Sources */,
 				532F28021B427FCE001482A1 /* Year.swift in Sources */,
 				6CDB5BB81C312BBB000F4E89 /* HammingTest.swift in Sources */,
 				532F28001B427FCE001482A1 /* LeapTest.swift in Sources */,
