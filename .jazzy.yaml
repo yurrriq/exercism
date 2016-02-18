@@ -11,6 +11,5 @@ github_file_prefix: https://github.com/yurrriq/exercism/blob/swift
 
 min_acl: private
 
-docset_path: docsets/Exercism Swift.docset
 output:      ../_site/swift
 root_url:    http://yurrriq.codes/exercism/swift/
