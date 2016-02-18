@@ -30,7 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		532F27F21B427F90001482A1 /* exercism.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = exercism.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		532F27F21B427F90001482A1 /* Exercism.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Exercism.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		532F27F61B427F90001482A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		532F27FD1B427FCE001482A1 /* LeapTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeapTest.swift; sourceTree = "<group>"; };
 		532F27FF1B427FCE001482A1 /* Year.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Year.swift; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 		532F27F31B427F90001482A1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				532F27F21B427F90001482A1 /* exercism.xctest */,
+				532F27F21B427F90001482A1 /* Exercism.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -200,9 +200,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		532F27F11B427F90001482A1 /* exercism */ = {
+		532F27F11B427F90001482A1 /* Exercism */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 532F27FB1B427F90001482A1 /* Build configuration list for PBXNativeTarget "exercism" */;
+			buildConfigurationList = 532F27FB1B427F90001482A1 /* Build configuration list for PBXNativeTarget "Exercism" */;
 			buildPhases = (
 				532F27EE1B427F90001482A1 /* Sources */,
 				532F27EF1B427F90001482A1 /* Frameworks */,
@@ -213,9 +213,9 @@
 			);
 			dependencies = (
 			);
-			name = exercism;
+			name = Exercism;
 			productName = exercism;
-			productReference = 532F27F21B427F90001482A1 /* exercism.xctest */;
+			productReference = 532F27F21B427F90001482A1 /* Exercism.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -232,7 +232,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 532F27EB1B427F6E001482A1 /* Build configuration list for PBXProject "exercism" */;
+			buildConfigurationList = 532F27EB1B427F6E001482A1 /* Build configuration list for PBXProject "Exercism" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -244,7 +244,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				532F27F11B427F90001482A1 /* exercism */,
+				532F27F11B427F90001482A1 /* Exercism */,
 			);
 		};
 /* End PBXProject section */
@@ -415,7 +415,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		532F27EB1B427F6E001482A1 /* Build configuration list for PBXProject "exercism" */ = {
+		532F27EB1B427F6E001482A1 /* Build configuration list for PBXProject "Exercism" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				532F27EC1B427F6E001482A1 /* Debug */,
@@ -424,7 +424,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		532F27FB1B427F90001482A1 /* Build configuration list for PBXNativeTarget "exercism" */ = {
+		532F27FB1B427F90001482A1 /* Build configuration list for PBXNativeTarget "Exercism" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				532F27F91B427F90001482A1 /* Debug */,
