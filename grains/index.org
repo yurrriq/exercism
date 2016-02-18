@@ -1,0 +1,45 @@
+#+SETUPFILE:   ../../org/setup.org
+#+TITLE:       Exercism.io → Racket → Grains
+#+DATE:
+#+DESCRIPTION: My solutions to Excercism.io in Scheme.
+#+OPTIONS: html-postamble:nil toc:nil
+#+HTML_MATHJAX: align:"left" scale:"100" mathml:t path:"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+#+LINK_HOME: ../../index.html
+#+LINK_UP:   ../index.html
+#+INFOJS_OPT: path:../../js/org-info.js view:showall toc:nil ltoc:nil tdepth:2 mouse:#dddddd
+
+* grains.rkt
+  :PROPERTIES:
+  :tangle:   grains.rkt
+  :END:
+Use the [[http://docs.racket-lang.org/guide/Module_Syntax.html#%2528part._hash-lang%2529][~#lang~ shorthand]] to declare the ~grains~ module.
+#+BEGIN_SRC racket :padline no
+#lang racket
+#+END_SRC
+
+The functions [[https://github.com/yurrriq/exercism/blob/racket/grains/grains.rkt][grains.rkt]] needs to export are [[square][square]] and [[total][total]].
+#+BEGIN_SRC racket
+(provide square total)
+#+END_SRC
+
+** square
+The definition of ~square~ is simple:
+$\displaystyle \text{square}\ n = 2^{n - 1}$
+
+#+BEGIN_SRC racket :tangle grains.rkt
+(define (square n) (expt 2 (sub1 n)))
+#+END_SRC
+
+** total
+The ~total~ is the sum of the number of grains of wheat on /every/ square,
+i.e. $\displaystyle \sum_{n=1}^{64} 2^{n - 1}$.
+
+\begin{align*}
+  \sum_{n=1}^{k}  2^{n - 1}  &= 2^k               &- 1 \\
+  \sum_{n=1}^{64} 2^{64 - 1} &= 2^{64}            &- 1 \\
+  \text{total}               &= 2^{65 - 1}        &- 1 \\
+                             &= \text{square}\ 65 &- 1
+\end{align*}
+#+BEGIN_SRC scheme :exports code
+(define (total) (sub1 (square 65)))
+#+END_SRC
