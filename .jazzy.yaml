@@ -13,3 +13,4 @@ min_acl: private
 
 docset_path: docsets/Exercism Swift.docset
 output:      ../_site/swift
+root_url:    http://yurrriq.codes/exercism/swift/
