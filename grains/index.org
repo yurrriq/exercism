@@ -14,10 +14,10 @@
   #:autoload (srfi srfi-1) (iota))
 #+END_SRC
 
-The definition of ~square~ is simple.
+The definition of ~square~ is simple:
 
 \[
-  \text{square}\ n = (n - 1)^2
+  \text{square}\ n = 2^{n - 1}
 \]
 
 #+BEGIN_SRC scheme :tangle grains.scm

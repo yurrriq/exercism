@@ -5,5 +5,4 @@
             my-filter
             my-fold
             my-append
-            my-concatenate
-            ))
+            my-concatenate))
