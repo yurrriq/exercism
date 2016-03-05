@@ -1,8 +1,6 @@
 [package]
-name = "dominoes"
-version = "0.0.0"
+name    = "dominoes"
+version = "0.0.1"
 
 [lib]
-name = "dominoes"
-path = "dominoes.rs"
-
+name    = "dominoes"
