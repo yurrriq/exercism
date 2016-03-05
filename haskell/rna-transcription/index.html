@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Exercism.io → Haskell → RNA Transcription</title>
-<!-- 2015-05-13 Wed 04:39 -->
+<!-- 2016-03-04 Fri 23:27 -->
 <meta  charset="utf-8">
+<meta  name="viewport" content="width=device-width, initial-scale=1">
+<title>Exercism.io → Haskell → RNA Transcription</title>
 <meta  name="generator" content="Org-mode">
 <meta  name="author" content="Eric Bailey">
 <meta  name="description" content="My solutions to Excercism.io in Haskell."
 >
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
   .todo   { font-family: monospace; color: red; }
-  .done   { color: green; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
   .tag    { background-color: #eee; font-family: monospace;
             padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
   .underline { text-decoration: underline; }
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
@@ -58,15 +65,14 @@
   caption.t-above { caption-side: top; }
   caption.t-bottom { caption-side: bottom; }
   td, th { vertical-align:top;  }
-  th.right  { text-align: center;  }
-  th.left   { text-align: center;   }
-  th.center { text-align: center; }
-  td.right  { text-align: right;  }
-  td.left   { text-align: left;   }
-  td.center { text-align: center; }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
   dt { font-weight: bold; }
-  .footpara:nth-child(2) { display: inline; }
-  .footpara { display: block; }
+  .footpara { display: inline; }
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
@@ -216,20 +222,20 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">RNA Transcription</a>
+<li><a href="#orgheadline1">RNA Transcription</a>
 <ul>
-<li><a href="#sec-1-1">Source</a></li>
-<li><a href="#sec-1-2">Solution</a></li>
-<li><a href="#sec-1-3">Tests</a></li>
+<li><a href="#orgheadline2">Source</a></li>
+<li><a href="#orgheadline3">Solution</a></li>
+<li><a href="#orgheadline4">Tests</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">RNA Transcription</h2>
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">RNA Transcription</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 Write a program that, given a DNA strand, returns its RNA complement (per RNA transcription).
 </p>
@@ -254,29 +260,25 @@ each nucleotide with its complement:
 </p>
 
 <ul class="org-ul">
-<li><code>G</code> -&gt; <code>C</code>
-</li>
-<li><code>C</code> -&gt; <code>G</code>
-</li>
-<li><code>T</code> -&gt; <code>A</code>
-</li>
-<li><code>A</code> -&gt; <code>U</code>
-</li>
+<li><code>G</code> -&gt; <code>C</code></li>
+<li><code>C</code> -&gt; <code>G</code></li>
+<li><code>T</code> -&gt; <code>A</code></li>
+<li><code>A</code> -&gt; <code>U</code></li>
 </ul>
 </div>
 
-<div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1">Source</h3>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">Source</h3>
+<div class="outline-text-3" id="text-orgheadline2">
 <p>
 Rosalind <a href="http://rosalind.info/problems/rna">view source</a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2">Solution</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">Solution</h3>
+<div class="outline-text-3" id="text-orgheadline3">
 <div class="org-src-container">
 
 <pre class="src src-haskell"><span style="color: #F92672;">{-# LANGUAGE LambdaCase #-}</span>
@@ -300,8 +302,8 @@ Apparently it took the Haskell team <a href="https://unknownparallel.wordpress.c
 
 <div class="org-src-container">
 
-<pre class="src src-haskell"><span style="color: #A6E22E;">toRNA</span> <span style="color: #A6E22E;">::</span> <span style="color: #66D9EF;">String</span> <span style="color: #FD971F;">-&gt;</span> <span style="color: #66D9EF;">String</span>
-<span style="color: #A6E22E;">toRNA</span> <span style="color: #A6E22E;">=</span> map (<span style="color: #FD971F;">\</span><span style="color: #F92672;">case</span> <span style="color: #E6DB74;">'G'</span> <span style="color: #FD971F;">-&gt;</span> <span style="color: #E6DB74;">'C'</span><span style="color: #FD971F;">;</span> <span style="color: #E6DB74;">'C'</span> <span style="color: #FD971F;">-&gt;</span> <span style="color: #E6DB74;">'G'</span><span style="color: #FD971F;">;</span> <span style="color: #E6DB74;">'T'</span> <span style="color: #FD971F;">-&gt;</span> <span style="color: #E6DB74;">'A'</span><span style="color: #FD971F;">;</span> <span style="color: #E6DB74;">'A'</span> <span style="color: #FD971F;">-&gt;</span> <span style="color: #E6DB74;">'U'</span>)
+<pre class="src src-haskell"><span style="color: #A6E22E;">toRNA</span> <span style="color: #FD971F;">::</span> <span style="color: #66D9EF;">String</span> <span style="color: #FD971F;">-&gt;</span> <span style="color: #66D9EF;">String</span>
+<span style="color: #A6E22E;">toRNA</span> <span style="color: #FD971F;">=</span> map (<span style="color: #FD971F;">\</span><span style="color: #F92672;">case</span> <span style="color: #E6DB74;">'G'</span> <span style="color: #FD971F;">-&gt;</span> <span style="color: #E6DB74;">'C'</span>; <span style="color: #E6DB74;">'C'</span> <span style="color: #FD971F;">-&gt;</span> <span style="color: #E6DB74;">'G'</span>; <span style="color: #E6DB74;">'T'</span> <span style="color: #FD971F;">-&gt;</span> <span style="color: #E6DB74;">'A'</span>; <span style="color: #E6DB74;">'A'</span> <span style="color: #FD971F;">-&gt;</span> <span style="color: #E6DB74;">'U'</span>)
 </pre>
 </div>
 
@@ -316,12 +318,12 @@ document Haskell code using <a href="https://github.com/haskell/haddock">Haddock
 </div>
 </div>
 
-<div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3">Tests</h3>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Tests</h3>
+<div class="outline-text-3" id="text-orgheadline4">
 <div class="org-src-container">
 
-<pre class="src src-fish">runhaskell rna-transcription_test.hs
+<pre class="src src-fish"><span style="color: #F92672;">runhaskell</span> rna-transcription_test.hs
 </pre>
 </div>
 <pre class="example">
