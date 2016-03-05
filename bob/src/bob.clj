@@ -30,7 +30,7 @@
   "Given a prompt, return `true` if there exists an uppercase letter and the
   prompt is equal to itself uppercased, otherwise `false`."
   [prompt]
-  (and (boolean (re-find #"[A-Z]" prompt))
+  (and (boolean (re-find #"\p{Lu}\p{M}*" prompt))
        (= prompt (s/upper-case prompt))))
 
 
