@@ -7,7 +7,7 @@
    :exclude "\\(README\\|setup\\).org"
    :recursive t
    :auto-sitemap t
-   :sitemap-filename "org/sitemap.org"
+   :sitemap-filename "index.org"
    :sitemap-title "My Exercism.io Solutions"
    :export-creator-info nil
    :export-author-info nil
