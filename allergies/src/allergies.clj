@@ -1,44 +1,46 @@
+;;;; -*- mode: clojure; mode: typed-clojure -*-
+
 (ns allergies
   "Determining people's allergies."
   {:author "Eric Bailey"}
   (:require [clojure.core.typed :refer [IFn Seq U Vec ann cf defalias loop]])
   (:refer-clojure :exclude [loop]))
 
-;; == TYPE ALIASES =============================================================
 
-(defalias ^{:doc "A keyword representing a known allergen.
+;;;=============================================================
+;;; Type Aliases
+;;;=============================================================
 
-```
-[:eggs :peanuts :shellfish :strawberries :tomatoes :chocolate :pollen :cats]
-```"}
-  Allergen
+(ann Allergen (U ':eggs ':peanuts ':shellfish ':strawberries
+                 ':tomatoes ':chocolate ':pollen ':cats))
+(defalias Allergen
+  "A keyword representing a known allergen."
   (U ':eggs ':peanuts ':shellfish ':strawberries
      ':tomatoes ':chocolate ':pollen ':cats))
 
-(defalias ^{:doc "A `Number` representing the index of a known [[Allergen]]."}
-  AllergenIndex Number)
+(ann AllergenIndex Number)
+(defalias AllergenIndex
+  "A number representing the index of a known [[Allergen]]."
+  Number)
 
-(defalias ^{:doc "A `Number` representing a person's [[allergies]]."}
-  Score Number)
+(ann Score Number)
+(defalias Score
+  "A number representing a person's [[allergies]]."
+  Number)
 
 
-;; == PRIVATE API ==============================================================
+;;;=============================================================
+;;; Private API
+;;;=============================================================
 
 (ann allergens (Vec Allergen))
 (def ^:private allergens
-  "```
-  (Vec Allergen)
-  ```
-  A vector of keywords representing all the allergens."
+  "A vector of keywords representing all the allergens."
   [:eggs :peanuts :shellfish :strawberries :tomatoes :chocolate :pollen :cats])
 
 (ann from-enum [Allergen -> AllergenIndex])
 (defn- from-enum
-  "```
-  Allergen -> AllergenIndex
-  ```
-
-  Given an [[Allergen]], return its [[AllergenIndex]]. If the allergen is
+  "Given an [[Allergen]], return its [[AllergenIndex]]. If the allergen is
   unknown, return -1.
 
   Named after Haskell's `fromEnum`."
@@ -51,17 +53,14 @@
       :else                  (recur (rest s) (inc i)))))
 
 
-;; == PUBLIC API ===============================================================
+;;;=============================================================
+;;; Public API
+;;;=============================================================
 
 (ann allergic-to? (IFn [Score -> [Allergen -> Boolean]]
                        [Score Allergen -> Boolean]))
 (defn allergic-to?
-  "```
-  [Score -> [Allergen -> Boolean]]
-  [Score Allergen -> Boolean]
-  ```
-
-  Given a [[Score]], return a function that takes an [[Allergen]] and calls the
+  "Given a [[Score]], return a function that takes an [[Allergen]] and calls the
   binary version of [[allergic-to?]].
 
   Given a [[Score]] and an [[Allergen]], return `true` if the [[Score]]
@@ -78,19 +77,7 @@
 
 (ann allergies [Score -> (Vec Allergen)])
 (defn allergies
-  "```
-  [Score -> (Vec Allergen)]
-  ```
-
-  Given a [[Score]], return the vector of [[Allergen]]s it represents,
+  "Given a [[Score]], return the vector of [[Allergen]]s it represents,
   i.e. the person's allergies."
   [score]
   (filterv (allergic-to? score) allergens))
-
-
-;; == EMACS CONFIG =============================================================
-
-;; Local Variables:
-;; mode: clojure
-;; mode: typed-clojure
-;; End:
