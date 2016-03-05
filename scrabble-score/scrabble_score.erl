@@ -15,13 +15,12 @@
         maps:from_list(lists:flatten([{L,N} || {N,Ls} <- ?LEGEND, L <- Ls]))).
 
 -spec score(string()) -> integer().
-score(Word) -> lists:foldl(fun add_points/2, 0, Word).
+score(Word) -> lists:foldl(fun score/2, 0, Word).
 
-add_points(C, Score) when C >= $a, C =< $z ->
-  add_points(to_upper(C), Score);
-add_points(C, Score) when C >= $A, C =< $Z ->
-  #{C := Points} = ?POINTS,
-  Score + Points.
+-spec score(char(), integer()) -> integer().
+score(C, Score) when C >= $a, C =< $z -> score(to_upper(C), Score);
+score(C, Score) when C >= $A, C =< $Z -> #{C := N} = ?POINTS, Score + N.
 
-to_upper(C) when C >= $a, C =< $z -> C - 32; %% 32 =:= $a - $A
+-spec to_upper(char()) -> char().
+to_upper(C) when C >= $a, C =< $z -> C - ($a - $A);
 to_upper(C) when C >= $A, C =< $Z -> C.
