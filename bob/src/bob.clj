@@ -1,3 +1,5 @@
+;;;; -*- mode: clojure; mode: typed-clojure -*-
+
 (ns bob
   "Mimicking the conversational ineptitude of a lackadaisical teenager."
   {:author "Eric Bailey"}
@@ -5,16 +7,29 @@
             [clojure.string :as s]))
 
 
-;;;; ==== TYPE ALIASES =========================================================
+;;;=============================================================
+;;; Type Aliases
+;;;=============================================================
 
-(defalias Prompt String)
+(ann Prompt String)
+(defalias Prompt
+  "A string."
+  String)
 
-(defalias PromptPredicate [Prompt -> Boolean])
+(ann PromptPredicate [Prompt -> Boolean])
+(defalias PromptPredicate
+  "A function from [[Prompt]] to `Boolean`."
+  [Prompt -> Boolean])
 
-(defalias Response String)
+(ann Response String)
+(defalias Response
+  "A string."
+  String)
 
 
-;;;; ==== PRIVATE API ==========================================================
+;;;=============================================================
+;;; Private API
+;;;=============================================================
 
 (ann silent? PromptPredicate)
 (def ^:private silent? s/blank?)
@@ -34,7 +49,9 @@
        (= prompt (s/upper-case prompt))))
 
 
-;;;; ==== PUBLIC API ===========================================================
+;;;=============================================================
+;;; Public API
+;;;=============================================================
 
 (ann response-for [Prompt -> Response])
 (defn response-for
@@ -45,11 +62,3 @@
     yelled?   "Whoa, chill out!"
     question? "Sure."
     "Whatever."))
-
-
-;;;; ==== EMACS CONFIG =========================================================
-
-;; Local Variables:
-;; mode: clojure
-;; mode: typed-clojure
-;; End:
