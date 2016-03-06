@@ -19,5 +19,7 @@ rotate = bool (const Nothing) rotate' =<< inRange ('a', 'z')
 
 -- | Like Clojure's @partition-all@.
 partitionAll :: Int -> [a] -> [[a]]
-partitionAll = (takeWhile (not . null) .) . unfoldr . (Just .) . splitAt
+partitionAll n xs = unfoldr (go . splitAt n) xs
+  where go ([],[]) = Nothing
+        go pair    = Just pair
 -- partitionAll n xs = takeWhile (not . null) $ unfoldr (Just . splitAt n) xs
