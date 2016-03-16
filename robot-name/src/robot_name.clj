@@ -18,6 +18,10 @@
 ;; NOTE: This is NOT universally valid, but it works for robot-name.
 (ann ^:no-check clojure.core/not-empty [String -> (U nil String)])
 
+;; NOTE: This is NOT universally valid, but it works for robot-name.
+(ann ^:no-check clojure.pprint/cl-format
+     [nil String Character Character Int -> String])
+
 
 ;;;; == PRIVATE API ============================================================
 
@@ -53,9 +57,10 @@
 (defn- rand-name
   "Return a random robot name of the form \"AA000\"."
   []
-  (-> (->> (repeatedly 2 rand-capital-letter)
-           (apply str))
-      (str (rand-number))))
+  (cl-format nil "~A~A~3,'0d"
+             (rand-capital-letter)
+             (rand-capital-letter)
+             (rand-number)))
 
 
 ;;;; == PUBLIC API =============================================================
