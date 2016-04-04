@@ -40,7 +40,6 @@ iff = ap (bool Nothing . Just)
 iffThen :: (a -> Bool) -> a -> b -> Maybe b
 iffThen p x = (iff p x >>) . Just
 -- iffThen = (((. Just) . (>>)) .) . iff
--- iffThen p x = (iff p x >>) . Just
 
 -- | Given a default value @d@, a predicate @p@ and a value to test @x@,
 -- | return @x@ if @p x@ holds, otherwise @d@.
