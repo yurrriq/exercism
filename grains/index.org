@@ -31,6 +31,7 @@ $\displaystyle \text{square}\ n = 2^{n - 1}$
 #+END_SRC
 
 ** total
+# http://www.wolframalpha.com/input/?i=sum+2%5E%7Bn+-+1%7D,+n%3D1+to+k
 The ~total~ is the sum of the number of grains of wheat on /every/ square,
 i.e. $\displaystyle \sum_{n=1}^{64} 2^{n - 1}$.
 
