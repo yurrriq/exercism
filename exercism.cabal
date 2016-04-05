@@ -61,6 +61,7 @@ library
                      , sum-of-multiples
                      , triangle
                      , word-count
+                     , ocr-numbers
   -- ls */*.hs | gsed -rn '/test/b; s/(.*)\/(.*)\.hs/, \2/p'
   exposed-modules:     Accumulate
                      , Allergies
@@ -105,6 +106,7 @@ library
                      , SumOfMultiples
                      , Triangle
                      , WordCount
+                     , OCR
   build-depends:       base >= 4.7 && < 5
                      , HUnit
                      , containers

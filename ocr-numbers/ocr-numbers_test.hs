@@ -1,6 +1,7 @@
-import Test.HUnit (Assertion, (@=?), runTestTT, Test(..), Counts(..))
-import System.Exit (ExitCode(..), exitWith)
-import OCR (convert)
+import           OCR         (convert)
+import           System.Exit (ExitCode (..), exitWith)
+import           Test.HUnit  (Assertion, Counts (..), Test (..), runTestTT,
+                              (@=?))
 
 exitProperly :: IO Counts -> IO ()
 exitProperly m = do
@@ -72,10 +73,10 @@ ocrTests =
                      , "   " ])
   , testCase "recognizes nine" $
     "9" @=? convert (unlines
-                 [ " _ "
-                 , "|_|"
-                 , " _|"
-                 , "   "])
+                     [ " _ "
+                     , "|_|"
+                     , " _|"
+                     , "   "])
   , testCase "recognizes garble" $
     "?" @=? convert (unlines
                      [ "   "

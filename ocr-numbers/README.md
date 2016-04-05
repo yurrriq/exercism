@@ -1,11 +1,11 @@
-# Ocr Numbers
+# OCR Numbers
 
-Write a program that, given a 3 x 4 grid of pipes, underscores, and spaces, can determine which number is represented, or whether it is garbled.
+Write a program that, given a 3 x 4 grid of pipes, underscores, and spaces, can
+determine which number is represented, or whether it is garbled.
 
 ## Step 1
 
-A simple binary font has been constructed using only pipes and
-underscores.
+A simple binary font has been constructed using only pipes and underscores.
 
 The number is four rows high, three columns wide:
 
@@ -19,16 +19,14 @@ The number is four rows high, three columns wide:
       |  #
          # (blank fourth row)
 
-Write a program that, given a 3 x 4 grid of pipes, underscores, and
-spaces, can determine whether the the grid represents a zero, a one, or
-garble.
+Write a program that, given a 3 x 4 grid of pipes, underscores, and spaces, can
+determine whether the the grid represents a zero, a one, or garble.
 
 Anything else is considered garble, and can be represented with a '?'
 
 ## Step 2
 
-A simple numeric font has been constructed using only pipes and
-underscores.
+A simple numeric font has been constructed using only pipes and underscores.
 
 The number consists of four rows high, three columns wide:
 
@@ -39,9 +37,8 @@ The number consists of four rows high, three columns wide:
 
 There may be several numbers in the input text, one per line.
 
-Check out [Exercism
-Help](http://exercism.io/languages/haskell) for
-instructions to get started writing Haskell.
+Check out [Exercism Help](http://exercism.io/languages/haskell) for instructions
+to get started writing Haskell.
 
 ## Running Tests
 
@@ -52,4 +49,5 @@ Haskell code.
 
 ## Source
 
-Inspired by the Bank OCR kata [view source](http://codingdojo.org/cgi-bin/wiki.pl?KataBankOCR)
+Inspired by the Bank OCR kata
+[view source](http://codingdojo.org/cgi-bin/wiki.pl?KataBankOCR)
