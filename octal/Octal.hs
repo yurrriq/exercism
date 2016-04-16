@@ -1,5 +1,4 @@
 {-# LANGUAGE BangPatterns #-}
-{-# LANGUAGE LambdaCase   #-}
 
 {-|
 Module      : Octal
@@ -15,27 +14,41 @@ Converting between strings and octal numbers.
 
 module Octal (readOct, showOct) where
 
-import           Data.Function (on)
+import           Control.Arrow           (first, (&&&), (***), (>>>))
+import           Control.Monad           (ap, liftM2)
+import           Data.Bool               (bool)
+import           Data.Function           (on)
+import           Data.Function.Pointless ((.:))
+import           Data.List               (uncons)
 
 readOct :: Integral a => String -> a
 readOct = lgo 0
   where
-    lgo acc  []     = acc
-    lgo !acc (c:cs) = lgo (8 * acc + fromDigit c) cs
-    fromDigit c | valid     = fromIntegral $ (subtract `on` fromEnum) '0' c
-                | otherwise = 333
-      where valid = '0' <= c && c <= '7'
+    lgo !acc = maybe acc go . uncons
+      where
+        go = uncurry lgo . first (f acc)
+          where f = curry $ (8 *) *** fromDigit >>> uncurry (+)
 
+fromDigit :: Integral a => Char -> a
+fromDigit = boolAp (badInput "Invalid digit") go valid
+  where
+    go    = fromIntegral . (subtract `on` fromEnum) '0'
+    valid = ('0' <=) &&& (<= '7') >>> uncurry (&&)
 
 showOct :: (Integral a, Show a) => a -> String
-showOct n | positive  = lgo [] n
-          | otherwise = "QuickCheck doesn't care."
+showOct = boolAp (badInput "Negative number") (flip rgo "") (>= 0)
   where
-    positive = n >= 0
-    lgo !acc = flip quotRem 8 `andThen` (prependDigit `andMaybe` goAgain)
-      where
-        andThen          = flip ((.) . uncurry)
-        prependDigit     =  (: acc) . toDigit
-        toDigit          = toEnum . (fromEnum '0' +) . fromIntegral
-        andMaybe g f q r = f q (g r)
-        goAgain          = \case 0 -> id; q -> flip lgo q
+    rgo :: (Integral a, Show a) => a -> String -> String
+    rgo x !acc = boolAp g f p (quotRem x 8)
+      where p = (== 0) . fst
+            f = snd >>> toDigit >>> (: acc)
+            g = liftM2 rgo fst f
+
+toDigit :: Integral a => a -> Char
+toDigit = toEnum . (fromEnum '0' +) . fromIntegral
+
+boolAp :: (a -> b) -> (a -> b) -> (a -> Bool) -> a -> b
+boolAp = ap .: liftM2 bool
+
+badInput :: Show a => String -> a -> t
+badInput reason input = error (reason ++ ": " ++ (show input))
