@@ -1,0 +1,14 @@
+{application, luhn, [
+  {description,  "The Luhn formula."},
+  {vsn,          "0.2.0"},
+  {registered,   []},
+  {applications, [kernel, stdlib]},
+  {env,          []},
+  {modules,      [luhn]},
+
+  {maintainers, ["Eric Bailey"]},
+  {licenses,    ["MIT"]},
+  {links, [
+    {"GitHub", "https://github.com/yurrriq/exercism/tree/erlang/luhn"}
+  ]}
+]}.
