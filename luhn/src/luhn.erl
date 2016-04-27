@@ -68,8 +68,8 @@ do_luhn(S, P) -> check_digit(P, do_luhn(S, 0, 0)).
 %% @see do_luhn/2
 -spec do_luhn(String, OddAcc, EvenAcc) -> {OddDigit,EvenDigit} when
     String    :: string(),
-    OddAcc    :: digit(),
-    EvenAcc   :: digit(),
+    OddAcc    :: non_neg_integer(),
+    EvenAcc   :: non_neg_integer(),
     OddDigit  :: digit(),
     EvenDigit :: digit().
 do_luhn([C|Cs], O, E) when $0 =< C, C =< $9 ->
@@ -90,7 +90,7 @@ parity(even) -> 2.
 %% @see do_luhn/3
 -spec check_digit(Parity, OddEvenTuple) -> CheckDigit when
     Parity       :: parity(),
-    OddEvenTuple :: {digit(),digit()},
+    OddEvenTuple :: {non_neg_integer(),non_neg_integer()},
     CheckDigit   :: digit().
 check_digit(P, OE) -> rem10(element(parity(P), OE)).
 
