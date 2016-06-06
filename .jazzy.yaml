@@ -1,9 +1,9 @@
-swift_version: 2.1.1
+swift_version: 2.2
 
-module_name: Exercism
+module: Exercism
 copyright:   '&copy; 2015-2016 [Eric Bailey](https://github.com/yurrriq)'
 
-author_name: Eric Bailey
+author: Eric Bailey
 author_url:  https://exercism.io/yurrriq
 
 github_url:         https://github.com/yurrriq/exercism/tree/swift
