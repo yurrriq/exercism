@@ -19,6 +19,8 @@
 		6C2DDB3E1D06150A00726D97 /* NumberClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C2DDB3D1D06150A00726D97 /* NumberClassifier.swift */; };
 		6C2DDB491D06235400726D97 /* AllergiesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C2DDB471D06235400726D97 /* AllergiesTest.swift */; };
 		6C2DDB4C1D06237F00726D97 /* Allergies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C2DDB4B1D06237F00726D97 /* Allergies.swift */; };
+		6C3300311D0766B900E63AD5 /* AccumulateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C33002F1D0766B900E63AD5 /* AccumulateTest.swift */; };
+		6C3300341D07670400E63AD5 /* Accumulate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3300331D07670400E63AD5 /* Accumulate.swift */; };
 		6C5F4B1A1C6FFD0E007F607A /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5F4B171C6FFD0E007F607A /* Robot.swift */; };
 		6C5F4B1B1C6FFD0E007F607A /* RobotNameTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5F4B181C6FFD0E007F607A /* RobotNameTest.swift */; };
 		6C794D911C4178D500696A41 /* PhoneNumberTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C794D8F1C4178D500696A41 /* PhoneNumberTest.swift */; };
@@ -48,6 +50,8 @@
 		6C2DDB3D1D06150A00726D97 /* NumberClassifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberClassifier.swift; sourceTree = "<group>"; };
 		6C2DDB471D06235400726D97 /* AllergiesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllergiesTest.swift; sourceTree = "<group>"; };
 		6C2DDB4B1D06237F00726D97 /* Allergies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Allergies.swift; sourceTree = "<group>"; };
+		6C33002F1D0766B900E63AD5 /* AccumulateTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccumulateTest.swift; sourceTree = "<group>"; };
+		6C3300331D07670400E63AD5 /* Accumulate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accumulate.swift; sourceTree = "<group>"; };
 		6C5F4B171C6FFD0E007F607A /* Robot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Robot.swift; sourceTree = "<group>"; };
 		6C5F4B181C6FFD0E007F607A /* RobotNameTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RobotNameTest.swift; sourceTree = "<group>"; };
 		6C794D8F1C4178D500696A41 /* PhoneNumberTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberTest.swift; sourceTree = "<group>"; };
@@ -104,6 +108,7 @@
 				6C5F4B151C6FFD0E007F607A /* robot-name */,
 				6C2DDB381D0614EF00726D97 /* perfect-numbers */,
 				6C2DDB461D06235400726D97 /* allergies */,
+				6C33002E1D0766B900E63AD5 /* accumulate */,
 				532F27F51B427F90001482A1 /* Supporting Files */,
 			);
 			path = exercism;
@@ -169,6 +174,15 @@
 				6C2DDB4B1D06237F00726D97 /* Allergies.swift */,
 			);
 			path = allergies;
+			sourceTree = SOURCE_ROOT;
+		};
+		6C33002E1D0766B900E63AD5 /* accumulate */ = {
+			isa = PBXGroup;
+			children = (
+				6C33002F1D0766B900E63AD5 /* AccumulateTest.swift */,
+				6C3300331D07670400E63AD5 /* Accumulate.swift */,
+			);
+			path = accumulate;
 			sourceTree = SOURCE_ROOT;
 		};
 		6C5F4B151C6FFD0E007F607A /* robot-name */ = {
@@ -323,6 +337,7 @@
 				6C111E041C40D3B000387DE0 /* Anagram.swift in Sources */,
 				6CE4C11C1C33BDB800FA35E9 /* ETLTest.swift in Sources */,
 				6CDB5BC21C312F91000F4E89 /* WordCount.swift in Sources */,
+				6C3300311D0766B900E63AD5 /* AccumulateTest.swift in Sources */,
 				6CE4C11F1C33BDF800FA35E9 /* ETL.swift in Sources */,
 				6C111E051C40D3B000387DE0 /* AnagramTest.swift in Sources */,
 				6C794D981C41980700696A41 /* GradeSchoolTest.swift in Sources */,
@@ -330,6 +345,7 @@
 				6C111E0F1C40DF4000387DE0 /* NucleotideCountTest.swift in Sources */,
 				6C2DDB491D06235400726D97 /* AllergiesTest.swift in Sources */,
 				6C794D941C4178EB00696A41 /* PhoneNumber.swift in Sources */,
+				6C3300341D07670400E63AD5 /* Accumulate.swift in Sources */,
 				6C794D9B1C41982000696A41 /* GradeSchool.swift in Sources */,
 				6C2DDB3B1D0614EF00726D97 /* PerfectNumbersTest.swift in Sources */,
 			);
