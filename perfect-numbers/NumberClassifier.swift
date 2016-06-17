@@ -62,7 +62,7 @@ public struct NumberClassifier {
 
 }
 
-extension Int {
+private extension Int {
 
   /** Return `true` iff `self` divides `dividend`.
    - parameter dividend: A number to divide by `self`

@@ -34,6 +34,7 @@
 		6CE4C11C1C33BDB800FA35E9 /* ETLTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE4C11A1C33BDB800FA35E9 /* ETLTest.swift */; };
 		6CE4C11F1C33BDF800FA35E9 /* ETL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE4C11E1C33BDF800FA35E9 /* ETL.swift */; };
 		6CE8A43C1D149CC30098102E /* SumOfMultiplesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE8A43A1D149CC30098102E /* SumOfMultiplesTest.swift */; };
+		6CE8A43E1D149CD80098102E /* SumOfMultiples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE8A43D1D149CD80098102E /* SumOfMultiples.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		6CE4C11A1C33BDB800FA35E9 /* ETLTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETLTest.swift; sourceTree = "<group>"; };
 		6CE4C11E1C33BDF800FA35E9 /* ETL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETL.swift; sourceTree = "<group>"; };
 		6CE8A43A1D149CC30098102E /* SumOfMultiplesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SumOfMultiplesTest.swift; sourceTree = "<group>"; };
+		6CE8A43D1D149CD80098102E /* SumOfMultiples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SumOfMultiples.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				6CE8A43A1D149CC30098102E /* SumOfMultiplesTest.swift */,
+				6CE8A43D1D149CD80098102E /* SumOfMultiples.swift */,
 			);
 			path = "sum-of-multiples";
 			sourceTree = SOURCE_ROOT;
@@ -341,6 +344,7 @@
 				6CDB5BB81C312BBB000F4E89 /* HammingTest.swift in Sources */,
 				532F28001B427FCE001482A1 /* LeapTest.swift in Sources */,
 				6C111E121C40DFAF00387DE0 /* DNA.swift in Sources */,
+				6CE8A43E1D149CD80098102E /* SumOfMultiples.swift in Sources */,
 				6CDB5BC01C312F49000F4E89 /* WordCountTest.swift in Sources */,
 				532F28061B427FD8001482A1 /* BobTest.swift in Sources */,
 				6CDB5BBB1C312BDF000F4E89 /* Hamming.swift in Sources */,
