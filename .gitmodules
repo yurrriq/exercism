@@ -102,3 +102,7 @@
 	path = sml
 	url = git@github.com:yurrriq/exercism.git
 	branch = sml
+[submodule "elm"]
+	path = elm
+	url = git@github.com:yurrriq/exercism.git
+	branch = elm
