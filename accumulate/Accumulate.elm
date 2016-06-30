@@ -8,7 +8,7 @@ import List exposing (foldr)
     accumulate String.toUpper ["hello","world"] == ["HELLO","WORLD"]
 -}
 accumulate : (a -> b) -> List a -> List b
-accumulate f xs = foldr ((::) << f) [] xs
+accumulate f = foldr ((::) << f) []
 
 {- Alternate version that (ab)uses Maybe.
 
