@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Hamming",
+    "comment": " This module calculates the Hamming difference between two DNA strands.\n\n@docs distance\n\n",
+    "aliases": [],
+    "types": [],
+    "values": [
+      {
+        "name": "distance",
+        "comment": " Calculate the Hamming difference between two DNA strands. ",
+        "type": "String -> String -> Maybe.Maybe Int"
+      }
+    ],
+    "generated-with-elm-version": "0.17.1"
+  }
+]
