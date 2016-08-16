@@ -7,7 +7,8 @@ import List exposing (foldr)
     keep isEven [1..6] == [2,4,6]
 -}
 keep : (a -> Bool) -> List a -> List a
-keep f = foldr (\x acc -> bool acc (x :: acc) (f x)) []
+keep f = let go x acc = bool acc (x :: acc) (f x) in
+         foldr go []
 
 {- Disard values that satisfy the predicate.
 
