@@ -54,6 +54,8 @@
     <Compile Include="leap\LeapTest.fs" />
     <Compile Include="gigasecond\Gigasecond.fs" />
     <Compile Include="gigasecond\GigasecondTest.fs" />
+    <Compile Include="difference-of-squares\DifferenceOfSquares.fs" />
+    <Compile Include="difference-of-squares\DifferenceOfSquaresTest.fs" />
   </ItemGroup>
   <Import Project="$(FSharpTargetsPath)" />
 </Project>
