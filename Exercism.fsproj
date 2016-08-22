@@ -56,6 +56,8 @@
     <Compile Include="gigasecond\GigasecondTest.fs" />
     <Compile Include="difference-of-squares\DifferenceOfSquares.fs" />
     <Compile Include="difference-of-squares\DifferenceOfSquaresTest.fs" />
+    <Compile Include="rna-transcription\RNATranscription.fs" />
+    <Compile Include="rna-transcription\RNATranscriptionTest.fs" />
   </ItemGroup>
   <Import Project="$(FSharpTargetsPath)" />
 </Project>
