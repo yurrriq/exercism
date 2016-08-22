@@ -58,6 +58,8 @@
     <Compile Include="difference-of-squares\DifferenceOfSquaresTest.fs" />
     <Compile Include="rna-transcription\RNATranscription.fs" />
     <Compile Include="rna-transcription\RNATranscriptionTest.fs" />
+    <Compile Include="sum-of-multiples\SumOfMultiples.fs" />
+    <Compile Include="sum-of-multiples\SumOfMultiplesTest.fs" />
   </ItemGroup>
   <Import Project="$(FSharpTargetsPath)" />
 </Project>
