@@ -50,6 +50,8 @@
     <Compile Include="hello-world\HelloWorldTest.fs" />
     <Compile Include="bob\Bob.fs" />
     <Compile Include="bob\BobTest.fs" />
+    <Compile Include="leap\LeapYear.fs" />
+    <Compile Include="leap\LeapTest.fs" />
   </ItemGroup>
   <Import Project="$(FSharpTargetsPath)" />
 </Project>
