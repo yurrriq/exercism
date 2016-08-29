@@ -60,6 +60,8 @@
     <Compile Include="rna-transcription\RNATranscriptionTest.fs" />
     <Compile Include="sum-of-multiples\SumOfMultiples.fs" />
     <Compile Include="sum-of-multiples\SumOfMultiplesTest.fs" />
+    <Compile Include="space-age\SpaceAge.fs" />
+    <Compile Include="space-age\SpaceAgeTest.fs" />
   </ItemGroup>
   <Import Project="$(FSharpTargetsPath)" />
 </Project>
