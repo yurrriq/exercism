@@ -62,6 +62,8 @@
     <Compile Include="sum-of-multiples\SumOfMultiplesTest.fs" />
     <Compile Include="space-age\SpaceAge.fs" />
     <Compile Include="space-age\SpaceAgeTest.fs" />
+    <Compile Include="bank-account\BankAccount.fs" />
+    <Compile Include="bank-account\BankAccountTest.fs" />
   </ItemGroup>
   <Import Project="$(FSharpTargetsPath)" />
 </Project>
