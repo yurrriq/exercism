@@ -1,19 +1,15 @@
-ERL     = $(shell which erl)
-LFETOOL = $(shell which lfetool)
-REBAR   = $(shell which rebar)
+ERL    := $(shell which erl)
+REBAR3 := $(shell which rebar3)
 
 ifeq ($(ERL),)
   $(error Can't find Erlang executable 'erl')
-else ifeq ($(LFETOOL),)
-  $(error Can't find lfetool)
-else ifeq ($(REBAR),)
-  $(error Can't find rebar)
+else ifeq ($(REBAR3),)
+  $(error Can't find rebar3)
 endif
 
-get-deps: ; $(REBAR) get-deps compile
+compile: ; $(REBAR3) compile
 
-clean: ; rebar clean
+clean: ; $(REBAR3) clean
 
-compile: ; $(REBAR) compile
-
-test: compile; $(LFETOOL) tests unit
+.PHONY: test
+test: ; $(REBAR3) eunit -m leap-tests

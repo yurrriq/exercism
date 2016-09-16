@@ -1,8 +1,6 @@
 (defmodule leap-tests
-  (behaviour ltest-unit)
-  (export all))
+  (behaviour ltest-unit))
 
-(include-lib "eunit/include/eunit.hrl")
 (include-lib "ltest/include/ltest-macros.lfe")
 
 (deftest leap-year
