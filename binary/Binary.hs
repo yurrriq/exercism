@@ -55,12 +55,12 @@ acc' = (2*) acc <$+> charToBinaryM c -- (   seen,         rest)
    0 = fromMaybe 0 Nothing
 -}
 
--- | Given a 'Char', converts @'0'@ to @Just 0@ and @'1'@ to @Just 1@,
--- otherwise returns @Nothing@.
+-- | Given a 'Char', convert @'0'@ to @Just 0@ and @'1'@ to @Just 1@,
+-- otherwise return @Nothing@.
 charToBinaryM :: Char -> Maybe Int
 charToBinaryM = \case '0' -> Just 0; '1' -> Just 1; _ -> Nothing
 
 -- | Given an 'Int' @x@ and a 'Maybe' @Int y@, if @y@ is a @Just@,
--- returns @Just (x + y)@, otherwise @Nothing@.
+-- return @Just (x + y)@, otherwise @Nothing@.
 (<$+>) :: Int -> Maybe Int -> Maybe Int
 (<$+>) = (<$>) . (+)
