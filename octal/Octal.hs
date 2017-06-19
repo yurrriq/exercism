@@ -36,7 +36,7 @@ fromDigit = boolAp (badInput "Invalid digit") go valid
     valid = ('0' <=) &&& (<= '7') >>> uncurry (&&)
 
 showOct :: (Integral a, Show a) => a -> String
-showOct = boolAp (badInput "Negative number") (flip rgo "") (>= 0)
+showOct = boolAp (badInput "Negative number") (`rgo` "") (>= 0)
   where
     rgo :: (Integral a, Show a) => a -> String -> String
     rgo x !acc = boolAp g f p (quotRem x 8)
@@ -51,4 +51,4 @@ boolAp :: (a -> b) -> (a -> b) -> (a -> Bool) -> a -> b
 boolAp = ap .: liftM2 bool
 
 badInput :: Show a => String -> a -> t
-badInput reason input = error (reason ++ ": " ++ (show input))
+badInput reason input = error (reason ++ ": " ++ show input)
