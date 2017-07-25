@@ -4,11 +4,10 @@ class Hamming
       fail ArgumentError 'Mismatched strand lengths!'
     end
 
-    # FIXME: gross
-    difference = 0
-    strand1.each_char.zip(strand2.each_char) { |nucleotide1,nucleotide2|
-      difference += 1 unless nucleotide1 == nucleotide2
-    }
-    difference
+    # FIXME: three traversals...
+    strand1.each_char
+      .zip(strand2.each_char)
+      .map { |pair| pair.reduce(:==) }
+      .count(false)
   end
 end
