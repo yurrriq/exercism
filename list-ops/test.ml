@@ -69,7 +69,7 @@ let tests =
      (L.concat (List.map ~f:(fun x -> [x]) (List.range 0 1_000_000)));
    "concat of small list of huge lists">::
    ael (List.range 0 1_000_000)
-     (L.concat 
+     (L.concat
         (List.map ~f:(fun x -> List.range (x*100_000) ((x+1)*100_000))
            (List.range 0 10)))
   ]
