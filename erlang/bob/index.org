@@ -1,0 +1,90 @@
+#+SETUPFILE:   ../../org/setup.org
+#+TITLE:       Exercism.io → Erlang → Bob
+#+DATE:
+#+DESCRIPTION: My solutions to Excercism.io in Haskell.
+#+OPTIONS: html-postamble:nil toc:nil
+#+HTML_MATHJAX: align:"left" scale:"100" mathml:t path:"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+
+* Bob
+Bob is a lackadaisical teenager. In conversation, his responses are very limited.
+
+Bob answers 'Sure.' if you ask him a question.
+
+He answers 'Whoa, chill out!' if you yell at him.
+
+He says 'Fine. Be that way!' if you address him without actually saying
+anything.
+
+He answers 'Whatever.' to anything else.
+
+** Instructions
+Run the test file, and fix each of the errors in turn. When you get the
+first test to pass, go to the first pending or skipped test, and make
+that pass as well. When all of the tests are passing, feel free to
+submit.
+
+Remember that passing code is just the first step. The goal is to work
+towards a solution that is as readable and expressive as you can make
+it.
+
+Please make your solution as general as possible. Good code doesn't just
+pass the test suite, it works with any input that fits the
+specification.
+
+Have fun!
+
+** Source
+Inspired by the 'Deaf Grandma' exercise in Chris Pine's Learn to Program tutorial. [[http://pine.fm/LearnToProgram/?Chapter%3D06][view source]]
+
+** Solution
+#+BEGIN_SRC erlang :tangle bob.erl :padline no
+-module(bob).
+-export([response_for/1]).
+
+response_for(Prompt) ->
+    case Prompt of
+        [] -> "Fine. Be that way!";
+        _  ->
+            Last      = lists:last(Prompt),
+            SomeUpper = lists:any(fun (C) -> C >= $A andalso C =< $Z end, Prompt),
+            Trimmed   = tl(re:replace(Prompt, "\\s*", "")),
+            Yelled    = string:to_upper(Prompt),
+            case {Last, SomeUpper, Trimmed, Prompt} of
+                {_, true, _, Yelled} -> "Whoa, chill out!";
+                {$?, _, _, _}        -> "Sure.";
+                {_, _, [], _}        -> "Fine. Be that way!";
+                {_, _, _, _}         -> "Whatever."
+            end
+    end.
+#+END_SRC
+
+** Tests
+#+BEGIN_SRC fish
+erlc bob*.erl; and erl -noshell -eval "eunit:test(bob_tests, [verbose])" -s init stop
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+======================== EUnit ========================
+module 'bob_tests'
+  bob_tests: responds_to_something_test...[0.006 s] ok
+  bob_tests: responds_to_shouts_test...ok
+  bob_tests: responds_to_questions_test...ok
+  bob_tests: responds_to_forceful_talking_test...ok
+  bob_tests: responds_to_acronyms_test...ok
+  bob_tests: responds_to_forceful_questions_test...ok
+  bob_tests: responds_to_shouting_with_special_characters_test...ok
+  bob_tests: responds_to_shouting_numbers_test...ok
+  bob_tests: responds_to_shouting_with_no_exclamation_mark_test...ok
+  bob_tests: responds_to_statement_containing_question_mark_test...ok
+  bob_tests: responds_to_silence_test...ok
+  bob_tests: responds_to_prolonged_silence_test...ok
+  bob_tests: responds_to_non_letters_with_question_test...ok
+  bob_tests: responds_to_multiple_line_questions_test...ok
+  bob_tests: responds_to_only_numbers_test...ok
+  bob_tests: responds_to_question_with_only_numbers_test...ok
+  bob_tests: responds_to_unicode_shout_test...ok
+  bob_tests: responds_to_unicode_non_shout_test...ok
+  [done in 0.059 s]
+=======================================================
+  All 18 tests passed.
+#+END_EXAMPLE

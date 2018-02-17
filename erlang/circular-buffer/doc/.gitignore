@@ -1,0 +1,6 @@
+# -*- conf -*-
+# Ignore everything in this directory
+*
+# Except these two files
+!.gitignore
+!overview.edoc

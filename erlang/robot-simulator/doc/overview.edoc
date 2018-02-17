@@ -1,0 +1,70 @@
+                                  -*- html -*-
+
+        Robot Simulator overview page
+
+@author Eric Bailey
+@version {@version}
+@title Robot Simulator
+
+@doc Simulating the movement of robots.
+
+
+The robot factory manufactures robots that have three possible movements:
+
+<ul>
+  <li>Turn right</li>
+  <li>Turn left</li>
+  <li>Advance</li>
+</ul>
+
+
+== Step 1 ==
+
+Robots are {@link robot_simulator:place/3. place}d on a hypothetical infinite
+grid, facing a particular direction (`north', `east', `south', or `west') at a
+set of `{X, Y}' coordinates, e.g. `{3, 8}'.
+
+
+== Step 2 ==
+
+Robots can pivot {@link robot_simulator:left/1. left} and
+{@link robot_simulator:right/1. right}.
+
+The factory's test facility needs a program to verify robot movements.
+
+There are a number of different rooms of varying sizes, measured in Robot Units,
+the distance a robot moves when you instruct it to
+{@link robot_simulator:advance/1. advance}.
+
+The floor of the room is a grid, each square of which measures 1 square
+RU (Robot Unit).
+
+The rooms are always oriented so that each wall faces `east', `south', `west',
+and `north'.
+
+The test algorithm is to {@link robot_simulator:place/3. place} a robot at a
+coordinate in the room, facing in a particular direction.
+
+The robot then receives a number of instructions, at which point the testing
+facility verifies the robot's new {@link robot_simulator:position/1. position},
+and in which {@link robot_simulator:direction/1. direction} it is pointing.
+
+
+== Step 3 ==
+
+The robot factory's test facility has a simulator which can take a
+string of letters and feed this into a robot as instructions.
+
+<ul>
+  <li>The letter-string "RAALAL" means:
+    <ul>
+      <li>Turn right</li>
+      <li>Advance twice</li>
+      <li>Turn left</li>
+      <li>Advance once</li>
+      <li>Turn left yet again</li>
+    </ul>
+  </li>
+  <li>Say a robot starts at {7, 3} facing north. Then running this stream
+    of instructions should leave it at {9, 4} facing west.</li>
+</ul>

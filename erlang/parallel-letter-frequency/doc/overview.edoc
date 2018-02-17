@@ -1,0 +1,14 @@
+                                  -*- html -*-
+
+                    Parallel Letter Frequency overview page
+
+@author Eric Bailey
+@copyright 2016 Eric Bailey
+@version 1.0.0
+
+@doc Computing letter frequency in parallel.
+
+Parallelism is about doing things in parallel that can also be done
+sequentially. A common example is counting the frequency of letters.
+{@link parallel_letter_frequency:dict/1} returns the total frequency
+of each letter in a list of strings, employing parallelism.
