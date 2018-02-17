@@ -1,0 +1,109 @@
+#+SETUPFILE:   ../../org/setup.org
+#+TITLE:       Exercism.io → Haskell → Sublist
+#+DATE:
+#+DESCRIPTION: My solutions to Excercism.io in Haskell.
+#+OPTIONS: html-postamble:nil toc:nil
+#+HTML_MATHJAX: align:"left" scale:"100" mathml:t path:"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+#+LINK_HOME: ../../index.html
+#+LINK_UP:   ../index.html
+#+INFOJS_OPT: path:../../js/org-info.js view:showall toc:nil ltoc:nil tdepth:2 mouse:#dddddd
+
+* Sublist
+Write a function to determine if a list is a sublist of another list.
+
+Write a function that given two lists determines if the first list is
+contained within the second list, if the second list is contained within
+the first list, if both lists are contained within each other or if none
+of these are true.
+
+Specifically, a list A is a sublist of list B if by dropping 0 or more elements
+from the front of B and 0 or more elements from the back of B you get a list
+that's completely equal to A.
+
+** Examples
+\begin{align*}
+  [1, 2, 3]       &\subseteq [1, 2, 3, 4, 5] \\
+  [3, 4, 5]       &\subseteq [1, 2, 3, 4, 5] \\
+  [3, 4]          &\subseteq [1, 2, 3, 4, 5] \\
+  [1, 2, 3]       &\equiv    [1, 2, 3] \\
+  [1, 2, 3, 4, 5] &\supseteq [2, 3, 4] \\
+  [1, 2, 4]       &\not=     [1, 2, 3, 4, 5]
+\end{align*}
+
+** Solution
+#+BEGIN_SRC haskell :tangle Sublist.hs :padline no :exports none
+{-|
+Module      : Sublist
+Copyright   : (c) Eric Bailey, 2015
+License     : MIT
+
+Maintainer  : Eric Bailey
+Stability   : experimental
+Portability : portable
+
+Determining if a list is a sublist of another list.
+-}
+module Sublist (
+  Sublist(..)
+  , sublist
+  ) where
+#+END_SRC
+
+For the sake of convenience I imported ~isInfixOf~ from ~Data.List~.
+
+#+BEGIN_SRC haskell :tangle Sublist.hs
+import Data.List
+#+END_SRC
+
+#+BEGIN_SRC haskell :tangle Sublist.hs :exports none
+{-|
+Result of comparing two lists to determine if the first is
+a sublist of the second.
+-}
+#+END_SRC
+
+Then I set up the ~Sublist~ data type.
+
+#+BEGIN_SRC haskell :tangle Sublist.hs :padline no
+data Sublist
+  -- | The two lists are equal.
+  = Equal
+  -- | The first list is a fully contained, in order, in the second list.
+  | Sublist
+  -- | The first list fully contains, in order, the second list.
+  | Superlist
+  -- | Neither list fully contains the other.
+  | Unequal
+  deriving (Show, Eq)
+#+END_SRC
+
+#+BEGIN_SRC haskell :tangle Sublist.hs :exports none
+{-|
+Given two lists, returns a 'Sublist' based on
+the first list compared to the second.
+-}
+#+END_SRC
+
+Which is used as the return type for ~sublist~.
+
+#+BEGIN_SRC haskell :tangle Sublist.hs :padline no
+sublist :: Eq a = [a] -> [a] -> Sublist
+#+END_SRC
+
+With ~isInfixOf~, the implementation of ~sublist~ is trivial.
+
+#+BEGIN_SRC haskell :tangle Sublist.hs :padline no
+sublist a b
+  | a == b          = Equal
+  | a `isInfixOf` b = Sublist
+  | b `isInfixOf` a = Superlist
+  | otherwise       = Unequal
+#+END_SRC
+
+** Tests
+#+BEGIN_SRC fish
+runhaskell sublist_test.hs
+#+END_SRC
+#+BEGIN_EXAMPLE
+Cases: 18  Tried: 18  Errors: 0  Failures: 0
+#+END_EXAMPLE
