@@ -1,0 +1,13 @@
+# Gigasecond
+
+Write a program that will calculate the date that someone turned or will celebrate their 1 Gs anniversary.
+
+A gigasecond is one billion (10**9) seconds.
+
+## Source
+
+Chapter 9 in Chris Pine's online Learn to Program tutorial. [http://pine.fm/LearnToProgram/?Chapter=09](http://pine.fm/LearnToProgram/?Chapter=09)
+
+## Submitting Incomplete Problems
+It's possible to submit an incomplete solution so you can see how others have completed the exercise.
+
