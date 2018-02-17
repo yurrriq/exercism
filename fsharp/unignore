@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+[ ! -f "$1" ] && echo "Usage: unignore [path/to/*Test.fs]" && exit 1
+
+gsed -i '/^\[<Ignore/d' "$1"
