@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Module luhn</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module luhn</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>The Luhn formula.
+
+<p><b>Authors:</b> Eric Bailey.</p>
+<p><b>References</b><ul><li><a href="https://www.youtube.com/watch?v=Q-VNe3piTw4">"4312" by Tyvek</a></li><li><a href="http://exercism.io/exercises/erlang/luhn/readme">README</a></li><li><a href="http://exercism.io/exercises/erlang/luhn">Test suite</a></li><li><a href="https://github.com/yurrriq/exercism/blob/erlang/luhn/src/luhn.erl">Source</a></li></ul></p>
+
+<h2><a name="description">Description</a></h2>The Luhn formula.
+  
+<h2><a name="types">Data Types</a></h2>
+
+<h3 class="typedecl"><a name="type-digit">digit()</a></h3>
+<p><b>abstract datatype</b>: <tt>digit()</tt></p>
+<p>A digit is a single decimal digit.</p>
+
+<h3 class="typedecl"><a name="type-parity">parity()</a></h3>
+<p><b>abstract datatype</b>: <tt>parity()</tt></p>
+<p>Parity is either <code>even</code> or <code>odd</code>.</p>
+
+<h3 class="typedecl"><a name="type-valid_char">valid_char()</a></h3>
+<p><b>abstract datatype</b>: <tt>valid_char()</tt></p>
+<p>A valid char is one of <code>"0123456789 "</code>.</p>
+
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#check_digit-2">check_digit/2*</a></td><td>Given a <code>Parity</code> and an <code>{OddAcc,EvenAcc}=OddEvenTuple</code>,
+  return the appropriate <code>CheckDigit</code>.</td></tr>
+<tr><td valign="top"><a href="#create-1">create/1</a></td><td>Given a <code>String</code>, calculate its check digit
+  and return it appended to <code>String</code>.</td></tr>
+<tr><td valign="top"><a href="#digit-0">digit/0*</a></td><td>A PropEr type generator for a digit <code>0..9</code>.</td></tr>
+<tr><td valign="top"><a href="#digits-0">digits/0*</a></td><td>A PropEr type generator for a list of <a href="#type-digit">digit</a>s,
+  such that <code>length(List) &gt;= 3</code> and <code>hd(List) &gt; 0</code>.</td></tr>
+<tr><td valign="top"><a href="#do_luhn-2">do_luhn/2*</a></td><td>Equivalent to <a href="#check_digit-1"><code>check_digit/1</code></a><code>(P,</code><a href="#do_luhn-3"><code>do_luhn/3</code></a><code>(S, 0, 0)</code>.</td></tr>
+<tr><td valign="top"><a href="#do_luhn-3">do_luhn/3*</a></td><td>Given a <code>String</code>, <code>OddAcc</code> and <code>EvenAcc</code>, return check digits
+  for both <code>odd</code> and <code>even</code> parity, as a tuple.</td></tr>
+<tr><td valign="top"><a href="#do_sum-2">do_sum/2*</a></td><td>Implementation of <a href="#sum-1"><code>sum/1</code></a>.</td></tr>
+<tr><td valign="top"><a href="#maybe_pad-1">maybe_pad/1*</a></td><td>Given a list of <a href="#digits-0">digits</a> <code>L</code>,
+  if <code>length(L)</code> is odd, prepend <code>0</code>, otherwise return <code>L</code>.</td></tr>
+<tr><td valign="top"><a href="#norm-1">norm/1*</a></td><td>Given a non-negative integer <code>N</code>, subtract nine if <code>N &gt;= 10</code>,
+  otherwise return <code>N</code>.</td></tr>
+<tr><td valign="top"><a href="#parity-1">parity/1*</a></td><td>Return the numeric value of a given <a href="#partity-0">parity</a> <code>P</code>,
+  i.e.</td></tr>
+<tr><td valign="top"><a href="#pos_digit-0">pos_digit/0*</a></td><td>A PropEr type generator for a digit <code>1..9</code>.</td></tr>
+<tr><td valign="top"><a href="#prop_create-0">prop_create/0*</a></td><td>∀ <code>Ds</code> ∈ <a href="#digits-0">digits</a>, <a href="#valid-1">valid</a><code>(</code>
+  <a href="#create-1">create</a><code>(</code><a href="#to_string-1">to_string</a><code>(Ds)))</code></td></tr>
+<tr><td valign="top"><a href="#prop_valid-0">prop_valid/0*</a></td><td>∀ <code>Ds</code> ∈ <a href="#digits-0">digits</a>, <a href="#valid1-1">valid1</a><code>(Ds)</code></td></tr>
+<tr><td valign="top"><a href="#rem10-1">rem10/1*</a></td><td>Return <code>X rem 10</code>.</td></tr>
+<tr><td valign="top"><a href="#sum-1">sum/1*</a></td><td>Return the sum, per the Luhn formula, of <code>Digits</code>.</td></tr>
+<tr><td valign="top"><a href="#to_string-1">to_string/1*</a></td><td>Given a list of <a href="#digit-0">digits</a>, return its reversed string
+  representation, e.g.</td></tr>
+<tr><td valign="top"><a href="#valid-1">valid/1</a></td><td>Given a <code>String</code>, return <code>true</code> if it represents a valid number,
+  per the Luhn formula, otherwise <code>false</code>.</td></tr>
+<tr><td valign="top"><a href="#valid1-1">valid1/1*</a></td><td>Return <code>true</code> iff <a href="luhn.html#valid-1">luhn:valid/1</a>
+  returns the correct result for <code>L</code>.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="check_digit-2">check_digit/2 *</a></h3>
+<div class="spec">
+<p><tt>check_digit(Parity, OddEvenTuple) -&gt; CheckDigit</tt>
+<ul class="definitions"><li><tt>Parity = <a href="#type-parity">parity()</a></tt></li><li><tt>OddEvenTuple = {<a href="#type-digit">digit()</a>, <a href="#type-digit">digit()</a>}</tt></li><li><tt>CheckDigit = <a href="#type-digit">digit()</a></tt></li></ul></p>
+</div><p>Given a <code>Parity</code> and an <code>{OddAcc,EvenAcc}=OddEvenTuple</code>,
+  return the appropriate <code>CheckDigit</code>.</p>
+<p><b>See also:</b> <a href="#do_luhn-3">do_luhn/3</a>.</p>
+
+<h3 class="function"><a name="create-1">create/1</a></h3>
+<div class="spec">
+<p><tt>create(String::string()) -&gt; Result::string()</tt><br></p>
+</div><p>Given a <code>String</code>, calculate its check digit
+  and return it appended to <code>String</code>.</p>
+
+<h3 class="function"><a name="digit-0">digit/0 *</a></h3>
+<div class="spec">
+<p><tt>digit() -&gt; <a href="proper_types.html#type-type">proper_types:type()</a></tt><br></p>
+</div><p>A PropEr type generator for a digit <code>0..9</code>.</p>
+<p><b>See also:</b> <a href="#digits-0">digits/0</a>, <a href="#pos_digit-0">pos_digit/0</a>.</p>
+
+<h3 class="function"><a name="digits-0">digits/0 *</a></h3>
+<div class="spec">
+<p><tt>digits() -&gt; <a href="proper_types.html#type-raw_type">proper_types:raw_type()</a></tt><br></p>
+</div><p>A PropEr type generator for a list of <a href="#type-digit">digit</a>s,
+  such that <code>length(List) &gt;= 3</code> and <code>hd(List) &gt; 0</code>.</p>
+<p><b>See also:</b> <a href="#pos_digit-0">pos_digit/0</a>.</p>
+
+<h3 class="function"><a name="do_luhn-2">do_luhn/2 *</a></h3>
+<div class="spec">
+<p><tt>do_luhn(String::string(), Parity::<a href="#type-parity">parity()</a>) -&gt; CheckDigit::<a href="#type-digit">digit()</a></tt><br></p>
+</div><p>Equivalent to <a href="#check_digit-1"><code>check_digit/1</code></a><code>(P,</code><a href="#do_luhn-3"><code>do_luhn/3</code></a><code>(S, 0, 0)</code>.</p>
+
+<h3 class="function"><a name="do_luhn-3">do_luhn/3 *</a></h3>
+<div class="spec">
+<p><tt>do_luhn(String, OddAcc, EvenAcc) -&gt; {OddDigit, EvenDigit}</tt>
+<ul class="definitions"><li><tt>String = string()</tt></li><li><tt>OddAcc = <a href="#type-digit">digit()</a></tt></li><li><tt>EvenAcc = <a href="#type-digit">digit()</a></tt></li><li><tt>OddDigit = <a href="#type-digit">digit()</a></tt></li><li><tt>EvenDigit = <a href="#type-digit">digit()</a></tt></li></ul></p>
+</div><p>Given a <code>String</code>, <code>OddAcc</code> and <code>EvenAcc</code>, return check digits
+  for both <code>odd</code> and <code>even</code> parity, as a tuple.</p>
+<p><b>See also:</b> <a href="#check_digit-1">check_digit/1</a>, <a href="#do_luhn-2">do_luhn/2</a>.</p>
+
+<h3 class="function"><a name="do_sum-2">do_sum/2 *</a></h3>
+<div class="spec">
+<p><tt>do_sum(T::[<a href="#type-digit">digit()</a>], Acc::non_neg_integer()) -&gt; non_neg_integer()</tt><br></p>
+</div><p>Implementation of <a href="#sum-1"><code>sum/1</code></a>.</p>
+
+<h3 class="function"><a name="maybe_pad-1">maybe_pad/1 *</a></h3>
+<div class="spec">
+<p><tt>maybe_pad(L::[<a href="#type-digit">digit()</a>, ...]) -&gt; [<a href="#type-digit">digit()</a>, ...]</tt><br></p>
+</div><p>Given a list of <a href="#digits-0">digits</a> <code>L</code>,
+  if <code>length(L)</code> is odd, prepend <code>0</code>, otherwise return <code>L</code>.</p>
+
+<h3 class="function"><a name="norm-1">norm/1 *</a></h3>
+<div class="spec">
+<p><tt>norm(N::non_neg_integer()) -&gt; N1::<a href="#type-digit">digit()</a></tt><br></p>
+</div><p>Given a non-negative integer <code>N</code>, subtract nine if <code>N &gt;= 10</code>,
+  otherwise return <code>N</code>.</p>
+
+<h3 class="function"><a name="parity-1">parity/1 *</a></h3>
+<div class="spec">
+<p><tt>parity(P::<a href="#type-parity">parity()</a>) -&gt; K::1 | 2</tt><br></p>
+</div><p>Return the numeric value of a given <a href="#partity-0">parity</a> <code>P</code>,
+  i.e. <code>1</code> for <code>odd</code> and <code>2</code> for <code>even</code>.</p>
+
+<h3 class="function"><a name="pos_digit-0">pos_digit/0 *</a></h3>
+<div class="spec">
+<p><tt>pos_digit() -&gt; <a href="proper_types.html#type-type">proper_types:type()</a></tt><br></p>
+</div><p>A PropEr type generator for a digit <code>1..9</code>.</p>
+<p><b>See also:</b> <a href="#digit-0">digit/0</a>, <a href="#digits-0">digits/0</a>.</p>
+
+<h3 class="function"><a name="prop_create-0">prop_create/0 *</a></h3>
+<div class="spec">
+<p><tt>prop_create() -&gt; <a href="proper.html#type-forall_clause">proper:forall_clause()</a></tt><br></p>
+</div><p>∀ <code>Ds</code> ∈ <a href="#digits-0">digits</a>, <a href="#valid-1">valid</a><code>(</code>
+  <a href="#create-1">create</a><code>(</code><a href="#to_string-1">to_string</a><code>(Ds)))</code></p>
+
+<h3 class="function"><a name="prop_valid-0">prop_valid/0 *</a></h3>
+<div class="spec">
+<p><tt>prop_valid() -&gt; <a href="proper.html#type-forall_clause">proper:forall_clause()</a></tt><br></p>
+</div><p>∀ <code>Ds</code> ∈ <a href="#digits-0">digits</a>, <a href="#valid1-1">valid1</a><code>(Ds)</code></p>
+
+<h3 class="function"><a name="rem10-1">rem10/1 *</a></h3>
+<div class="spec">
+<p><tt>rem10(X::non_neg_integer()) -&gt; <a href="#type-digit">digit()</a></tt><br></p>
+</div><p>Return <code>X rem 10</code>.</p>
+
+<h3 class="function"><a name="sum-1">sum/1 *</a></h3>
+<div class="spec">
+<p><tt>sum(Digits::[<a href="#type-digit">digit()</a>, ...]) -&gt; non_neg_integer()</tt><br></p>
+</div><p>Return the sum, per the Luhn formula, of <code>Digits</code>.</p>
+
+<h3 class="function"><a name="to_string-1">to_string/1 *</a></h3>
+<div class="spec">
+<p><tt>to_string(Ds::[<a href="#type-digit">digit()</a>, ...]) -&gt; [<a href="#type-valid_char">valid_char()</a>, ...]</tt><br></p>
+</div><p>Given a list of <a href="#digit-0">digits</a>, return its reversed string
+  representation, e.g. <code>"4312" = to_string([2,1,3,4])</code>.</p>
+
+<h3 class="function"><a name="valid-1">valid/1</a></h3>
+<div class="spec">
+<p><tt>valid(String::string()) -&gt; Valid::boolean()</tt><br></p>
+</div><p>Given a <code>String</code>, return <code>true</code> if it represents a valid number,
+  per the Luhn formula, otherwise <code>false</code>.</p>
+
+<h3 class="function"><a name="valid1-1">valid1/1 *</a></h3>
+<div class="spec">
+<p><tt>valid1(L::[<a href="#type-digit">digit()</a>, ...]) -&gt; boolean()</tt><br></p>
+</div><p>Return <code>true</code> iff <a href="luhn.html#valid-1">luhn:valid/1</a>
+  returns the correct result for <code>L</code>.</p>
+<p><b>See also:</b> <a href="#prop_create-0">prop_create/0</a>.</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Apr 21 2016, 15:38:47.</i></p>
+</body>
+</html>
