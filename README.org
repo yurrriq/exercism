@@ -1,0 +1,4 @@
+* xClojure
+[[https://travis-ci.org/yurrriq/exercism][file:https://travis-ci.org/yurrriq/exercism.svg?branch=clojure]]
+
+[[http://exercism.io/yurrriq][My solutions]] to [[http://exercism.io/about][Exercism]] exercises in [[http://clojure.org][Clojure]].
