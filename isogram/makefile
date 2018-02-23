@@ -10,16 +10,52 @@ VFLAGS += --tool=memcheck
 VFLAGS += --leak-check=full
 VFLAGS += --error-exitcode=1
 
-test: tests.out
-	@./tests.out
+cpif   ?= | cpif
+NW_SRC := $(wildcard src/*.nw)
+C_SRC  := ${NW_SRC:.nw=.c}
+PDF    := ${NW_SRC:.nw=.pdf}
 
-memcheck: tests.out
-	@valgrind $(VFLAGS) ./tests.out
-	@echo "Memory check passed"
+latexmk_flags = -cd -pdf
+
+ifneq (,$(findstring B,$(MAKEFLAGS)))
+latexmk_flags += -gg
+endif
+
+
+.PHONY: all test clean test/test_%.c
+
+all: test
+
+.SUFFIXES: .nw .c .out .tex .pdf
+
+.nw.c:
+	notangle $< ${cpif} $@
+	indent -kr -nut $@
+
+.nw.tex:
+	@ noweave -autodefs c -n -delay -index $< ${cpif} $@
+
+.tex.pdf:
+	latexmk ${latexmk_flags} $<
+
+
+all: test ${PDF}
+
 
 clean:
-	rm -rf *.o *.out *.out.dSYM
+	@ rm -fR **/*~ **/*.o **/*.out **/*.out.dSYM
 
-tests.out: test/test_isogram.c src/isogram.c src/isogram.h
-	@echo Compiling $@
-	@cc $(CFLAGS) src/isogram.c test/vendor/unity.c test/test_isogram.c -o tests.out
+
+src/%.out: src/%.c test/vendor/unity.c test/test_%.c
+	@ rm -fR $@
+	@ echo Compiling $@
+	@ cc $(CFLAGS) $^ -o $@
+	@ echo valgrind $(VFLAGS) $@
+	@ $@
+
+
+test: ${C_SRC:.c=.out}
+
+
+test/test_%.c:
+	@ sed -i '/TEST_IGNORE/d' $@
