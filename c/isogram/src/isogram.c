@@ -1,7 +1,7 @@
 #include "isogram.h"
+#include <ctype.h>
 #include <stddef.h>
 #include <stdint.h>
-#include <ctype.h>
 
 
 bool is_isogram(const char phrase[])
