@@ -1,0 +1,211 @@
+% -*- ess-noweb-code-mode: c-mode; -*-
+\documentclass{tufte-handout}
+
+\input{preamble.tex}
+
+\hypersetup{
+  pdffitwindow=true,
+  pdfstartview={FitH},
+  pdftitle={Exercism: Isogram in C},
+  pdfauthor={Eric Bailey <eric@ericb.me>},
+  pdfsubject={My literate C solution to the isogram problem},
+  pdfkeywords={C language, learning, exercises, literate programming, noweb},
+  colorlinks=true,
+  linkcolor=ErlangRed,
+  urlcolor=ErlangRed
+}
+
+\title{Exercism: Isogram in C}
+
+\date{%
+  February 22, 2018
+  \thanks{Last updated \today}
+}
+
+\begin{document}
+
+\maketitle
+@
+
+
+\begin{marginfigure}
+<<*>>=
+#include "isogram.h"
+<<Include headers.>>
+
+
+<<Define the [[is_isogram]] function.>>
+@
+\end{marginfigure}
+
+
+\begin{abstract}
+  An {\sl isogram} is a word or phrase without a repeating letter.
+\end{abstract}
+
+
+\tableofcontents
+
+
+\section{The \cee{is_isogram} function}
+
+To determine a [[phrase]] is an isogram,
+there are two failing conditions we must disprove.
+
+<<Define the [[is_isogram]] function.>>=
+bool is_isogram(const char phrase[])
+{
+    <<If [[phrase]] is NULL, return false.>>
+
+    <<If any letter in [[phrase]] appears more than once, return false.>>
+
+    <<Otherwise, [[phrase]] is an isogram.>>
+}
+@ %def seen
+
+
+\newpage
+\subsection{\cee{NULL} is not an isogram}
+
+The implementation first condition is self-explanatory.
+
+<<If [[phrase]] is NULL, return false.>>=
+if (phrase == NULL)
+    return false;
+@
+
+
+\subsection{Determining whether a word is an isogram}
+
+To determine whether [[phrase]] is an isogram, we need to keep track of letters
+we've already [[seen]]. For that, use an unsigned 32-bit integer ([[uint32_t]]).
+
+<<If any letter in [[phrase]] appears more than once, return false.>>=
+uint32_t seen = 0;
+
+@ % def seen
+
+Next, iterate through each letter in [[phrase]] until \cee{NUL},
+short-circuiting if we've [[seen]] one before.
+
+<<If any letter in [[phrase]] appears more than once, return false.>>=
+for (size_t i = 0; phrase[i] != '\0'; ++i) {
+    <<Ignore nonalphabetic characters.>>
+
+    <<If we've already [[seen]] the current letter, return false.>>
+
+    <<Otherwise, mask the bit for the current letter on in [[seen]].>>
+}
+@
+
+Since we don't care about nonalphabetic characters, ignore them.
+
+<<Ignore nonalphabetic characters.>>=
+if (!isalpha(phrase[i]))
+    continue;
+@
+
+To determine, case-insensitively, if we've seen a letter already, convert it to
+uppercase and subtract \cee{'A'},
+e.g \cee{'a' - 'A' == 0} and \cee{'e' - 'A' == 4}.
+\href{https://en.wikipedia.org/wiki/Mask_(computing)#Masking_bits_to_1}{Mask the
+  corresponding bit on} and store the result.
+
+<<If we've already [[seen]] the current letter, return false.>>=
+uint32_t bit_mask = 1 @<< (toupper(phrase[i]) - 'A');
+@ %def bit_mask
+
+If the result of bitwise [[seen]] \cee{AND} [[bit_mask]] is nonzero,
+we've seen this letter before and [[phrase]] is not an isogram.
+
+<<If we've already [[seen]] the current letter, return false.>>=
+if (seen & bit_mask)
+    return false;
+@
+
+If this is a new letter, mask its bit (see [[bit_mask]]) on in [[seen]] and
+proceed to the next letter.
+
+<<Otherwise, mask the bit for the current letter on in [[seen]].>>=
+seen |= bit_mask;
+@
+
+
+\subsection{Double negation}
+
+\marginnote{%
+  \makeatletter
+  % https://tex.stackexchange.com/a/157441/45537
+  \newcommand*{\pmneg}{\sim}
+  % \renewcommand{\star}{\ding{88}}
+  \newcommand*{\pmstar}{\ding{107}}
+  \newcommand*{\pmimplies}{\boldsymbol{\supset}}
+  \makeatother
+  \paragraph{\pmstar\boldmath$2{\cdot}14.$}
+  ${\vdash}.{\pmneg}({\pmneg}p){\pmimplies}p$
+  \newline \noindent
+  (\citeauthor*{whitehead_russell_1910})
+  % https://quod.lib.umich.edu/u/umhistmath/AAT3201.0001.001/124?rgn=full+text;view=pdf
+}
+
+If [[phrase]] is not not an isogram, then it is an isogram.
+
+<<Otherwise, [[phrase]] is an isogram.>>=
+return true;
+@
+
+
+\section{Include headers}
+
+From
+\href{http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/stddef.h.html}{\cee{stddef.h}}
+import the [[NULL]] macro.
+
+<<Include headers.>>=
+#include <stddef.h>
+@ %def NULL
+
+From
+\href{http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/stdint.h.html}{\cee{stdint.h}}
+import the 32-bit unsigned integer type, [[uint32_t]].
+
+<<Include headers.>>=
+#include <stdint.h>
+@ %def uint32_t
+
+From
+\href{http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/ctype.h.html}{\cee{ctype.h}}
+import the functions
+\href{http://pubs.opengroup.org/onlinepubs/9699919799/functions/isalpha.html}{[[isalpha]]},
+to determine whether a character is alphabetic,
+and \href{http://pubs.opengroup.org/onlinepubs/9699919799/functions/toupper.html}{[[toupper]]},
+to convert a letter to uppercase.
+
+<<Include headers.>>=
+#include <ctype.h>
+@ %def isalpha
+@ %def toupper
+
+
+\newpage
+\section{Full Listing}
+
+\inputc{isogram.h}
+
+\inputc{isogram.c}
+
+
+\newpage
+\section{Chunks}
+\nowebchunks
+
+
+\section{Index}
+\nowebindex
+
+
+\bibliography{isogram}
+\bibliographystyle{plainnat}
+
+
+\end{document}
