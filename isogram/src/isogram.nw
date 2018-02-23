@@ -67,7 +67,7 @@ bool is_isogram(const char phrase[])
 \newpage
 \subsection{\cee{NULL} is not an isogram}
 
-The implementation first condition is self-explanatory.
+The implementation of the first condition is self-explanatory.
 
 <<If [[phrase]] is NULL, return false.>>=
 if (phrase == NULL)
@@ -77,8 +77,11 @@ if (phrase == NULL)
 
 \subsection{Determining whether a word is an isogram}
 
-To determine whether [[phrase]] is an isogram, we need to keep track of letters
-we've already [[seen]]. For that, use an unsigned 32-bit integer ([[uint32_t]]).
+To determine whether [[phrase]] is an isogram, we need to keep track of which
+letters we've already [[seen]]. For that, use an unsigned 32-bit integer.
+\marginnote{%
+  We'll bitmask this later.
+}
 
 <<If any letter in [[phrase]] appears more than once, return false.>>=
 uint32_t seen = 0;
@@ -115,7 +118,7 @@ e.g \cee{'a' - 'A' == 0} and \cee{'e' - 'A' == 4}.
 uint32_t bit_mask = 1 @<< (toupper(phrase[i]) - 'A');
 @ %def bit_mask
 
-If the result of bitwise [[seen]] \cee{AND} [[bit_mask]] is nonzero,
+If the result of [[seen]] bitwise \cee{AND} [[bit_mask]] is nonzero,
 we've seen this letter before and [[phrase]] is not an isogram.
 
 <<If we've already [[seen]] the current letter, return false.>>=
@@ -123,7 +126,7 @@ if (seen & bit_mask)
     return false;
 @
 
-If this is a new letter, mask its bit (see [[bit_mask]]) on in [[seen]] and
+If this is a new letter, mask its bit on in [[seen]] and
 proceed to the next letter.
 
 <<Otherwise, mask the bit for the current letter on in [[seen]].>>=
@@ -158,6 +161,20 @@ return true;
 \section{Include headers}
 
 From
+\href{http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/ctype.h.html}{\cee{ctype.h}}
+import the functions
+\href{http://pubs.opengroup.org/onlinepubs/9699919799/functions/isalpha.html}{[[isalpha]]},
+to determine whether a character is alphabetic,
+and \href{http://pubs.opengroup.org/onlinepubs/9699919799/functions/toupper.html}{[[toupper]]},
+to convert a letter to uppercase.
+
+<<Include headers.>>=
+#include <ctype.h>
+@ %def isalpha
+@ %def toupper
+
+
+From
 \href{http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/stddef.h.html}{\cee{stddef.h}}
 import the [[NULL]] macro.
 
@@ -172,19 +189,6 @@ import the 32-bit unsigned integer type, [[uint32_t]].
 <<Include headers.>>=
 #include <stdint.h>
 @ %def uint32_t
-
-From
-\href{http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/ctype.h.html}{\cee{ctype.h}}
-import the functions
-\href{http://pubs.opengroup.org/onlinepubs/9699919799/functions/isalpha.html}{[[isalpha]]},
-to determine whether a character is alphabetic,
-and \href{http://pubs.opengroup.org/onlinepubs/9699919799/functions/toupper.html}{[[toupper]]},
-to convert a letter to uppercase.
-
-<<Include headers.>>=
-#include <ctype.h>
-@ %def isalpha
-@ %def toupper
 
 
 \newpage
