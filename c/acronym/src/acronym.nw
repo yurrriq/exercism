@@ -1,0 +1,149 @@
+\documentclass[nobib]{tufte-handout}
+
+\input{preamble.tex}
+
+\hypersetup{
+  pdffitwindow=true,
+  pdfstartview={FitH},
+  pdftitle={Exercism: Acronym in C},
+  pdfauthor={Eric Bailey <eric@ericb.me>},
+  pdfsubject={My literate C solution to the acronym problem},
+  pdfkeywords={C language, learning, exercises, literate programming, noweb},
+  colorlinks=true,
+  linkcolor=ErlangRed,
+  urlcolor=ErlangRed
+}
+
+\title{Exercism: Acronym in C}
+
+\date{%
+  February 25, 2018
+  \thanks{Last updated \today}
+}
+
+\begin{document}
+
+\maketitle
+@
+
+
+\begin{marginfigure}
+<<*>>=
+#include "acronym.h"
+<<Include headers.>>
+
+
+<<Define the [[is_word_start]] function.>>
+
+
+<<Define the [[word_count]] function.>>
+
+
+<<Define the [[abbreviate]] function.>>
+@
+\end{marginfigure}
+
+
+\begin{abstract}
+  \todoo{WRITE ME}
+\end{abstract}
+
+
+\tableofcontents
+
+
+\section{The \cee{abbreviate} function}
+
+<<Define the [[abbreviate]] function.>>=
+char *abbreviate(const char *phrase)
+{
+    if (phrase == NULL || phrase[0] == '\0')
+        return NULL;
+
+    char *acronym = NULL;
+    if (!(acronym = calloc(word_count(phrase) + 1, sizeof phrase[0])))
+        return NULL;
+
+    acronym[0] = toupper(phrase[0]);
+
+    for (size_t i = 1, j = 1; phrase[i] != '\0'; ++i) {
+        if (is_word_start(phrase[i], phrase[i - 1]))
+            acronym[j++] = toupper(phrase[i]);
+    }
+
+    return acronym;
+}
+@
+
+\section{Count the words in a phrase}
+
+To determine the number of words in a phrase, count the number of characters for
+which [[is_word_start]] holds.
+
+<<Define the [[word_count]] function.>>=
+static int word_count(const char phrase[])
+{
+    if (phrase == NULL)
+        return 0;
+
+    int count = 1;
+
+    for (size_t i = 1; phrase[i] != '\0'; ++i) {
+        if (is_word_start(phrase[i], phrase[i - 1]))
+            count++;
+    }
+
+    return count;
+}
+@ %def word_count
+
+
+\section{Determining the start of a word}
+
+The \cee{current} character starts a word if, and only if, it is alphabetic and
+the \cee{previous} character is not.
+
+<<Define the [[is_word_start]] function.>>=
+static int is_word_start(char current, char previous)
+{
+    return isalpha(current) && (!isalpha(previous));
+}
+@ %def is_word_start
+
+
+\section{Include headers}
+
+<<Include headers.>>=
+#include <ctype.h>
+@ %def isalpha
+@ %def toupper
+
+<<Include headers.>>=
+#include <stdlib.h>
+@ %def NULL
+@ %def calloc
+@ %def size_t
+
+
+\newpage
+\section{Full Listing}
+
+\inputc{acronym.h}
+
+\inputc{acronym.c}
+
+
+\newpage
+\section{Chunks}
+\nowebchunks
+
+
+\section{Index}
+\nowebindex
+
+
+% \bibliography{acronym}
+% \bibliographystyle{plainnat}
+
+
+\end{document}
