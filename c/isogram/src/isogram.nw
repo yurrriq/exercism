@@ -61,7 +61,7 @@ bool is_isogram(const char phrase[])
 
     <<Otherwise, [[phrase]] is an isogram.>>
 }
-@ %def seen
+@
 
 
 \newpage
