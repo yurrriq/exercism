@@ -6,30 +6,41 @@ Bob answers 'Sure.' if you ask him a question.
 
 He answers 'Whoa, chill out!' if you yell at him.
 
+He answers 'Calm down, I know what I'm doing!' if you yell a question at him.
+
 He says 'Fine. Be that way!' if you address him without actually saying
 anything.
 
 He answers 'Whatever.' to anything else.
 
-## Instructions
+Bob's conversational partner is a purist when it comes to written communication and always follows normal rules regarding sentence punctuation in English.
 
-Run the test file, and fix each of the errors in turn. When you get the
-first test to pass, go to the first pending or skipped test, and make
-that pass as well. When all of the tests are passing, feel free to
-submit.
+## Running tests
 
-Remember that passing code is just the first step. The goal is to work
-towards a solution that is as readable and expressive as you can make
-it.
+In order to run the tests, issue the following command from the exercise
+directory:
 
-Please make your solution as general as possible. Good code doesn't just
-pass the test suite, it works with any input that fits the
-specification.
+For running the tests provided, `rebar3` is used as it is the official build and
+dependency management tool for erlang now. Please refer to [the tracks installation
+instructions](http://exercism.io/languages/erlang/installation) on how to do that.
 
-Have fun!
+In order to run the tests, you can issue the following command from the exercise
+directory.
 
+```bash
+$ rebar3 eunit
+```
 
+## Questions?
+
+For detailed information about the Erlang track, please refer to the
+[help page](http://exercism.io/languages/erlang) on the Exercism site.
+This covers the basic information on setting up the development
+environment expected by the exercises.
 
 ## Source
 
-Inspired by the 'Deaf Grandma' exercise in Chris Pine's Learn to Program tutorial. [view source](http://pine.fm/LearnToProgram/?Chapter=06)
+Inspired by the 'Deaf Grandma' exercise in Chris Pine's Learn to Program tutorial. [http://pine.fm/LearnToProgram/?Chapter=06](http://pine.fm/LearnToProgram/?Chapter=06)
+
+## Submitting Incomplete Solutions
+It's possible to submit an incomplete solution so you can see how others have completed the exercise.
