@@ -1,0 +1,59 @@
+{
+  "nodes": {
+    "emacs-overlay": {
+      "locked": {
+        "lastModified": 1631843322,
+        "narHash": "sha256-7rWo0xaND/FpXZQ4XLidaOCwqdjz7/x21Qa7Eb9mE3A=",
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "rev": "830dd351b336617e58efe7ee7878959fe78e1927",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1631561581,
+        "narHash": "sha256-3VQMV5zvxaVLvqqUrNz3iJelLw30mIVSfZmAaauM3dA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "7e5bf3925f6fbdfaf50a2a7ca0be2879c4261d19",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1631830867,
+        "narHash": "sha256-7mas4nl6KnK59i+mlNVrIgR/cOrToU9M1C9waOkRFJE=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "ebf419e737bb8154b32010a322dcdffbea596443",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "release-21.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "emacs-overlay": "emacs-overlay",
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
