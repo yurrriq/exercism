@@ -11,18 +11,13 @@ pub enum LogLevel {
 
 impl fmt::Display for LogLevel {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self {
-            LogLevel::Debug => write!(f, "DEBUG"),
-            LogLevel::Info => write!(f, "INFO"),
-            LogLevel::Warning => write!(f, "WARNING"),
-            LogLevel::Error => write!(f, "ERROR"),
-        }
+        write!(f, "{}", format!("{:?}", self).to_uppercase())
     }
 }
 
 /// primary function for emitting logs
 pub fn log(level: LogLevel, message: &str) -> String {
-    fmt::format(format_args!("[{}]: {}", level, message))
+    format!("[{}]: {}", level, message)
 }
 
 pub fn info(message: &str) -> String {
