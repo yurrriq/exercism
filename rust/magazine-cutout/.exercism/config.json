@@ -1,0 +1,17 @@
+{
+  "blurb": "Use `HashMap` and the entry API methods to write an anonymous letter.",
+  "authors": [
+    "seanchen1991"
+  ],
+  "files": {
+    "solution": [
+      "src/lib.rs"
+    ],
+    "test": [
+      "tests/magazine-cutout.rs"
+    ],
+    "exemplar": [
+      ".meta/exemplar.rs"
+    ]
+  }
+}
