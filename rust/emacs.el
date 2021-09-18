@@ -59,7 +59,7 @@
   :config (global-hl-todo-mode t))
 
 (use-package lsp-mode
-  :hook ((rustic-mode . lsp-deferred))
+  :hook (rustic-mode . lsp-deferred)
   :commands (lsp lsp-deferred)
   :custom
   (lsp-eldoc-render-all t)
@@ -69,7 +69,12 @@
   (lsp-rust-analyzer-server-display-inlay-hints t)
   (lsp-rust-server 'rust-analyzer)
   :config
-  (advice-add 'lsp :before #'direnv-update-environment))
+  (advice-add 'lsp :before #'direnv-update-environment)
+  (add-to-list 'lsp-language-id-configuration '(nix-mode . "nix"))
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection '("rnix-lsp"))
+                    :major-modes '(nix-mode)
+                    :server-id 'nix)))
 
 (use-package lsp-ui
   :hook (rustic-mode . lsp-ui-mode)
@@ -87,7 +92,7 @@
   :hook (emacs-lisp-mode . paredit-mode))
 
 (use-package rainbow-delimiters
-  :hook ((emacs-lisp-mode . rainbow-delimeters-mode)))
+  :hook (emacs-lisp-mode . rainbow-delimiters-mode))
 
 (use-package rustic
   :bind (:map rustic-mode-map
@@ -99,9 +104,9 @@
               ("C-c C-c q" . lsp-workspace-restart)
               ("C-c C-c Q" . lsp-workspace-shutdown)
               ("C-c C-c s" . lsp-rust-analyzer-status))
+  :hook (rustic-mode . eb/rustic-mode-hook)
   :config
-  (setq rustic-format-on-save t)
-  (add-hook 'rustic-mode-hook 'eb/rustic-mode-hook))
+  (setq rustic-format-on-save t))
 
 (defun eb/rustic-mode-hook ()
   ;; NOTE: https://github.com/brotzeit/rustic/issues/253
