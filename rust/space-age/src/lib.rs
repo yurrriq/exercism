@@ -1,38 +1,56 @@
-// The code below is a stub. Just enough to satisfy the compiler.
-// In order to pass the tests you can add-to or change any of this code.
-
 #[derive(Debug)]
-pub struct Duration;
+pub struct Duration(f64);
+
+const EARTH_YEAR: f64 = 31_557_600_f64;
 
 impl From<u64> for Duration {
-    fn from(s: u64) -> Self {
-        unimplemented!("s, measured in seconds: {}", s)
+    fn from(seconds: u64) -> Self {
+        Self(seconds as f64)
     }
 }
 
 pub trait Planet {
-    fn years_during(d: &Duration) -> f64 {
-        unimplemented!(
-            "convert a duration ({:?}) to the number of years on this planet for that duration",
-            d,
-        );
+    const ORBITAL_PERIOD: f64 = 1_f64;
+
+    fn years_during(duration: &Duration) -> f64 {
+        duration.0 / Self::ORBITAL_PERIOD / EARTH_YEAR
     }
 }
 
 pub struct Mercury;
-pub struct Venus;
-pub struct Earth;
-pub struct Mars;
-pub struct Jupiter;
-pub struct Saturn;
-pub struct Uranus;
-pub struct Neptune;
+impl Planet for Mercury {
+    const ORBITAL_PERIOD: f64 = 0.2408467;
+}
 
-impl Planet for Mercury {}
-impl Planet for Venus {}
+pub struct Venus;
+impl Planet for Venus {
+    const ORBITAL_PERIOD: f64 = 0.61519726;
+}
+
+pub struct Earth;
 impl Planet for Earth {}
-impl Planet for Mars {}
-impl Planet for Jupiter {}
-impl Planet for Saturn {}
-impl Planet for Uranus {}
-impl Planet for Neptune {}
+
+pub struct Mars;
+impl Planet for Mars {
+    const ORBITAL_PERIOD: f64 = 1.8808158;
+}
+
+pub struct Jupiter;
+impl Planet for Jupiter {
+    const ORBITAL_PERIOD: f64 = 11.862615;
+}
+
+pub struct Saturn;
+impl Planet for Saturn {
+    const ORBITAL_PERIOD: f64 = 29.447498;
+}
+
+pub struct Uranus;
+impl Planet for Uranus {
+    const ORBITAL_PERIOD: f64 = 84.016846;
+}
+
+pub struct Neptune;
+impl Planet for Neptune {
+    const ORBITAL_PERIOD: f64 = 164.79132;
+}
