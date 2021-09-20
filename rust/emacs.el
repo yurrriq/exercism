@@ -106,7 +106,23 @@
               ("C-c C-c s" . lsp-rust-analyzer-status))
   :hook (rustic-mode . eb/rustic-mode-hook)
   :config
-  (setq rustic-format-on-save t))
+  (setq rustic-format-on-save t)
+  ;; https://rust-lang.github.io/rustfmt/
+  (dolist (item '(("blank_lines_upper_bound" . 2)
+                  ("combine_control_expr" . "false")
+                  ("comment_width" . 80)
+                  ("format_code_in_doc_comments" . "true")
+                  ("format_strings" . "true")
+                  ("group_imports" . "StdExternalCrate")
+                  ("imports_granularity" . "Module")
+                  ("match_block_trailing_comma" . "true")
+                  ("max_width" . 80)
+                  ("reorder_impl_items" . "true")
+                  ("space_before_colon" . "true")
+                  ("struct_field_align_threshold" . 20)
+                  ("use_try_shorthand" . "true")
+                  ("wrap_comments" . "true")))
+    (add-to-list 'rustic-rustfmt-config-alist item)))
 
 (defun eb/rustic-mode-hook ()
   ;; NOTE: https://github.com/brotzeit/rustic/issues/253
