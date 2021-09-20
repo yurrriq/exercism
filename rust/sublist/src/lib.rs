@@ -1,3 +1,6 @@
+use crate::Comparison::*;
+use std::cmp::Ordering;
+
 #[derive(Debug, PartialEq)]
 pub enum Comparison {
     Equal,
@@ -6,6 +9,19 @@ pub enum Comparison {
     Unequal,
 }
 
-pub fn sublist<T: PartialEq>(_first_list: &[T], _second_list: &[T]) -> Comparison {
-    unimplemented!("Determine if the first list is equal to, sublist of, superlist of or unequal to the second list.");
+pub fn sublist<T: PartialEq>(needle: &[T], haystack: &[T]) -> Comparison {
+    match needle.len().cmp(&haystack.len()) {
+        Ordering::Less if is_infix_of(needle, haystack) => Sublist,
+        Ordering::Equal if needle == haystack => Equal,
+        Ordering::Greater if is_infix_of(haystack, needle) => Superlist,
+        _ => Unequal,
+    }
+}
+
+// Basically Haskell's Data.List.isInfixOf
+fn is_infix_of<T: PartialEq>(needle: &[T], haystack: &[T]) -> bool {
+    needle.is_empty()
+        || haystack
+            .windows(needle.len())
+            .any(|window| window == needle)
 }
