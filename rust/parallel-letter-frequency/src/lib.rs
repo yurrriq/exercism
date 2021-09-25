@@ -1,12 +1,33 @@
 use std::collections::HashMap;
 
-pub fn frequency(input: &[&str], worker_count: usize) -> HashMap<char, usize> {
-    unimplemented!(
-        "Count the frequency of letters in the given input '{:?}'. Ensure that you are using {} to process the input.",
-        input,
-        match worker_count {
-            1 => "1 worker".to_string(),
-            _ => format!("{} workers", worker_count),
-        }
-    );
+extern crate rayon;
+use rayon::prelude::*;
+
+pub fn frequency(
+    input : &[&str],
+    worker_count : usize,
+) -> HashMap<char, usize> {
+    input
+        .par_chunks(worker_count)
+        .map(|input| {
+            input.iter().fold(HashMap::new(), |counts, s| {
+                // NOTE: shadowing counts here
+                s.chars().fold(counts, |mut counts, ch| {
+                    if ch.is_alphabetic() {
+                        *counts
+                            // NOTE: Tests don't include non-ASCII uppercase
+                            .entry(ch.to_ascii_lowercase())
+                            .or_insert(0) += 1;
+                    }
+                    counts
+                })
+            })
+        })
+        .reduce_with(|mut dest, src| {
+            for (k, v) in src.iter() {
+                *dest.entry(*k).or_insert(0) += *v
+            }
+            dest
+        })
+        .unwrap_or_default()
 }
