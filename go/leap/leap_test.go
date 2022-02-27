@@ -1,19 +1,6 @@
 package leap
 
-import (
-	"testing"
-)
-
-var testCases = []struct {
-	year        int
-	expected    bool
-	description string
-}{
-	{1996, true, "vanilla leap year"},
-	{1997, false, "normal year"},
-	{1900, false, "century"},
-	{2400, true, "exceptional century"},
-}
+import "testing"
 
 func TestLeapYears(t *testing.T) {
 	for _, test := range testCases {
@@ -25,10 +12,14 @@ func TestLeapYears(t *testing.T) {
 	}
 }
 
-func BenchmarkLeapYears(b *testing.B) {
+// Benchmark 400 year interval to get fair weighting of different years.
+func Benchmark400(b *testing.B) {
+	if testing.Short() {
+		b.Skip("skipping benchmark in short mode.")
+	}
 	for i := 0; i < b.N; i++ {
-		for _, test := range testCases {
-			IsLeapYear(test.year)
+		for y := 1600; y < 2000; y++ {
+			IsLeapYear(y)
 		}
 	}
 }

@@ -1,17 +1,18 @@
 package leap
 
-// Source: exercism/x-common
-// Commit: 945d08e Merge pull request #50 from soniakeys/master
+// Source: exercism/problem-specifications
+// Commit: 18875ec Leap: Improve the specification so that code generation is more readable - … (#1468)
+// Problem Specifications Version: 1.5.1
 
 var testCases = []struct {
 	year        int
 	expected    bool
 	description string
 }{
-	{1996, true, "leap year"},
-	{1997, false, "non-leap year"},
-	{1998, false, "non-leap even year"},
-	{1900, false, "century"},
-	{2400, true, "fourth century"},
-	{2000, true, "Y2K"},
+	{2015, false, "year not divisible by 4 in common year"},
+	{1970, false, "year divisible by 2, not divisible by 4 in common year"},
+	{1996, true, "year divisible by 4, not divisible by 100 in leap year"},
+	{2100, false, "year divisible by 100, not divisible by 400 in common year"},
+	{2000, true, "year divisible by 400 in leap year"},
+	{1800, false, "year divisible by 200, not divisible by 400 in common year"},
 }
