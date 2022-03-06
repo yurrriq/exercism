@@ -3,7 +3,7 @@
 
   inputs = {
     emacs-overlay.url = "github:nix-community/emacs-overlay";
-    nixpkgs.url = "github:nixos/nixpkgs/release-21.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
   outputs = { self, emacs-overlay, nixpkgs }:
