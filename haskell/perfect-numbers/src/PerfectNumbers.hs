@@ -78,14 +78,17 @@ classify n
 
 -- | The sum of the factors of a number not including the number itself.
 --
+-- \[
+-- \sum_{d=1}^{n-1} \begin{cases}
+-- d & \text{if } d \mid n \\
+-- 0 & \text{otherwise}
+-- \end{cases}
+-- \]
+--
 -- >>> aliquotSum 15 == 1 + 3 + 5
 -- True
 aliquotSum :: Int -> Int
-aliquotSum n = foldl go 0 [1 .. n - 1]
-  where
-    go z m
-      | m .|. n = z + m
-      | otherwise = z
+aliquotSum n = sum [d | d <- [1 .. n -1], d .|. n]
 
 -- | Whether @n@ is divisible by @d@, i.e. @True@ if \(d \mid n\).
 --
