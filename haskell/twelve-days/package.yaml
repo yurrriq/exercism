@@ -1,21 +1,30 @@
 name: twelve-days
+synopsis: Output the lyrics to "The Twelve Days of Christmas".
+author: Eric Bailey
+maintainer: eric@ericb.me
+github: yurrriq/exercism
 version: 1.2.0.5
 
 dependencies:
-  - base
+- base
+
+ghc-options:
+- -Wall
+- -Werror
+- -Wincomplete-patterns
+- -Wincomplete-uni-patterns
 
 library:
   exposed-modules: TwelveDays
   source-dirs: src
-  ghc-options: -Wall
-  # dependencies:
-  # - foo       # List here the packages you
-  # - bar       # want to use in your solution.
+  dependencies:
+  - finite-typelits
+  - text
 
 tests:
   test:
     main: Tests.hs
     source-dirs: test
     dependencies:
-      - twelve-days
-      - hspec
+    - twelve-days
+    - hspec
