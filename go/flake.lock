@@ -1,12 +1,16 @@
 {
   "nodes": {
     "emacs-overlay": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs"
+      },
       "locked": {
-        "lastModified": 1645927085,
-        "narHash": "sha256-ltbDmrTsdiTTwAEMypk4f/kkr887bLi5HOSDBVqkRBg=",
+        "lastModified": 1654457502,
+        "narHash": "sha256-1Gdacyl27j3I4qIzJe8fADO6pAqSQnWszxu2VToPnfw=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "f7eca8816dd24bed25f7c6a49cf4185d3725642d",
+        "rev": "468341ff2164834767efbd5e0f55f942342deaab",
         "type": "github"
       },
       "original": {
@@ -15,18 +19,46 @@
         "type": "github"
       }
     },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1653893745,
+        "narHash": "sha256-0jntwV3Z8//YwuOjzhV2sgJJPt+HY6KhU7VZUL0fKZQ=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "1ed9fb1935d260de5fe1c2f7ee0ebaae17ed2fa1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1645885043,
-        "narHash": "sha256-wDATA3Tks+fG91q3XL673rPQDl58zLRmjdJXpmrUwXU=",
+        "lastModified": 1640053457,
+        "narHash": "sha256-oEW6t3pAA+ka8nEof4aOce4UtF7GhGSvKpeuKRcEyqM=",
+        "path": "/nix/store/xng23x0hckwiqd7q9km7gf1cmhnmw7j5-source",
+        "rev": "9aeb6f081840e084d7d9f612dc8182c19bed1e92",
+        "type": "path"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1654464531,
+        "narHash": "sha256-EKqyLXo171SEPnqcDHQnOLaSXIWWpatsgaJTGM0Tdjg=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "1622abf0e7890a3dac995f6eb5a92f56819ae38e",
+        "rev": "b5243a0c099cecfa284065ff7076c6ce5ffb8d93",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "release-21.11",
+        "ref": "release-22.05",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -34,7 +66,7 @@
     "root": {
       "inputs": {
         "emacs-overlay": "emacs-overlay",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       }
     }
   },
