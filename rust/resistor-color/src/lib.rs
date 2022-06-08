@@ -21,18 +21,20 @@ pub enum ResistorColor {
 }
 
 impl fmt::Display for ResistorColor {
-    fn fmt(&self, f : &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{}", format!("{:?}", self))
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{:?}", self)
     }
 }
 
-pub fn color_to_value(color : ResistorColor) -> usize {
+pub fn color_to_value(color: ResistorColor) -> usize {
     IntEnum::int_value(color)
 }
 
-pub fn value_to_color_string(value : usize) -> String {
-    ResistorColor::from_int(value)
-        .map_or("value out of range".to_string(), |r| r.to_string())
+pub fn value_to_color_string(value: usize) -> String {
+    match ResistorColor::from_int(value) {
+        Ok(resistor) => resistor.to_string(),
+        Err(_) => "value out of range".to_string(),
+    }
 }
 
 pub fn colors() -> Vec<ResistorColor> {

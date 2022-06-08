@@ -1,4 +1,6 @@
-use resistor_color::{color_to_value, colors, value_to_color_string, ResistorColor};
+use resistor_color::{
+    color_to_value, colors, value_to_color_string, ResistorColor,
+};
 
 #[test]
 fn test_black() {
@@ -50,6 +52,8 @@ fn test_all_colors() {
     use ResistorColor::*;
     assert_eq!(
         colors(),
-        vec![Black, Brown, Red, Orange, Yellow, Green, Blue, Violet, Grey, White]
+        vec![
+            Black, Brown, Red, Orange, Yellow, Green, Blue, Violet, Grey, White
+        ]
     );
 }
