@@ -1,26 +1,67 @@
+// A point of sale (POS) system for Gross Store.
 package gross
 
-// Units stores the Gross Store unit measurements.
+// Store the Gross Store unit measurements.
 func Units() map[string]int {
-	panic("Please implement the Units() function")
+	return map[string]int{
+		"quarter_of_a_dozen": 3,
+		"half_of_a_dozen":    6,
+		"dozen":              12,
+		"small_gross":        120,
+		"gross":              144,
+		"great_gross":        1728,
+	}
 }
 
-// NewBill creates a new bill.
+// Create a new bill.
 func NewBill() map[string]int {
-	panic("Please implement the NewBill() function")
+	return map[string]int{}
 }
 
-// AddItem adds an item to customer bill.
+// Add an item to a customer's bill.
 func AddItem(bill, units map[string]int, item, unit string) bool {
-	panic("Please implement the AddItem() function")
+	newUnit, isKnownUnit := units[unit]
+	if !isKnownUnit {
+		return false
+	}
+
+	_, isPresent := bill[item]
+	if isPresent {
+		bill[item] += newUnit
+	} else {
+		bill[item] = newUnit
+	}
+
+	return true
 }
 
-// RemoveItem removes an item from customer bill.
+// Remove an item from a customer's bill.
 func RemoveItem(bill, units map[string]int, item, unit string) bool {
-	panic("Please implement the RemoveItem() function")
+	oldUnit, isPresent := bill[item]
+	if !isPresent {
+		return false
+	}
+
+	newUnit, isKnownUnit := units[unit]
+	if !isKnownUnit || newUnit > oldUnit {
+		return false
+	}
+
+	if newUnit == oldUnit {
+		delete(bill, item)
+	} else {
+		bill[item] -= newUnit
+	}
+
+	return true
 }
 
-// GetItem returns the quantity of an item that the customer has in his/her bill.
+// Return the quantity of an item that the customer has in their bill.
 func GetItem(bill map[string]int, item string) (int, bool) {
-	panic("Please implement the GetItem() function")
+	quantity, isPresent := bill[item]
+	if !isPresent {
+		return 0, false
+	}
+
+	return quantity, isPresent
 }
