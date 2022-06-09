@@ -33,8 +33,8 @@
         buildInputs = [
           exercism
           go
-          go-tools
           gopls
+          gotools
           myEmacs
           rnix-lsp
         ];
