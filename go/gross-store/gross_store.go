@@ -21,18 +21,11 @@ func NewBill() map[string]int {
 // Add an item to a customer's bill.
 func AddItem(bill, units map[string]int, item, unit string) bool {
 	newUnit, isKnownUnit := units[unit]
-	if !isKnownUnit {
-		return false
-	}
-
-	_, isPresent := bill[item]
-	if isPresent {
+	if isKnownUnit {
 		bill[item] += newUnit
-	} else {
-		bill[item] = newUnit
 	}
 
-	return true
+	return isKnownUnit
 }
 
 // Remove an item from a customer's bill.
