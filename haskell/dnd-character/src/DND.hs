@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -Wno-orphans #-}
+
 -- |
 -- Module      : DND
 -- Description : Generate D&D characters.
@@ -16,7 +18,10 @@ where
 
 import Control.Monad (replicateM)
 import Data.List (sort)
-import Test.QuickCheck (Gen, chooseInt)
+import Test.QuickCheck (Gen, chooseInt, discard, shuffle)
+
+instance MonadFail Gen where
+  fail = discard
 
 -- | A character has six abilities and hit points.
 data Character = Character
@@ -45,12 +50,6 @@ ability = sum . tail . sort <$> replicateM 4 (chooseInt (1, 6))
 character :: Gen Character
 character =
   do
-    con <- ability
-    let conMod = modifier con
-    let hp = 10 + conMod
-    str <- ability
-    dex <- ability
-    int <- ability
-    wis <- ability
-    cha <- ability
-    pure $ Character str dex con int wis cha hp
+    rolls <- drop 2 . sort <$> replicateM 8 ability
+    [str, dex, con, int, wis, cha] <- shuffle rolls
+    pure $ Character str dex con int wis cha (10 + modifier con)
