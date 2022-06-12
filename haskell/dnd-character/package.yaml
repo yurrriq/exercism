@@ -8,10 +8,11 @@ dependencies:
 library:
   exposed-modules: DND
   source-dirs: src
-  ghc-options: -Wall
-  # dependencies:
-  # - foo       # List here the packages you
-  # - bar       # want to use in your solution.
+  ghc-options:
+  - -Wall
+  - -Werror
+  - -Wincomplete-patterns
+  - -Wincomplete-uni-patterns
 
 tests:
   test:

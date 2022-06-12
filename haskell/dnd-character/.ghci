@@ -1,0 +1,4 @@
+:set +s
+:set -Wno-type-defaults
+:set -haddock
+:def pf \str -> return $ ":! pointfree \"" ++ str ++ "\""
