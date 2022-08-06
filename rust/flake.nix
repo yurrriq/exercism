@@ -33,7 +33,7 @@
         };
       in
       {
-        devShell = with pkgs; mkShell {
+        devShells.default = with pkgs; mkShell {
           FONTCONFIG_FILE = pkgs.makeFontsConf {
             fontDirectories = [ pkgs.iosevka ];
           };
@@ -55,27 +55,33 @@
         };
 
         packages =
-          let
-            inherit (builtins) attrNames filter listToAttrs pathExists readDir;
-          in
-          listToAttrs (
-            map
-              (pname: lib.nameValuePair pname (
-                inputs.naersk.lib.${system}.buildPackage {
-                  inherit pname;
-                  root = ./. + "/${pname}";
-                  doCheck = true;
-                }
-              )
-              )
-              (filter (name: pathExists (./. + ("/" + name + "/Cargo.toml")))
-                (attrNames (lib.filterAttrs (_: type: type == "directory") (readDir ./.))))
+          {
+            default = pkgs.symlinkJoin {
+              name = "exercism-rust";
+              paths =
+                builtins.attrValues
+                  (pkgs.lib.filterAttrs
+                    (n: _: n != "default")
+                    self.packages.${system});
+            };
+          } // (
+            let
+              inherit (builtins) attrNames filter listToAttrs pathExists readDir;
+            in
+            listToAttrs (
+              map
+                (pname: lib.nameValuePair pname (
+                  inputs.naersk.lib.${system}.buildPackage {
+                    inherit pname;
+                    root = ./. + "/${pname}";
+                    doCheck = true;
+                  }
+                )
+                )
+                (filter (name: pathExists (./. + ("/" + name + "/Cargo.toml")))
+                  (attrNames (lib.filterAttrs (_: type: type == "directory") (readDir ./.))))
+            )
           );
-
-        defaultPackage = pkgs.symlinkJoin {
-          name = "exercism-rust";
-          paths = builtins.attrValues self.packages.${system};
-        };
       }
     );
 }
