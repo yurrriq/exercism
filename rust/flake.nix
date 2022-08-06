@@ -41,10 +41,8 @@
           buildInputs = with pkgs; [
             cargo
             clippy
-            direnv
             exercism
             myEmacs
-            nix-direnv
             nixpkgs-fmt
             rnix-lsp
             rust-analyzer
