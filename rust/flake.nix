@@ -46,7 +46,6 @@
             myEmacs
             nix-direnv
             nixpkgs-fmt
-            pandoc
             rnix-lsp
             rust-analyzer
             rustc
