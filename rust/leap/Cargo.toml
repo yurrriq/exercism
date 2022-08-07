@@ -2,3 +2,6 @@
 edition = "2021"
 name = "leap"
 version = "1.6.0"
+
+[dependencies]
+num-traits = "0.2"
