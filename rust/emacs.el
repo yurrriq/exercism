@@ -105,6 +105,7 @@
               ("C-c C-c Q" . lsp-workspace-shutdown)
               ("C-c C-c s" . lsp-rust-analyzer-status))
   :hook (rustic-mode . eb/rustic-mode-hook)
+  :mode ("\\.rs\\'" . rustic-mode)
   :config
   (setq rustic-format-on-save t)
   ;; https://rust-lang.github.io/rustfmt/

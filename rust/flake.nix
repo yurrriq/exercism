@@ -3,10 +3,10 @@
 
   inputs = {
     emacs-overlay.url = "github:nix-community/emacs-overlay";
-    # fenix = {
-    #   url = "github:nix-community/fenix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-utils.url = "github:numtide/flake-utils";
     naersk.url = "github:nmattia/naersk";
     nixpkgs.url = "github:nixos/nixpkgs/release-22.05";
@@ -31,7 +31,7 @@
         pkgs = import inputs.nixpkgs {
           overlays = [
             inputs.emacs-overlay.overlay
-            # inputs.fenix.overlay
+            inputs.fenix.overlay
             self.overlay
           ];
           inherit system;
@@ -47,19 +47,20 @@
             cargo
             clippy
             exercism
-            # (
-            #   fenix.complete.withComponents [
-            #     "cargo"
-            #     "clippy"
-            #     "rustc"
-            #     "rustfmt"
-            #   ]
-            # )
+            (
+              fenix.complete.withComponents [
+                "cargo"
+                "clippy"
+                "rust-src"
+                "rustc"
+                "rustfmt"
+              ]
+            )
             myEmacs
             nixpkgs-fmt
             rnix-lsp
-            rust-analyzer
-            # rust-analyzer-nightly
+            # rust-analyzer
+            rust-analyzer-nightly
             rustc
             rustfmt
           ];
