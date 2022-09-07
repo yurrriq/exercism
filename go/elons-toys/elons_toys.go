@@ -19,6 +19,5 @@ func (car *Car) DisplayBattery() string {
 
 // Check if a car is able to finish a certain track.
 func (car *Car) CanFinish(trackDistance int) bool {
-	segments := (trackDistance - car.distance) / car.speed
-	return car.battery-(car.batteryDrain*segments) >= 0
+	return (car.battery/car.batteryDrain)*car.speed >= trackDistance
 }
