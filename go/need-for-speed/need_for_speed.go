@@ -9,7 +9,12 @@ type Car struct {
 
 // Create a new remote controlled car with full battery and given specifications.
 func NewCar(speed, batteryDrain int) Car {
-	return Car{battery: 100, batteryDrain: batteryDrain, distance: 0, speed: speed}
+	return Car{
+		battery:      100,
+		batteryDrain: batteryDrain,
+		distance:     0,
+		speed:        speed,
+	}
 }
 
 type Track struct {
@@ -24,7 +29,7 @@ func NewTrack(distance int) Track {
 // Drive the car one time.
 // If there is not enough battery to drive on more time, the car will not move.
 func Drive(car Car) Car {
-	if car.battery > car.batteryDrain {
+	if car.battery >= car.batteryDrain {
 		car.battery -= car.batteryDrain
 		car.distance += car.speed
 	}
