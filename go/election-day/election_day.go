@@ -5,17 +5,16 @@ import "fmt"
 // NewVoteCounter returns a new vote counter with
 // a given number of initial votes.
 func NewVoteCounter(initialVotes int) *int {
-	var counter *int
-	counter = &initialVotes
-	return counter
+	voteCounter := &initialVotes
+	return voteCounter
 }
 
 // VoteCount extracts the number of votes from a counter.
 func VoteCount(counter *int) int {
-	if counter == nil {
-		return 0
-	} else {
+	if counter != nil {
 		return *counter
+	} else {
+		return 0
 	}
 }
 
