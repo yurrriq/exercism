@@ -1,27 +1,59 @@
 package chessboard
 
-// Declare a type named File which stores if a square is occupied by a piece - this will be a slice of bools
+// File represents whether squares in a vertical column are occupied by a piece.
+type File []bool
 
-// Declare a type named Chessboard which contains a map of eight Files, accessed with keys from "A" to "H"
+// Chessboard is a map of eight Files, accessed with keys from "A" to "H".
+type Chessboard map[string]File
 
 // CountInFile returns how many squares are occupied in the chessboard,
 // within the given file.
-func CountInFile(cb Chessboard, file string) int {
-	panic("Please implement CountInFile()")
+func CountInFile(board Chessboard, file string) int {
+	numOccupiedSquares := 0
+
+	for _, squareIsOccupied := range board[file] {
+		if squareIsOccupied {
+			numOccupiedSquares++
+		}
+	}
+
+	return numOccupiedSquares
 }
 
 // CountInRank returns how many squares are occupied in the chessboard,
 // within the given rank.
-func CountInRank(cb Chessboard, rank int) int {
-	panic("Please implement CountInRank()")
+func CountInRank(board Chessboard, rank int) int {
+	numOccupiedSquares := 0
+
+	if rank >= 1 && rank <= 8 {
+		for _, file := range board {
+			if file[rank-1] {
+				numOccupiedSquares++
+			}
+		}
+	}
+
+	return numOccupiedSquares
 }
 
 // CountAll should count how many squares are present in the chessboard.
-func CountAll(cb Chessboard) int {
-	panic("Please implement CountAll()")
+func CountAll(board Chessboard) int {
+	numSquares := 0
+
+	for _, file := range board {
+		numSquares += len(file)
+	}
+
+	return numSquares
 }
 
 // CountOccupied returns how many squares are occupied in the chessboard.
-func CountOccupied(cb Chessboard) int {
-	panic("Please implement CountOccupied()")
+func CountOccupied(board Chessboard) int {
+	numOccupiedSquares := 0
+
+	for file := range board {
+		numOccupiedSquares += CountInFile(board, file)
+	}
+
+	return numOccupiedSquares
 }
