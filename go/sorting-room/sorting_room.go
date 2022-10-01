@@ -1,17 +1,19 @@
 package sorting
 
-// DescribeNumber should return a string describing the number.
+import "fmt"
+
+// DescribeNumber returns a string describing the number.
 func DescribeNumber(f float64) string {
-	panic("Please implement DescribeNumber")
+	return fmt.Sprintf("This is the number %.1f", f)
 }
 
 type NumberBox interface {
 	Number() int
 }
 
-// DescribeNumberBox should return a string describing the NumberBox.
+// DescribeNumberBox returns a string describing the NumberBox.
 func DescribeNumberBox(nb NumberBox) string {
-	panic("Please implement DescribeNumberBox")
+	return fmt.Sprintf("This is a box containing the number %.1f", float64(nb.Number()))
 }
 
 type FancyNumber struct {
@@ -26,18 +28,41 @@ type FancyNumberBox interface {
 	Value() string
 }
 
-// ExtractFancyNumber should return the integer value for a FancyNumber
-// and 0 if any other FancyNumberBox is supplied.
+// ExtractFancyNumber returns the integer value for a FancyNumber and 0 if any
+// other FancyNumberBox is supplied.
 func ExtractFancyNumber(fnb FancyNumberBox) int {
-	panic("Please implement ExtractFancyNumber")
+	_, ok := fnb.(FancyNumber)
+	if !ok {
+		return 0
+	}
+
+	var i int
+	_, err := fmt.Sscan(fnb.Value(), &i)
+	if err != nil {
+		return 0
+	}
+
+	return i
 }
 
-// DescribeFancyNumberBox should return a string describing the FancyNumberBox.
+// DescribeFancyNumberBox returns a string describing the FancyNumberBox.
 func DescribeFancyNumberBox(fnb FancyNumberBox) string {
-	panic("Please implement DescribeFancyNumberBox")
+	i := ExtractFancyNumber(fnb)
+	return fmt.Sprintf("This is a fancy box containing the number %.1f", float64(i))
 }
 
-// DescribeAnything should return a string describing whatever it contains.
+// DescribeAnything returns a string describing whatever it contains.
 func DescribeAnything(i interface{}) string {
-	panic("Please implement DescribeAnything")
+	switch x := i.(type) {
+	case int:
+		return DescribeNumber(float64(x))
+	case float64:
+		return DescribeNumber(x)
+	case NumberBox:
+		return DescribeNumberBox(x)
+	case FancyNumberBox:
+		return DescribeFancyNumberBox(x)
+	default:
+		return "Return to sender"
+	}
 }
