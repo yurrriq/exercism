@@ -14,10 +14,9 @@ func SplitLogLine(text string) []string {
 	return separatorPattern.Split(text, -1)
 }
 
-var quotedPasswordPattern = regexp.MustCompile(`"[^"]*(?:(?i)password)"`)
+var quotedPasswordPattern = regexp.MustCompile(`(?i)"[^"]*password"`)
 
-func CountQuotedPasswords(lines []string) int {
-	count := 0
+func CountQuotedPasswords(lines []string) (count int) {
 	for _, line := range lines {
 		count += len(quotedPasswordPattern.FindAllString(line, -1))
 	}
@@ -25,13 +24,13 @@ func CountQuotedPasswords(lines []string) int {
 	return count
 }
 
-var endOfLinePattern = regexp.MustCompile(`end-of-line[0-9]+`)
+var endOfLinePattern = regexp.MustCompile(`end-of-line\d+`)
 
 func RemoveEndOfLineText(text string) string {
-	return endOfLinePattern.ReplaceAllString(text, "")
+	return endOfLinePattern.ReplaceAllLiteralString(text, "")
 }
 
-var usernamePattern = regexp.MustCompile(`User\s+(\S+)`)
+var usernamePattern = regexp.MustCompile(`User\s+(\w+)`)
 
 func TagWithUserName(lines []string) []string {
 	taggedLines := make([]string, 0, len(lines))
