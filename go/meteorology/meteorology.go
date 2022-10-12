@@ -9,12 +9,15 @@ const (
 	Fahrenheit TemperatureUnit = 1
 )
 
-func (unit TemperatureUnit) String() string {
-	if unit == Celsius {
-		return "°C"
+func (unit TemperatureUnit) String() (repr string) {
+	switch unit {
+	case Celsius:
+		repr = "°C"
+	case Fahrenheit:
+		repr = "°F"
 	}
 
-	return "°F"
+	return
 }
 
 type Temperature struct {
@@ -22,8 +25,8 @@ type Temperature struct {
 	unit   TemperatureUnit
 }
 
-func (temperature *Temperature) String() string {
-	return fmt.Sprintf("%d %s", temperature.degree, temperature.unit.String())
+func (temperature Temperature) String() string {
+	return fmt.Sprintf("%d %s", temperature.degree, temperature.unit)
 }
 
 type SpeedUnit int
@@ -33,12 +36,15 @@ const (
 	MilesPerHour SpeedUnit = 1
 )
 
-func (unit SpeedUnit) String() string {
-	if unit == KmPerHour {
-		return "km/h"
+func (unit SpeedUnit) String() (repr string) {
+	switch unit {
+	case KmPerHour:
+		repr = "km/h"
+	case MilesPerHour:
+		repr = "mph"
 	}
 
-	return "mph"
+	return
 }
 
 type Speed struct {
@@ -46,8 +52,8 @@ type Speed struct {
 	unit      SpeedUnit
 }
 
-func (speed *Speed) String() string {
-	return fmt.Sprintf("%d %s", speed.magnitude, speed.unit.String())
+func (speed Speed) String() string {
+	return fmt.Sprintf("%d %s", speed.magnitude, speed.unit)
 }
 
 type MeteorologyData struct {
@@ -58,11 +64,11 @@ type MeteorologyData struct {
 	humidity      int
 }
 
-func (data *MeteorologyData) String() string {
+func (data MeteorologyData) String() string {
 	return fmt.Sprintf(
 		"%s: %s, Wind %s at %s, %d%% Humidity",
-		data.location, data.temperature.String(),
-		data.windDirection, data.windSpeed.String(),
+		data.location, data.temperature,
+		data.windDirection, data.windSpeed,
 		data.humidity,
 	)
 }
