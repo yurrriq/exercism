@@ -1,24 +1,22 @@
 pub fn reply(message : &str) -> &str {
-    let message_trimmed = message.trim();
-
-    if message_trimmed == "" {
-        return "Fine. Be that way!";
+    match message.trim() {
+        "" => "Fine. Be that way!",
+        m if is_forceful_question(m) => "Calm down, I know what I'm doing!",
+        m if is_question(m) => "Sure.",
+        m if is_yelled(m) => "Whoa, chill out!",
+        _ => "Whatever.",
     }
+}
 
-    let is_yelled = message_trimmed.chars().any(|c| c.is_alphabetic())
-        && message_trimmed == message_trimmed.to_uppercase();
+fn is_forceful_question(message : &str) -> bool {
+    is_question(message) && is_yelled(message)
+}
 
-    if message_trimmed.ends_with("?") {
-        if is_yelled {
-            return "Calm down, I know what I'm doing!";
-        }
+fn is_question(message : &str) -> bool {
+    message.ends_with("?")
+}
 
-        return "Sure.";
-    }
-
-    if is_yelled {
-        return "Whoa, chill out!";
-    }
-
-    return "Whatever.";
+fn is_yelled(message : &str) -> bool {
+    message.chars().any(|c| c.is_alphabetic())
+        && message == message.to_uppercase()
 }
