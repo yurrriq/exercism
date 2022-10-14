@@ -2,5 +2,13 @@
 
 -export([score/2]).
 
+score(X, Y) ->
+    Distance = distance_from_origin(X, Y),
+    do_score(Distance).
 
-score(_X, _Y) -> undefined.
+do_score(Distance) when Distance =< 1 -> 10;
+do_score(Distance) when Distance =< 5 -> 5;
+do_score(Distance) when Distance =< 10 -> 1;
+do_score(_Distance) -> 0.
+
+distance_from_origin(X, Y) -> math:sqrt(X * X + Y * Y).

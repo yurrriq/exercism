@@ -1,9 +1,11 @@
-{application, darts,
-  [{description, "exercism.io - darts"},
+{application, darts, [
+    {description, "exercism.io - darts"},
     {vsn, "0.0.1"},
     {modules, []},
     {registered, []},
-    {applications, [kernel,
-      stdlib]},
+    {applications, [
+        kernel,
+        stdlib
+    ]},
     {env, []}
 ]}.
