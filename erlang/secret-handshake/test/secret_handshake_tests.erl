@@ -8,59 +8,77 @@
 -include_lib("erl_exercism/include/exercism.hrl").
 -include_lib("eunit/include/eunit.hrl").
 
-
-
-
 '1_wink_for_1_test_'() ->
-    {"wink for 1",
-     ?_assertEqual(["wink"], secret_handshake:commands(1))}.
+    {"wink for 1", ?_assertEqual(["wink"], secret_handshake:commands(1))}.
 
 '2_double_blink_for_10_test_'() ->
     {"double blink for 10",
-     ?_assertEqual(["double blink"],
-		   secret_handshake:commands(2))}.
+        ?_assertEqual(
+            ["double blink"],
+            secret_handshake:commands(2)
+        )}.
 
 '3_close_your_eyes_for_100_test_'() ->
     {"close your eyes for 100",
-     ?_assertEqual(["close your eyes"],
-		   secret_handshake:commands(4))}.
+        ?_assertEqual(
+            ["close your eyes"],
+            secret_handshake:commands(4)
+        )}.
 
 '4_jump_for_1000_test_'() ->
-    {"jump for 1000",
-     ?_assertEqual(["jump"], secret_handshake:commands(8))}.
+    {"jump for 1000", ?_assertEqual(["jump"], secret_handshake:commands(8))}.
 
 '5_combine_two_actions_test_'() ->
     {"combine two actions",
-     ?_assertEqual(["wink", "double blink"],
-		   secret_handshake:commands(3))}.
+        ?_assertEqual(
+            ["wink", "double blink"],
+            secret_handshake:commands(3)
+        )}.
 
 '6_reverse_two_actions_test_'() ->
     {"reverse two actions",
-     ?_assertEqual(["double blink", "wink"],
-		   secret_handshake:commands(19))}.
+        ?_assertEqual(
+            ["double blink", "wink"],
+            secret_handshake:commands(19)
+        )}.
 
 '7_reversing_one_action_gives_the_same_action_test_'() ->
-    {"reversing one action gives the same "
-     "action",
-     ?_assertEqual(["jump"], secret_handshake:commands(24))}.
+    {
+        "reversing one action gives the same "
+        "action",
+        ?_assertEqual(["jump"], secret_handshake:commands(24))
+    }.
 
 '8_reversing_no_actions_still_gives_no_actions_test_'() ->
-    {"reversing no actions still gives no "
-     "actions",
-     ?_assertEqual([], secret_handshake:commands(16))}.
+    {
+        "reversing no actions still gives no "
+        "actions",
+        ?_assertEqual([], secret_handshake:commands(16))
+    }.
 
 '9_all_possible_actions_test_'() ->
     {"all possible actions",
-     ?_assertEqual(["wink", "double blink",
-		    "close your eyes", "jump"],
-		   secret_handshake:commands(15))}.
+        ?_assertEqual(
+            [
+                "wink",
+                "double blink",
+                "close your eyes",
+                "jump"
+            ],
+            secret_handshake:commands(15)
+        )}.
 
 '10_reverse_all_possible_actions_test_'() ->
     {"reverse all possible actions",
-     ?_assertEqual(["jump", "close your eyes",
-		    "double blink", "wink"],
-		   secret_handshake:commands(31))}.
+        ?_assertEqual(
+            [
+                "jump",
+                "close your eyes",
+                "double blink",
+                "wink"
+            ],
+            secret_handshake:commands(31)
+        )}.
 
 '11_do_nothing_for_zero_test_'() ->
-    {"do nothing for zero",
-     ?_assertEqual([], secret_handshake:commands(0))}.
+    {"do nothing for zero", ?_assertEqual([], secret_handshake:commands(0))}.
