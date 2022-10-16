@@ -3,28 +3,18 @@
 -export([is_valid/1]).
 
 %% @doc Determine whether a given ISBN is valid.
--spec is_valid(string()) -> boolean().
+-spec is_valid(Isbn :: string()) -> boolean().
 is_valid(Isbn) ->
-    case checksum(Isbn, 10, 0) of
-        error ->
-            false;
-        {ok, Checksum} ->
-            Checksum rem 11 =:= 0
-    end.
+    is_valid(Isbn, 10, 0).
 
--spec checksum(string(), 0..10, non_neg_integer()) -> error | {ok, non_neg_integer()}.
-checksum([], 0, Acc) ->
-    {ok, Acc};
-checksum([$- | Rest], Position, Acc) ->
-    checksum(Rest, Position, Acc);
-checksum("X", 1, Acc) ->
-    {ok, Acc + 10};
-checksum([Char | Chars], Position, Acc) ->
-    case string:list_to_integer([Char]) of
-        {error, no_integer} ->
-            error;
-        {Digit, _} ->
-            checksum(Chars, Position - 1, Acc + (Digit * Position))
-    end;
-checksum(_, _, _) ->
-    error.
+-spec is_valid(IsbnPart :: string(), Position :: 0..10, Checksum :: non_neg_integer()) -> boolean().
+is_valid([], 0, Acc) ->
+    Acc rem 11 =:= 0;
+is_valid([$- | Rest], Position, Acc) ->
+    is_valid(Rest, Position, Acc);
+is_valid("X", 1, Acc) ->
+    is_valid([], 0, Acc + 10);
+is_valid([Char | Chars], Position, Acc) when Char >= $0 andalso Char =< $9 ->
+    is_valid(Chars, Position - 1, Acc + ((Char - $0) * Position));
+is_valid(_, _, _) ->
+    false.
