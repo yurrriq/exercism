@@ -1,14 +1,46 @@
-module ValentinesDay where
+module ValentinesDay
+  ( Approval (..),
+    Cuisine (..),
+    Genre (..),
+    Activity (..),
+    rateActivity,
+  )
+where
 
--- Define the function and required algebraic data types (ADT) below.
+import Prelude hiding (Maybe)
 
-data Approval = ImplementApproval
+data Approval
+  = Yes
+  | No
+  | Maybe
+  deriving (Eq, Show)
 
-data Cuisine = ImplementCuisine
+data Cuisine
+  = Korean
+  | Turkish
+  deriving (Eq, Show)
 
-data Genre = ImplementGenre
+data Genre
+  = Crime
+  | Horror
+  | Romance
+  | Thriller
+  deriving (Eq, Show)
 
-data Activity = ImplementActivity
+data Activity
+  = BoardGame
+  | Chill
+  | Movie Genre
+  | Restaurant Cuisine
+  | Walk Int
+  deriving (Eq, Show)
 
 rateActivity :: Activity -> Approval
-rateActivity activity = error "Implement rateActivity"
+rateActivity (Movie Romance) = Yes
+rateActivity (Restaurant Korean) = Yes
+rateActivity (Restaurant Turkish) = Maybe
+rateActivity (Walk distance)
+  | distance < 3 = Yes
+  | distance <= 5 = Maybe
+  | otherwise = No
+rateActivity _ = No
