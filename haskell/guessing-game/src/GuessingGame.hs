@@ -16,8 +16,8 @@ where
 -- | Reply to a 'guess', responding differently depending on how close the guess
 -- was to the chosen number (@42@).
 reply :: Int -> String
+reply 42 = "Correct"
 reply guess
-  | guess == 42 = "Correct"
-  | guess == 41 || guess == 43 = "So close"
   | guess < 41 = "Too low"
-  | otherwise = "Too high"
+  | guess > 43 = "Too high"
+  | otherwise = "So close"
