@@ -1,0 +1,3 @@
+:set -haddock
+:set -w
+:def pf \str -> return $ ":! pointfree \"" ++ str ++ "\""
