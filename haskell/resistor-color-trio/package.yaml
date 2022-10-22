@@ -1,21 +1,32 @@
 name: resistor-color-trio
+synopsis: Label 3 band resistors.
+author: Eric Bailey
+maintainer: eric@ericb.me
+github: yurrriq/exercism
 version: 1.0.0.0
 
 dependencies:
-  - base
+- base
+
+default-extensions:
+- OverloadedStrings
+
+ghc-options:
+- -Wall
+- -Werror
+- -Wincomplete-patterns
+- -Wincomplete-uni-patterns
 
 library:
   exposed-modules: ResistorColors
   source-dirs: src
-  ghc-options: -Wall
-  # dependencies:
-  # - foo       # List here the packages you
-  # - bar       # want to use in your solution.
+  dependencies:
+  - text
 
 tests:
   test:
     main: Tests.hs
     source-dirs: test
     dependencies:
-      - resistor-color-trio
-      - hspec
+    - resistor-color-trio
+    - hspec

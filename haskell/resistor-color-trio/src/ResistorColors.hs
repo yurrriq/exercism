@@ -1,7 +1,11 @@
-module ResistorColors (Color(..), Resistor(..), label, ohms) where
+module ResistorColors (Color (..), Resistor (..), label, ohms) where
 
-data Color =
-    Black
+import Control.Arrow ((>>>))
+import Data.Text (Text)
+import qualified Data.Text as T
+
+data Color
+  = Black
   | Brown
   | Red
   | Orange
@@ -13,11 +17,25 @@ data Color =
   | White
   deriving (Show, Enum, Bounded)
 
-newtype Resistor = Resistor { bands :: (Color, Color, Color) }
-  deriving Show
+newtype Resistor = Resistor
+  { bands :: (Color, Color, Color)
+  }
+  deriving (Show)
 
-label :: Resistor -> String
-label resistor = error "You need to implement this function."
+label :: Resistor -> Text
+label resistor =
+  case value `divMod` 1000000000 of
+    (gigaohms, 0) | gigaohms > 0 -> mkLabel gigaohms "gigaohms"
+    _ ->
+      case value `divMod` 1000000 of
+        (megaohms, 0) | megaohms > 0 -> mkLabel megaohms "megaohms"
+        _ ->
+          case value `divMod` 1000 of
+            (kiloohms, 0) | kiloohms > 0 -> mkLabel kiloohms "kiloohms"
+            _ -> mkLabel value "ohms"
+  where
+    value = ohms resistor
+    mkLabel n unit = T.unwords [T.pack (show n), unit]
 
 ohms :: Resistor -> Int
-ohms resistor = error "You need to implement this function."
+ohms = bands >>> \(x, y, zeros) -> (fromEnum x * 10 + fromEnum y) * (10 ^ fromEnum zeros)
