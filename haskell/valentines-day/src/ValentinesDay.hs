@@ -39,8 +39,11 @@ rateActivity :: Activity -> Approval
 rateActivity (Movie Romance) = Yes
 rateActivity (Restaurant Korean) = Yes
 rateActivity (Restaurant Turkish) = Maybe
-rateActivity (Walk distance)
+rateActivity (Walk distance) = rateWalkDistance distance
+rateActivity _ = No
+
+rateWalkDistance :: Int -> Approval
+rateWalkDistance distance
   | distance < 3 = Yes
   | distance <= 5 = Maybe
   | otherwise = No
-rateActivity _ = No
