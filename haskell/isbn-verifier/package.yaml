@@ -4,6 +4,8 @@ version: 2.7.0.9
 dependencies:
 - base
 
+default-extensions:
+- TemplateHaskell
 
 ghc-options:
 - -Wall
@@ -14,6 +16,9 @@ ghc-options:
 library:
   exposed-modules: IsbnVerifier
   source-dirs: src
+  dependencies:
+  - lens
+  - trifecta
 
 tests:
   test:
