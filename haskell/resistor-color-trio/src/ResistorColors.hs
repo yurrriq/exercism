@@ -1,6 +1,12 @@
-module ResistorColors (Color (..), Resistor (..), label, ohms) where
+module ResistorColors
+  ( Color (..),
+    Resistor (..),
+    label,
+    ohms,
+  )
+where
 
-import Control.Arrow ((>>>))
+import Data.Maybe (fromMaybe, listToMaybe, mapMaybe)
 import Data.Text (Text)
 import qualified Data.Text as T
 
@@ -23,19 +29,31 @@ newtype Resistor = Resistor
   deriving (Show)
 
 label :: Resistor -> Text
-label resistor =
-  case value `divMod` 1000000000 of
-    (gigaohms, 0) | gigaohms > 0 -> mkLabel gigaohms "gigaohms"
-    _ ->
-      case value `divMod` 1000000 of
-        (megaohms, 0) | megaohms > 0 -> mkLabel megaohms "megaohms"
-        _ ->
-          case value `divMod` 1000 of
-            (kiloohms, 0) | kiloohms > 0 -> mkLabel kiloohms "kiloohms"
-            _ -> mkLabel value "ohms"
-  where
-    value = ohms resistor
-    mkLabel n unit = T.unwords [T.pack (show n), unit]
+label = labelOhms . ohms
 
 ohms :: Resistor -> Int
-ohms = bands >>> \(x, y, zeros) -> (fromEnum x * 10 + fromEnum y) * (10 ^ fromEnum zeros)
+ohms (Resistor (tens, ones, zeros)) =
+  (10 * fromEnum tens + fromEnum ones) * (10 ^ fromEnum zeros)
+
+labelOhms :: Int -> Text
+labelOhms 0 = "0 ohms"
+labelOhms n =
+  mkLabel
+    . fromMaybe (n, "ohms")
+    . listToMaybe
+    $ mapMaybe go labels
+  where
+    go (divisor, unit) =
+      case n `divMod` divisor of
+        (n', 0) -> Just (n', unit)
+        _ -> Nothing
+
+labels :: [(Int, Text)]
+labels =
+  [ (1000000000, "gigaohms"),
+    (1000000, "megaohms"),
+    (1000, "kiloohms")
+  ]
+
+mkLabel :: (Int, Text) -> Text
+mkLabel (n', unit) = T.unwords [T.pack (show n'), unit]
