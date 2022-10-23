@@ -6,28 +6,15 @@ where
 import Data.List.Split (chunksOf)
 
 proteins :: String -> Maybe [String]
-proteins [] = Just []
-proteins codons = go (Just []) (chunksOf 3 codons)
+proteins = fmap (takeWhile (/= "STOP")) . mapM go . chunksOf 3
   where
-    go (Just protein) [] = Just (reverse protein)
-    go (Just protein) (codon : codons') =
-      case codon of
-        "AUG" -> go (Just ("Methionine" : protein)) codons'
-        "UUU" -> go (Just ("Phenylalanine" : protein)) codons'
-        "UUC" -> go (Just ("Phenylalanine" : protein)) codons'
-        "UUA" -> go (Just ("Leucine" : protein)) codons'
-        "UUG" -> go (Just ("Leucine" : protein)) codons'
-        "UCU" -> go (Just ("Serine" : protein)) codons'
-        "UCC" -> go (Just ("Serine" : protein)) codons'
-        "UCA" -> go (Just ("Serine" : protein)) codons'
-        "UCG" -> go (Just ("Serine" : protein)) codons'
-        "UAU" -> go (Just ("Tyrosine" : protein)) codons'
-        "UAC" -> go (Just ("Tyrosine" : protein)) codons'
-        "UGU" -> go (Just ("Cysteine" : protein)) codons'
-        "UGC" -> go (Just ("Cysteine" : protein)) codons'
-        "UGG" -> go (Just ("Tryptophan" : protein)) codons'
-        "UAA" -> Just (reverse protein)
-        "UAG" -> Just (reverse protein)
-        "UGA" -> Just (reverse protein)
-        _ -> Nothing
-    go _ _ = Nothing
+    go "AUG" = Just "Methionine"
+    go "UGG" = Just "Tryptophan"
+    go codon
+      | codon `elem` ["UUU", "UUC"] = Just "Phenylalanine"
+      | codon `elem` ["UUA", "UUG"] = Just "Leucine"
+      | codon `elem` ["UCU", "UCC", "UCA", "UCG"] = Just "Serine"
+      | codon `elem` ["UAU", "UAC"] = Just "Tyrosine"
+      | codon `elem` ["UGU", "UGC"] = Just "Cysteine"
+      | codon `elem` ["UAA", "UAG", "UGA"] = Just "STOP"
+    go _ = Nothing
