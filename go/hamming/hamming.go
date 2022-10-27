@@ -1,14 +1,20 @@
 package hamming
 
-import "errors"
+const ErrInvalidStrands HammingError = "Can't compute Hamming distance for strands of unequal length"
 
-func Distance(a, b string) (distance int, err error) {
-	if len(a) != len(b) {
-		return 0, errors.New("Can't compute Hamming distance for strings of unequal length")
+type HammingError string
+
+func (err HammingError) Error() string {
+	return string(err)
+}
+
+func Distance(strandA, strandB string) (distance int, err error) {
+	if len(strandA) != len(strandB) {
+		return -1, ErrInvalidStrands
 	}
 
-	for i, aRune := range a {
-		if aRune != []rune(b)[i] {
+	for i := range strandA {
+		if strandA[i] != strandB[i] {
 			distance++
 		}
 	}
