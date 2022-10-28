@@ -1,20 +1,45 @@
 # Robot Name
 
-Write a program that manages robot factory settings.
+Welcome to Robot Name on Exercism's Clojure Track.
+If you need help running the tests or submitting your code, check out `HELP.md`.
 
-When robots come off the factory floor, they have no name.
+## Instructions
 
-The first time you boot them up, a random name is generated, such as
-RX837 or BC811.
+Manage robot factory settings.
+
+When a robot comes off the factory floor, it has no name.
+
+The first time you turn on a robot, a random name is generated in the format
+of two uppercase letters followed by three digits, such as RX837 or BC811.
 
 Every once in a while we need to reset a robot to its factory settings,
-which means that their name gets wiped. The next time you ask, it gets a
-new name.
+which means that its name gets wiped. The next time you ask, that robot will
+respond with a new random name.
 
-Random names means a risk of collisions. In some exercism language
-tracks there are tests to ensure that the same name is never used twice.
-
+The names must be random: they should not follow a predictable sequence.
+Using random names means a risk of collisions. Your solution must ensure that
+every existing robot has a unique name.
 
 ## Source
 
-A debugging session with Paul Blackwell at gSchool. [view source](http://gschool.it)
+### Created by
+
+- @rubysolo
+
+### Contributed to by
+
+- @AndreaCrotti
+- @canweriotnow
+- @dkinzer
+- @ducky427
+- @haus
+- @jgwhite
+- @kytrinyx
+- @mathias
+- @nwallace
+- @querenker
+- @yurrriq
+
+### Based on
+
+A debugging session with Paul Blackwell at gSchool.
