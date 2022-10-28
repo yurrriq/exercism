@@ -1,3 +1,9 @@
+.clj-kondo/
+.cpcache/
+.direnv/
+.exercism/
+.lsp/
+
 # Leiningen
 # https://github.com/github/gitignore/blob/master/Leiningen.gitignore
 pom.xml
