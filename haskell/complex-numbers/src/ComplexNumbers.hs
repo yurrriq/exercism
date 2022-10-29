@@ -1,49 +1,61 @@
 module ComplexNumbers
-(Complex,
- conjugate,
- abs,
- exp,
- real,
- imaginary,
- mul,
- add,
- sub,
- div,
- complex) where
+  ( Complex,
+    conjugate,
+    abs,
+    exp,
+    real,
+    imaginary,
+    mul,
+    add,
+    sub,
+    div,
+    complex,
+  )
+where
 
-import Prelude hiding (div, abs, exp)
+import Prelude hiding (abs, div, exp)
+import qualified Prelude as P
 
--- Data definition -------------------------------------------------------------
-data Complex a = Dummy deriving(Eq, Show)
+------------------------------------------------------------ [ Data definition ]
+
+newtype Complex a = Complex {getParts :: (a, a)}
+  deriving (Eq, Show)
 
 complex :: (a, a) -> Complex a
-complex = error "You need to implement this function"
+complex = Complex
 
--- unary operators -------------------------------------------------------------
+------------------------------------------------------------ [ Unary operators ]
 conjugate :: Num a => Complex a -> Complex a
-conjugate = error "You need to implement this function"
+conjugate (Complex (realPart, imaginaryPart)) =
+  Complex (realPart, negate imaginaryPart)
 
 abs :: Floating a => Complex a -> a
-abs = error "You need to implement this function"
+abs (Complex (realPart, imaginaryPart)) =
+  sqrt (realPart * realPart + imaginaryPart * imaginaryPart)
 
 real :: Num a => Complex a -> a
-real = error "You need to implement this function"
+real = fst . getParts
 
 imaginary :: Num a => Complex a -> a
-imaginary = error "You need to implement this function"
+imaginary = snd . getParts
 
 exp :: Floating a => Complex a -> Complex a
-exp = error "You need to implement this function"
+exp (Complex (a, b)) = Complex (P.exp a * cos b, P.exp a * sin b)
 
--- binary operators ------------------------------------------------------------
+----------------------------------------------------------- [ Binary operators ]
+
 mul :: Num a => Complex a -> Complex a -> Complex a
-mul = error "You need to implement this function"
+mul (Complex (a, b)) (Complex (c, d)) = Complex (a * c - b * d, b * c + a * d)
 
 add :: Num a => Complex a -> Complex a -> Complex a
-add = error "You need to implement this function"
+add (Complex (a, b)) (Complex (c, d)) = Complex (a + c, b + d)
 
 sub :: Num a => Complex a -> Complex a -> Complex a
-sub = error "You need to implement this function"
+sub (Complex (a, b)) (Complex (c, d)) = Complex (a - c, b - d)
 
 div :: Fractional a => Complex a -> Complex a -> Complex a
-div = error "You need to implement this function"
+div (Complex (a, b)) (Complex (c, d)) =
+  Complex
+    ( (a * c + b * d) / (c * c + d * d),
+      (b * c - a * d) / (c * c + d * d)
+    )
