@@ -1,21 +1,28 @@
 name: isogram
+author: Eric Bailey
+github: yurrriq/exercism
 version: 1.7.0.8
 
+
 dependencies:
-  - base
+- base
+
+ghc-options:
+- -Wall
+- -Werror
+- -Wincomplete-patterns
+- -Wincomplete-uni-patterns
 
 library:
   exposed-modules: Isogram
   source-dirs: src
-  ghc-options: -Wall
-  # dependencies:
-  # - foo       # List here the packages you
-  # - bar       # want to use in your solution.
+  dependencies:
+  - containers
 
 tests:
   test:
     main: Tests.hs
     source-dirs: test
     dependencies:
-      - isogram
-      - hspec
+    - isogram
+    - hspec
