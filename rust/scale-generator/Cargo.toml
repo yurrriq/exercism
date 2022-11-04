@@ -4,3 +4,5 @@ name = "scale_generator"
 version = "2.0.0"
 
 [dependencies]
+int-enum = "0.4.0"
+enum-iterator = "0.7.0"
