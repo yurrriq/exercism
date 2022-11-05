@@ -1,6 +1,6 @@
 extern crate int_enum;
 
-use enum_iterator::IntoEnumIterator;
+use enum_iterator::Sequence;
 use int_enum::IntEnum;
 
 use std::fmt;
@@ -9,7 +9,7 @@ use std::str::FromStr;
 use crate::error::Error;
 
 #[repr(isize)]
-#[derive(Clone, Copy, Debug, Eq, PartialEq, IntEnum, IntoEnumIterator)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, IntEnum, Sequence)]
 pub enum Accidental {
     DoubleFlat = -2,
     Flat = -1,

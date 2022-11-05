@@ -1,14 +1,14 @@
+use crate::accidental::Accidental;
 use crate::error::Error;
 use crate::pitch_class::PitchClass;
-use crate::accidental::Accidental;
 
 use std::fmt;
 use std::str::FromStr;
 
-#[derive(Debug, Eq, PartialEq)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq)]
 pub struct Pitch {
-    pitch_class: PitchClass,
-    accidental: Accidental,
+    pub pitch_class: PitchClass,
+    pub accidental: Accidental,
 }
 
 impl fmt::Display for Pitch {
@@ -25,6 +25,9 @@ impl FromStr for Pitch {
         let pitch_class = PitchClass::from_str(pitchclass_str)?;
         let accidental = Accidental::from_str(accidental_str)?;
 
-        Ok(Pitch{pitch_class, accidental})
+        Ok(Pitch {
+            pitch_class,
+            accidental,
+        })
     }
 }
