@@ -4,23 +4,35 @@ module RailFenceCipher
   )
 where
 
-import Data.Char (isAlpha)
 import Data.List (sortOn)
 
-encode :: Int -> String -> String
-encode n = railFence n . filter isAlpha
+-- | Encode a message using a rail fence cipher with a given number of rails.
+encode :: Int -> [a] -> [a]
+encode numRails = zipSort (zigZag numRails)
 
-decode :: Int -> String -> String
-decode = unRailFence
+-- | Decode a rail fence ciphertext with a given number of rails.
+decode :: Int -> [a] -> [a]
+decode 1 message = message
+decode numRails ciphertext = zipSort indices ciphertext
+  where
+    indices = encode numRails [1 .. length ciphertext]
 
-railFence :: Int -> [a] -> [a]
-railFence n = sortIndexed . zip (zigZag n)
+-- | Sort a list by its corresponding indices.
+--
+-- > zipSort [3,5,2,4,1] ['a'..] == "ecadb"
+zipSort :: Ord b => [b] -> [a] -> [a]
+zipSort indices list = map snd (sortOn fst (zip indices list))
 
-unRailFence :: Int -> [b] -> [b]
-unRailFence n str = sortIndexed (zip (railFence n [1 .. length str]) str)
-
-sortIndexed :: [(Int, b)] -> [b]
-sortIndexed = map snd . sortOn fst
-
-zigZag :: (Num a, Enum a) => a -> [a]
-zigZag n = cycle ([1 .. n] ++ [n - 1, n - 2 .. 2])
+-- | The list @[1 .. n] ++ [n - 1, n - 2 .. 2]@ repeated.
+--
+-- > take 8 (zigZag 1) == [1, 1, 1, 1, 1, 1, 1, 1]
+-- > take 8 (zigZag 2) == [1, 2, 1, 2, 1, 2, 1, 2]
+-- > take 8 (zigZag 4) == [1, 2, 3, 4, 3, 2, 1, 2]
+zigZag :: Int -> [Int]
+zigZag 1 = repeat 1
+zigZag 2 = cycle [1, 2]
+zigZag n
+  | n > 0 = cycle (xs ++ tail (reverse (tail xs)))
+  | otherwise = []
+  where
+    xs = [1 .. n]
