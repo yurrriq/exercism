@@ -3,7 +3,7 @@ module RotationalCipher
   )
 where
 
-import Data.Char (chr, isAlpha, isLower, ord)
+import Data.Char (chr, isLower, isUpper, ord)
 
 -- | Rotate a string's letters by a given number of letters.
 --
@@ -24,15 +24,14 @@ rotate n
 -- > shift 13 '.' == '.'
 shift :: Int -> Char -> Char
 shift n c
-  | isAlpha c =
-    if isLower c
-      then shift' 97 n c
-      else shift' 65 n c
+  | isLower c = shift' 97 n c -- ord 'a' == 97
+  | isUpper c = shift' 65 n c -- ord 'A' == 65
   | otherwise = c
 
--- | Shift a letter by a specified number of letters.
+-- | Shift a letter by a specified number of letters, wrapping around a given
+-- 'Int' value for the letter A, i.e. @97@ or @65@.
 --
--- Use @shift' 97@ for lowercase and @shift' 65@ for uppercase letters,
--- since @ord ''a'' == 97@ and @ord ''A'' == 65@.
+-- Use @shift' 97@ for lowercase and @shift' 65@
+-- for uppercase letters, since @ord ''a'' == 97@ and @ord ''A'' == 65@.
 shift' :: Int -> Int -> Char -> Char
 shift' ordA n c = chr (ordA + ((ord c - ordA + n) `mod` 26))
