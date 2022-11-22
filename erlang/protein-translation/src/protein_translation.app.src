@@ -1,9 +1,11 @@
-{application, protein_translation,
-  [{description, "exercism.io - protein-translation"},
+{application, protein_translation, [
+    {description, "exercism.io - protein-translation"},
     {vsn, "0.0.1"},
     {modules, []},
     {registered, []},
-    {applications, [kernel,
-      stdlib]},
+    {applications, [
+        kernel,
+        stdlib
+    ]},
     {env, []}
 ]}.
