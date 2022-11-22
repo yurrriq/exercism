@@ -1,9 +1,11 @@
-{application, sieve,
-  [{description, "exercism.io - sieve"},
+{application, sieve, [
+    {description, "exercism.io - sieve"},
     {vsn, "0.0.1"},
     {modules, []},
     {registered, []},
-    {applications, [kernel,
-      stdlib]},
+    {applications, [
+        kernel,
+        stdlib
+    ]},
     {env, []}
-  ]}.
+]}.
