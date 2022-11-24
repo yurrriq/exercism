@@ -3,7 +3,6 @@ module Change
   )
 where
 
-import Control.Monad (msum)
 import Data.Group (Group, invert)
 import Data.List (find)
 import Data.Maybe (listToMaybe, mapMaybe)
@@ -19,10 +18,8 @@ findFewestCoins target coins
   | otherwise = fmap (map getSum) unboundedKnapsack
   where
     unboundedKnapsack =
-      msum
-        [ knapsack n goal xs
-          | n <- [1 .. fromInteger (target `div` minimum coins)]
-        ]
+      forMaybes [1 .. fromInteger (target `div` minimum coins)] $ \n ->
+        knapsack n goal xs
     goal = Sum target
     xs = map Sum coins
 
@@ -32,5 +29,8 @@ knapsack :: (Eq a, Ord a, Group a) => Int -> a -> [a] -> Maybe [a]
 knapsack 0 _ _ = Nothing
 knapsack 1 goal xs = pure <$> find (== goal) xs
 knapsack n goal xs =
-  listToMaybe . flip mapMaybe xs $ \x ->
+  forMaybes xs $ \x ->
     (x :) <$> knapsack (pred n) (goal <> invert x) (filter (>= x) xs)
+
+forMaybes :: [a] -> (a -> Maybe b) -> Maybe b
+forMaybes = (listToMaybe .) . flip mapMaybe
