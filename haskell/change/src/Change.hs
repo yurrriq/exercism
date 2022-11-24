@@ -3,10 +3,8 @@ module Change
   )
 where
 
-import Data.Group (Group, invert)
 import Data.List (find)
 import Data.Maybe (listToMaybe, mapMaybe)
-import Data.Monoid (Sum (..), getSum)
 
 -- | Given an amount and a list of coin denominations, determine the shortest
 -- list of coins such that the value is equal to the desired amount.
@@ -15,22 +13,18 @@ findFewestCoins 0 _ = Just []
 findFewestCoins _ [] = Nothing
 findFewestCoins target coins
   | target < 0 = Nothing
-  | otherwise = fmap (map getSum) unboundedKnapsack
-  where
-    unboundedKnapsack =
-      forMaybes [1 .. fromInteger (target `div` minimum coins)] $ \n ->
-        knapsack n goal xs
-    goal = Sum target
-    xs = map Sum coins
+  | otherwise =
+    forMaybes [1 .. fromInteger (target `div` minimum coins)] $ \n ->
+      knapsack n target coins
 
 -- | Using at max @n@ items from a list @xs@, allowing for any non-negative
--- number of copies, find a list of items @ys@ such that @mconcat ys == goal@.
-knapsack :: (Eq a, Ord a, Group a) => Int -> a -> [a] -> Maybe [a]
+-- number of copies, find a list of items @ys@ such that @sum ys == goal@.
+knapsack :: Int -> Integer -> [Integer] -> Maybe [Integer]
 knapsack 0 _ _ = Nothing
 knapsack 1 goal xs = pure <$> find (== goal) xs
 knapsack n goal xs =
   forMaybes xs $ \x ->
-    (x :) <$> knapsack (pred n) (goal <> invert x) (filter (>= x) xs)
+    (x :) <$> knapsack (pred n) (goal - x) (filter (>= x) xs)
 
 forMaybes :: [a] -> (a -> Maybe b) -> Maybe b
-forMaybes = (listToMaybe .) . flip mapMaybe
+forMaybes xs f = listToMaybe (mapMaybe f xs)

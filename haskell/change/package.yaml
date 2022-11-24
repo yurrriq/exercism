@@ -15,8 +15,6 @@ ghc-options:
 library:
   exposed-modules: Change
   source-dirs: src
-  dependencies:
-  - groups
 
 tests:
   test:
