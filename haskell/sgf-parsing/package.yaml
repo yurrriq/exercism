@@ -1,23 +1,29 @@
 name: sgf-parsing
+author: Eric Bailey
+github: yurrriq/exercism
 version: 1.2.0.5
 
+ghc-options:
+- -Wall
+- -Werror
+- -Wincomplete-patterns
+- -Wincomplete-uni-patterns
+
 dependencies:
-  - base
-  - containers
-  - text
+- base
+- containers
+- text
 
 library:
   exposed-modules: Sgf
   source-dirs: src
-  ghc-options: -Wall
-  # dependencies:
-  # - foo       # List here the packages you
-  # - bar       # want to use in your solution.
+  dependencies:
+  - trifecta
 
 tests:
   test:
     main: Tests.hs
     source-dirs: test
     dependencies:
-      - sgf-parsing
-      - hspec
+    - sgf-parsing
+    - hspec
