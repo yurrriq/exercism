@@ -1,21 +1,27 @@
 name: series
+author: Eric Bailey
+github: yurrriq/exercism
 version: 1.0.0.4
 
+ghc-options:
+- -Wall
+- -Werror
+- -Wincomplete-patterns
+- -Wincomplete-uni-patterns
+
 dependencies:
-  - base
+- base
 
 library:
   exposed-modules: Series
   source-dirs: src
-  ghc-options: -Wall
-  # dependencies:
-  # - foo       # List here the packages you
-  # - bar       # want to use in your solution.
+  dependencies:
+  - safe
 
 tests:
   test:
     main: Tests.hs
     source-dirs: test
     dependencies:
-      - series
-      - hspec
+    - series
+    - hspec
