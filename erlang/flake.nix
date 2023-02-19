@@ -2,8 +2,13 @@
   description = "exercism exercises in Erlang";
 
   inputs = {
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    emacs-overlay = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/emacs-overlay";
+    };
+
     flake-utils.url = "github:numtide/flake-utils";
+
     nixpkgs.url = "github:nixos/nixpkgs/release-22.05";
   };
 
