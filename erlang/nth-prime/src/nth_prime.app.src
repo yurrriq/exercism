@@ -1,9 +1,11 @@
-{application, nth_prime,
-  [{description, "exercism.org - nth-prime"},
+{application, nth_prime, [
+    {description, "exercism.org - nth-prime"},
     {vsn, "0.0.1"},
     {modules, []},
     {registered, []},
-    {applications, [kernel,
-      stdlib]},
+    {applications, [
+        kernel,
+        stdlib
+    ]},
     {env, []}
 ]}.
