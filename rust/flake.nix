@@ -2,14 +2,23 @@
   description = "exercism exercises in Rust";
 
   inputs = {
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    emacs-overlay = {
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+      url = "github:nix-community/emacs-overlay";
+    };
     fenix = {
-      url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/fenix";
     };
     flake-utils.url = "github:numtide/flake-utils";
-    naersk.url = "github:nmattia/naersk";
-    nixpkgs.url = "github:nixos/nixpkgs/release-22.05";
+    naersk = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nmattia/naersk";
+    };
+    nixpkgs.url = "github:nixos/nixpkgs/release-22.11";
   };
 
   outputs = { self, ... }@inputs:
@@ -31,7 +40,7 @@
         pkgs = import inputs.nixpkgs {
           overlays = [
             inputs.emacs-overlay.overlay
-            inputs.fenix.overlay
+            inputs.fenix.overlays.default
             self.overlay
           ];
           inherit system;
@@ -44,8 +53,6 @@
           };
           RUST_BACKTRACE = 1;
           buildInputs = with pkgs; [
-            cargo
-            clippy
             exercism
             (
               fenix.complete.withComponents [
@@ -59,10 +66,7 @@
             myEmacs
             nixpkgs-fmt
             rnix-lsp
-            # rust-analyzer
             rust-analyzer-nightly
-            rustc
-            rustfmt
           ];
         };
 
