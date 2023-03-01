@@ -86,6 +86,11 @@
   ;; NOTE: https://github.com/emacs-lsp/lsp-ui/issues/285
   (set-face-attribute 'markdown-code-face nil :family "Iosevka" :height 110))
 
+(use-package magit
+  :bind
+  (("C-x g" . magit-status)
+   ("C-x C-g" . magit-status)))
+
 (use-package nix-mode)
 
 (use-package paredit
@@ -108,22 +113,24 @@
   :mode ("\\.rs\\'" . rustic-mode)
   :config
   (setq rustic-format-on-save t)
+  :custom
   ;; https://rust-lang.github.io/rustfmt/
-  (dolist (item '(("blank_lines_upper_bound" . 2)
-                  ("combine_control_expr" . "false")
-                  ("comment_width" . 80)
-                  ("format_code_in_doc_comments" . "true")
-                  ("format_strings" . "true")
-                  ("group_imports" . "StdExternalCrate")
-                  ("imports_granularity" . "Module")
-                  ("match_block_trailing_comma" . "true")
-                  ("max_width" . 80)
-                  ("reorder_impl_items" . "true")
-                  ("space_before_colon" . "true")
-                  ("struct_field_align_threshold" . 20)
-                  ("use_try_shorthand" . "true")
-                  ("wrap_comments" . "true")))
-    (add-to-list 'rustic-rustfmt-config-alist item)))
+  (rustic-rustfmt-config-alist
+   '(("blank_lines_upper_bound" . 2)
+     ("combine_control_expr" . "false")
+     ("comment_width" . 80)
+     ("format_code_in_doc_comments" . "true")
+     ("format_strings" . "true")
+     ("group_imports" . "StdExternalCrate")
+     ("imports_granularity" . "Module")
+     ("match_block_trailing_comma" . "true")
+     ("max_width" . 80)
+     ("reorder_impl_items" . "true")
+     ("space_after_colon" . "true")
+     ("space_before_colon" . "false")
+     ("struct_field_align_threshold" . 20)
+     ("use_try_shorthand" . "true")
+     ("wrap_comments" . "true"))))
 
 (defun eb/rustic-mode-hook ()
   ;; NOTE: https://github.com/brotzeit/rustic/issues/253
