@@ -1,24 +1,32 @@
-#[derive(Debug)]
-pub struct HighScores;
+extern crate itertools;
+use itertools::Itertools;
 
-impl HighScores {
-    pub fn new(scores: &[u32]) -> Self {
-        unimplemented!("Construct a HighScores struct, given the scores: {scores:?}")
+#[derive(Debug)]
+pub struct HighScores<'a>(&'a [u32]);
+
+impl<'a> HighScores<'a> {
+    pub fn new(scores: &'a [u32]) -> Self {
+        Self(scores)
     }
 
     pub fn scores(&self) -> &[u32] {
-        unimplemented!("Return all the scores as a slice")
+        self.0
     }
 
     pub fn latest(&self) -> Option<u32> {
-        unimplemented!("Return the latest (last) score")
+        self.0.last().copied()
     }
 
     pub fn personal_best(&self) -> Option<u32> {
-        unimplemented!("Return the highest score")
+        self.0.iter().max().copied()
     }
 
     pub fn personal_top_three(&self) -> Vec<u32> {
-        unimplemented!("Return 3 highest scores")
+        self.0
+            .iter()
+            .sorted_by(|a, b| b.cmp(a))
+            .take(3)
+            .copied()
+            .collect()
     }
 }
