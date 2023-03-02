@@ -1,0 +1,86 @@
+{
+  "nodes": {
+    "emacs-overlay": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1677608641,
+        "narHash": "sha256-sbSZhceOflqZIePzUrHiRB4bv4OHObs7NrhzICCUcC4=",
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "rev": "545383bd7de8e3f100356fea217698379d8f5c31",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1676283394,
+        "narHash": "sha256-XX2f9c3iySLCw54rJ/CZs+ZK6IQy7GXNY4nSOyu2QG4=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3db36a8b464d0c4532ba1c7dda728f4576d6d073",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "gleam-mode": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1676230199,
+        "narHash": "sha256-VqU+NFLMVtljQf00FpM8OSIB8szrW8qhzqpta15y+Oo=",
+        "ref": "refs/heads/main",
+        "rev": "6e5366682ba23153e011239493b9332cac244284",
+        "revCount": 41,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/gleam-lang/gleam-mode"
+      },
+      "original": {
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/gleam-lang/gleam-mode"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1677706422,
+        "narHash": "sha256-zZbJLRSrUzgooPHAjwwsEbSvS1XWcl8ZuEeWvllqUEU=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "9701f3139a30c806f5a19ef255352d5c6a0df58f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "release-22.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "emacs-overlay": "emacs-overlay",
+        "flake-utils": "flake-utils",
+        "gleam-mode": "gleam-mode",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
