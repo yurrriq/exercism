@@ -77,6 +77,12 @@
   :config
   (setq lsp-ui-doc-position 'bottom))
 
+(use-package magit
+  :demand
+  :bind
+  (("C-x g"   . magit-status)
+   ("C-x C-g" . magit-status)))
+
 (use-package multiple-cursors
   :demand
   :config (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines))
