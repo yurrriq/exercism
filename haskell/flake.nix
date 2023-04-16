@@ -2,7 +2,10 @@
   description = "Solutions to Haskell exercises from exercism.io";
 
   inputs = {
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    emacs-overlay = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/emacs-overlay";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
