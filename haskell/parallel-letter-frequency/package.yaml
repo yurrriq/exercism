@@ -1,26 +1,33 @@
 name: parallel-letter-frequency
 version: 0.1.0.4
+author: Eric Bailey
+github: yurrriq/exercism
+
+ghc-options:
+- -Wall
+- -Werror
+- -Wincomplete-patterns
+- -Wincomplete-uni-patterns
 
 dependencies:
-  - base
-  - containers
-  - text
+- base
+- containers
+- text
 
 library:
   exposed-modules: Frequency
   source-dirs: src
   ghc-options: -Wall
-  # dependencies:
-  # - foo       # List here the packages you
-  # - bar       # want to use in your solution.
+  dependencies:
+  - parallel
 
 tests:
   test:
     main: Tests.hs
     source-dirs: test
     dependencies:
-      - parallel-letter-frequency
-      - hspec
+    - parallel-letter-frequency
+    - hspec
 
 benchmarks:
   bench:
@@ -29,5 +36,5 @@ benchmarks:
     main: Benchmark.hs
     source-dirs: bench
     dependencies:
-      - parallel-letter-frequency
-      - criterion
+    - parallel-letter-frequency
+    - criterion
