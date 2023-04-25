@@ -1,43 +1,65 @@
+{-# LANGUAGE TemplateHaskell #-}
+{-# OPTIONS_GHC -Wno-unused-top-binds #-}
+
 module Person
-  ( Address (..)
-  , Born    (..)
-  , Name    (..)
-  , Person  (..)
-  , bornStreet
-  , renameStreets
-  , setBirthMonth
-  , setCurrentStreet
-  ) where
+  ( Address (..),
+    Born (..),
+    Name (..),
+    Person (..),
+    bornStreet,
+    renameStreets,
+    setBirthMonth,
+    setCurrentStreet,
+  )
+where
 
-import Data.Time.Calendar (Day)
+import Control.Lens
+  ( makeLenses,
+    over,
+    set,
+    view,
+  )
+import Data.Time.Calendar (Day, fromGregorian, toGregorian)
 
-data Person = Person { _name    :: Name
-                     , _born    :: Born
-                     , _address :: Address
-                     }
+data Person = Person
+  { _name :: Name,
+    _born :: Born,
+    _address :: Address
+  }
 
-data Name = Name { _foreNames :: String
-                 , _surName   :: String
-                 }
+data Name = Name
+  { _foreNames :: String,
+    _surName :: String
+  }
 
-data Born = Born { _bornAt :: Address
-                 , _bornOn :: Day
-                 }
+data Born = Born
+  { _bornAt :: Address,
+    _bornOn :: Day
+  }
 
-data Address = Address { _street      :: String
-                       , _houseNumber :: Int
-                       , _place       :: String
-                       , _country     :: String
-                       }
+data Address = Address
+  { _street :: String,
+    _houseNumber :: Int,
+    _place :: String,
+    _country :: String
+  }
+
+makeLenses ''Person
+makeLenses ''Born
+makeLenses ''Address
 
 bornStreet :: Born -> String
-bornStreet born = error "You need to implement this function."
+bornStreet = view (bornAt . street)
 
 setCurrentStreet :: String -> Person -> Person
-setCurrentStreet street person = error "You need to implement this function."
+setCurrentStreet = set (address . street)
 
 setBirthMonth :: Int -> Person -> Person
-setBirthMonth month person = error "You need to implement this function."
+setBirthMonth monthOfYear = over (born . bornOn) $ \day ->
+  let (year, _, dayOfMonth) = toGregorian day
+   in fromGregorian year monthOfYear dayOfMonth
 
 renameStreets :: (String -> String) -> Person -> Person
-renameStreets f person = error "You need to implement this function."
+renameStreets rename =
+  over (born . bornAt . street) rename
+    . over (address . street) rename

@@ -1,22 +1,27 @@
 name: lens-person
 version: 0.1.0.3
+author: Eric Bailey
+github: yurrriq/exercism
+
+ghc-options:
+- -Wall
+- -Werror
+- -Wincomplete-patterns
+- -Wincomplete-uni-patterns
 
 dependencies:
-  - base
-  - time
+- base
+- lens
+- time
 
 library:
   exposed-modules: Person
   source-dirs: src
-  ghc-options: -Wall
-  # dependencies:
-  # - foo       # List here the packages you
-  # - bar       # want to use in your solution.
 
 tests:
   test:
     main: Tests.hs
     source-dirs: test
     dependencies:
-      - lens-person
-      - hspec
+    - lens-person
+    - hspec
