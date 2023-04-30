@@ -36,6 +36,17 @@
           swiProlog
           myEmacs
           rnix-lsp
+          (
+            texlive.combine {
+              inherit noweb;
+              inherit (texlive) scheme-small
+                # datetime
+                dirtytalk
+                latexmk
+                plweb
+                ;
+            }
+          )
         ];
       };
     };
