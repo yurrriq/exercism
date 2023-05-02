@@ -4,18 +4,20 @@ module Diamond
 where
 
 import Data.Char (chr, isUpper, ord)
+import Data.Text (Text)
+import qualified Data.Text as Text
 
-diamond :: Char -> Maybe [String]
+diamond :: Char -> Maybe [Text]
 diamond z
   | isUpper z = Just (reflectRight (triangle z))
   | otherwise = Nothing
 
-triangle :: Char -> [String]
+triangle :: Char -> [Text]
 triangle z = map (triangleRow (ord z)) [65 .. ord z]
 
-triangleRow :: Int -> Int -> [Char]
+triangleRow :: Int -> Int -> Text
 triangleRow ordZ ordC =
-  reflectLeft $
+  Text.pack . reflectLeft $
     replicate (ordC - 65) ' '
       <> (chr ordC : replicate (ordZ - ordC) ' ')
 
