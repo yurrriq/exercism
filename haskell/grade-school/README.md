@@ -1,6 +1,12 @@
 # Grade School
 
-Write a small archiving program that stores students' names along with the grade that they are in.
+Welcome to Grade School on Exercism's Haskell Track.
+If you need help running the tests or submitting your code, check out `HELP.md`.
+
+## Instructions
+
+Given students' names along with the grade that they are in, create a roster
+for the school.
 
 In the end, you should be able to:
 
@@ -14,12 +20,14 @@ In the end, you should be able to:
   as 1, 2, 3, etc., and students within a grade should be sorted
   alphabetically by name.
   - "Who all is enrolled in school right now?"
-  - "Grade 1: Anna, Barb, and Charlie. Grade 2: Alex, Peter, and Zoe.
-    Grade 3…"
+  - "Let me think. We have
+  Anna, Barb, and Charlie in grade 1,
+  Alex, Peter, and Zoe in grade 2
+  and Jim in grade 5.
+  So the answer is: Anna, Barb, Charlie, Alex, Peter, Zoe and Jim"
 
 Note that all our students only have one name.  (It's a small town, what
 do you want?)
-
 
 ## For bonus points
 
@@ -34,17 +42,37 @@ are some additional things you could try:
 Then please share your thoughts in a comment on the submission. Did this
 experiment make the code better? Worse? Did you learn anything from it?
 
-Check out [Exercism
-Help](http://help.exercism.io/getting-started-with-haskell.html) for
-instructions to get started writing Haskell.
+To complete this exercise you need to create the data type `School`
+and implement the following functions:
 
-## Running Tests
+- `add`
+- `empty`
+- `grade`
+- `sorted`
 
-Use `runhaskell` (included in the Haskell Platform) to compile and run your
-Haskell code.
-
-    $ runhaskell -Wall bob_test.hs
+You will find a dummy data declaration and type signatures already in
+place, but it is up to you to define the functions and create a meaningful
+data type, newtype or type synonym.
 
 ## Source
 
-A pairing session with Phil Battos at gSchool [view source](http://gschool.it)
+### Created by
+
+- @etrepum
+
+### Contributed to by
+
+- @eparovyshnaya
+- @ffflorian
+- @iHiD
+- @kytrinyx
+- @navossoc
+- @petertseng
+- @ppartarr
+- @rbasso
+- @sshine
+- @tejasbubane
+
+### Based on
+
+A pairing session with Phil Battos at gSchool

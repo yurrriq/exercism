@@ -1,0 +1,26 @@
+name: grade-school
+author: Eric Bailey
+github: yurrriq/exercism
+version: 1.0.0.4
+
+ghc-options:
+- -Wall
+- -Werror
+- -Wincomplete-patterns
+- -Wincomplete-uni-patterns
+
+dependencies:
+- base
+- containers
+
+library:
+  exposed-modules: School
+  source-dirs: src
+
+tests:
+  test:
+    main: Tests.hs
+    source-dirs: test
+    dependencies:
+    - grade-school
+    - hspec

@@ -28,7 +28,7 @@ type Roster = [(Grade, [Student])]
 
 -- | The empty 'School'.
 empty :: School
-empty = School $ Map.fromList []
+empty = School Map.empty
 
 -- | Given a 'Grade' @n@, a 'Student' @x@ and a 'School' @s@, appends @[x]@
 -- to the existing list of 'Student's in @n@ at @s@, or sets the list to @[x]@
