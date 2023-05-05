@@ -53,15 +53,17 @@
           ghc
           ghcid
           haskell-language-server
-          haskellPackages.cabal-plan
-          haskellPackages.hpack
-          haskellPackages.hlint
-          haskellPackages.ormolu
-          haskellPackages.pointfree
           myEmacs
           nix-direnv
           rnix-lsp
-        ];
+        ] ++ (with haskellPackages; [
+          apply-refact
+          cabal-plan
+          hpack
+          hlint
+          ormolu
+          pointfree
+        ]);
       };
     };
 }
