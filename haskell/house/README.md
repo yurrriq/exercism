@@ -1,6 +1,11 @@
 # House
 
-Write a program that outputs the nursery rhyme 'This is the House that Jack Built'.
+Welcome to House on Exercism's Haskell Track.
+If you need help running the tests or submitting your code, check out `HELP.md`.
+
+## Instructions
+
+Recite the nursery rhyme 'This is the House that Jack Built'.
 
 > [The] process of placing a phrase of clause within another phrase of
 > clause is called embedding. It is through the processes of recursion
@@ -9,12 +14,11 @@ Write a program that outputs the nursery rhyme 'This is the House that Jack Buil
 > Furthermore, embedding also allows us to construct an infinitely long
 > structure, in theory anyway.
 
-- [papyr.com](http://papyr.com/hypertextbooks/grammar/ph_noun.htm)
-
+- [papyr.com](https://papyr.com/hypertextbooks/grammar/ph_noun.htm)
 
 The nursery rhyme reads as follows:
 
-```plain
+```text
 This is the house that Jack built.
 
 This is the malt
@@ -106,17 +110,41 @@ that ate the malt
 that lay in the house that Jack built.
 ```
 
-Check out [Exercism
-Help](http://help.exercism.io/getting-started-with-haskell.html) for
-instructions to get started writing Haskell.
+This exercise is about [code refactoring](https://en.wikipedia.org/wiki/Refactoring),
+so we are providing you with a solution that already passes the tests.
 
-## Running Tests
+The challenge is to rewrite it until you are proud of it, and learn
+something in the process.
 
-Use `runhaskell` (included in the Haskell Platform) to compile and run your
-Haskell code.
+If you don't know where to start, here are some ideas:
 
-    $ runhaskell -Wall bob_test.hs
+- Try to reduce repetition to a minimum.
+- Try to make the code readable.
+
+Take your time.
+
+Change one thing at a time and check if your solution still passes the tests.
+
+Have fun!
 
 ## Source
 
-British nursery rhyme [view source](http://en.wikipedia.org/wiki/This_Is_The_House_That_Jack_Built)
+### Created by
+
+- @sjakobi
+
+### Contributed to by
+
+- @etrepum
+- @iHiD
+- @kytrinyx
+- @navossoc
+- @petertseng
+- @ppartarr
+- @rbasso
+- @sshine
+- @tejasbubane
+
+### Based on
+
+British nursery rhyme - https://en.wikipedia.org/wiki/This_Is_The_House_That_Jack_Built

@@ -3,13 +3,13 @@
 module House where
 
 import Data.Function.Pointless ((.:))
-import Data.List (tails)
+import Data.List (intercalate, tails)
 
 rhyme :: String
 rhyme =
-  unlines $
+  intercalate "\n" $
     map strophe $
-      (reverse . init . tails)
+      (tail . reverse . tails)
         [ ["horse and the hound and the horn", "belonged to"],
           ["farmer sowing his corn", "kept"],
           ["rooster that crowed in the morn", "woke"],
@@ -29,7 +29,7 @@ strophe = thisIs . (`go` ".\n")
   where
     go :: [[String]] -> ShowS
     go = \case
-      ([n, v] : []) -> the n . space . that v
+      [[n, v]] -> the n . space . that v
       ([n, v] : t) -> the n . lineBreak . that v . go t
       _ -> undefined
 
