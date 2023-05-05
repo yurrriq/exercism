@@ -1,6 +1,6 @@
-import Test.HUnit (Assertion, (@=?), runTestTT, Test(..), Counts(..))
-import System.Exit (ExitCode(..), exitWith)
 import Bob (responseFor)
+import System.Exit (ExitCode (..), exitWith)
+import Test.HUnit (Assertion, Counts (..), Test (..), runTestTT, (@=?))
 
 exitProperly :: IO Counts -> IO ()
 exitProperly m = do
@@ -36,8 +36,10 @@ test_respondsToForcefulQuestions =
 
 test_respondsToShoutingWithSpecialCharacters :: Assertion
 test_respondsToShoutingWithSpecialCharacters =
-  "Whoa, chill out!" @=? responseFor (
-    "ZOMG THE %^*@#$(*^ ZOMBIES ARE COMING!!11!!1!")
+  "Whoa, chill out!"
+    @=? responseFor
+      ( "ZOMG THE %^*@#$(*^ ZOMBIES ARE COMING!!11!!1!"
+      )
 
 test_respondsToShoutingNumbers :: Assertion
 test_respondsToShoutingNumbers =
@@ -89,29 +91,33 @@ test_respondsToUnicodeNonShout =
 
 respondsToTests :: [Test]
 respondsToTests =
-  [ testCase "something" test_respondsToSomething
-  , testCase "shouts" test_respondsToShouts
-  , testCase "questions" test_respondsToQuestions
-  , testCase "forceful talking" test_respondsToForcefulTalking
-  , testCase "acronyms" test_respondsToAcronyms
-  , testCase "forceful questions" test_respondsToForcefulQuestions
-  , testCase "shouting with special characters"
-    test_respondsToShoutingWithSpecialCharacters
-  , testCase "shouting numbers" test_respondsToShoutingNumbers
-  , testCase "shouting with no exclamation mark"
-    test_respondsToShoutingWithNoExclamationMark
-  , testCase "statement containing question mark"
-    test_respondsToStatementContainingQuestionMark
-  , testCase "silence" test_respondsToSilence
-  , testCase "prolonged silence" test_respondsToProlongedSilence
-  , testCase "questioned nonsense" test_respondsToNonLettersWithQuestion
-  , testCase "multiple-line statement containing question mark"
-    test_respondsToMultipleLineQuestions
-  , testCase "all whitespace is silence" test_respondsToOtherWhitespace
-  , testCase "only numbers" test_respondsToOnlyNumbers
-  , testCase "question with only numbers" test_respondsToQuestionWithOnlyNumbers
-  , testCase "unicode shout" test_respondsToUnicodeShout
-  , testCase "unicode non-shout" test_respondsToUnicodeNonShout
+  [ testCase "something" test_respondsToSomething,
+    testCase "shouts" test_respondsToShouts,
+    testCase "questions" test_respondsToQuestions,
+    testCase "forceful talking" test_respondsToForcefulTalking,
+    testCase "acronyms" test_respondsToAcronyms,
+    testCase "forceful questions" test_respondsToForcefulQuestions,
+    testCase
+      "shouting with special characters"
+      test_respondsToShoutingWithSpecialCharacters,
+    testCase "shouting numbers" test_respondsToShoutingNumbers,
+    testCase
+      "shouting with no exclamation mark"
+      test_respondsToShoutingWithNoExclamationMark,
+    testCase
+      "statement containing question mark"
+      test_respondsToStatementContainingQuestionMark,
+    testCase "silence" test_respondsToSilence,
+    testCase "prolonged silence" test_respondsToProlongedSilence,
+    testCase "questioned nonsense" test_respondsToNonLettersWithQuestion,
+    testCase
+      "multiple-line statement containing question mark"
+      test_respondsToMultipleLineQuestions,
+    testCase "all whitespace is silence" test_respondsToOtherWhitespace,
+    testCase "only numbers" test_respondsToOnlyNumbers,
+    testCase "question with only numbers" test_respondsToQuestionWithOnlyNumbers,
+    testCase "unicode shout" test_respondsToUnicodeShout,
+    testCase "unicode non-shout" test_respondsToUnicodeNonShout
   ]
 
 main :: IO ()

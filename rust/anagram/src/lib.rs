@@ -1,6 +1,9 @@
 use std::collections::HashSet;
 
-pub fn anagrams_for<'a>(word: &str, possible_anagrams: &[&'a str]) -> HashSet<&'a str> {
+pub fn anagrams_for<'a>(
+    word: &str,
+    possible_anagrams: &[&'a str],
+) -> HashSet<&'a str> {
     let lowercased_word = word.to_lowercase();
     let normalized_word = normalize(&lowercased_word);
 
@@ -14,7 +17,11 @@ pub fn anagrams_for<'a>(word: &str, possible_anagrams: &[&'a str]) -> HashSet<&'
         })
 }
 
-fn is_anagram(candidate: &str, lowercased_word: &str, normalized_word: &str) -> bool {
+fn is_anagram(
+    candidate: &str,
+    lowercased_word: &str,
+    normalized_word: &str,
+) -> bool {
     let lowercased_candidate = candidate.to_lowercase();
     lowercased_candidate.ne(&lowercased_word)
         && normalize(&lowercased_candidate).eq(&normalized_word)

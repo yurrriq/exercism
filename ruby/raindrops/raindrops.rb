@@ -12,19 +12,19 @@ class Raindrops
   def self.convert(number)
     raindrops = ""
 
-    if 3.divides?(number) then
+    if 3.divides?(number)
       raindrops += "Pling"
     end
 
-    if 5.divides?(number) then
+    if 5.divides?(number)
       raindrops += "Plang"
     end
 
-    if 7.divides?(number) then
+    if 7.divides?(number)
       raindrops += "Plong"
     end
 
-    if raindrops.empty? then
+    if raindrops.empty?
       "#{number}"
     else
       raindrops

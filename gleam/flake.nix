@@ -29,7 +29,7 @@
           (lib.attrValues
             (lib.filterAttrs (n: _: n != "default") self.overlays));
 
-        myEmacs = final: prev: {
+        myEmacs = _final: prev: {
           myEmacs = prev.emacsWithPackagesFromUsePackage {
             alwaysEnsure = true;
             config = ./emacs.el;
@@ -69,7 +69,7 @@
         };
 
         packages = {
-          gleam-mode = pkgs.runCommand "gleam-mode" {} ''
+          gleam-mode = pkgs.runCommand "gleam-mode" { } ''
             mkdir -p $out/share/emacs/site-lisp
             cp -r ${inputs.gleam-mode} $out/share/emacs/site-lisp/gleam-mode
           '';

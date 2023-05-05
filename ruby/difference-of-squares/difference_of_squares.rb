@@ -2,7 +2,6 @@ module BookKeeping
   VERSION = 4
 end
 
-
 class Squares
   attr_reader :n
 
@@ -11,7 +10,7 @@ class Squares
   end
 
   def square_of_sum
-    ((@n * (@n + 1)) / 2)**2
+    ((@n * (@n + 1)) / 2) ** 2
   end
 
   def sum_of_squares

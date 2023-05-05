@@ -39,7 +39,7 @@ startLine n = ["On the", ordinal n, "day of Christmas my true love gave to me:"]
 finishLine :: Day -> [Text]
 finishLine 1 = [countGift 1 <> "."]
 finishLine n =
-  [countGift m <> "," | m <- [n, n -1 .. 2]]
+  [countGift m <> "," | m <- [n, n - 1 .. 2]]
     <> ["and"]
     <> finishLine 1
 

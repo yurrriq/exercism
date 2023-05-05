@@ -20,4 +20,3 @@
 (deftest undefined-when-lengths-are-different
   (is (= nil (point-mutations/hamming-distance "AAAC" "TAGGGGAGGCTAGCGGTAGGAC")))
   (is (= nil (point-mutations/hamming-distance "GACTACGGACAGGGTAACATAG" "GACA"))))
-

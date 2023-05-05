@@ -47,15 +47,17 @@ impl Iterator for Scale {
         let last_pitch = self.pitches.last().unwrap_or(&self.tonic);
         let next_pitch_class = next(&last_pitch.pitch_class)?;
         let next_step = self.intervals.pop()?;
-        let increment: isize =
-            if next_pitch_class == PitchClass::C || next_pitch_class == PitchClass::F {
-                1
-            } else {
-                2
-            };
-        let next_accidental =
-            Accidental::from_int(last_pitch.accidental.int_value() + next_step.0 - increment)
-                .ok()?;
+        let increment: isize = if next_pitch_class == PitchClass::C
+            || next_pitch_class == PitchClass::F
+        {
+            1
+        } else {
+            2
+        };
+        let next_accidental = Accidental::from_int(
+            last_pitch.accidental.int_value() + next_step.0 - increment,
+        )
+        .ok()?;
         let next_pitch = &Pitch {
             pitch_class: next_pitch_class,
             accidental: next_accidental,

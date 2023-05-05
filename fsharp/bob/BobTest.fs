@@ -2,7 +2,7 @@
 
 open NUnit.Framework
 open Bob
-    
+
 [<Test>]
 let ``Stating something`` () =
     Assert.That(hey "Tom-ay-to, tom-aaaah-to.", Is.EqualTo("Whatever."))

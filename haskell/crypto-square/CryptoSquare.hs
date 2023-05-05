@@ -1,15 +1,18 @@
-module CryptoSquare (ciphertext,
-                     plaintextSegments,
-                     normalizePlaintext,
-                     squareSize,
-                     normalizeCiphertext) where
+module CryptoSquare
+  ( ciphertext,
+    plaintextSegments,
+    normalizePlaintext,
+    squareSize,
+    normalizeCiphertext,
+  )
+where
 
-import           Control.Monad   (ap)
-import           Data.Bool       (bool)
-import           Data.Char       (isAlphaNum, toLower)
-import           Data.List       (transpose)
-import           Data.List.Split (chunksOf)
-import           Data.Maybe      (mapMaybe)
+import Control.Monad (ap)
+import Data.Bool (bool)
+import Data.Char (isAlphaNum, toLower)
+import Data.List (transpose)
+import Data.List.Split (chunksOf)
+import Data.Maybe (mapMaybe)
 
 ciphertext :: String -> String
 ciphertext = concat . transpose . plaintextSegments

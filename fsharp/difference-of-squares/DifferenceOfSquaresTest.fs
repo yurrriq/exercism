@@ -2,7 +2,7 @@
 
 open NUnit.Framework
 open DifferenceOfSquares
-    
+
 [<Test>]
 let ``Square of sums to 5`` () =
     Assert.That(squareOfSums 5, Is.EqualTo(225))

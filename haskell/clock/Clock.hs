@@ -1,31 +1,30 @@
-{-|
-Module      : Clock
-Copyright   : (c) Eric Bailey, 2015
-License     : MIT
-
-Maintainer  : Eric Bailey
-Stability   : stable
-Portability : portable
-
-Handling time without dates.
--}
-
+-- |
+-- Module      : Clock
+-- Copyright   : (c) Eric Bailey, 2015
+-- License     : MIT
+--
+-- Maintainer  : Eric Bailey
+-- Stability   : stable
+-- Portability : portable
+--
+-- Handling time without dates.
 module Clock where
 
-import           Data.Function           (on)
-import           Data.Function.Pointless ((.:))
-import           Data.List.Split         (splitOn)
-import           Text.Printf             (printf)
+import Data.Function (on)
+import Data.Function.Pointless ((.:))
+import Data.List.Split (splitOn)
+import Text.Printf (printf)
 
 -- | A number of hours.
 type Hour = Integer
 
 -- | A number of minutes.
-type Min  = Integer
+type Min = Integer
 
 -- | A 'Clock' represents a dateless time.
 newtype Clock = Clock
-  { minutes :: Integer -- ^ The number of minutes, floored to the 'day'.
+  { -- | The number of minutes, floored to the 'day'.
+    minutes :: Integer
   }
   deriving (Eq, Show)
 
@@ -37,7 +36,7 @@ instance Num Clock where
   (*) = fromInteger .: (*) `on` minutes
   (-) = fromInteger .: (-) `on` minutes
 
-  abs    = id
+  abs = id
 
   signum = Clock . signum . minutes
 
@@ -53,8 +52,9 @@ fromHourMin = fromIntegral .: (+) . hourToMin
 -- 'toString' on the 'Clock' returns the given string.
 fromString :: String -> Clock
 fromString = go . splitOn ":"
-  where go [h,m] = (fromHourMin `on` read) h m
-        go _     = error "invalid string"
+  where
+    go [h, m] = (fromHourMin `on` read) h m
+    go _ = error "invalid string"
 
 -- | Given a 'Clock', return a string representation of the form, @hh:mm@.
 toString :: Clock -> String

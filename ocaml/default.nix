@@ -11,7 +11,7 @@ let
 
 in
 
-with import (fetchTarballFromGitHub (fromJSONFile ./nixpkgs-src.json)) {};
+with import (fetchTarballFromGitHub (fromJSONFile ./nixpkgs-src.json)) { };
 
 stdenv.mkDerivation {
   name = "exercism-ocaml-env";

@@ -11,7 +11,10 @@ fn test_stating_something() {
 #[test]
 /// ending with whitespace
 fn test_ending_with_whitespace() {
-    process_response_case("Okay if like my  spacebar  quite a bit?   ", "Sure.");
+    process_response_case(
+        "Okay if like my  spacebar  quite a bit?   ",
+        "Sure.",
+    );
 }
 
 #[test]
@@ -50,7 +53,10 @@ fn test_prattling_on() {
 #[test]
 /// forceful question
 fn test_forceful_question() {
-    process_response_case("WHAT'S GOING ON?", "Calm down, I know what I'm doing!");
+    process_response_case(
+        "WHAT'S GOING ON?",
+        "Calm down, I know what I'm doing!",
+    );
 }
 
 #[test]
@@ -123,7 +129,10 @@ fn test_shouting_gibberish() {
 #[test]
 /// asking a question
 fn test_asking_a_question() {
-    process_response_case("Does this cryogenic chamber make me look fat?", "Sure.");
+    process_response_case(
+        "Does this cryogenic chamber make me look fat?",
+        "Sure.",
+    );
 }
 
 #[test]

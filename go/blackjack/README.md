@@ -20,7 +20,7 @@ case "macos":
     // do something if the operating system is macos
 default:
     // do something if the operating system is none of the above
-} 
+}
 ```
 
 One interesting thing about switch statements, is that the value after the `switch` keyword can be omitted, and we can have boolean conditions for each `case`:

@@ -13,4 +13,3 @@
 
 (deftest lovecraft-birthday
   (is (= [1922 4 29] (gigasecond/from 1890 8 20))))
-

@@ -24,7 +24,7 @@
   NSString *result = [[self helloWorld] hello:input];
   XCTAssertEqualObjects(expected, result);
 }
-  
+
 - (void)testOtherSampleName {
   NSString *input = @"Bob";
   NSString *expected = @"Hello, Bob!";

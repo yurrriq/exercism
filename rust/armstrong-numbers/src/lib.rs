@@ -6,7 +6,7 @@ pub fn is_armstrong_number(num: u32) -> bool {
 
 fn is_armstrong_number_base(num: u32, base: u32) -> bool {
     if num == 0 {
-        return true
+        return true;
     }
 
     let k = (num as f32).log(base as f32).floor() as u32 + 1;

@@ -24,7 +24,7 @@ depending on what you created for the exercise). Also, when you run statements,
 "run" each individual `create` statement individually by selecting its text.
 APEX does not seem to like doing too much work at once...
 
-To work on individual problems, a nice and free way is to use SQL Developer. If 
+To work on individual problems, a nice and free way is to use SQL Developer. If
 you don't want to use yet another IDE, you can simply copy and paste your code
 into a terminal / command prompt connected to the database. The files are
 prepared in a way that will simply overwrite the previously compiled version.
@@ -74,4 +74,3 @@ When everything is passing, you can submit your code with the following
 command:
 
     $ exercism submit hamming#.plsql
-

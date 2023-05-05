@@ -24,14 +24,20 @@ impl Robot {
 
     pub fn turn_right(self) -> Self {
         Self {
-            direction: Direction::from_int((self.direction.int_value() + 1) % 4).unwrap(),
+            direction: Direction::from_int(
+                (self.direction.int_value() + 1) % 4,
+            )
+            .unwrap(),
             ..self
         }
     }
 
     pub fn turn_left(self) -> Self {
         Self {
-            direction: Direction::from_int((self.direction.int_value() + 3) % 4).unwrap(),
+            direction: Direction::from_int(
+                (self.direction.int_value() + 3) % 4,
+            )
+            .unwrap(),
             ..self
         }
     }
@@ -59,14 +65,15 @@ impl Robot {
     }
 
     pub fn instructions(self, instructions: &str) -> Self {
-        instructions
-            .chars()
-            .fold(self, |robot, instruction| match instruction {
+        instructions.chars().fold(
+            self,
+            |robot, instruction| match instruction {
                 'A' => robot.advance(),
                 'L' => robot.turn_left(),
                 'R' => robot.turn_right(),
                 _ => unimplemented!("Unknown instruction"),
-            })
+            },
+        )
     }
 
     pub fn position(&self) -> (i32, i32) {

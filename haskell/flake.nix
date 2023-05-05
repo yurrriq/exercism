@@ -20,9 +20,9 @@
       };
     in
     {
-      overlay = final: prev: {
+      overlay = _final: prev: {
         haskellPackages = prev.haskellPackages.override {
-          overrides = hfinal: hprev: {
+          overrides = _hfinal: hprev: {
             digits = hprev.callCabal2nix "digits"
               (prev.fetchFromGitHub {
                 owner = "yurrriq";

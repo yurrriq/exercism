@@ -49,4 +49,3 @@ ignore_non_allergen_score_parts_test() ->
   ?assertEqual(
      ['eggs', 'shellfish', 'strawberries', 'tomatoes', 'chocolate', 'pollen', 'cats'],
      allergies:allergies(509)).
-

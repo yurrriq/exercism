@@ -16,6 +16,8 @@ impl BowlingGame {
     }
 
     pub fn score(&self) -> Option<u16> {
-        unimplemented!("Return the score if the game is complete, or None if not.");
+        unimplemented!(
+            "Return the score if the game is complete, or None if not."
+        );
     }
 }

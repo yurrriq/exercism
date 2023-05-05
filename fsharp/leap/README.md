@@ -32,4 +32,3 @@ JavaRanch Cattle Drive, exercise 3 [http://www.javaranch.com/leap.jsp](http://ww
 
 ## Submitting Incomplete Problems
 It's possible to submit an incomplete solution so you can see how others have completed the exercise.
-

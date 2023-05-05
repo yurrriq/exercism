@@ -28,4 +28,3 @@ square_64_test() ->
 
 total_grains_test() ->
   ?assertEqual(18446744073709551615, grains:total()).
-

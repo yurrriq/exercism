@@ -6,7 +6,7 @@ If you get stuck on the exercise, check out `HINTS.md`, but try and solve it wit
 
 ## Introduction
 
-In Go, functions are first-class values. This means that you can do with functions the same things you can do with all other values - assign functions to variables, pass them as arguments to other functions or even return functions from other functions. 
+In Go, functions are first-class values. This means that you can do with functions the same things you can do with all other values - assign functions to variables, pass them as arguments to other functions or even return functions from other functions.
 
 Below we are creating two functions, `engGreeting` and `espGreeting` and we are assigning them to the variable `greeting`:
 
@@ -142,7 +142,7 @@ p := DaysPeriod{From: 1, To: 31}
 //  - days 1, 20, 16 and 31 are examples of days that are included
 //    in the range of time specified by p
 //  - days 50 and 40 are examples of days that are not included
-//    in the range of time specified by p  
+//    in the range of time specified by p
 ```
 
 ## 1. Implement a general records filter
@@ -247,7 +247,7 @@ TotalByPeriod(records, p2)
 
 ## 5. Calculate the total expenses for records of a category in a period
 
-For the most complex reports Bob makes to his clients, Bob needs to filter records by category and period of time at the same time. 
+For the most complex reports Bob makes to his clients, Bob needs to filter records by category and period of time at the same time.
 That means Bob wants to know the total expenses for records in a category in a given period of time.
 
 Implement the `CategoryExpenses` function that returns the total amount of expenses in a category in a given period of days. The function should also differentiate the case when the given category is not present in the expenses records and the case when there are no category's expenses in the provided period.

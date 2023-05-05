@@ -1,10 +1,10 @@
-{ nixpkgs ? import <nixpkgs> {} }:
+{ nixpkgs ? import <nixpkgs> { } }:
 
 with nixpkgs;
 
 let
 
-  gems = callPackage ../. {};
+  gems = callPackage ../. { };
 
 in
 

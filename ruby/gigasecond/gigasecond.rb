@@ -3,7 +3,7 @@ module BookKeeping
 end
 
 class Gigasecond
-  GIGASECOND = 10**9
+  GIGASECOND = 10 ** 9
 
   def self.from(seconds)
     seconds + GIGASECOND

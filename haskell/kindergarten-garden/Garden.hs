@@ -1,28 +1,27 @@
-{-|
-Module      : Garden
-Copyright   : (c) Eric Bailey, 2015
-License     : MIT
+-- |
+-- Module      : Garden
+-- Copyright   : (c) Eric Bailey, 2015
+-- License     : MIT
+--
+-- Maintainer  : Eric Bailey
+-- Stability   : experimental
+-- Portability : portable
+--
+-- Parsing kindergarten garden diagrams.
+module Garden (Plant (..), defaultGarden, garden, lookupPlants) where
 
-Maintainer  : Eric Bailey
-Stability   : experimental
-Portability : portable
+import Data.List (elemIndex, sort)
+import Data.List.Split (chunksOf)
+import Data.Map (Map)
+import qualified Data.Map as M
+import Data.Maybe (mapMaybe)
 
-Parsing kindergarten garden diagrams.
--}
-
-module Garden (Plant(..), defaultGarden, garden, lookupPlants) where
-
-import           Data.List       (elemIndex, sort)
-import           Data.List.Split (chunksOf)
-import           Data.Map        (Map)
-import qualified Data.Map        as M
-import           Data.Maybe      (mapMaybe)
-
-data Plant   = Grass
-             | Clover
-             | Radishes
-             | Violets
-             deriving (Bounded, Enum, Eq, Read, Show)
+data Plant
+  = Grass
+  | Clover
+  | Radishes
+  | Violets
+  deriving (Bounded, Enum, Eq, Read, Show)
 
 -- | A diagram is a string.
 type Diagram = String
@@ -31,7 +30,7 @@ type Diagram = String
 type Student = String
 
 -- | A garden is a map from 'Student' to a list of 'Plants'.
-type Garden  = Map Student [Plant]
+type Garden = Map Student [Plant]
 
 -- | Call 'garden' with 'classList' and return the default 'Garden'.
 defaultGarden :: Diagram -> Garden
@@ -40,13 +39,15 @@ defaultGarden = garden classList
 -- | Given a list of 'Student's and a 'Diagram',
 -- return the 'Garden' represented by the the given 'Garden'.
 garden :: [Student] -> Diagram -> Garden
-garden students = M.fromListWith (++) .
-                  concatMap (sortZip students . kidRows) .
-                  reverse . linesMap fromString
+garden students =
+  M.fromListWith (++)
+    . concatMap (sortZip students . kidRows)
+    . reverse
+    . linesMap fromString
   where
     linesMap = (. lines) . map
-    kidRows  = chunksOf 2
-    sortZip  = zip . sort
+    kidRows = chunksOf 2
+    sortZip = zip . sort
 
 -- | Given a 'Student' and a 'Garden', return the list of 'Plant's
 -- belonging to the given 'Student'.
@@ -60,6 +61,17 @@ fromString = mapMaybe $ (toEnum <$>) . (`elemIndex` "GCRV")
 
 -- The default list of 'Student's.
 classList :: [Student]
-classList = ["Alice",  "Bob",    "Charlie", "David",
-             "Eve",    "Fred",   "Ginny",   "Harriet",
-             "Ileana", "Joseph", "Kincaid", "Larry"]
+classList =
+  [ "Alice",
+    "Bob",
+    "Charlie",
+    "David",
+    "Eve",
+    "Fred",
+    "Ginny",
+    "Harriet",
+    "Ileana",
+    "Joseph",
+    "Kincaid",
+    "Larry"
+  ]

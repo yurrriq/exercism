@@ -1,5 +1,5 @@
 /// Check a Luhn checksum.
-pub fn is_valid(code : &str) -> bool {
+pub fn is_valid(code: &str) -> bool {
     code.chars()
         .rev()
         .filter(|character| !character.is_whitespace())

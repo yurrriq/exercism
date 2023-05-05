@@ -18,5 +18,6 @@ words' = wordsBy $ not . isAlphaNum
 -- | Given a string, returns a Map from word to frequency for each word.
 wordCount :: String -> Map String Int
 wordCount = Map.fromListWith (+) . toPairs . words'
-  where toPairs :: [String] -> [(String, Int)]
-        toPairs = map $ flip (,) 1 . lowercase
+  where
+    toPairs :: [String] -> [(String, Int)]
+    toPairs = map $ flip (,) 1 . lowercase

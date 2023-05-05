@@ -1,9 +1,9 @@
-import           Data.Bool            (bool)
-import qualified Numeric              as N
-import           Octal                (readOct, showOct)
-import           System.Exit          (ExitCode (..), exitWith)
-import           Test.QuickCheck
-import           Test.QuickCheck.Test (isSuccess)
+import Data.Bool (bool)
+import qualified Numeric as N
+import Octal (readOct, showOct)
+import System.Exit (ExitCode (..), exitWith)
+import Test.QuickCheck
+import Test.QuickCheck.Test (isSuccess)
 
 {-
 For the appropriate amount of challenge here, you should only
@@ -17,12 +17,16 @@ Handling invalid input is not necessary.
 -}
 
 main :: IO ()
-main = exitProperly $ all isSuccess <$> mapM quickCheckResult
-  [ prop_showOct_integral
-  , prop_showOct_int
-  , prop_readOct_integral
-  , prop_readOct_int
-  ]
+main =
+  exitProperly $
+    all isSuccess
+      <$> mapM
+        quickCheckResult
+        [ prop_showOct_integral,
+          prop_showOct_int,
+          prop_readOct_integral,
+          prop_readOct_int
+        ]
 
 prop_showOct_integral :: (Integral a, Show a) => (Positive a) -> Bool
 prop_showOct_integral (Positive n) = N.showOct n "" == showOct n

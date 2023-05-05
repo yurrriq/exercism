@@ -1,12 +1,14 @@
-module Luhn ( create
-            , isValid
-            , checkDigit
-            , checksum
-            , addends
-            ) where
+module Luhn
+  ( create,
+    isValid,
+    checkDigit,
+    checksum,
+    addends,
+  )
+where
 
-import           Data.Bool (bool)
-import           Data.Char (digitToInt)
+import Data.Bool (bool)
+import Data.Char (digitToInt)
 
 {-
 -- ====================================================================
@@ -17,15 +19,15 @@ import           Data.Bits  (Bits, toIntegralSized)
 import           Data.Maybe (fromJust)
 -}
 
-
 -- ====================================================================
 --                       Integer implementation
 -- ====================================================================
 
 create :: Integer -> Integer
 create x = bool (tenx + 10 - cksum) tenx (cksum == 0)
-  where cksum = rem10 (checksum tenx)
-        tenx  = x * 10
+  where
+    cksum = rem10 (checksum tenx)
+    tenx = x * 10
 
 isValid :: Integer -> Bool
 isValid = (10 `divides`) . checksum
@@ -37,14 +39,15 @@ checksum :: Integer -> Integer
 checksum = toInteger . rem10 . sum . digits
 
 digits :: Integer -> [Integer]
-digits = map sumDigits .
-         zipWith (*) (cycle [1,2]) .
-         map (toInteger . digitToInt) .
-         reverse . show
+digits =
+  map sumDigits
+    . zipWith (*) (cycle [1, 2])
+    . map (toInteger . digitToInt)
+    . reverse
+    . show
 
 addends :: Integer -> [Integer]
 addends = reverse . digits
-
 
 {-
 -- ====================================================================
@@ -74,7 +77,6 @@ digits = map sumDigits .
 addends :: (Integral a, Bits a, Show a) => a -> [a]
 addends = reverse . digits
 
-
 -- ====================================================================
 --                      Generic helper function
 -- ====================================================================
@@ -82,7 +84,6 @@ addends = reverse . digits
 toIntegral :: (Integral a, Integral b, Bits a, Bits b) => a -> b
 toIntegral = fromJust . toIntegralSized
 -}
-
 
 -- ====================================================================
 --                          Helper functions

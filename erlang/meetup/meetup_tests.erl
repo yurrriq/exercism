@@ -368,4 +368,3 @@ last_sunday_of_march_2013_test() ->
 last_sunday_of_april_2013_test() ->
   ?assertEqual({2013, 4, 28},
                meetup:schedule(2013, 4, sunday, last)).
-

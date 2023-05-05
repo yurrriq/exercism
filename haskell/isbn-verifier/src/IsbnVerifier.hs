@@ -47,7 +47,8 @@ isbn input =
           views title checksumTitle parsed,
           views checkDigit unCheckDigit parsed
         ]
-        `mod` 11 == 0
+        `mod` 11
+        == 0
     Failure _ -> False
 
 checksumCountry :: Country -> Int
@@ -64,10 +65,14 @@ checksumTitle (Title digits) =
 parser :: Parser ISBN
 parser =
   ISBN
-    <$> (Country . digitToInt <$> digit) <* maybeDash
-    <*> (Publisher . map digitToInt <$> count 3 digit) <* maybeDash
-    <*> (Title . map digitToInt <$> count 5 digit) <* maybeDash
-    <*> (CheckDigit <$> ((digitToInt <$> digit) <|> (char 'X' $> 10))) <* eof
+    <$> (Country . digitToInt <$> digit)
+    <* maybeDash
+    <*> (Publisher . map digitToInt <$> count 3 digit)
+    <* maybeDash
+    <*> (Title . map digitToInt <$> count 5 digit)
+    <* maybeDash
+    <*> (CheckDigit <$> ((digitToInt <$> digit) <|> (char 'X' $> 10)))
+    <* eof
 
 maybeDash :: Parser (Maybe Char)
 maybeDash = optional (char '-')

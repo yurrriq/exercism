@@ -3,7 +3,7 @@
 open NUnit.Framework
 
 open RNATranscription
-    
+
 [<Test>]
 let ``Rna complement of cytosine is guanine`` () =
     Assert.That(toRna "C", Is.EqualTo("G"))

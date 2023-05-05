@@ -55,7 +55,8 @@ mod evens {
     #[test]
     fn strs() {
         let input = "You really must never be above joking.".split_whitespace();
-        let expected: Vec<_> = "You must be joking.".split_whitespace().collect();
+        let expected: Vec<_> =
+            "You must be joking.".split_whitespace().collect();
         let out: Vec<_> = evens(input).collect();
         assert_eq!(out, expected);
     }

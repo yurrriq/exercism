@@ -1,38 +1,47 @@
-{-|
-Module      : BankAccount
-Copyright   : (c) Eric Bailey, 2015
-License     : MIT
+-- |
+-- Module      : BankAccount
+-- Copyright   : (c) Eric Bailey, 2015
+-- License     : MIT
+--
+-- Maintainer  : Eric Bailey
+-- Stability   : experimental
+-- Portability : portable
+--
+-- Accessing thread-safe bank accounts.
+module BankAccount
+  ( BankAccount,
+    openAccount,
+    closeAccount,
+    getBalance,
+    incrementBalance,
+  )
+where
 
-Maintainer  : Eric Bailey
-Stability   : experimental
-Portability : portable
-
-Accessing thread-safe bank accounts.
--}
-
-module BankAccount (BankAccount,
-                    openAccount, closeAccount,
-                    getBalance, incrementBalance) where
-
-import           Control.Concurrent.STM (STM, TVar, atomically, modifyTVar,
-                                         newTVar, readTVar, writeTVar)
-import           Control.DeepSeq        (($!!))
+import Control.Concurrent.STM
+  ( STM,
+    TVar,
+    atomically,
+    modifyTVar,
+    newTVar,
+    readTVar,
+    writeTVar,
+  )
+import Control.DeepSeq (($!!))
 
 -- | A 'BankAccount' holds a shared memory location, representing a 'Balance'
 -- that supports atomic memory transactions.
-data BankAccount =
-  -- | Given a 'TVar' 'Balance', return a 'BankAccount'.
-  BankAccount {
-    -- | Return the memory location of the 'Balance' of a 'BankAccount'.
-    balance :: TVar Balance
+data BankAccount
+  = -- | Given a 'TVar' 'Balance', return a 'BankAccount'.
+    BankAccount
+    { -- | Return the memory location of the 'Balance' of a 'BankAccount'.
+      balance :: TVar Balance
     }
 
 -- | An 'Amount' is an integer.
-type Amount  = Int
+type Amount = Int
 
 -- | A 'Balance' is 'Just' an 'Amount' or 'Nothing'.
 type Balance = Maybe Amount
-
 
 -- | The initial 'Balance' of a 'BankAccount' is 'Just' @0@.
 initialBalance :: Balance
@@ -63,6 +72,7 @@ readBalance = readTVar . balance
 -- | Given a 'BankAccount' and an 'Amount' (potentially negative), atomically
 -- add the amount to the account's 'balance' and return the updated 'Balance'.
 incrementBalance :: BankAccount -> Amount -> IO Balance
-incrementBalance account amount = atomically $
-                                  (modifyBalance account $!! fmap (+ amount)) >>
-                                  readBalance account
+incrementBalance account amount =
+  atomically $
+    (modifyBalance account $!! fmap (+ amount))
+      >> readBalance account

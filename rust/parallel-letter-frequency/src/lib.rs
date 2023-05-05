@@ -3,10 +3,7 @@ use std::collections::HashMap;
 extern crate rayon;
 use rayon::prelude::*;
 
-pub fn frequency(
-    input : &[&str],
-    worker_count : usize,
-) -> HashMap<char, usize> {
+pub fn frequency(input: &[&str], worker_count: usize) -> HashMap<char, usize> {
     input
         .par_chunks(worker_count)
         .map(|input| {

@@ -1,3 +1,4 @@
+exclude: '.*(?:_test|test_|framework|vendor).*'
 repos:
 - hooks:
   - id: trailing-whitespace

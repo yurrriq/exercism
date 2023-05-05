@@ -6,7 +6,7 @@
 - Note that there are already 2 constants created for you that are of this type: `Celsius` and `Fahrenheit`, representing a temperature in Celsius and Fahrenheit, respectively
 - Add a `String()` method to the `TemperatureUnit` type so it satisfies the `Stringer` interface. This method must return the string `"°C"` if the temperature unit is Celsius or `"°F"` if the temperature unit is Fahrenheit
 
-## 2. Implement the `Stringer` interface for type  `Temperature` 
+## 2. Implement the `Stringer` interface for type  `Temperature`
 
  - Add a `String()` method to the `Temperature` type so it satisfies the `Stringer` interface
  - The `String()` method should return a string with the numeric value for the temperature and the temperature unit separated by a space (`<temperature> <unit>`)

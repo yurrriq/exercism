@@ -1,7 +1,12 @@
-import           LeapYear    (isLeapYear)
-import           System.Exit (ExitCode (..), exitWith)
-import           Test.HUnit  (Assertion, Counts (..), Test (..), runTestTT,
-                              (@=?))
+import LeapYear (isLeapYear)
+import System.Exit (ExitCode (..), exitWith)
+import Test.HUnit
+  ( Assertion,
+    Counts (..),
+    Test (..),
+    runTestTT,
+    (@=?),
+  )
 
 exitProperly :: IO Counts -> IO ()
 exitProperly m = do
@@ -12,17 +17,20 @@ testCase :: String -> Assertion -> Test
 testCase label assertion = TestLabel label (TestCase assertion)
 
 main :: IO ()
-main = exitProperly $ runTestTT $ TestList
-       [ TestList isLeapYearTests ]
+main =
+  exitProperly $
+    runTestTT $
+      TestList
+        [TestList isLeapYearTests]
 
 isLeapYearTests :: [Test]
 isLeapYearTests =
   [ testCase "vanilla leap year" $
-    True @=? isLeapYear 1996
-  , testCase "any old year" $
-    False @=? isLeapYear 1997
-  , testCase "century" $
-    False @=? isLeapYear 1900
-  , testCase "exceptional century" $
-    True @=? isLeapYear 2400
+      True @=? isLeapYear 1996,
+    testCase "any old year" $
+      False @=? isLeapYear 1997,
+    testCase "century" $
+      False @=? isLeapYear 1900,
+    testCase "exceptional century" $
+      True @=? isLeapYear 2400
   ]

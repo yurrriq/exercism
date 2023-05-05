@@ -8,11 +8,11 @@ If you get stuck on the exercise, check out `HINTS.md`, but try and solve it wit
 
 Package [regexp][package-regexp] offers support for regular expressions in Go.
 
-## Syntax 
+## Syntax
 
-The [syntax][regexp-syntax] of the regular expressions accepted is the same general syntax used by Perl, Python, and other languages. 
+The [syntax][regexp-syntax] of the regular expressions accepted is the same general syntax used by Perl, Python, and other languages.
 
-Both the search patterns and the input texts are interpreted as UTF-8.  
+Both the search patterns and the input texts are interpreted as UTF-8.
 
 When using backticks (\`) to make strings, backslashes (`\`)  don't have any special meaning and don't mark the beginning of special characters like tabs `\t` or newlines `\n`:
 
@@ -45,20 +45,20 @@ re, err = regexp.Compile(`a|b)+`)
 fmt.Println(re, err) // => <nil> error parsing regexp: unexpected ): `a|b)+`
 ```
 
-Function `MustCompile` is a convenient alternative to `Compile`: 
+Function `MustCompile` is a convenient alternative to `Compile`:
 
-```go 
+```go
 re = regexp.MustCompile(`[a-z]+\d*`)
 ```
 
-Using this function, there is no need to handle an error. 
+Using this function, there is no need to handle an error.
 
 ~~~~exercism/caution
  `MustCompile` should only be used when we know for sure the pattern does compile, as otherwise the program will panic.
  ~~~~
- 
+
  ## Regular expression methods
- 
+
 There are 16 methods of `Regexp` that match a regular expression and identify the matched text.
 Their names are matched by this regular expression:
 
@@ -67,7 +67,7 @@ Find(All)?(String)?(Submatch)?(Index)?
 ```
 
 * If `All` is present, the routine matches successive non-overlapping matches of the entire expressions.
-* If `String` is present, the argument is a string; otherwise it is a slice of bytes; return values are adjusted as appropriate. 
+* If `String` is present, the argument is a string; otherwise it is a slice of bytes; return values are adjusted as appropriate.
 * If `Submatch` is present, the return value is a slice identifying the successive submatches of the expression.
 * If `Index` is present, matches and submatches are identified by byte index pairs within the input string.
 
@@ -79,8 +79,8 @@ There are also methods for:
 All-in-all, the `regexp` package defines more than 40 functions and methods.
 We will demonstrate the use of a few methods below.
 Please see the [API documentation][package-regexp] for details of these and other functions.
- 
-### `MatchString` Examples 
+
+### `MatchString` Examples
 
 Method `MatchString` reports whether a string contains any match of a regular expression.
 
@@ -89,10 +89,10 @@ re = regexp.MustCompile(`[a-z]+\d*`)
 b = re.MatchString("[a12]")       // => true
 b = re.MatchString("12abc34(ef)") // => true
 b = re.MatchString(" abc!")       // => true
-b = re.MatchString("123 456")     // => false    
+b = re.MatchString("123 456")     // => false
 ```
 
-### `FindString` Examples 
+### `FindString` Examples
 
 Method `FindString` returns a string holding the text of the leftmost match of the regular expression.
 
@@ -110,7 +110,7 @@ Method `FindStringSubmatch` returns a slice of strings holding the text of the l
 This can be used to identify the strings matching capturing groups.
 A return value of `nil` indicates no match.
 
-```go 
+```go
 re = regexp.MustCompile(`[a-z]+(\d*)`)
 sl = re.FindStringSubmatch("[a12]")       // => []string{"a12","12"}
 sl = re.FindStringSubmatch("12abc34(ef)") // => []string{"abc34","34"}
@@ -129,9 +129,9 @@ s = re.ReplaceAllString("12abc34(ef)", "X") // => "12X(X)"
 s = re.ReplaceAllString(" abc!", "X")       // => " X!"
 s = re.ReplaceAllString("123 456", "X")     // => "123 456"
 ```
- 
+
  ### `Split` Examples
- 
+
 Method `re.Split(s,n)` slices a text `s` into substrings separated by the expression and returns a slice of the substrings between those expression matches.
 The count `n` determines the maximal number of substrings to return.
 If `n<0`, the method returns all substrings.
@@ -143,7 +143,7 @@ sl = re.Split("12abc34(ef)", 2) // => []string{"12","(ef)"}
 sl = re.Split(" abc!", -1)      // => []string{" ","!"}
 sl = re.Split("123 456", -1)    // => []string{"123 456"}
 ```
-  
+
 [package-regexp]: https://pkg.go.dev/regexp
 [regexp-syntax]: https://pkg.go.dev/regexp/syntax
 
@@ -170,7 +170,7 @@ To be considered valid a line should begin with one of the following strings:
 
 Implement the `IsValidLine` function to return `false` if a string is not valid otherwise `true`.
 
-```go 
+```go
 IsValidLine("[ERR] A good error here")
 // => true
 IsValidLine("Any old [ERR] text")
@@ -209,7 +209,7 @@ lines := []string{
     `[INF] passWord`, // contains 'password' but not surrounded by quotation marks
     `"passWord"`,  // count this one
     `[INF] User saw error message "Unexpected Error" on page load.`, // does not contain 'password'
-    `[INF] The message "Please reset your password" was ignored by the user`, // count this one 
+    `[INF] The message "Please reset your password" was ignored by the user`, // count this one
 }
 // => 2
 ```
@@ -239,7 +239,7 @@ Implement a function `TagWithUserName` that processes log lines:
 
 - Lines that do not contain the string `"User "` remain unchanged.
 - For lines that contain the string `"User "`, prefix the line with `[USR]` followed by the user name.
- 
+
 For example:
 
 ```go
@@ -248,8 +248,8 @@ result := TagWithUserName([]string{
 	"[WRN] Host down. User   Michelle4 lost connection.",
 	"[INF] Users can login again after 23:00.",
 	"[DBG] We need to check that user names are at least 6 chars long.",
-     
-}) 
+
+})
 // => []string {
 //  "[USR] James123 [WRN] User James123 has exceeded storage space.",
 //  "[USR] Michelle4 [WRN] Host down. User   Michelle4 lost connection.",
@@ -258,7 +258,7 @@ result := TagWithUserName([]string{
 // }
 ```
 
-You can assume that: 
+You can assume that:
 
 - User names are followed by at least one whitespace character in the log.
 - There is at most one occurrence of the string `"User "` in each line.

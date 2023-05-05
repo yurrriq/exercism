@@ -18,7 +18,7 @@
       };
     in
     {
-      overlay = final: prev: {
+      overlay = _final: prev: {
         myEmacs = prev.emacsWithPackagesFromUsePackage {
           alwaysEnsure = true;
           config = ./emacs.el;

@@ -1,6 +1,6 @@
-import Test.HUnit (Assertion, (@=?), runTestTT, Test(..), Counts(..))
-import System.Exit (ExitCode(..), exitWith)
 import Binary (toDecimal)
+import System.Exit (ExitCode (..), exitWith)
+import Test.HUnit (Assertion, Counts (..), Test (..), runTestTT, (@=?))
 
 exitProperly :: IO Counts -> IO ()
 exitProperly m = do
@@ -11,18 +11,23 @@ testCase :: String -> Assertion -> Test
 testCase label assertion = TestLabel label (TestCase assertion)
 
 main :: IO ()
-main = exitProperly $ runTestTT $ TestList
-       [ TestList binaryTests ]
+main =
+  exitProperly $
+    runTestTT $
+      TestList
+        [TestList binaryTests]
 
 binaryTests :: [Test]
-binaryTests = map TestCase
-  [ 1 @=? toDecimal "1"
-  , 2 @=? toDecimal "10"
-  , 3 @=? toDecimal "11"
-  , 4 @=? toDecimal "100"
-  , 9 @=? toDecimal "1001"
-  , 26 @=? toDecimal "11010"
-  , 1128 @=? toDecimal "10001101000"
-  , 0 @=? toDecimal "carrot"
-  , 0 @=? toDecimal "carrot123"
-  ]
+binaryTests =
+  map
+    TestCase
+    [ 1 @=? toDecimal "1",
+      2 @=? toDecimal "10",
+      3 @=? toDecimal "11",
+      4 @=? toDecimal "100",
+      9 @=? toDecimal "1001",
+      26 @=? toDecimal "11010",
+      1128 @=? toDecimal "10001101000",
+      0 @=? toDecimal "carrot",
+      0 @=? toDecimal "carrot123"
+    ]

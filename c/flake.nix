@@ -15,7 +15,7 @@
 
   outputs = { self, emacs-overlay, flake-utils, nixpkgs }: {
     overlays = {
-      myEmacs = final: prev: {
+      myEmacs = _final: prev: {
         myEmacs = prev.emacsWithPackagesFromUsePackage {
           alwaysEnsure = true;
           config = ./emacs.el;

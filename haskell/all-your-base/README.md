@@ -88,4 +88,3 @@ one, head over there and create an issue.  We'll do our best to help you!
 
 ## Submitting Incomplete Solutions
 It's possible to submit an incomplete solution so you can see how others have completed the exercise.
-

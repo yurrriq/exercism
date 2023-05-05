@@ -1,20 +1,18 @@
-{-|
-Module      : Raindrops
-Copyright   : (c) Eric Bailey, 2015
-License     : MIT
-
-Maintainer  : Eric Bailey
-Stability   : experimental
-Portability : portable
-
-Converting numbers to raindrops, based on their prime factors.
--}
-
+-- |
+-- Module      : Raindrops
+-- Copyright   : (c) Eric Bailey, 2015
+-- License     : MIT
+--
+-- Maintainer  : Eric Bailey
+-- Stability   : experimental
+-- Portability : portable
+--
+-- Converting numbers to raindrops, based on their prime factors.
 module Raindrops (convert) where
 
-import           Control.Monad (ap, join)
-import           Data.Bool     (bool)
-import           Data.Maybe    (fromMaybe, mapMaybe)
+import Control.Monad (ap, join)
+import Data.Bool (bool)
+import Data.Maybe (fromMaybe, mapMaybe)
 
 -- | Given a number @n@, convert it to a string, the contents of which
 -- depends on @n@'s prime factors.
@@ -39,6 +37,7 @@ iff = ap (bool Nothing . Just)
 -- return 'Just' @y@ if @p x@ holds, otherwise 'Nothing'.
 iffThen :: (a -> Bool) -> a -> b -> Maybe b
 iffThen p x = (iff p x >>) . Just
+
 -- iffThen = (((. Just) . (>>)) .) . iff
 
 -- | Given a default value @d@, a predicate @p@ and a value to test @x@,

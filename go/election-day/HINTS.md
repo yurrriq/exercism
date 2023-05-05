@@ -42,7 +42,7 @@ result := &ElectionResult{
 }
 
 result.Name // "John" - Go will automatically dereference the pointer
-            //          and access the 'Name' field of the dereferenced struct 
+            //          and access the 'Name' field of the dereferenced struct
 ```
 
 ## 6. Vote recounting

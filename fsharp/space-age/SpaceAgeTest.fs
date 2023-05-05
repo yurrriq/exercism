@@ -2,7 +2,7 @@
 
 open NUnit.Framework
 open SpaceAge
-    
+
 [<Test>]
 let ``Age on earth`` () =
     let seconds = 1000000000m

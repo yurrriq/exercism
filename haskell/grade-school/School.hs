@@ -1,32 +1,30 @@
-{-|
-Module      : School
-Copyright   : (c) Eric Bailey, 2015
-License     : MIT
-
-Maintainer  : Eric Bailey
-Stability   : experimental
-Portability : portable
-
-Altering and sorting grade school rosters.
--}
-
+-- |
+-- Module      : School
+-- Copyright   : (c) Eric Bailey, 2015
+-- License     : MIT
+--
+-- Maintainer  : Eric Bailey
+-- Stability   : experimental
+-- Portability : portable
+--
+-- Altering and sorting grade school rosters.
 module School (School, Grade, Roster, Student, empty, add, grade, sorted) where
 
-import           Data.List       (sort)
-import           Data.Map.Strict (Map)
+import Data.List (sort)
+import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
 
 -- | A school is a map from grade to list of students.
-newtype School = School { unSchool :: Map Grade [Student]}
+newtype School = School {unSchool :: Map Grade [Student]}
 
 -- | A grade is an integer.
-type Grade     = Int
+type Grade = Int
 
 -- | A student is represented by their first name, as a string.
-type Student   = String
+type Student = String
 
 -- | A roster is a list of pairs of a 'Grade' and a list of 'Student's.
-type Roster    = [(Grade, [Student])]
+type Roster = [(Grade, [Student])]
 
 -- | The empty 'School'.
 empty :: School

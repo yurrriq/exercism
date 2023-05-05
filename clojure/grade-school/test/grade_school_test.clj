@@ -51,5 +51,3 @@
              (grade-school/add "Kyle" 3)
              (grade-school/sorted)
              (keys)))))
-
-

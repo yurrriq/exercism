@@ -4,12 +4,12 @@ open NUnit.Framework
 open BankAccount
 
 [<Test>]
-let ``Returns empty balance after opening``() = 
+let ``Returns empty balance after opening``() =
     let account = mkBankAccount() |> openAccount
     Assert.That(getBalance account, Is.EqualTo(Some 0.0))
 
 [<Test>]
-let ``Check basic balance``() = 
+let ``Check basic balance``() =
     let account1 = mkBankAccount() |> openAccount
     let openingBalance = account1 |> getBalance
     let account2 = account1 |> updateBalance 10.0
@@ -18,7 +18,7 @@ let ``Check basic balance``() =
     Assert.That(updatedBalance, Is.EqualTo(Some 10.0))
 
 [<Test>]
-let ``Balance can increment or decrement``() = 
+let ``Balance can increment or decrement``() =
     let account1 = mkBankAccount() |> openAccount
     let openingBalance = account1 |> getBalance
     let account2 = account1 |> updateBalance 10.0
@@ -30,8 +30,8 @@ let ``Balance can increment or decrement``() =
     Assert.That(subtractedBalance, Is.EqualTo(Some -5.0))
 
 [<Test>]
-let ``Account can be closed``() = 
-    let account = 
+let ``Account can be closed``() =
+    let account =
         mkBankAccount()
         |> openAccount
         |> closeAccount

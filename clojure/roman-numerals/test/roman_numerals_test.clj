@@ -59,4 +59,3 @@
 
 (deftest type-annotations
   (is (check-ns 'roman-numerals)))
-

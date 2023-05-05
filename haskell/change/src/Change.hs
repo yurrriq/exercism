@@ -14,8 +14,8 @@ findFewestCoins _ [] = Nothing
 findFewestCoins target coins
   | target < 0 = Nothing
   | otherwise =
-    forMaybes [1 .. fromInteger (target `div` minimum coins)] $ \n ->
-      knapsack n target coins
+      forMaybes [1 .. fromInteger (target `div` minimum coins)] $ \n ->
+        knapsack n target coins
 
 -- | Using at max @n@ items from a list @xs@, allowing for any non-negative
 -- number of copies, find a list of items @ys@ such that @sum ys == goal@.

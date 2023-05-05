@@ -1,15 +1,13 @@
-{-|
-Module      : Accumulate
-Copyright   : (c) Eric Bailey, 2015
-License     : MIT
-
-Maintainer  : Eric Bailey
-Stability   : experimental
-Portability : portable
-
-The 'accumulate' operation.
--}
-
+-- |
+-- Module      : Accumulate
+-- Copyright   : (c) Eric Bailey, 2015
+-- License     : MIT
+--
+-- Maintainer  : Eric Bailey
+-- Stability   : experimental
+-- Portability : portable
+--
+-- The 'accumulate' operation.
 module Accumulate where
 
 -- | Given a collection and an operation to perform on each element

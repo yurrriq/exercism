@@ -19,7 +19,7 @@
     {
       overlay = lib.composeManyExtensions (lib.attrValues self.overlays);
       overlays = {
-        myEmacs = final: prev: {
+        myEmacs = _final: prev: {
           myEmacs = prev.emacsWithPackagesFromUsePackage {
             alwaysEnsure = true;
             config = ./emacs.el;

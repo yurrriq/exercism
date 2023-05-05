@@ -34,4 +34,3 @@ trinary_1122000120_is_decimal_32091_test() ->
 
 invalid_trinary_is_decimal_0_test() ->
   ?assertEqual(0, trinary:to_decimal("carrot")).
-

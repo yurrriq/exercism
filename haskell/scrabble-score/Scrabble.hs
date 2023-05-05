@@ -1,14 +1,13 @@
-{-|
-Module      : Scrabble
-Copyright   : (c) Eric Bailey, 2015
-License     : WTFPL
-
-Maintainer  : Eric Bailey
-Stability   : experimental
-Portability : portable
-
-Computing the Scrabble score for words.
--}
+-- |
+-- Module      : Scrabble
+-- Copyright   : (c) Eric Bailey, 2015
+-- License     : WTFPL
+--
+-- Maintainer  : Eric Bailey
+-- Stability   : experimental
+-- Portability : portable
+--
+-- Computing the Scrabble score for words.
 module Scrabble (scoreLetter, scoreWord) where
 
 import Data.Char (isLetter, toUpper)
@@ -32,10 +31,12 @@ points :: Map Char Int
 points = Map.fromList $ legend >>= uncurry (map . flip (,))
 
 legend :: [(Int, String)]
-legend = [(1,  "AEIOULNRST"),
-          (2,  "DG"),
-          (3,  "BCMP"),
-          (4,  "FHVWY"),
-          (5,  "K"),
-          (8,  "JX"),
-          (10, "QZ")]
+legend =
+  [ (1, "AEIOULNRST"),
+    (2, "DG"),
+    (3, "BCMP"),
+    (4, "FHVWY"),
+    (5, "K"),
+    (8, "JX"),
+    (10, "QZ")
+  ]

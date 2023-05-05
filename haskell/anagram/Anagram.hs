@@ -1,26 +1,27 @@
-{-|
-Module      : Anagram
-Copyright   : (c) Eric Bailey, 2015
-License     : MIT
+-- |
+-- Module      : Anagram
+-- Copyright   : (c) Eric Bailey, 2015
+-- License     : MIT
+--
+-- Maintainer  : Eric Bailey
+-- Stability   : experimental
+-- Portability : portable
+--
+-- Selecting sublists of anagrams.
+module Anagram
+  ( anagramsFor,
+    filterCaseSensitiveAnagramsFor,
+    isCaseSensitiveAnagramOf,
+    hasSameLettersAs,
 
-Maintainer  : Eric Bailey
-Stability   : experimental
-Portability : portable
+    -- * Non-pointless Version
+    -- $alternate
+  )
+where
 
-Selecting sublists of anagrams.
--}
-module Anagram (
-  anagramsFor,
-  filterCaseSensitiveAnagramsFor,
-  isCaseSensitiveAnagramOf,
-  hasSameLettersAs
-  -- * Non-pointless Version
-  -- $alternate
-  ) where
-
-import           Control.Monad (ap)
-import           Data.Char     (toLower)
-import           Data.List     (sort)
+import Control.Monad (ap)
+import Data.Char (toLower)
+import Data.List (sort)
 
 -- | Given a string and a list of strings, returns a sublist where
 -- each string is an anagram for the given string.
@@ -43,19 +44,18 @@ isCaseSensitiveAnagramOf = ap (ap . ((&&) .) . (/=)) hasSameLettersAs
 hasSameLettersAs :: String -> String -> Bool
 hasSameLettersAs = (. sort) . (==) . sort
 
-{- $alternate
-@
-anagramsFor :: String -> [String] -> [String]
-anagramsFor word = filterCaseSensitiveAnagramsFor (map toLower word)
-
-filterCaseSensitiveAnagramsFor :: String -> [String] -> [String]
-filterCaseSensitiveAnagramsFor a =
-  filter (\\b -> (map toLower b) \`isCaseSensitiveAnagramOf\` a)
-
-isCaseSensitiveAnagramOf :: String -> String -> Bool
-x \`isCaseSensitiveAnagramOf\` y = (x /= y) && (x \`hasSameLettersAs\` y)
-
-hasSameLettersAs :: String -> String -> Bool
-x \`hasSameLettersAs\` y = sort x == sort y
-@
--}
+-- $alternate
+-- @
+-- anagramsFor :: String -> [String] -> [String]
+-- anagramsFor word = filterCaseSensitiveAnagramsFor (map toLower word)
+--
+-- filterCaseSensitiveAnagramsFor :: String -> [String] -> [String]
+-- filterCaseSensitiveAnagramsFor a =
+--   filter (\\b -> (map toLower b) \`isCaseSensitiveAnagramOf\` a)
+--
+-- isCaseSensitiveAnagramOf :: String -> String -> Bool
+-- x \`isCaseSensitiveAnagramOf\` y = (x /= y) && (x \`hasSameLettersAs\` y)
+--
+-- hasSameLettersAs :: String -> String -> Bool
+-- x \`hasSameLettersAs\` y = sort x == sort y
+-- @

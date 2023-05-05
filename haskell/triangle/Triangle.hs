@@ -1,55 +1,55 @@
 -- -*- compile-command: "runhaskell triangle_test.hs" -*-
 
-{-|
-Module      : Triangle
-Copyright   : (c) Eric Bailey, 2015
-License     : MIT
-
-Maintainer  : Eric Bailey
-Stability   : experimental
-Portability : portable
-
-Determining if a triangle is illogical, equilateral, isosceles, or scalene.
--}
-module Triangle (TriangleType(..), triangleType) where
+-- |
+-- Module      : Triangle
+-- Copyright   : (c) Eric Bailey, 2015
+-- License     : MIT
+--
+-- Maintainer  : Eric Bailey
+-- Stability   : experimental
+-- Portability : portable
+--
+-- Determining if a triangle is illogical, equilateral, isosceles, or scalene.
+module Triangle (TriangleType (..), triangleType) where
 
 import Control.Monad (ap)
 
 -- | Qualifying triangles.
-data TriangleType =
-  -- | Fails the
-  -- <https://en.wikipedia.org/wiki/Triangle_inequality triangle inequality>.
-  --
-  -- <<illogical.png>>
-  Illogical
-  -- | All sides are equal.
-  --
-  -- <<equilateral.png>>
-  | Equilateral
-  -- | Two sides are equal.
-  --
-  -- <<isosceles.png>>
-  | Isosceles
-  -- | Passes the
-  -- <https://en.wikipedia.org/wiki/Triangle_inequality triangle inequality>.
-  --
-  -- <<scalene.png>>
-  | Scalene
+data TriangleType
+  = -- | Fails the
+    -- <https://en.wikipedia.org/wiki/Triangle_inequality triangle inequality>.
+    --
+    -- <<illogical.png>>
+    Illogical
+  | -- | All sides are equal.
+    --
+    -- <<equilateral.png>>
+    Equilateral
+  | -- | Two sides are equal.
+    --
+    -- <<isosceles.png>>
+    Isosceles
+  | -- | Passes the
+    -- <https://en.wikipedia.org/wiki/Triangle_inequality triangle inequality>.
+    --
+    -- <<scalene.png>>
+    Scalene
   deriving (Eq, Show)
 
 -- | Given three sides, returns a 'TriangleType' describing the quality of the
 -- given triangle.
 triangleType :: Int -> Int -> Int -> TriangleType
 triangleType x y z
-  | isIllogical   = Illogical
+  | isIllogical = Illogical
   | isEquilateral = Equilateral
-  | isIsosceles   = Isosceles
-  | otherwise     = Scalene
-  where isIllogical   = any (uncurry ((. sum) . (>=))) picked
-        isEquilateral = and . ap (zipWith (==)) tail $ sides
-        isIsosceles   = any (uncurry elem) picked
-        picked        = picks sides
-        sides         = [x,y,z]
+  | isIsosceles = Isosceles
+  | otherwise = Scalene
+  where
+    isIllogical = any (uncurry ((. sum) . (>=))) picked
+    isEquilateral = and . ap (zipWith (==)) tail $ sides
+    isIsosceles = any (uncurry elem) picked
+    picked = picks sides
+    sides = [x, y, z]
 
 -- | Given a list, returns a list of tuples of each element in the list,
 -- paired with a list of every other element.

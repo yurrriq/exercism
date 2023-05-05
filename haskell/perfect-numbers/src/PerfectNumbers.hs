@@ -70,10 +70,10 @@ data Classification
 classify :: Int -> Maybe Classification
 classify n
   | n > 0 =
-    case compare (aliquotSum n) n of
-      EQ -> pure Perfect
-      GT -> pure Abundant
-      LT -> pure Deficient
+      case compare (aliquotSum n) n of
+        EQ -> pure Perfect
+        GT -> pure Abundant
+        LT -> pure Deficient
   | otherwise = Nothing
 
 -- | The sum of the factors of a number not including the number itself.
@@ -88,7 +88,7 @@ classify n
 -- >>> aliquotSum 15 == 1 + 3 + 5
 -- True
 aliquotSum :: Int -> Int
-aliquotSum n = sum [d | d <- [1 .. n -1], d .|. n]
+aliquotSum n = sum [d | d <- [1 .. n - 1], d .|. n]
 
 -- | Whether @n@ is divisible by @d@, i.e. @True@ if \(d \mid n\).
 --

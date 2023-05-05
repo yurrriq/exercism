@@ -12,7 +12,7 @@ It's a defined type.
 ```go
 var closed bool    // boolean variable 'closed' implicitly initialized with 'false'
 speeding := true   // boolean variable 'speeding' initialized with 'true'
-hasError := false  // boolean variable 'hasError' initialized with 'false' 
+hasError := false  // boolean variable 'hasError' initialized with 'false'
 ```
 
 Go supports three logical operators that can evaluate expressions down to Boolean values, returning either `true` or `false`.

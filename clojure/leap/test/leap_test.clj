@@ -13,4 +13,3 @@
 
 (deftest exceptional-century
   (is (leap/leap-year? 2400)))
-

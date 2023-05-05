@@ -63,8 +63,8 @@ specs = do
     characterIsValid :: Character -> Property
     characterIsValid character' =
       conjoin $
-        hitpointsAddUp character' :
-        map (abilityWithinRange' character') abilities
+        hitpointsAddUp character'
+          : map (abilityWithinRange' character') abilities
       where
         abilities =
           [ ("strength", strength),

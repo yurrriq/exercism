@@ -1,7 +1,7 @@
 class Hamming
   def self.compute(strand1, strand2)
     unless strand1.length == strand2.length
-      fail ArgumentError 'Mismatched strand lengths!'
+      fail ArgumentError "Mismatched strand lengths!"
     end
 
     # FIXME: three traversals...

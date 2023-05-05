@@ -1,10 +1,10 @@
 use minesweeper::annotate;
 
-fn remove_annotations(board : &[&str]) -> Vec<String> {
+fn remove_annotations(board: &[&str]) -> Vec<String> {
     board.iter().map(|r| remove_annotations_in_row(r)).collect()
 }
 
-fn remove_annotations_in_row(row : &str) -> String {
+fn remove_annotations_in_row(row: &str) -> String {
     row.chars()
         .map(|ch| match ch {
             '*' => '*',
@@ -13,7 +13,7 @@ fn remove_annotations_in_row(row : &str) -> String {
         .collect()
 }
 
-fn run_test(test_case : &[&str]) {
+fn run_test(test_case: &[&str]) {
     let cleaned = remove_annotations(test_case);
     let cleaned_strs = cleaned.iter().map(|r| &r[..]).collect::<Vec<_>>();
     let expected = test_case.iter().map(|&r| r.to_string()).collect::<Vec<_>>();

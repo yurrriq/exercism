@@ -1,6 +1,6 @@
 use std::convert::TryFrom;
 
-static ADJACENCIES : &[(i8, i8)] = &[
+static ADJACENCIES: &[(i8, i8)] = &[
     (-1, -1),
     (0, -1),
     (1, -1),
@@ -12,7 +12,7 @@ static ADJACENCIES : &[(i8, i8)] = &[
     (1, 1),
 ];
 
-pub fn annotate(minefield : &[&str]) -> Vec<String> {
+pub fn annotate(minefield: &[&str]) -> Vec<String> {
     if minefield.is_empty() {
         return vec![];
     }

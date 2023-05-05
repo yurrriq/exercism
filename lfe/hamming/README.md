@@ -56,4 +56,3 @@ The Calculating Point Mutations problem at Rosalind [http://rosalind.info/proble
 
 ## Submitting Incomplete Problems
 It's possible to submit an incomplete solution so you can see how others have completed the exercise.
-

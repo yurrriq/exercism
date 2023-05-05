@@ -11,7 +11,8 @@ impl Clock {
 
     pub fn add_minutes(&self, minutes: i32) -> Self {
         Self {
-            hours: (self.hours + (self.minutes + minutes).div_euclid(60)).rem_euclid(24),
+            hours: (self.hours + (self.minutes + minutes).div_euclid(60))
+                .rem_euclid(24),
             minutes: (self.minutes + minutes).rem_euclid(60),
         }
     }

@@ -16,4 +16,3 @@ valid_test() ->
 
 create_test() ->
   ?assertEqual("2323 2005 7766 3554", luhn:create("2323 2005 7766 355")).
-

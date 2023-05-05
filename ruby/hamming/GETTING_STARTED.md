@@ -131,4 +131,3 @@ When everything is passing, you can submit your code with the following
 command:
 
     $ exercism submit hamming.rb
-

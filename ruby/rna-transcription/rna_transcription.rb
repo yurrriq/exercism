@@ -5,9 +5,9 @@ end
 class Complement
   def self.of_dna(strand)
     unless strand =~ /[^ACGT]/
-      strand.tr('ACGT', 'UGCA')
+      strand.tr("ACGT", "UGCA")
     else
-      ''
+      ""
     end
   end
 end

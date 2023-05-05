@@ -3,7 +3,7 @@
 open NUnit.Framework
 open Gigasecond
 open System
-    
+
 [<Test>]
 let ``First date`` () =
     let input = DateTime(2011, 4, 25)

@@ -91,12 +91,16 @@ fn test_type_override() {
             impl HashMap {
                 #[allow(dead_code)]
                 pub fn new() -> Self {
-                    panic!("Do not allow users to override which HashMap is used");
+                    panic!(
+                        "Do not allow users to override which HashMap is used"
+                    );
                 }
 
                 #[allow(dead_code)]
                 pub fn insert<K, V>(&mut self, _key: K, _val: V) {
-                    panic!("Do not allow users to override which HashMap is used");
+                    panic!(
+                        "Do not allow users to override which HashMap is used"
+                    );
                 }
             }
         }
@@ -162,7 +166,8 @@ mod simple_trybuild {
     use std::process::Command;
 
     pub fn compile_fail(file_name: &str) {
-        let invalid_path: PathBuf = ["tests", "invalid"].iter().collect::<PathBuf>();
+        let invalid_path: PathBuf =
+            ["tests", "invalid"].iter().collect::<PathBuf>();
 
         let mut file_path = invalid_path.clone();
         file_path.push(file_name);

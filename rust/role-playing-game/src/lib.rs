@@ -30,12 +30,12 @@ impl Player {
             Some(mana) if mana >= mana_cost => {
                 self.mana = Some(mana - mana_cost);
                 2 * mana_cost
-            }
+            },
             Some(_) => 0,
             None => {
                 self.health -= min(self.health, mana_cost);
                 0
-            }
+            },
         }
     }
 }

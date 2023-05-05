@@ -1,6 +1,6 @@
-import Test.HUnit (Assertion, (@=?), runTestTT, Test(..), Counts(..))
-import System.Exit (ExitCode(..), exitWith)
 import DNA (toRNA)
+import System.Exit (ExitCode (..), exitWith)
+import Test.HUnit (Assertion, Counts (..), Test (..), runTestTT, (@=?))
 
 exitProperly :: IO Counts -> IO ()
 exitProperly m = do
@@ -13,15 +13,15 @@ testCase label assertion = TestLabel label (TestCase assertion)
 toRNATests :: [Test]
 toRNATests =
   [ testCase "transcribes cytosine to guanine" $
-    "G" @=? toRNA "C"
-  , testCase "transcribes guanine to cytosine" $
-    "C" @=? toRNA "G"
-  , testCase "transcribes adenine to uracil" $
-    "U" @=? toRNA "A"
-  , testCase "transcribes thymine to adenine" $
-    "A" @=? toRNA "T"
-  , testCase "transcribes all ACGT to UGCA" $
-    "UGCACCAGAAUU" @=? toRNA "ACGTGGTCTTAA"
+      "G" @=? toRNA "C",
+    testCase "transcribes guanine to cytosine" $
+      "C" @=? toRNA "G",
+    testCase "transcribes adenine to uracil" $
+      "U" @=? toRNA "A",
+    testCase "transcribes thymine to adenine" $
+      "A" @=? toRNA "T",
+    testCase "transcribes all ACGT to UGCA" $
+      "UGCACCAGAAUU" @=? toRNA "ACGTGGTCTTAA"
   ]
 
 main :: IO ()

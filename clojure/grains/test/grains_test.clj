@@ -25,4 +25,3 @@
 
 (deftest total-grains
   (is (= 18446744073709551615  (grains/total))))
-
