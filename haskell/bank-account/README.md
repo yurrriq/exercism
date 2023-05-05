@@ -1,6 +1,12 @@
 # Bank Account
 
-Bank accounts can be accessed in different ways at the same time.
+Welcome to Bank Account on Exercism's Haskell Track.
+If you need help running the tests or submitting your code, check out `HELP.md`.
+
+## Instructions
+
+Simulate a bank account supporting opening/closing, withdrawals, and deposits
+of money. Watch out for concurrent transactions!
 
 A bank account can be accessed in multiple ways. Clients can make
 deposits and withdrawals using the internet, mobile phones, etc. Shops
@@ -9,9 +15,8 @@ can charge against the account.
 Create an account that can be accessed from multiple threads/processes
 (terminology depends on your programming language).
 
-The account only needs to be available when the bank is open, though it
-may be available at all times. You will get notified when the bank opens
-and closes.
+It should be possible to close an account; operations against a closed
+account must fail.
 
 ## Instructions
 
@@ -26,17 +31,40 @@ it.
 
 Have fun!
 
-Check out [Exercism
-Help](http://help.exercism.io/getting-started-with-haskell.html) for
-instructions to get started writing Haskell.
+To complete this exercise you need to implement the following functions:
 
-## Running Tests
+- `openAccount` - Called at the start of each test. Returns a BankAccount.
+- `closeAccount` - Called at the end of each test.
+- `getBalance` - Get the balance of the bank account.
+- `updateBalance` - Increment the balance of the bank account by the given amount.
 
-Use `runhaskell` (included in the Haskell Platform) to compile and run your
-Haskell code.
+The amount may be negative for a withdrawal.
 
-    $ runhaskell -Wall bob_test.hs
+The initial balance of the bank account should be 0.
+
+You will find a dummy data declaration and type signatures already in place,
+but it is up to you to define the functions and create a meaningful data type,
+newtype or type synonym.
+
+If you need help, here are some additional resources:
+
+- Read about [concurrency](https://en.wikipedia.org/wiki/Concurrent_Haskell) in Haskell.
+- Look into the [Software Transactional Memory](https://hackage.haskell.org/package/stm) package and its Transactional Variables.
 
 ## Source
 
- [view source]()
+### Created by
+
+- @etrepum
+
+### Contributed to by
+
+- @iHiD
+- @kytrinyx
+- @lpalma
+- @nicuveo
+- @petertseng
+- @ppartarr
+- @rbasso
+- @sshine
+- @tejasbubane

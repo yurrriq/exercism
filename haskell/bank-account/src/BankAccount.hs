@@ -30,7 +30,7 @@ import Control.DeepSeq (($!!))
 
 -- | A 'BankAccount' holds a shared memory location, representing a 'Balance'
 -- that supports atomic memory transactions.
-data BankAccount
+newtype BankAccount
   = -- | Given a 'TVar' 'Balance', return a 'BankAccount'.
     BankAccount
     { -- | Return the memory location of the 'Balance' of a 'BankAccount'.
@@ -38,7 +38,7 @@ data BankAccount
     }
 
 -- | An 'Amount' is an integer.
-type Amount = Int
+type Amount = Integer
 
 -- | A 'Balance' is 'Just' an 'Amount' or 'Nothing'.
 type Balance = Maybe Amount
