@@ -1,28 +1,80 @@
 # Word Count
 
-Write a program that given a phrase can count the occurrences of each word in that phrase.
+Welcome to Word Count on Exercism's Haskell Track.
+If you need help running the tests or submitting your code, check out `HELP.md`.
 
-For example for the input `"olly olly in come free"`
+## Instructions
 
-```plain
-olly: 2
-in: 1
-come: 1
-free: 1
+Given a phrase, count the occurrences of each _word_ in that phrase.
+
+For the purposes of this exercise you can expect that a _word_ will always be one of:
+
+1. A _number_ composed of one or more ASCII digits (ie "0" or "1234") OR
+2. A _simple word_ composed of one or more ASCII letters (ie "a" or "they") OR
+3. A _contraction_ of two _simple words_ joined by a single apostrophe (ie "it's" or "they're")
+
+When counting words you can assume the following rules:
+
+1. The count is _case insensitive_ (ie "You", "you", and "YOU" are 3 uses of the same word)
+2. The count is _unordered_; the tests will ignore how words and counts are ordered
+3. Other than the apostrophe in a _contraction_ all forms of _punctuation_ are regarded as spaces
+4. The words can be separated by _any_ form of whitespace (ie "\t", "\n", " ")
+
+For example, for the phrase `"That's the password: 'PASSWORD 123'!", cried the Special Agent.\nSo I fled.` the count would be:
+
+```text
+that's: 1
+the: 2
+password: 2
+123: 1
+cried: 1
+special: 1
+agent: 1
+so: 1
+i: 1
+fled: 1
 ```
 
+To complete this exercise you need to implement the function `wordCount`,
+that takes a *text* and returns how many times each *word* appears.
 
-Check out [Exercism
-Help](http://help.exercism.io/getting-started-with-haskell.html) for
-instructions to get started writing Haskell.
+If it is your first time solving this exercise, it is recommended that you
+stick to the provided signature:
 
-## Running Tests
+```haskell
+wordCount :: String -> [(String, Int)]
+```
 
-Use `runhaskell` (included in the Haskell Platform) to compile and run your
-Haskell code.
+Later, it may be a good idea to revisit this problem and play with other data
+types and libraries:
 
-    $ runhaskell -Wall bob_test.hs
+- `Text`, from package *text*.
+- `Map`, from package *containers*.
+- `MultiSet`, from package *multiset*
+
+The test suite was intentionally designed to accept almost any type signature
+that makes sense, so you are encouraged to find the one you think is the best.
 
 ## Source
 
-The golang tour [view source](http://tour.golang.org)
+### Created by
+
+- @etrepum
+
+### Contributed to by
+
+- @iHiD
+- @karen-pal
+- @kytrinyx
+- @navossoc
+- @petertseng
+- @ppartarr
+- @rbasso
+- @sshine
+- @tejasbubane
+- @Twisol
+- @yawpitch
+
+### Based on
+
+This is a classic toy problem, but we were reminded of it by seeing it in the Go Tour.

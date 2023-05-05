@@ -1,6 +1,8 @@
 module WordCount (wordCount) where
 
-import Data.Char (isAlphaNum, toLower)
+import Control.Applicative (liftA2)
+import Data.Char (isAlphaNum, isSpace, toLower)
+import Data.List (dropWhileEnd, foldl')
 import Data.List.Split (wordsBy)
 import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
@@ -13,11 +15,24 @@ lowercase = map toLower
 -- | Given a string, returns a list of strings by splitting on (and dropping)
 -- non-alphanumeric characters.
 words' :: String -> [String]
-words' = wordsBy $ not . isAlphaNum
+words' =
+  map unQuote
+    . wordsBy (not . (isAlphaNum <||> isQuote))
 
 -- | Given a string, returns a Map from word to frequency for each word.
 wordCount :: String -> Map String Int
-wordCount = Map.fromListWith (+) . toPairs . words'
+wordCount = foldl' go Map.empty . map lowercase . words'
   where
-    toPairs :: [String] -> [(String, Int)]
-    toPairs = map $ flip (,) 1 . lowercase
+    go seen word = Map.insertWith (+) word 1 seen
+
+unQuote :: String -> String
+unQuote = dropWhileEnd isQuote . dropWhile isQuote
+
+isQuote :: Char -> Bool
+isQuote '\'' = True
+isQuote _ = False
+
+(<||>) :: Applicative f => f Bool -> f Bool -> f Bool
+(<||>) = liftA2 (||)
+
+infixr 2 <||>
