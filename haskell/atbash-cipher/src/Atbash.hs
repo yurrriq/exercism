@@ -1,4 +1,8 @@
-module Atbash (encode) where
+module Atbash
+  ( encode,
+    decode,
+  )
+where
 
 import Data.Bool (bool)
 import Data.Char (chr, isDigit, toLower)
@@ -8,7 +12,10 @@ import Data.List (unfoldr)
 import Data.Maybe (mapMaybe)
 
 encode :: String -> String
-encode = unwords . partitionAll 5 . mapMaybe cipher
+encode = unwords . partitionAll 5 . decode
+
+decode :: String -> String
+decode = mapMaybe cipher
 
 cipher :: Char -> Maybe Char
 cipher = bool (rotate . toLower) Just =<< isDigit
@@ -20,7 +27,7 @@ rotate = bool (const Nothing) rotate' =<< inRange ('a', 'z')
 
 -- | Like Clojure's @partition-all@.
 partitionAll :: Int -> [a] -> [[a]]
-partitionAll n xs = unfoldr (go . splitAt n) xs
+partitionAll n = unfoldr (go . splitAt n)
   where
     go ([], []) = Nothing
     go pair = Just pair
