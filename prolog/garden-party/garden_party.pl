@@ -1,88 +1,86 @@
 /*
-
-\Predicate solve/1(Solution).
-
 \PL*/
-solve(Solution) :-
+:- use_module(library(clpfd)).
 /*PL
+
+\Predicate garden_party/3(Pairs, Dishes, Beverages).
 
 Four chefs, Aisha, Emma, Mei, and Winona, are attending a garden party. They
 each prepare a different dish and bring a different beverage.
+
 \PL*/
-    Solution = [
-        [aisha, Dish1, Beverage1],
-        [emma, Dish2, Beverage2],
-        [mei, Dish3, Beverage3],
-        [winona, Dish4, Beverage4]
-    ],
+garden_party(Pairs, Dishes, Beverages) :-
+    Table = [Chefs, Dishes, Beverages],
+    ChefNames = [aisha, emma, mei, winona],
+    Chefs = [Aisha, Emma, Mei, Winona],
+    Dishes = [PadThai, Frybread, Tagine, Biryani],
+    Beverages = [Tonic, Lassi, _Kombucha, Amasi],
+    pairs_keys_values(Pairs, Chefs, ChefNames),
+    maplist(all_distinct, Table),
+    append(Table, Vs),
+    Vs ins 1..4,
 /*PL
 
-The dishes are Pad Thai, Frybread, Tagine, and Biryani.
+Aisha prepares Tagine.
 
 \PL*/
-    permutation([Dish1, Dish2, Dish3, Dish4],
-                [pad_thai, frybread, tagine, biryani]),
+    Aisha #= Tagine,
 /*PL
 
-The beverages are Tonic, Lassi, Kombucha, and Amasi.
+Emma brings Amasi.
+
 \PL*/
-    permutation([Beverage1, Beverage2, Beverage3, Beverage4],
-                [tonic, lassi, kombucha, amasi]),
+    Emma #= Amasi,
 /*PL
 
-Aisha prepares tagine.
+The chef who prepares Frybread brings Tonic.
 
 \PL*/
-    member([aisha, tagine, _], Solution),
+    Frybread #= Tonic,
 /*PL
 
-Emma brings amasi.
+Mei brings Lassi.
 
 \PL*/
-    member([emma, _, amasi], Solution),
+    Mei #= Lassi,
 /*PL
 
-The chef who prepares frybread brings tonic.
+Winona does not prepare Pad Thai.
 
 \PL*/
-    member([_, frybread, tonic], Solution),
+    Winona #\= PadThai,
 /*PL
 
-Mei brings lassi.
+The chef who brings the Lassi did not cook the Biryani
 
 \PL*/
-    member([mei, DishLassi, lassi], Solution),
-/*PL
-
-The chef who brings the lassi did not cook the biryani.
-
-\PL*/
-    dif(DishLassi, biryani),
-/*PL
-
-Winona does not prepare pad thai.
-
-\PL*/
-    member([winona, DishWinona, _], Solution),
-    dif(DishWinona, pad_thai),
-    !.
-/*PL
-
-\Predicate beverage/2(Chef, Beverage).
-
-\PL*/
-beverage(Chef, Beverage) :-
-    solve(Solution),
-    member([Chef, _, Beverage], Solution),
-    !.
+    Lassi #\= Biryani.
 /*PL
 
 \Predicate dish/2(Chef, Dish).
 
 \PL*/
 dish(Chef, Dish) :-
-    solve(Solution),
-    member([Chef, Dish, _], Solution),
+    DishNames = [pad_thai, frybread, tagine, biryani],
+    garden_party(ChefPairs, Dishes, _),
+    label(Dishes),
+    pairs_keys_values(DishPairs, Dishes, DishNames),
+    member((N-Chef), ChefPairs),
+    member((N-Dish), DishPairs),
+    !.
+/*PL
+
+\Predicate beverage/2(Chef, Beverage).
+
+\PL*/
+
+beverage(Chef, Beverage) :-
+    BeverageNames = [tonic, lassi, kombucha, amasi],
+    garden_party(ChefPairs, _, Beverages),
+    label(Beverages),
+    pairs_keys_values(BeveragePairs, Beverages, BeverageNames),
+    member((N-Chef), ChefPairs),
+    member((N-Beverage), BeveragePairs),
     !.
 /*PL
 \EndProlog*/
