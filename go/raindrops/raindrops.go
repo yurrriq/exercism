@@ -1,5 +1,22 @@
 package raindrops
 
-func Convert(number int) string {
-	panic("Please implement the Convert function")
+import (
+	"strconv"
+)
+
+var numbers = []int{3, 5, 7}
+var words = []string{"Pling", "Plang", "Plong"}
+
+func Convert(number int) (result string) {
+	for i, divisor := range numbers {
+		if number%divisor == 0 {
+			result += words[i]
+		}
+	}
+
+	if result == "" {
+		result = strconv.Itoa(number)
+	}
+
+	return result
 }
