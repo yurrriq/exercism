@@ -1,18 +1,14 @@
-// This is a "stub" file.  It's a little start on your solution.
-// It's not a complete solution though; you have to write some code.
-
-// Package gigasecond should have a package comment that summarizes what it's about.
-// https://golang.org/doc/effective_go.html#commentary
+// Calculating gigasecond anniversaries.
 package gigasecond
 
-// import path for the time package from the standard library
-import "time"
+import (
+	"time"
+)
 
-// AddGigasecond should have a comment documenting it.
+// A gigasecond in nanoseconds.
+const Gigasecond time.Duration = 1e9 * 1e9
+
+// Given a time.Time, return the time.Time a gigasecond later.
 func AddGigasecond(t time.Time) time.Time {
-	// Write some code here to pass the test suite.
-	// Then remove all the stock comments.
-	// They're here to help you get started but they only clutter a finished solution.
-	// If you leave them in, reviewers may protest!
-	return t
+	return t.Add(Gigasecond)
 }
