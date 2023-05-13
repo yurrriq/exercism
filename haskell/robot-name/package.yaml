@@ -1,0 +1,28 @@
+name: robot-name
+author: Eric Bailey
+github: yurrriq/exercism
+version: 0.1.0.4
+
+ghc-options:
+- -Wall
+- -Werror
+- -Wincomplete-patterns
+- -Wincomplete-uni-patterns
+
+dependencies:
+- base
+- mtl
+- random
+- stm
+
+library:
+  exposed-modules: Robot
+  source-dirs: src
+
+tests:
+  test:
+    main: Tests.hs
+    source-dirs: test
+    dependencies:
+    - robot-name
+    - hspec
