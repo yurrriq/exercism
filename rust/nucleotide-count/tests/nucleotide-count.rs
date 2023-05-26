@@ -1,6 +1,6 @@
-use nucleotide_count as dna;
-
 use std::collections::HashMap;
+
+use nucleotide_count as dna;
 
 fn process_nucleotidecounts_case(s: &str, pairs: &[(char, usize)]) {
     // The reason for the awkward code in here is to ensure that the failure
@@ -22,43 +22,36 @@ fn count_returns_result() {
 }
 
 #[test]
-#[ignore]
 fn test_count_empty() {
     assert_eq!(dna::count('A', ""), Ok(0));
 }
 
 #[test]
-#[ignore]
 fn count_invalid_nucleotide() {
     assert_eq!(dna::count('X', "A"), Err('X'));
 }
 
 #[test]
-#[ignore]
 fn count_invalid_dna() {
     assert_eq!(dna::count('A', "AX"), Err('X'));
 }
 
 #[test]
-#[ignore]
 fn test_count_repetitive_cytosine() {
     assert_eq!(dna::count('C', "CCCCC"), Ok(5));
 }
 
 #[test]
-#[ignore]
 fn test_count_only_thymine() {
     assert_eq!(dna::count('T', "GGGGGTAACCCGG"), Ok(1));
 }
 
 #[test]
-#[ignore]
 fn counts_returns_result() {
     assert!(dna::nucleotide_counts("ACGT").is_ok());
 }
 
 #[test]
-#[ignore]
 fn test_empty_strand() {
     process_nucleotidecounts_case(
         "",
@@ -67,7 +60,6 @@ fn test_empty_strand() {
 }
 
 #[test]
-#[ignore]
 /// can count one nucleotide in single-character input
 fn test_can_count_one_nucleotide_in_singlecharacter_input() {
     process_nucleotidecounts_case(
@@ -77,7 +69,6 @@ fn test_can_count_one_nucleotide_in_singlecharacter_input() {
 }
 
 #[test]
-#[ignore]
 fn test_strand_with_repeated_nucleotide() {
     process_nucleotidecounts_case(
         "GGGGGGG",
@@ -86,7 +77,6 @@ fn test_strand_with_repeated_nucleotide() {
 }
 
 #[test]
-#[ignore]
 /// strand with multiple nucleotides
 fn test_strand_with_multiple_nucleotides() {
     process_nucleotidecounts_case(
@@ -96,13 +86,11 @@ fn test_strand_with_multiple_nucleotides() {
 }
 
 #[test]
-#[ignore]
 fn counts_invalid_nucleotide_results_in_err() {
     assert_eq!(dna::nucleotide_counts("GGXXX"), Err('X'));
 }
 
 #[test]
-#[ignore]
 /// strand with invalid nucleotides
 fn test_strand_with_invalid_nucleotides() {
     assert_eq!(dna::nucleotide_counts("AGXXACT"), Err('X'),);
