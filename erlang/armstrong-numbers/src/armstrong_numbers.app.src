@@ -1,9 +1,11 @@
-{application, armstrong_numbers,
-  [{description, "exercism.org - armstrong-numbers"},
+{application, armstrong_numbers, [
+    {description, "exercism.org - armstrong-numbers"},
     {vsn, "0.0.1"},
     {modules, []},
     {registered, []},
-    {applications, [kernel,
-      stdlib]},
+    {applications, [
+        kernel,
+        stdlib
+    ]},
     {env, []}
 ]}.

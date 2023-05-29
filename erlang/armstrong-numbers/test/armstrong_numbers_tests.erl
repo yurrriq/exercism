@@ -8,47 +8,55 @@
 -include_lib("erl_exercism/include/exercism.hrl").
 -include_lib("eunit/include/eunit.hrl").
 
-
-
-
 '1_zero_is_an_armstrong_number_test_'() ->
-    {"Zero is an Armstrong number",
-     ?_assert(armstrong_numbers:is_armstrong_number(0))}.
+    {"Zero is an Armstrong number", ?_assert(armstrong_numbers:is_armstrong_number(0))}.
 
 '2_single_digit_numbers_are_armstrong_numbers_test_'() ->
     {"Single-digit numbers are Armstrong numbers",
-     ?_assert(armstrong_numbers:is_armstrong_number(5))}.
+        ?_assert(armstrong_numbers:is_armstrong_number(5))}.
 
 '3_there_are_no_two_digit_armstrong_numbers_test_'() ->
     {"There are no two-digit Armstrong numbers",
-     ?_assertNot(armstrong_numbers:is_armstrong_number(10))}.
+        ?_assertNot(armstrong_numbers:is_armstrong_number(10))}.
 
 '4_three_digit_number_that_is_an_armstrong_number_test_'() ->
-    {"Three-digit number that is an Armstrong "
-     "number",
-     ?_assert(armstrong_numbers:is_armstrong_number(153))}.
+    {
+        "Three-digit number that is an Armstrong "
+        "number",
+        ?_assert(armstrong_numbers:is_armstrong_number(153))
+    }.
 
 '5_three_digit_number_that_is_not_an_armstrong_number_test_'() ->
-    {"Three-digit number that is not an Armstrong "
-     "number",
-     ?_assertNot(armstrong_numbers:is_armstrong_number(100))}.
+    {
+        "Three-digit number that is not an Armstrong "
+        "number",
+        ?_assertNot(armstrong_numbers:is_armstrong_number(100))
+    }.
 
 '6_four_digit_number_that_is_an_armstrong_number_test_'() ->
-    {"Four-digit number that is an Armstrong "
-     "number",
-     ?_assert(armstrong_numbers:is_armstrong_number(9474))}.
+    {
+        "Four-digit number that is an Armstrong "
+        "number",
+        ?_assert(armstrong_numbers:is_armstrong_number(9474))
+    }.
 
 '7_four_digit_number_that_is_not_an_armstrong_number_test_'() ->
-    {"Four-digit number that is not an Armstrong "
-     "number",
-     ?_assertNot(armstrong_numbers:is_armstrong_number(9475))}.
+    {
+        "Four-digit number that is not an Armstrong "
+        "number",
+        ?_assertNot(armstrong_numbers:is_armstrong_number(9475))
+    }.
 
 '8_seven_digit_number_that_is_an_armstrong_number_test_'() ->
-    {"Seven-digit number that is an Armstrong "
-     "number",
-     ?_assert(armstrong_numbers:is_armstrong_number(9926315))}.
+    {
+        "Seven-digit number that is an Armstrong "
+        "number",
+        ?_assert(armstrong_numbers:is_armstrong_number(9926315))
+    }.
 
 '9_seven_digit_number_that_is_not_an_armstrong_number_test_'() ->
-    {"Seven-digit number that is not an Armstrong "
-     "number",
-     ?_assertNot(armstrong_numbers:is_armstrong_number(9926314))}.
+    {
+        "Seven-digit number that is not an Armstrong "
+        "number",
+        ?_assertNot(armstrong_numbers:is_armstrong_number(9926314))
+    }.
