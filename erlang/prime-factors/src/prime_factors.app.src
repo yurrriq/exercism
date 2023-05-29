@@ -1,9 +1,11 @@
-{application, prime_factors,
-  [{description, "exercism.org - prime-factors"},
+{application, prime_factors, [
+    {description, "exercism.org - prime-factors"},
     {vsn, "0.0.1"},
     {modules, []},
     {registered, []},
-    {applications, [kernel,
-      stdlib]},
+    {applications, [
+        kernel,
+        stdlib
+    ]},
     {env, []}
 ]}.
