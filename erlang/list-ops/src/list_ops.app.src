@@ -1,9 +1,11 @@
-{application, list_ops,
-  [{description, "exercism.org - list-ops"},
+{application, list_ops, [
+    {description, "exercism.org - list-ops"},
     {vsn, "0.0.1"},
     {modules, []},
     {registered, []},
-    {applications, [kernel,
-      stdlib]},
+    {applications, [
+        kernel,
+        stdlib
+    ]},
     {env, []}
-  ]}.
+]}.
