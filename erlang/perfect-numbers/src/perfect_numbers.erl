@@ -47,4 +47,5 @@ classify(Number) ->
 aliquot_sum(Number) ->
     lists:sum([ Divisor || Divisor <- lists:seq(1, Number div 2),
                            Number rem Divisor =:= 0 ]).
+
 %%% ==================================================================== [ EOF ]
