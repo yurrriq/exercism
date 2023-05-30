@@ -1,9 +1,11 @@
-{application, perfect_numbers,
-  [{description, "exercism.org - perfect-numbers"},
+{application, perfect_numbers, [
+    {description, "exercism.org - perfect-numbers"},
     {vsn, "0.0.1"},
     {modules, []},
     {registered, []},
-    {applications, [kernel,
-      stdlib]},
+    {applications, [
+        kernel,
+        stdlib
+    ]},
     {env, []}
 ]}.
