@@ -15,8 +15,14 @@
 -export([deposit/2]).
 
 %% gen_server callbacks
--export([init/1, handle_call/3, handle_cast/2, handle_info/2,
-         terminate/2, code_change/3]).
+-export([
+    init/1,
+    handle_call/3,
+    handle_cast/2,
+    handle_info/2,
+    terminate/2,
+    code_change/3
+]).
 
 %% account record with default balance of 0
 -record(account, {balance = 0 :: amount()}).
@@ -27,9 +33,8 @@
 %% @doc Create a new bank account and return its pid.
 -spec create() -> pid().
 create() ->
-  {ok, Pid} = gen_server:start_link(?MODULE, [], []),
-  Pid.
-
+    {ok, Pid} = gen_server:start_link(?MODULE, [], []),
+    Pid.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                              SYNCHRONOUS API                               %%
@@ -60,7 +65,6 @@ close(Pid) -> gen_server:call(Pid, close).
 -spec withdraw(pid(), amount()) -> amount() | {error, atom()}.
 withdraw(Pid, Amount) -> gen_server:call(Pid, {withdraw, Amount}).
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                              ASYNCHRONOUS API                              %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -69,7 +73,6 @@ withdraw(Pid, Amount) -> gen_server:call(Pid, {withdraw, Amount}).
 %%
 -spec deposit(pid(), amount()) -> ok.
 deposit(Pid, Amount) -> gen_server:cast(Pid, {deposit, Amount}).
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                            GEN_SERVER CALLBACKS                            %%
@@ -80,36 +83,38 @@ init([]) -> {ok, #account{}}.
 
 %% @private
 handle_call(balance, _From, Account = #account{balance = Balance}) ->
-  {reply, Balance, Account};
+    {reply, Balance, Account};
 handle_call({charge, Amount}, _From, Account) when Amount =< 0 ->
-  {reply, 0, Account};
+    {reply, 0, Account};
 handle_call({charge, Amount}, _From, Account = #account{balance = Balance}) ->
-  case Balance > Amount of
-    true  -> {reply, Amount, Account#account{balance = Balance - Amount}};
-    false -> {reply, 0,      Account}
-  end;
+    case Balance > Amount of
+        true -> {reply, Amount, Account#account{balance = Balance - Amount}};
+        false -> {reply, 0, Account}
+    end;
 handle_call(close, _From, #account{balance = Balance}) ->
-  {reply, Balance, account_closed};
+    {reply, Balance, account_closed};
 handle_call({withdraw, Amount}, _From, Account) when Amount =< 0 ->
-  {reply, 0, Account};
+    {reply, 0, Account};
 handle_call({withdraw, Amount}, _From, Account = #account{balance = Balance}) ->
-  case Balance > Amount of
-    true  -> {reply, Amount,  Account#account{balance = Balance - Amount}};
-    false -> {reply, Balance, #account{}}
-  end;
-handle_call(_, _From, Error) -> {reply, {error, Error}, Error}.
+    case Balance > Amount of
+        true -> {reply, Amount, Account#account{balance = Balance - Amount}};
+        false -> {reply, Balance, #account{}}
+    end;
+handle_call(_, _From, Error) ->
+    {reply, {error, Error}, Error}.
 
 %% @private
 handle_cast({deposit, Amount}, Account) when Amount =< 0 -> {noreply, Account};
 handle_cast({deposit, Amount}, Account = #account{balance = Balance}) ->
-  {noreply, Account#account{balance = Balance + Amount}};
-handle_cast(_, Error) -> {noreply, Error}.
+    {noreply, Account#account{balance = Balance + Amount}};
+handle_cast(_, Error) ->
+    {noreply, Error}.
 
 %% @private
-handle_info(timeout, State)         -> {noreply, State}.
+handle_info(timeout, State) -> {noreply, State}.
 
 %% @private
-terminate(_Reason, _State)          -> ok.
+terminate(_Reason, _State) -> ok.
 
 %% @private
 code_change(_OldVsn, State, _Extra) -> {ok, State}.

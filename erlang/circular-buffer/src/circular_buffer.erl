@@ -16,18 +16,25 @@
 -export([write/2]).
 
 %% gen_server callbacks
--export([init/1, handle_call/3, handle_cast/2, handle_info/2,
-         terminate/2, code_change/3]).
+-export([
+    init/1,
+    handle_call/3,
+    handle_cast/2,
+    handle_info/2,
+    terminate/2,
+    code_change/3
+]).
 
 %% buffer record with default current_size of 0,
 %% and max_size and queue as undefined
--record(buffer, {current_size = 0         :: buffer_size(),
-                 max_size     = undefined :: buffer_size(),
-                 queue        = undefined :: queue:queue(term())}).
+-record(buffer, {
+    current_size = 0 :: buffer_size(),
+    max_size = undefined :: buffer_size(),
+    queue = undefined :: queue:queue(term())
+}).
 
 %% @type buffer_size(). A buffer size is an integer.
 -type buffer_size() :: integer().
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                              SYNCHRONOUS API                               %%
@@ -39,8 +46,8 @@
 %% @see size/1
 -spec create(buffer_size()) -> pid().
 create(Size) ->
-  {ok, Pid} = gen_server:start_link(?MODULE, [Size], []),
-  Pid.
+    {ok, Pid} = gen_server:start_link(?MODULE, [Size], []),
+    Pid.
 
 %% @doc Given a circular buffer pid, synchronously get and return its size.
 -spec size(pid()) -> {ok, buffer_size()}.
@@ -59,7 +66,6 @@ read(Pid) -> gen_server:call(Pid, read).
 -spec write_attempt(pid(), term()) -> {error, full} | 'ok'.
 write_attempt(Pid, Item) -> gen_server:call(Pid, {write_attempt, Item}).
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                              ASYNCHRONOUS API                              %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -72,42 +78,48 @@ write_attempt(Pid, Item) -> gen_server:call(Pid, {write_attempt, Item}).
 -spec write(pid(), term()) -> 'ok'.
 write(Pid, Item) -> gen_server:cast(Pid, {write, Item}).
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                            GEN_SERVER CALLBACKS                            %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% @private
 init([MaxSize]) ->
-  {ok, #buffer{max_size = MaxSize,
-               queue    = queue:new()}}.
+    {ok, #buffer{
+        max_size = MaxSize,
+        queue = queue:new()
+    }}.
 
 %% @private
 handle_call(read, _From, #buffer{current_size = 0} = Buffer) ->
-  {reply, {error, empty}, Buffer};
+    {reply, {error, empty}, Buffer};
 handle_call(read, _From, #buffer{current_size = N, queue = Q1} = Buffer) ->
-  {{value, Item}, Q2} = queue:out(Q1),
-  {reply, {ok, Item}, Buffer#buffer{current_size = N - 1, queue = Q2}};
+    {{value, Item}, Q2} = queue:out(Q1),
+    {reply, {ok, Item}, Buffer#buffer{current_size = N - 1, queue = Q2}};
 handle_call(size, _From, #buffer{max_size = Size} = Buffer) ->
-  {reply, {ok, Size}, Buffer};
-handle_call({write_attempt, _Item}, _From, #buffer{max_size     = N,
-                                                   current_size = N} = Buffer) ->
-  {reply, {error, full}, Buffer};
+    {reply, {ok, Size}, Buffer};
+handle_call(
+    {write_attempt, _Item},
+    _From,
+    #buffer{
+        max_size = N,
+        current_size = N
+    } = Buffer
+) ->
+    {reply, {error, full}, Buffer};
 handle_call({write_attempt, Item}, _From, Buffer) ->
-  {reply, ok, enqueue(Buffer, Item)}.
+    {reply, ok, enqueue(Buffer, Item)}.
 
 %% @private
-handle_cast({write, Item}, Buffer)  -> {noreply, enqueue(Buffer, Item)}.
+handle_cast({write, Item}, Buffer) -> {noreply, enqueue(Buffer, Item)}.
 
 %% @private
-handle_info(timeout, State)         -> {noreply, State}.
+handle_info(timeout, State) -> {noreply, State}.
 
 %% @private
-terminate(_Reason, _State)          -> ok.
+terminate(_Reason, _State) -> ok.
 
 %% @private
 code_change(_OldVsn, State, _Extra) -> {ok, State}.
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                PRIVATE API                                 %%
@@ -116,7 +128,7 @@ code_change(_OldVsn, State, _Extra) -> {ok, State}.
 %% @see write/2
 -spec enqueue(#buffer{}, term()) -> #buffer{}.
 enqueue(#buffer{current_size = N, max_size = N, queue = Q1} = Buffer, Item) ->
-  {_Removed, Q2} = queue:out(Q1),
-  Buffer#buffer{queue = queue:in(Item, Q2)};
+    {_Removed, Q2} = queue:out(Q1),
+    Buffer#buffer{queue = queue:in(Item, Q2)};
 enqueue(#buffer{current_size = N, queue = Q1} = Buffer, Item) ->
-  Buffer#buffer{current_size = N + 1, queue = queue:in(Item, Q1)}.
+    Buffer#buffer{current_size = N + 1, queue = queue:in(Item, Q1)}.

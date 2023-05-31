@@ -1,9 +1,11 @@
-{application, bob,
-  [{description, "exercism.io - bob"},
+{application, bob, [
+    {description, "exercism.io - bob"},
     {vsn, "0.0.1"},
     {modules, []},
     {registered, []},
-    {applications, [kernel,
-      stdlib]},
+    {applications, [
+        kernel,
+        stdlib
+    ]},
     {env, []}
-  ]}.
+]}.

@@ -15,13 +15,12 @@
 -export([classify/1]).
 -export_type([classification/0]).
 
-
 %%% ============================================================= [ Public API ]
 
 -type classification() ::
-        deficient |
-        perfect |
-        abundant.
+    deficient
+    | perfect
+    | abundant.
 %% Nicomachus's classification scheme for positive integers.
 
 %% @doc Classify an integer based on Nicomachus's scheme.
@@ -45,7 +44,10 @@ classify(Number) ->
 %% @doc The sum of the factors of a number not including the number itself.
 -spec aliquot_sum(pos_integer()) -> pos_integer().
 aliquot_sum(Number) ->
-    lists:sum([ Divisor || Divisor <- lists:seq(1, Number div 2),
-                           Number rem Divisor =:= 0 ]).
+    lists:sum([
+        Divisor
+     || Divisor <- lists:seq(1, Number div 2),
+        Number rem Divisor =:= 0
+    ]).
 
 %%% ==================================================================== [ EOF ]

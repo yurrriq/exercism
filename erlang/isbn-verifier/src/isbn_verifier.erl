@@ -7,7 +7,9 @@
 is_valid(Isbn) ->
     is_valid(Isbn, 10, 0).
 
--spec is_valid(IsbnPart :: string(), Position :: 0..10, Checksum :: non_neg_integer()) -> boolean().
+-spec is_valid(
+    IsbnPart :: string(), Position :: 0..10, Checksum :: non_neg_integer()
+) -> boolean().
 is_valid([], 0, Acc) ->
     Acc rem 11 =:= 0;
 is_valid([$- | Rest], Position, Acc) ->

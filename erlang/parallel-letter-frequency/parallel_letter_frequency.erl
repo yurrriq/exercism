@@ -24,13 +24,12 @@
 %% {@type frequencies()} in parallel and return the result.
 -spec dict([string()]) -> frequencies().
 dict(Strings) ->
-  Pid = spawn(fun loop/0),
-  lists:foreach(fun(String) -> Pid ! {string, String} end, Strings),
-  Pid ! {done, self()},
-  receive
-    Freqs -> Freqs
-  end.
-
+    Pid = spawn(fun loop/0),
+    lists:foreach(fun(String) -> Pid ! {string, String} end, Strings),
+    Pid ! {done, self()},
+    receive
+        Freqs -> Freqs
+    end.
 
 %%% ==================================================================
 %%% Internal functions
@@ -56,12 +55,12 @@ loop() -> loop(dict:new()).
 %% @see frequency/2
 -spec loop(frequencies()) -> frequencies().
 loop(Freqs) ->
-  receive
-    {string, String} ->
-      loop(lists:foldl(fun frequency/2, Freqs, String));
-    {done,   From}   ->
-      From ! Freqs
-  end.
+    receive
+        {string, String} ->
+            loop(lists:foldl(fun frequency/2, Freqs, String));
+        {done, From} ->
+            From ! Freqs
+    end.
 
 %% @doc Given a character `Char', and previously computed
 %% {@type frequencies()} `Freqs', increment the value of `Char'

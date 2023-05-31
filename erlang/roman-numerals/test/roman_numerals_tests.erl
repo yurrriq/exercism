@@ -4,9 +4,8 @@
 -define(TEST_VERSION, 1).
 -include("exercism.hrl").
 
-
 expect_roman(Number, Expected) ->
-  ?assertEqual(Expected, ?TESTED_MODULE:numerals(Number)).
+    ?assertEqual(Expected, ?TESTED_MODULE:numerals(Number)).
 
 convert_1_test() -> expect_roman(1, "I").
 

@@ -9,7 +9,8 @@
 -include_lib("eunit/include/eunit.hrl").
 
 '1_zero_is_an_armstrong_number_test_'() ->
-    {"Zero is an Armstrong number", ?_assert(armstrong_numbers:is_armstrong_number(0))}.
+    {"Zero is an Armstrong number",
+        ?_assert(armstrong_numbers:is_armstrong_number(0))}.
 
 '2_single_digit_numbers_are_armstrong_numbers_test_'() ->
     {"Single-digit numbers are Armstrong numbers",

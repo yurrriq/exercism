@@ -14,5 +14,5 @@ simple_word_scores_the_number_of_letters_test() -> ?checkScore(6, "street").
 complicated_word_scores_more_test() -> ?checkScore(22, "quirky").
 
 scores_are_case_insensitive_test() ->
-  ?checkScore(41, "oxyphenbutazone"),
-  ?checkScore(41, "OXYPHENBUTAZONE").
+    ?checkScore(41, "oxyphenbutazone"),
+    ?checkScore(41, "OXYPHENBUTAZONE").

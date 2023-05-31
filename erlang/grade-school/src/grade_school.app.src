@@ -1,7 +1,8 @@
-{application, grade_school,
- [{description,  "Altering and sorting grade school rosters."}
- ,{vsn,          "0.1.0"}
- ,{registered,   []}
- ,{applications, [kernel, stdlib]}
- ,{env,          []}
- ,{modules,      []}]}.
+{application, grade_school, [
+    {description, "Altering and sorting grade school rosters."},
+    {vsn, "0.1.0"},
+    {registered, []},
+    {applications, [kernel, stdlib]},
+    {env, []},
+    {modules, []}
+]}.

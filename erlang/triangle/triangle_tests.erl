@@ -5,7 +5,7 @@
 -include_lib("eunit/include/eunit.hrl").
 
 equilateral_triangles_have_equal_sides_test() ->
-    ?assertMatch(equilateral, triangle:kind(2,2,2)).
+    ?assertMatch(equilateral, triangle:kind(2, 2, 2)).
 
 larger_equilateral_triangles_also_have_equal_sides_test() ->
     ?assertMatch(equilateral, triangle:kind(10, 10, 10)).
@@ -35,21 +35,31 @@ very_small_triangles_are_legal_test() ->
     ?assertMatch(scalene, triangle:kind(0.4, 0.6, 0.3)).
 
 triangles_with_no_size_are_illegal_test() ->
-    ?assertMatch({error, "all side lengths must be positive"},
-                 triangle:kind(0, 0, 0)).
+    ?assertMatch(
+        {error, "all side lengths must be positive"},
+        triangle:kind(0, 0, 0)
+    ).
 
 triangles_with_negative_sides_are_illegal_test() ->
-    ?assertMatch({error, "all side lengths must be positive"},
-                 triangle:kind(3, 4, -5)).
+    ?assertMatch(
+        {error, "all side lengths must be positive"},
+        triangle:kind(3, 4, -5)
+    ).
 
 triangles_violating_triangle_inequality_are_illegel_test() ->
-    ?assertMatch({error, "side lengths violate triangle inequality"},
-                 triangle:kind(1, 1, 3)).
+    ?assertMatch(
+        {error, "side lengths violate triangle inequality"},
+        triangle:kind(1, 1, 3)
+    ).
 
 triangles_violating_triangle_inequality_are_illegel_2_test() ->
-    ?assertMatch({error, "side lengths violate triangle inequality"},
-                 triangle:kind(2, 4, 2)).
+    ?assertMatch(
+        {error, "side lengths violate triangle inequality"},
+        triangle:kind(2, 4, 2)
+    ).
 
 triangles_violating_triangle_inequality_are_illegel_3_test() ->
-    ?assertMatch({error, "side lengths violate triangle inequality"},
-                 triangle:kind(7, 3, 2)).
+    ?assertMatch(
+        {error, "side lengths violate triangle inequality"},
+        triangle:kind(7, 3, 2)
+    ).

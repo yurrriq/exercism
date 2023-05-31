@@ -12,22 +12,28 @@
     {"cannot attack", ?_assertNot(queen_attack:can_attack({4, 2}, {6, 6}))}.
 
 '2_can_attack_on_same_row_test_'() ->
-    {"can attack on same row", ?_assert(queen_attack:can_attack({4, 2}, {6, 2}))}.
+    {"can attack on same row",
+        ?_assert(queen_attack:can_attack({4, 2}, {6, 2}))}.
 
 '3_can_attack_on_same_column_test_'() ->
-    {"can attack on same column", ?_assert(queen_attack:can_attack({5, 4}, {5, 2}))}.
+    {"can attack on same column",
+        ?_assert(queen_attack:can_attack({5, 4}, {5, 2}))}.
 
 '4_can_attack_on_first_diagonal_test_'() ->
-    {"can attack on first diagonal", ?_assert(queen_attack:can_attack({2, 2}, {4, 0}))}.
+    {"can attack on first diagonal",
+        ?_assert(queen_attack:can_attack({2, 2}, {4, 0}))}.
 
 '5_can_attack_on_second_diagonal_test_'() ->
-    {"can attack on second diagonal", ?_assert(queen_attack:can_attack({2, 2}, {1, 3}))}.
+    {"can attack on second diagonal",
+        ?_assert(queen_attack:can_attack({2, 2}, {1, 3}))}.
 
 '6_can_attack_on_third_diagonal_test_'() ->
-    {"can attack on third diagonal", ?_assert(queen_attack:can_attack({2, 2}, {1, 1}))}.
+    {"can attack on third diagonal",
+        ?_assert(queen_attack:can_attack({2, 2}, {1, 1}))}.
 
 '7_can_attack_on_fourth_diagonal_test_'() ->
-    {"can attack on fourth diagonal", ?_assert(queen_attack:can_attack({7, 1}, {6, 0}))}.
+    {"can attack on fourth diagonal",
+        ?_assert(queen_attack:can_attack({7, 1}, {6, 0}))}.
 
 '8_cannot_attack_if_falling_diagonals_are_only_the_same_when_reflected_across_the_longest_falling_diagonal_test_'() ->
     {

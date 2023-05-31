@@ -1,10 +1,11 @@
-{application, circular_buffer,
- [{description,   "Creating and manipulating circular buffers."},
-  {vsn,          "0.1.0"},
-  {registered,   []},
-  {applications, [kernel, stdlib]},
-  {env,          []},
-  {modules,      []},
-  {contributors, []},
-  {licenses,     []},
-  {links,        []}]}.
+{application, circular_buffer, [
+    {description, "Creating and manipulating circular buffers."},
+    {vsn, "0.1.0"},
+    {registered, []},
+    {applications, [kernel, stdlib]},
+    {env, []},
+    {modules, []},
+    {contributors, []},
+    {licenses, []},
+    {links, []}
+]}.

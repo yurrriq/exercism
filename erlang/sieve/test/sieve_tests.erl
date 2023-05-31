@@ -10,7 +10,8 @@
 
 '1_no_primes_under_two_test_'() ->
     Expected = [],
-    {"no primes under two", ?_assertEqual(Expected, lists:sort(sieve:primes(1)))}.
+    {"no primes under two",
+        ?_assertEqual(Expected, lists:sort(sieve:primes(1)))}.
 
 '2_find_first_prime_test_'() ->
     Expected = [2],
@@ -18,7 +19,8 @@
 
 '3_find_primes_up_to_10_test_'() ->
     Expected = [2, 3, 5, 7],
-    {"find primes up to 10", ?_assertEqual(Expected, lists:sort(sieve:primes(10)))}.
+    {"find primes up to 10",
+        ?_assertEqual(Expected, lists:sort(sieve:primes(10)))}.
 
 '4_limit_is_prime_test_'() ->
     Expected = [2, 3, 5, 7, 11, 13],

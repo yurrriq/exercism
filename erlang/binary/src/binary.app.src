@@ -1,10 +1,12 @@
-{application, 'binary',
- [{description,   "Converting string binary numbers to their decimal equivalents."},
-  {vsn,          "0.1.0"},
-  {registered,   []},
-  {applications, [kernel, stdlib]},
-  {env,          []},
-  {modules,      []},
-  {contributors, []},
-  {licenses,     []},
-  {links,        []}]}.
+{application, 'binary', [
+    {description,
+        "Converting string binary numbers to their decimal equivalents."},
+    {vsn, "0.1.0"},
+    {registered, []},
+    {applications, [kernel, stdlib]},
+    {env, []},
+    {modules, []},
+    {contributors, []},
+    {licenses, []},
+    {links, []}
+]}.

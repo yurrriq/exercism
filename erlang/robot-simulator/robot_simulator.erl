@@ -16,12 +16,20 @@
 -export([place/3, control/2, advance/1, left/1, right/1]).
 
 %% gen_server callbacks
--export([init/1, handle_call/3, handle_cast/2, handle_info/2,
-         terminate/2, code_change/3]).
+-export([
+    init/1,
+    handle_call/3,
+    handle_cast/2,
+    handle_info/2,
+    terminate/2,
+    code_change/3
+]).
 
 %% robot record with default values as undefined
--record(robot, {direction = undefined              :: direction(),
-                position  = {undefined, undefined} :: coordinates()}).
+-record(robot, {
+    direction = undefined :: direction(),
+    position = {undefined, undefined} :: coordinates()
+}).
 
 %% @type direction(). A direction is `north', `east', `south', `west' or
 %% `undefined'.
@@ -37,9 +45,8 @@
 %% @doc Create a new robot and return its pid.
 -spec create() -> pid().
 create() ->
-  {ok, Pid} = gen_server:start_link(?MODULE, [], []),
-  Pid.
-
+    {ok, Pid} = gen_server:start_link(?MODULE, [], []),
+    Pid.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                               READ-ONLY API                                %%
@@ -56,8 +63,7 @@ direction(Pid) -> gen_server:call(Pid, direction).
 %%
 %% @see advance/1
 -spec position(pid()) -> coordinates().
-position(Pid)  -> gen_server:call(Pid, position).
-
+position(Pid) -> gen_server:call(Pid, position).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                MUTATING API                                %%
@@ -70,7 +76,7 @@ position(Pid)  -> gen_server:call(Pid, position).
 %% @see position/1
 -spec place(pid(), bearing(), coordinates()) -> 'ok'.
 place(Pid, Direction, Position) ->
-  gen_server:cast(Pid, {place, Direction, Position}).
+    gen_server:cast(Pid, {place, Direction, Position}).
 
 %% @doc Given a robot pid and a string of instructions, for each letter in
 %% `Instructions', perform one of the following actions:
@@ -90,12 +96,15 @@ place(Pid, Direction, Position) ->
 %% @see right/1
 -spec control(pid(), string()) -> 'ok'.
 control(Pid, Instructions) ->
-  lists:foreach(fun ($A) -> advance(Pid);
-                    ($L) -> left(Pid);
-                    ($R) -> right(Pid);
-                    (_)  -> noop
-                end,
-                Instructions).
+    lists:foreach(
+        fun
+            ($A) -> advance(Pid);
+            ($L) -> left(Pid);
+            ($R) -> right(Pid);
+            (_) -> noop
+        end,
+        Instructions
+    ).
 
 %% @doc Given a robot pid, asynchronously advance its position one unit, based
 %% on its current direction and position. Return `ok' immediately.
@@ -111,7 +120,7 @@ advance(Pid) -> gen_server:cast(Pid, advance).
 %% @see direction/1
 %% @see right/1
 -spec left(pid()) -> 'ok'.
-left(Pid)    -> gen_server:cast(Pid, {turn, left}).
+left(Pid) -> gen_server:cast(Pid, {turn, left}).
 
 %% @doc Given a robot pid, asynchronously change its direction by turning right.
 %% Return `ok' immediately.
@@ -119,29 +128,27 @@ left(Pid)    -> gen_server:cast(Pid, {turn, left}).
 %% @see direction/1
 %% @see left/1
 -spec right(pid()) -> 'ok'.
-right(Pid)   -> gen_server:cast(Pid, {turn, right}).
-
+right(Pid) -> gen_server:cast(Pid, {turn, right}).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                PRIVATE API                                 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 -spec advance(direction(), coordinates()) -> coordinates().
-advance(north, {X, Y}) -> {X,     Y + 1};
-advance(east,  {X, Y}) -> {X + 1, Y};
-advance(south, {X, Y}) -> {X,     Y - 1};
-advance(west,  {X, Y}) -> {X - 1, Y}.
+advance(north, {X, Y}) -> {X, Y + 1};
+advance(east, {X, Y}) -> {X + 1, Y};
+advance(south, {X, Y}) -> {X, Y - 1};
+advance(west, {X, Y}) -> {X - 1, Y}.
 
 -spec turn(direction(), bearing()) -> direction().
 turn(north, right) -> east;
-turn(north, left)  -> west;
-turn(east,  right) -> south;
-turn(east,  left)  -> north;
+turn(north, left) -> west;
+turn(east, right) -> south;
+turn(east, left) -> north;
 turn(south, right) -> west;
-turn(south, left)  -> east;
-turn(west,  right) -> north;
-turn(west,  left)  -> south.
-
+turn(south, left) -> east;
+turn(west, right) -> north;
+turn(west, left) -> south.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                            GEN_SERVER CALLBACKS                            %%
@@ -149,36 +156,42 @@ turn(west,  left)  -> south.
 
 %% @private
 init([Direction, Position]) ->
-  {ok, #robot{direction = Direction,
-              position  = Position}};
+    {ok, #robot{
+        direction = Direction,
+        position = Position
+    }};
 init([]) ->
-  {ok, #robot{}}.
+    {ok, #robot{}}.
 
 %% @private
 handle_call(direction, _From, Robot) ->
-  #robot{direction = Direction} = Robot,
-  {reply, Direction, Robot};
+    #robot{direction = Direction} = Robot,
+    {reply, Direction, Robot};
 handle_call(position, _From, Robot) ->
-  #robot{position = Position} = Robot,
-  {reply, Position, Robot}.
+    #robot{position = Position} = Robot,
+    {reply, Position, Robot}.
 
 %% @private
 handle_cast(advance, Robot) ->
-  #robot{direction = Direction,
-         position  = Position} = Robot,
-  {noreply, Robot#robot{position = advance(Direction, Position)}};
+    #robot{
+        direction = Direction,
+        position = Position
+    } = Robot,
+    {noreply, Robot#robot{position = advance(Direction, Position)}};
 handle_cast({place, Direction, Position}, Robot) ->
-  {noreply, Robot#robot{direction = Direction,
-                        position  = Position}};
+    {noreply, Robot#robot{
+        direction = Direction,
+        position = Position
+    }};
 handle_cast({turn, Turn}, Robot) ->
-  #robot{direction = Direction} = Robot,
-  {noreply, Robot#robot{direction = turn(Direction, Turn)}}.
+    #robot{direction = Direction} = Robot,
+    {noreply, Robot#robot{direction = turn(Direction, Turn)}}.
 
 %% @private
-handle_info(timeout, State)         -> {noreply, State}.
+handle_info(timeout, State) -> {noreply, State}.
 
 %% @private
-terminate(_Reason, _State)          -> ok.
+terminate(_Reason, _State) -> ok.
 
 %% @private
 code_change(_OldVsn, State, _Extra) -> {ok, State}.

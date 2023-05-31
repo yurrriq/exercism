@@ -37,13 +37,15 @@
         )}.
 
 '8_just_outside_the_inner_circle_test_'() ->
-    {"Just outside the inner circle", ?_assertEqual(5, darts:score(8.0e-1, -8.0e-1))}.
+    {"Just outside the inner circle",
+        ?_assertEqual(5, darts:score(8.0e-1, -8.0e-1))}.
 
 '9_just_within_the_middle_circle_test_'() ->
     {"Just within the middle circle", ?_assertEqual(5, darts:score(-3.5, 3.5))}.
 
 '10_just_outside_the_middle_circle_test_'() ->
-    {"Just outside the middle circle", ?_assertEqual(1, darts:score(-3.6, -3.6))}.
+    {"Just outside the middle circle",
+        ?_assertEqual(1, darts:score(-3.6, -3.6))}.
 
 '11_just_within_the_outer_circle_test_'() ->
     {"Just within the outer circle", ?_assertEqual(1, darts:score(-7.0, 7.0))}.

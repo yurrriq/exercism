@@ -12,10 +12,12 @@
     {"valid isbn", ?_assert(isbn_verifier:is_valid("3-598-21508-8"))}.
 
 '2_invalid_isbn_check_digit_test_'() ->
-    {"invalid isbn check digit", ?_assertNot(isbn_verifier:is_valid("3-598-21508-9"))}.
+    {"invalid isbn check digit",
+        ?_assertNot(isbn_verifier:is_valid("3-598-21508-9"))}.
 
 '3_valid_isbn_with_a_check_digit_of_10_test_'() ->
-    {"valid isbn with a check digit of 10", ?_assert(isbn_verifier:is_valid("3-598-21507-X"))}.
+    {"valid isbn with a check digit of 10",
+        ?_assert(isbn_verifier:is_valid("3-598-21507-X"))}.
 
 '4_check_digit_is_a_character_other_than_x_test_'() ->
     {"check digit is a character other than X",
@@ -29,10 +31,12 @@
     }.
 
 '6_x_is_only_valid_as_a_check_digit_test_'() ->
-    {"X is only valid as a check digit", ?_assertNot(isbn_verifier:is_valid("3-598-2X507-9"))}.
+    {"X is only valid as a check digit",
+        ?_assertNot(isbn_verifier:is_valid("3-598-2X507-9"))}.
 
 '7_valid_isbn_without_separating_dashes_test_'() ->
-    {"valid isbn without separating dashes", ?_assert(isbn_verifier:is_valid("3598215088"))}.
+    {"valid isbn without separating dashes",
+        ?_assert(isbn_verifier:is_valid("3598215088"))}.
 
 '8_isbn_without_separating_dashes_and_x_as_check_digit_test_'() ->
     {
@@ -42,16 +46,19 @@
     }.
 
 '9_isbn_without_check_digit_and_dashes_test_'() ->
-    {"isbn without check digit and dashes", ?_assertNot(isbn_verifier:is_valid("359821507"))}.
+    {"isbn without check digit and dashes",
+        ?_assertNot(isbn_verifier:is_valid("359821507"))}.
 
 '10_too_long_isbn_and_no_dashes_test_'() ->
-    {"too long isbn and no dashes", ?_assertNot(isbn_verifier:is_valid("3598215078X"))}.
+    {"too long isbn and no dashes",
+        ?_assertNot(isbn_verifier:is_valid("3598215078X"))}.
 
 '11_too_short_isbn_test_'() ->
     {"too short isbn", ?_assertNot(isbn_verifier:is_valid("00"))}.
 
 '12_isbn_without_check_digit_test_'() ->
-    {"isbn without check digit", ?_assertNot(isbn_verifier:is_valid("3-598-21507"))}.
+    {"isbn without check digit",
+        ?_assertNot(isbn_verifier:is_valid("3-598-21507"))}.
 
 '13_check_digit_of_x_should_not_be_used_for_0_test_'() ->
     {

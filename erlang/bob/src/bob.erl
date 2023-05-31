@@ -7,28 +7,29 @@
 
 %%%% =================================================================== [ EOH ]
 
-
 %%%% ================================================================ [ Macros ]
 
--define(IF(Test, Then, Else), (case Test of true -> Then; false -> Else end)).
+-define(IF(Test, Then, Else),
+    (case Test of
+        true -> Then;
+        false -> Else
+    end)
+).
 
-
--define(RESPONSES,
-	[ {fun is_silent/1,            "Fine. Be that way!"}
-	, {fun is_forceful_question/1, "Calm down, I know what I'm doing!"}
-	, {fun is_yelled/1,            "Whoa, chill out!"}
-	, {fun is_question/1,          "Sure."}]).
-
+-define(RESPONSES, [
+    {fun is_silent/1, "Fine. Be that way!"},
+    {fun is_forceful_question/1, "Calm down, I know what I'm doing!"},
+    {fun is_yelled/1, "Whoa, chill out!"},
+    {fun is_question/1, "Sure."}
+]).
 
 %%%% ================================================================= [ Types ]
 
 %% @type prompt(). A prompt is a string.
 -type prompt() :: string().
 
-
 %% @type response(). A response is a string.
 -type response() :: string().
-
 
 %%%% ============================================================ [ Public API ]
 
@@ -38,7 +39,6 @@ response([]) ->
     "Fine. Be that way!";
 response(Prompt) when is_list(Prompt) ->
     answer(string:trim(Prompt), ?RESPONSES).
-
 
 %%%% ========================================================= [ Private Parts ]
 
@@ -52,7 +52,6 @@ answer(Prompt, [{Pred, Response} | Rest]) ->
 answer(_Prompt, []) ->
     "Whatever.".
 
-
 %%%% ===================================================== [ Prompt Predicates ]
 
 %% @doc Given a `Prompt', determine whether it is {@link is_yelled/1. yelled}
@@ -61,7 +60,6 @@ answer(_Prompt, []) ->
 is_forceful_question(Prompt) ->
     is_question(Prompt) andalso is_yelled(Prompt).
 
-
 %% @doc Determine whether a given `Prompt' ends with `$?'.
 -spec is_question(prompt()) -> boolean().
 is_question([]) ->
@@ -69,18 +67,15 @@ is_question([]) ->
 is_question(Prompt) ->
     lists:last(Prompt) =:= $?.
 
-
 %% @doc Determine whether a given `Prompt' is the empty string.
 -spec is_silent(Prompt :: prompt()) -> boolean().
-is_silent("")      -> true;
+is_silent("") -> true;
 is_silent(_Prompt) -> false.
-
 
 %% @doc Determine if a given `Character' is an uppercase letter, A-Z.
 -spec is_upper(char()) -> boolean().
 is_upper(Character) ->
     Character >= $A andalso Character =< $Z.
-
 
 %% @doc Determine whether given `Prompt' has at least one uppercase letter,
 %% and is equal to itself uppercased.
@@ -90,10 +85,10 @@ is_yelled(Prompt) ->
 
 is_yelled(AnyUpper, [C | Cs]) ->
     case string:to_upper(C) of
-	C -> is_yelled(AnyUpper orelse is_upper(C), Cs);
-	_ -> false
+        C -> is_yelled(AnyUpper orelse is_upper(C), Cs);
+        _ -> false
     end;
-is_yelled(AnyUpper, []) -> AnyUpper.
-
+is_yelled(AnyUpper, []) ->
+    AnyUpper.
 
 %%%% =================================================================== [ EOF ]

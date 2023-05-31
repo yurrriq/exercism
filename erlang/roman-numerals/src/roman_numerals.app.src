@@ -1,8 +1,8 @@
-{application, roman_numerals,
- [{description, "exercism.io - roman-numerals"},
-  {vsn, "0.0.1"},
-  {modules, [roman_numerals]},
-  {registered, []},
-  {applications, [kernel, stdlib]},
-  {env, []}
- ]}.
+{application, roman_numerals, [
+    {description, "exercism.io - roman-numerals"},
+    {vsn, "0.0.1"},
+    {modules, [roman_numerals]},
+    {registered, []},
+    {applications, [kernel, stdlib]},
+    {env, []}
+]}.

@@ -36,7 +36,7 @@ to_decimal(String) -> to_decimal(String, 0).
 %%====================================================================
 
 -spec to_decimal(string(), integer()) -> integer().
-to_decimal([], D)     -> D;
-to_decimal([$0|T], D) -> to_decimal(T, D bsl 1);
-to_decimal([$1|T], D) -> to_decimal(T, 1 + (D bsl 1));
-to_decimal(_, _)      -> 0.
+to_decimal([], D) -> D;
+to_decimal([$0 | T], D) -> to_decimal(T, D bsl 1);
+to_decimal([$1 | T], D) -> to_decimal(T, 1 + (D bsl 1));
+to_decimal(_, _) -> 0.

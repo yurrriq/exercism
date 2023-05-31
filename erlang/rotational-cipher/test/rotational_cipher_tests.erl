@@ -5,10 +5,8 @@
 -include_lib("proper/include/proper.hrl").
 -include("exercism.hrl").
 
-
 %%% To use this testsuite completely do run
 %%% rebar3 do eunit, proper
-
 
 %%% These tests are inspired by
 %%% https://github.com/exercism/problem-specifications/blob/932c674a0554ad0db3645e9d2a473a515876d6eb/exercises/rotational-cipher/canonical-data.json
@@ -40,13 +38,23 @@ encrypt_spaces_test() ->
     ?assertEqual("T R L", ?TESTED_MODULE:encrypt("O M G", 5)).
 
 encrypt_numbers_test() ->
-    ?assertEqual("Xiwxmrk 1 2 3 xiwxmrk", ?TESTED_MODULE:encrypt("Testing 1 2 3 testing", 4)).
+    ?assertEqual(
+        "Xiwxmrk 1 2 3 xiwxmrk",
+        ?TESTED_MODULE:encrypt("Testing 1 2 3 testing", 4)
+    ).
 
 encrypt_punctuation_test() ->
-    ?assertEqual("Gzo'n zvo, Bmviyhv!", ?TESTED_MODULE:encrypt("Let's eat, Grandma!", 21)).
+    ?assertEqual(
+        "Gzo'n zvo, Bmviyhv!", ?TESTED_MODULE:encrypt("Let's eat, Grandma!", 21)
+    ).
 
 encrypt_all_letters_test() ->
-    ?assertEqual("Gur dhvpx oebja sbk whzcf bire gur ynml qbt.", ?TESTED_MODULE:encrypt("The quick brown fox jumps over the lazy dog.", 13)).
+    ?assertEqual(
+        "Gur dhvpx oebja sbk whzcf bire gur ynml qbt.",
+        ?TESTED_MODULE:encrypt(
+            "The quick brown fox jumps over the lazy dog.", 13
+        )
+    ).
 
 %% Decryption tests
 
@@ -72,28 +80,51 @@ decrypt_spaces_test() ->
     ?assertEqual("O M G", ?TESTED_MODULE:decrypt("T R L", 5)).
 
 decrypt_numbers_test() ->
-    ?assertEqual("Testing 1 2 3 testing", ?TESTED_MODULE:decrypt("Xiwxmrk 1 2 3 xiwxmrk", 4)).
+    ?assertEqual(
+        "Testing 1 2 3 testing",
+        ?TESTED_MODULE:decrypt("Xiwxmrk 1 2 3 xiwxmrk", 4)
+    ).
 
 decrypt_punctuation_test() ->
-    ?assertEqual("Let's eat, Grandma!", ?TESTED_MODULE:decrypt("Gzo'n zvo, Bmviyhv!", 21)).
+    ?assertEqual(
+        "Let's eat, Grandma!", ?TESTED_MODULE:decrypt("Gzo'n zvo, Bmviyhv!", 21)
+    ).
 
 decrypt_all_letters_test() ->
-    ?assertEqual("The quick brown fox jumps over the lazy dog.", ?TESTED_MODULE:decrypt("Gur dhvpx oebja sbk whzcf bire gur ynml qbt.", 13)).
+    ?assertEqual(
+        "The quick brown fox jumps over the lazy dog.",
+        ?TESTED_MODULE:decrypt(
+            "Gur dhvpx oebja sbk whzcf bire gur ynml qbt.", 13
+        )
+    ).
 
 %%% Properties tested via `proper`
 
 prop_decrypt_encrypt_is_id() ->
-    ?FORALL({Input, N}, {string(), integer(0,26)},
-            ?TESTED_MODULE:decrypt(?TESTED_MODULE:encrypt(Input, N), N) == Input).
+    ?FORALL(
+        {Input, N},
+        {string(), integer(0, 26)},
+        ?TESTED_MODULE:decrypt(?TESTED_MODULE:encrypt(Input, N), N) == Input
+    ).
 
 prop_decrypt_is_encrypt_with_another_key() ->
-    ?FORALL({Input, N}, {string(), integer(0,26)},
-            ?TESTED_MODULE:decrypt(Input, 26 - N) == ?TESTED_MODULE:encrypt(Input, N)).
+    ?FORALL(
+        {Input, N},
+        {string(), integer(0, 26)},
+        ?TESTED_MODULE:decrypt(Input, 26 - N) ==
+            ?TESTED_MODULE:encrypt(Input, N)
+    ).
 
 prop_encrypt_13_twice_is_id() ->
-    ?FORALL(Input, string(),
-            ?TESTED_MODULE:encrypt(?TESTED_MODULE:encrypt(Input, 13), 13) == Input).
+    ?FORALL(
+        Input,
+        string(),
+        ?TESTED_MODULE:encrypt(?TESTED_MODULE:encrypt(Input, 13), 13) == Input
+    ).
 
 prop_decrypt_13_twice_is_id() ->
-    ?FORALL(Input, string(),
-            ?TESTED_MODULE:decrypt(?TESTED_MODULE:decrypt(Input, 13), 13) == Input).
+    ?FORALL(
+        Input,
+        string(),
+        ?TESTED_MODULE:decrypt(?TESTED_MODULE:decrypt(Input, 13), 13) == Input
+    ).

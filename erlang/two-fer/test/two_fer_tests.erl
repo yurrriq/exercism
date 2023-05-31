@@ -29,7 +29,9 @@
     end)())
 end).
 
--define(_assertStringEqual(Expect, Expr), ?_test(?assertStringEqual(Expect, Expr))).
+-define(_assertStringEqual(Expect, Expr),
+    ?_test(?assertStringEqual(Expect, Expr))
+).
 
 '1_no_name_given_test_'() ->
     {"no name given",

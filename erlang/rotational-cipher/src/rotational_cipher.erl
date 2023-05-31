@@ -11,16 +11,13 @@
 
 -export([test_version/0]).
 
-
 %% Types.
 -export_type([key/0]).
 
 -type key() :: 0..26.
 
-
 %% Macros.
--define(IN_RANGE(Num,Min,Max), (Min =< Num andalso Num =< Max)).
-
+-define(IN_RANGE(Num, Min, Max), (Min =< Num andalso Num =< Max)).
 
 %%% ============================================================= [ Public API ]
 
@@ -29,12 +26,10 @@
 encrypt(String, Key) ->
     lists:map(rotate(Key), String).
 
-
 %% @todo write docstring
 -spec decrypt(string(), key()) -> string().
 decrypt(String, Key) ->
     encrypt(String, 26 - Key).
-
 
 %% @doc Return the test version, to comply with the testing procedure for the
 %% Erlang track of Exercism.
@@ -42,13 +37,11 @@ decrypt(String, Key) ->
 test_version() ->
     1.
 
-
 %%% ========================================================== [ Private Parts ]
 
 -spec rotate(key()) -> fun((char()) -> char()).
 rotate(Key) ->
     fun(Char) -> rotate(Char, Key) end.
-
 
 -spec rotate(char(), key()) -> char().
 rotate(Char, Key) when ?IN_RANGE(Char, $a, $z) ->
@@ -58,10 +51,8 @@ rotate(Char, Key) when ?IN_RANGE(Char, $A, $Z) ->
 rotate(Char, _Key) ->
     Char.
 
-
 -spec rotate_letter(char(), char(), key()) -> char().
 rotate_letter(MinChar, Char, Key) ->
     MinChar + ((Char - MinChar + Key) rem 26).
-
 
 %%% ==================================================================== [ EOF ]
