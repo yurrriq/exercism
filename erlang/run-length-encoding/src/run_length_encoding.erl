@@ -11,7 +11,9 @@ decode_iter(Acc, String) ->
     case lists:splitwith(fun(C) -> $0 =< C andalso C =< $9 end, String) of
         {[], [Char | Rest]} ->
             decode_iter([Char | Acc], Rest);
-        {CountString, _} when CountString =:= "0"; CountString =:= "1" ->
+        {[$0 | _], _} ->
+            erlang:error(bad_encoding);
+        {"1", _} ->
             erlang:error(bad_encoding);
         {CountString, [Char | Rest]} ->
             Count = list_to_integer(CountString),
