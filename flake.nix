@@ -6,7 +6,7 @@
     nixpkgs.url = "github:nixos/nixpkgs";
     treefmt-nix = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:numtide/treefmt-nix";
+      url = "github:numtide/treefmt-nix/refs/pull/83/head";
     };
   };
 
@@ -28,6 +28,10 @@
             black.enable = true;
             clang-format.enable = true;
             deadnix.enable = true;
+            erlfmt = {
+              enable = true;
+              print-width = 80;
+            };
             gofmt.enable = true;
             hlint.enable = true;
             nixpkgs-fmt.enable = true;
