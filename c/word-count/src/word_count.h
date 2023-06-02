@@ -6,8 +6,8 @@
 
 // results structure
 typedef struct word_count_word {
-  char text[MAX_WORD_LENGTH];
-  int count;
+    char text[MAX_WORD_LENGTH];
+    int count;
 } word_count_word_t;
 
 #define EXCESSIVE_LENGTH_WORD -1
