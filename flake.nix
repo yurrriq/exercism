@@ -46,6 +46,13 @@
             rufo.enable = true;
             rustfmt.enable = true;
           };
+          settings.formatter = {
+            clang-format = {
+              excludes = [
+                "**/test**"
+              ];
+            };
+          };
         };
       }
     );

@@ -1,0 +1,5 @@
+AlignTrailingComments: false
+BasedOnStyle: Microsoft
+BreakBeforeBraces: Stroustrup
+IndentWidth: 4
+PointerAlignment: Right
