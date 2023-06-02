@@ -5,22 +5,17 @@
 unsigned int ipow(unsigned int base, unsigned int exp);
 
 bool is_armstrong_number(int candidate) {
-  if (candidate == 0) {
+  if (candidate < 10) {
     return true;
   }
 
-  if (candidate < 0) {
-    return false;
-  }
-
-  unsigned int base = 10;
-  unsigned int n = (unsigned int)candidate;
-  size_t num_digits = (size_t)ceil(log(n + 1) / log(base));
+  unsigned int n = candidate;
+  unsigned int num_digits = log10(candidate) + 1;
 
   int sum = 0;
   while (n > 0) {
-    sum += ipow(n % base, num_digits);
-    n /= base;
+    sum += ipow(n % 10, num_digits);
+    n /= 10;
   }
 
   return candidate == sum;
