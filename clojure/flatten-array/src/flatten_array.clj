@@ -1,5 +1,9 @@
 (ns flatten-array)
 
-(defn flatten [arr] ;; <- arglist goes here
-  ;; your code goes here
-)
+(defn flatten [arr]
+  (mapcat (fn [x]
+            (cond
+              (sequential? x) (flatten x)
+              (some? x) [x]
+              :else []))
+          arr))
