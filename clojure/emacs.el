@@ -92,6 +92,11 @@
   (lsp-ui-doc-position 'bottom)
   (lsp-ui-sideline-enable t))
 
+(use-package magit
+  :bind
+  (("C-x g" . magit-status)
+   ("C-x C-g" . magit-status)))
+
 (use-package nix-mode)
 
 (use-package paredit
