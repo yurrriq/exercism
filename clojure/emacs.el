@@ -100,10 +100,16 @@
 (use-package nix-mode)
 
 (use-package paredit
-  :hook (emacs-lisp-mode . paredit-mode))
+  :hook ((cider-repl-mode
+          clojure-mode
+          emacs-lisp-mode)
+         . paredit-mode))
 
 (use-package rainbow-delimiters
-  :hook (emacs-lisp-mode . rainbow-delimiters-mode))
+  :hook ((cider-repl-mode
+          clojure-mode
+          emacs-lisp-mode)
+         . rainbow-delimiters-mode))
 
 (use-package smex
   :demand
