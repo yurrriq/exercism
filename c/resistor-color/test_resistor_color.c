@@ -18,19 +18,16 @@ static void test_black(void)
 
 static void test_white(void)
 {
-   TEST_IGNORE();   // delete this line to run test
    TEST_ASSERT_EQUAL_UINT16(9, color_code(WHITE));
 }
 
 static void test_orange(void)
 {
-   TEST_IGNORE();
    TEST_ASSERT_EQUAL_UINT16(3, color_code(ORANGE));
 }
 
 static void test_colors(void)
 {
-   TEST_IGNORE();
    const resistor_band_t expected[] = { BLACK, BROWN, RED,    ORANGE, YELLOW,
                                         GREEN, BLUE,  VIOLET, GREY,   WHITE };
    const resistor_band_t *actual = colors();
