@@ -3,11 +3,11 @@
 
 #define COLORS BLACK, BROWN, RED, ORANGE, YELLOW, GREEN, BLUE, VIOLET, GREY, WHITE
 
-typedef enum {
+typedef enum RESISTOR_BANDS {
     COLORS
 } resistor_band_t;
 
-int color_code(resistor_band_t);
+int color_code(resistor_band_t color);
 
-resistor_band_t *colors();
+resistor_band_t *colors(void);
 #endif
