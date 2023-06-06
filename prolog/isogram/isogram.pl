@@ -1,7 +1,6 @@
 /*
-\PL*/
-:- use_module(library(clpfd)).
-/*PL
+
+\PrologDialect{swiprolog}
 
 \Predicate isogram/1(Phrase).
 
@@ -32,9 +31,10 @@ unify the result with \emph{Letters}.
     include(is_alpha, Codes, Letters),
 /*PL
 
-Succeed iff \emph{Letters} are pairwise distinct.
+True if \emph{Letters} is a proper list without duplicates.
 
 \PL*/
-    all_distinct(Letters).
+    is_set(Letters).
 /*PL
+
 \EndProlog*/
