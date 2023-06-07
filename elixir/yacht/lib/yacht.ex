@@ -25,18 +25,17 @@ defmodule Yacht do
   def score(:sixes, dice), do: pips(6, dice)
 
   def score(:full_house, dice) do
-    case group(dice) do
-      [[_, _], [_, _, _]] -> Enum.sum(dice)
-      [[_, _, _], [_, _]] -> Enum.sum(dice)
+    case Enum.sort(dice) do
+      [x, x, y, y, y] when x != y -> Enum.sum(dice)
+      [x, x, x, y, y] when x != y -> Enum.sum(dice)
       _ -> 0
     end
   end
 
   def score(:four_of_a_kind, dice) do
-    case group(dice) do
-      [[x, _, _, _], [_]] -> 4 * x
-      [[_], [x, _, _, _]] -> 4 * x
-      [[x, _, _, _, _]] -> 4 * x
+    case Enum.sort(dice) do
+      [x, x, x, x, _y] -> 4 * x
+      [_x, y, y, y, y] -> 4 * y
       _ -> 0
     end
   end
@@ -64,12 +63,5 @@ defmodule Yacht do
     dice
     |> Enum.filter(&(&1 == n))
     |> Enum.sum()
-  end
-
-  defp group(list) do
-    list
-    |> Enum.sort
-    |> Enum.group_by(&Function.identity/1)
-    |> Map.values
   end
 end
