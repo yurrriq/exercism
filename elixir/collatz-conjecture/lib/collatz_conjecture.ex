@@ -15,22 +15,13 @@ defmodule CollatzConjecture do
         when number: pos_integer(),
              steps: non_neg_integer()
   def calc(number) when is_integer(number) and number > 0 do
-    do_calc(number, 0)
+    number
+    |> Stream.iterate(&do_calc/1)
+    |> Stream.take_while(&(&1 != 1))
+    |> Enum.count()
   end
 
-  # @spec calc(any()) :: no_return()
-
-  @spec do_calc(number, step) :: steps
-        when number: pos_integer(),
-             step: non_neg_integer(),
-             steps: non_neg_integer()
-  def do_calc(1, steps), do: steps
-
-  def do_calc(number, step) when is_even(number) do
-    do_calc(div(number, 2), step + 1)
-  end
-
-  def do_calc(number, step) do
-    do_calc(3 * number + 1, step + 1)
-  end
+  @spec do_calc(pos_integer()) :: non_neg_integer()
+  defp do_calc(n) when is_even(n), do: div(n, 2)
+  defp do_calc(n), do: n * 3 + 1
 end
