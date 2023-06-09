@@ -1,37 +1,44 @@
 package secret
 
-import (
-	"sort"
-)
+const reverse = 16
+
+func normalActions() []string {
+	return []string{
+		"wink",
+		"double blink",
+		"close your eyes",
+		"jump",
+	}
+}
 
 func Handshake(code uint) []string {
 	actions := make([]string, 0, 5)
 
-	if 1&code == 1 {
-		actions = append(actions, "wink")
+	var addToSlice func(action string, actions *[]string)
+
+	if hasInstruction(reverse, code) {
+		addToSlice = cons
+	} else {
+		addToSlice = snoc
 	}
 
-	if 2&code == 2 {
-		actions = append(actions, "double blink")
-	}
-
-	if 4&code == 4 {
-		actions = append(actions, "close your eyes")
-	}
-
-	if 8&code == 8 {
-		actions = append(actions, "jump")
-	}
-
-	if 16&code == 16 {
-		reverseSlice(actions)
+	for i, action := range normalActions() {
+		if hasInstruction(1<<i, code) {
+			addToSlice(action, &actions)
+		}
 	}
 
 	return actions
 }
 
-func reverseSlice[T comparable](s []T) {
-	sort.SliceStable(s, func(i, j int) bool {
-		return i > j
-	})
+func hasInstruction(instruction uint, code uint) bool {
+	return instruction&code == instruction
+}
+
+func cons(str string, slice *[]string) {
+	*slice = append([]string{str}, *slice...)
+}
+
+func snoc(str string, slice *[]string) {
+	*slice = append(*slice, str)
 }
