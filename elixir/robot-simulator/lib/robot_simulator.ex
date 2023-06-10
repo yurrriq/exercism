@@ -1,15 +1,58 @@
+defmodule RobotSimulator.Guards do
+  @moduledoc """
+  Guards for `RobotSimulator`.
+  """
+
+  @doc """
+  Return `true` iff `term` is a `t:RobotSimulator.direction/0`.
+
+  Allowed in guard tests. Inlined by the compiler.
+  """
+  defguard is_direction(term) when term in ~w(north east south west)a
+
+  @doc """
+  Return `true` iff `term` is a `t:RobotSimulator.position/0`.
+
+  Allowed in guard tests. Inlined by the compiler.
+  """
+  defguard is_position(term)
+           when is_tuple(term) and tuple_size(term) == 2 and
+                  is_integer(elem(term, 0)) and is_integer(elem(term, 1))
+
+  @doc """
+  Return `true` iff `term` is a `t:RobotSimulator.bearing/0`.
+
+  Allowed in guard tests. Inlined by the compiler.
+  """
+  defguard is_bearing(term) when term in [?L, ?R]
+
+  @doc """
+  Return `true` iff `term` is a `t:RobotSimulator.instruction/0`.
+
+  Allowed in guard tests. Inlined by the compiler.
+  """
+  defguard is_instruction(term) when term == ?A or is_bearing(term)
+end
+
 defmodule RobotSimulator do
+  @moduledoc """
+  A robot simulator.
+  """
+
+  import RobotSimulator.Guards
+
+  @typedoc """
+  A robot has a `t:direction/0` and a `t:position/0`.
+  """
   @type robot() :: %{
           direction: direction(),
           position: position()
         }
 
+  @typedoc """
+  One of `:north`, `:east`, `:south`, and `:west`.
+  """
   @type direction() :: :north | :east | :south | :west
-  defguard is_direction(direction)
-           when direction == :north or
-                  direction == :east or
-                  direction == :south or
-                  direction == :west
 
   @doc """
   Return the robot's direction.
@@ -19,11 +62,10 @@ defmodule RobotSimulator do
   @spec direction(robot) :: direction()
   def direction(robot), do: robot[:direction]
 
+  @typedoc """
+  A 2-tuple of Cartesian coordinates.
+  """
   @type position() :: {integer(), integer()}
-  defguard is_position(position)
-           when tuple_size(position) == 2 and
-                  is_integer(elem(position, 0)) and
-                  is_integer(elem(position, 1))
 
   @doc """
   Return the robot's position.
@@ -31,15 +73,15 @@ defmodule RobotSimulator do
   @spec position(robot) :: position()
   def position(robot), do: robot[:position]
 
-  @type bearing() :: ?L | ?R
-  defguard is_bearing(bearing)
-           when bearing == ?L or
-                  bearing == ?R
-
+  @typedoc """
+  `?A` for advance or a `t:bearing/0`.
+  """
   @type instruction() :: ?A | bearing()
-  defguard is_instruction(instruction)
-           when instruction == ?A or
-                  is_bearing(instruction)
+
+  @typedoc """
+  `?L` to turn left or `?R` to turn right.
+  """
+  @type bearing() :: ?L | ?R
 
   @doc """
   Create a Robot Simulator given an initial direction and position.
@@ -49,17 +91,16 @@ defmodule RobotSimulator do
   @spec create(direction, position) :: robot() | {:error, String.t()}
   def create(direction \\ :north, position \\ {0, 0})
 
-  def create(direction, position)
-      when is_direction(direction) and is_position(position) do
-    %{direction: direction, position: position}
-  end
-
-  def create(_, position) when is_position(position) do
+  def create(direction, _) when not is_direction(direction) do
     {:error, "invalid direction"}
   end
 
-  def create(direction, _) when is_direction(direction) do
+  def create(_, position) when not is_position(position) do
     {:error, "invalid position"}
+  end
+
+  def create(direction, position) do
+    %{direction: direction, position: position}
   end
 
   @doc """
