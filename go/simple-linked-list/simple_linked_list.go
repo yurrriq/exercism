@@ -55,10 +55,10 @@ func (l *List) Array() []int {
 }
 
 func (l *List) Reverse() *List {
-	list := New(nil)
+	list := &List{}
 
-	for value, err := l.Pop(); err == nil; value, err = l.Pop() {
-		list.Push(value)
+	for cursor := l.head; cursor != nil; cursor = cursor.next {
+		list.Push(cursor.value)
 	}
 
 	return list
