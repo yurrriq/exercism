@@ -1,0 +1,39 @@
+{
+  "authors": [],
+  "contributors": [
+    "alebaffa",
+    "bitfield",
+    "da-edra",
+    "ekingery",
+    "ferhatelmas",
+    "hilary",
+    "ilmanzo",
+    "kytrinyx",
+    "leenipper",
+    "petertseng",
+    "robphoenix",
+    "sebito91",
+    "tleen",
+    "eklatzer"
+  ],
+  "files": {
+    "solution": [
+      "binary_search.go"
+    ],
+    "test": [
+      "binary_search_test.go"
+    ],
+    "example": [
+      ".meta/example.go"
+    ],
+    "editor": [
+      "cases_test.go"
+    ],
+    "invalidator": [
+      "go.mod"
+    ]
+  },
+  "blurb": "Implement a binary search algorithm.",
+  "source": "Wikipedia",
+  "source_url": "https://en.wikipedia.org/wiki/Binary_search_algorithm"
+}
