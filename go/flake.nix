@@ -37,6 +37,7 @@
           gopls
           gotools
           myEmacs
+          revive
           rnix-lsp
         ];
       };
