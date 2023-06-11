@@ -13,31 +13,31 @@ pending :-
         space_age("Earth", 1000000000, Age),
         float_eq(Age, 3169).
 
-    test(mercury, condition(pending)) :-
+    test(mercury, condition(true)) :-
         space_age("Mercury", 2134835688, Age),
         float_eq(Age, 28088).
 
-    test(venus, condition(pending)) :-
+    test(venus, condition(true)) :-
         space_age("Venus", 189839836, Age),
         float_eq(Age, 978).
 
-    test(mars, condition(pending)) :-
+    test(mars, condition(true)) :-
         space_age("Mars", 2329871239, Age),
         float_eq(Age, 3925).
 
-    test(jupiter, condition(pending)) :-
+    test(jupiter, condition(true)) :-
         space_age("Jupiter", 901876382, Age),
         float_eq(Age, 241).
 
-    test(saturn, condition(pending)) :-
+    test(saturn, condition(true)) :-
         space_age("Saturn", 3000000000, Age),
         float_eq(Age, 323).
     
-    test(uranus, condition(pending)) :-
+    test(uranus, condition(true)) :-
         space_age("Uranus", 3210123456, Age),
         float_eq(Age, 121).
 
-    test(neptune, condition(pending)) :-
+    test(neptune, condition(true)) :-
         space_age("Neptune", 8210123456, Age),
         float_eq(Age, 158).
 
