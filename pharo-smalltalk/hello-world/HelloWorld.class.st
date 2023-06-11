@@ -6,5 +6,5 @@ Class {
 
 { #category : #example }
 HelloWorld class >> sayHello [
-	^ 'Goodbye, Mars!'
+	^ 'Hello, World!'
 ]
