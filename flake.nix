@@ -19,6 +19,7 @@
 
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
+            exercism
             pre-commit
           ];
         };
