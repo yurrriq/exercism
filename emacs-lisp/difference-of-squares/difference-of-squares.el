@@ -6,16 +6,18 @@
 
 (require 'cl-lib)
 
-(defun square (x) (expt x 2))
+(defun square (x)
+  (expt x 2))
 
-(defun square-of-sums (x) (square (reduce #'+ (number-sequence 1 x))))
+(defun square-of-sum (x)
+  (square (cl-reduce #'+ (number-sequence 1 x))))
 
 (defun sum-of-squares (x)
   (cl-reduce (lambda (sum y) (+ sum (square y)))
              (number-sequence 1 x)))
 
 (defun difference (x)
-  (- (square-of-sums x)
+  (- (square-of-sum x)
      (sum-of-squares x)))
 
 (provide 'difference-of-squares)
