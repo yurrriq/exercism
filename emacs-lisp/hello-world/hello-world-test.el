@@ -1,17 +1,15 @@
-;;; hello-world-test.el --- Tests for Hello World (exercism)
+;;; hello-world-test.el --- Tests for Hello World (exercism)  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
+;; Common test data version: 1.1.0 be3ae66
 
 ;;; Code:
 
 (load-file "hello-world.el")
+(declare-function hello "hello-world.el")
 
-(ert-deftest no-args ()
-  (should (equal (hello) "Hello, World!")))
-
-(ert-deftest with-args ()
-  (should (equal (hello "Emacs") "Hello, Emacs!"))
-  (should (equal (hello "Exercism") "Hello, Exercism!")))
+(ert-deftest hello-world-test ()
+  (should (string= (hello) "Hello, World!")))
 
 (provide 'hello-world-test)
 
