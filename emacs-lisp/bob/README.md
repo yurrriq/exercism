@@ -1,35 +1,53 @@
 # Bob
 
-Bob is a lackadaisical teenager. In conversation, his responses are very limited.
+Welcome to Bob on Exercism's Emacs Lisp Track.
+If you need help running the tests or submitting your code, check out `HELP.md`.
 
-Bob answers 'Sure.' if you ask him a question.
+## Introduction
 
-He answers 'Whoa, chill out!' if you yell at him.
+Bob is a [lackadaisical][] teenager.
+He likes to think that he's very cool.
+And he definitely doesn't get excited about things.
+That wouldn't be cool.
 
-He says 'Fine. Be that way!' if you address him without actually saying
-anything.
+When people talk to him, his responses are pretty limited.
 
-He answers 'Whatever.' to anything else.
+[lackadaisical]: https://www.collinsdictionary.com/dictionary/english/lackadaisical
 
 ## Instructions
 
-Run the test file, and fix each of the errors in turn. When you get the
-first test to pass, go to the first pending or skipped test, and make
-that pass as well. When all of the tests are passing, feel free to
-submit.
+Your task is to determine what Bob will reply to someone when they say something to him or ask him a question.
 
-Remember that passing code is just the first step. The goal is to work
-towards a solution that is as readable and expressive as you can make
-it.
+Bob only ever answers one of five things:
 
-Please make your solution as general as possible. Good code doesn't just
-pass the test suite, it works with any input that fits the
-specification.
-
-Have fun!
-
-
+- **"Sure."**
+  This is his response if you ask him a question, such as "How are you?"
+  The convention used for questions is that it ends with a question mark.
+- **"Whoa, chill out!"**
+  This is his answer if you YELL AT HIM.
+  The convention used for yelling is ALL CAPITAL LETTERS.
+- **"Calm down, I know what I'm doing!"**
+  This is what he says if you yell a question at him.
+- **"Fine. Be that way!"**
+  This is how he responds to silence.
+  The convention used for silence is nothing, or various combinations of whitespace characters.
+- **"Whatever."**
+  This is what he answers to anything else.
 
 ## Source
 
-Inspired by the 'Deaf Grandma' exercise in Chris Pine's Learn to Program tutorial. [view source](http://pine.fm/LearnToProgram/?Chapter=06)
+### Created by
+
+- @canweriotnow
+
+### Contributed to by
+
+- @benreyn
+- @kytrinyx
+- @stefanv
+- @vermiculus
+- @yurrriq
+
+### Based on
+
+Inspired by the 'Deaf Grandma' exercise in Chris Pine's Learn to Program tutorial. - https://pine.fm/LearnToProgram/?Chapter=06
