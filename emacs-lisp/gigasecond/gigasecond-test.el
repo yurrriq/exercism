@@ -1,4 +1,4 @@
-;;; gigasecond-test.el --- ERT tests for gigasecond (exercism)
+;;; gigasecond-test.el --- ERT tests for gigasecond (exercism)  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -14,6 +14,7 @@
 ;;; Code:
 
 (load-file "gigasecond.el")
+(declare-function from "gigasecond.el" (second minute hour day month year))
 
 (ert-deftest from-lisp-epoch ()
   (should
