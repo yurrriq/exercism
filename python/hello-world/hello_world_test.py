@@ -1,29 +1,26 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
 import unittest
 
-import hello_world
+try:
+    from hello_world import (
+        hello,
+    )
+
+except ImportError as import_fail:
+    message = import_fail.args[0].split("(", maxsplit=1)
+    item_name = import_fail.args[0].split()[3]
+
+    item_name = item_name[:-1] + "()'"
+
+    # pylint: disable=raise-missing-from
+    raise ImportError(
+        "\n\nMISSING FUNCTION --> In your 'hello_world.py' file, we can not find or import the"
+        f" function named {item_name}. \nThe tests for this first exercise expect a function that"
+        f' returns the string "Hello, World!"'
+        f'\n\nDid you use print("Hello, World!") instead?'
+    ) from None
 
 
-class BobTests(unittest.TestCase):
-
-    def test_hello_without_name(self):
-        self.assertEqual(
-            'Hello, world!',
-            hello_world.hello()
-        )
-    def test_hello_with_name(self):
-        self.assertEqual(
-            'Hello, Jane!',
-            hello_world.hello('Jane')
-        )
-
-    def test_hello_with_umlaut_name(self):
-        self.assertEqual(
-            'Hello, Jürgen!',
-            hello_world.hello('Jürgen')
-        )
-
-if __name__ == '__main__':
-    unittest.main()
+class HelloWorldTest(unittest.TestCase):
+    def test_say_hi(self):
+        msg = "\n\nThis test expects a return of the string 'Hello, World!' \nDid you use print('Hello, World!') by mistake?"
+        self.assertEqual(hello(), "Hello, World!", msg=msg)
