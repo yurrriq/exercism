@@ -1,4 +1,5 @@
 .direnv/
+.exercism/
 coffeescript/hello-world/hello_world.spec.coffee
 coffeescript/hello-world/README.md
 coffeescript
