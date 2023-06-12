@@ -8,14 +8,20 @@
 
 (defun response-for (prompt)
   "Given a `PROMPT', return a teenager's response."
-  (cond ((string-blank-p prompt) "Fine. Be that way!")
-        ((yelled-p prompt)       "Whoa, chill out!")
-        ((question-p prompt)     "Sure.")
-        (t                       "Whatever.")))
+  (let ((trimmed-prompt (string-trim prompt)))
+    (cond ((string-blank-p trimmed-prompt)
+           "Fine. Be that way!")
+          ((question-p trimmed-prompt)
+           (if (yelled-p trimmed-prompt)
+               "Calm down, I know what I'm doing!"
+             "Sure."))
+          ((yelled-p trimmed-prompt)
+           "Whoa, chill out!")
+          (t "Whatever."))))
 
 (defun question-p (prompt)
-  "Return t iff `PROMPT' ends with `??'."
-  (not (null (string-match "?\\'" prompt))))
+  "Return t iff `PROMPT' ends with `?'."
+  (string-suffix-p "?" prompt))
 
 (defun yelled-p (prompt)
   "Return t iff `PROMPT' is yelled.
