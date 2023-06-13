@@ -3,16 +3,14 @@ from operator import mul
 
 
 def largest_product(series, size):
-    if size < 1:
+    if size == 0:
+        return 1
+    if size < 0:
         raise ValueError("span must not be negative")
-
     if size > len(series):
         raise ValueError("span must be smaller than string length")
-
-    numbers = [digit_to_int(c) for c in list(series)]
-    chunks = chunks_of(numbers, size)
-
-    return max(product(chunk) for chunk in chunks)
+    digits = [digit_to_int(c) for c in list(series)]
+    return max(map(product, chunks_of(digits, size)))
 
 
 def product(lst):
@@ -27,5 +25,4 @@ def chunks_of(lst, n):
 def digit_to_int(digit):
     if not digit.isdigit():
         raise ValueError("digits input must only contain digits")
-
-    return ord(digit) - 48
+    return int(digit)
