@@ -7,17 +7,12 @@ def saddle_points(matrix):
         raise ValueError("irregular matrix")
 
     height = len(matrix)
-    row_maxes = {
-        (x, y)
-        for (y, row) in enumerate(matrix)
-        for (x, val) in enumerate(row)
-        if matrix[y][x] == max(row)
-    }
-    col_mins = {
-        (x, y)
-        for y in range(height)
-        for x in range(width)
-        if matrix[y][x] == (col_min := min(matrix[y][x] for y in range(height)))
-    }
+    row_maxes = [max(row) for row in matrix]
+    col_mins = [min(matrix[y][x] for y in range(height)) for x in range(width)]
 
-    return [{"column": x + 1, "row": y + 1} for (x, y) in (row_maxes & col_mins)]
+    return [
+        {"column": x + 1, "row": y + 1}
+        for (y, row_max) in enumerate(row_maxes)
+        for (x, col_min) in enumerate(col_mins)
+        if row_max == col_min
+    ]
