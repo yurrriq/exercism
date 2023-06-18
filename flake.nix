@@ -27,6 +27,7 @@
           pre-commit-check = pre-commit-hooks.lib.${system}.run {
             src = ./.;
             hooks = {
+              revive.enable = true;
               treefmt.enable = true;
             };
             settings = {
