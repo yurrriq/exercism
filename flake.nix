@@ -4,23 +4,41 @@
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:nixos/nixpkgs";
+    pre-commit-hooks = {
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+      url = "github:cachix/pre-commit-hooks.nix";
+    };
     treefmt-nix = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:numtide/treefmt-nix";
     };
   };
 
-  outputs = { flake-utils, nixpkgs, treefmt-nix, ... }:
-    flake-utils.lib.eachDefaultSystem (_system:
+  outputs = { self, flake-utils, nixpkgs, pre-commit-hooks, treefmt-nix, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        pkgs = nixpkgs.legacyPackages.${system};
       in
       {
+        checks = {
+          pre-commit-check = pre-commit-hooks.lib.${system}.run {
+            src = ./.;
+            hooks = {
+              treefmt.enable = true;
+            };
+            settings = {
+              treefmt.package = self.formatter.${system};
+            };
+          };
+        };
 
         devShells.default = pkgs.mkShell {
+          inherit (self.checks.${system}.pre-commit-check) shellHook;
           buildInputs = with pkgs; [
             exercism
-            pre-commit
           ];
         };
         formatter = treefmt-nix.lib.mkWrapper pkgs {

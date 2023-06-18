@@ -1,5 +1,6 @@
 .direnv/
 .exercism/
+.pre-commit-config.yaml
 coffeescript/hello-world/hello_world.spec.coffee
 coffeescript/hello-world/README.md
 coffeescript
