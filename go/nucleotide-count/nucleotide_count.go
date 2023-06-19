@@ -33,17 +33,11 @@ func (err NucleotideError) Error() string {
 // Returns an error if dna contains an invalid nucleotide.
 func (dna DNA) Counts() (Histogram, error) {
 	counts := Histogram{Adenine: 0, Cytosine: 0, Guanine: 0, Thymine: 0}
-	roons := []rune(dna)
-	for _, roon := range roons {
-		switch roon {
-		case 'A':
-			counts[Adenine]++
-		case 'C':
-			counts[Cytosine]++
-		case 'G':
-			counts[Guanine]++
-		case 'T':
-			counts[Thymine]++
+	nucleotides := []rune(dna)
+	for _, nucleotide := range nucleotides {
+		switch nucleotide {
+		case 'A', 'C', 'G', 'T':
+			counts[Nucleotide(nucleotide)]++
 		default:
 			return nil, ErrInvalidNucleotide
 		}
