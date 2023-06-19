@@ -1,6 +1,8 @@
+{-# LANGUAGE LambdaCase #-}
+
 -- |
 -- Module      : DNA
--- Copyright   : (c) Eric Bailey, 2015
+-- Copyright   : (c) Eric Bailey, 2015-2023
 -- License     : MIT
 --
 -- Maintainer  : Eric Bailey
@@ -8,45 +10,43 @@
 -- Portability : portable
 --
 -- Calculating nucleotide frequencies in DNA strings.
-module DNA where
+module DNA
+  ( Nucleotide (..),
+    nucleotideCounts,
+  )
+where
 
-import Data.Map.Strict (Map, fromListWith)
+import Data.Foldable (foldlM)
+import Data.Map.Strict (Map, fromList)
+import qualified Data.Map.Strict as Map
 
--- | A nucleotide is a character.
-type Nucleotide = Char
+data Nucleotide
+  = -- | Adenine
+    A
+  | -- | Cytosine
+    C
+  | -- | Guanine
+    G
+  | -- | Thymine
+    T
+  deriving (Eq, Ord, Show)
 
--- | A DNA string is a list of nucleotides.
-type DNA = [Nucleotide]
+-- | Given a DNA strand, return either the first invalid nucleotide found or a
+-- map from a nucleotide to its frequency in the given strand.
+nucleotideCounts :: String -> Either Char (Map Nucleotide Int)
+nucleotideCounts = foldlM go emptyFrequencies
+  where
+    go counts character =
+      (\nucleotide -> Map.insertWith (+) nucleotide 1 counts)
+        <$> transcribe character
 
--- | The frequency of a nucleotide in a DNA string is an integer.
-type Frequency = Int
+transcribe :: Char -> Either Char Nucleotide
+transcribe = \case
+  'A' -> Right A
+  'C' -> Right C
+  'G' -> Right G
+  'T' -> Right T
+  x -> Left x
 
--- | Given a nucleotide and a DNA string, returns the frequency of
--- the given nucleotide in the given string, throwing an exception for any
--- invalid nucleotide.
-count :: Nucleotide -> DNA -> Frequency
-count c | valid c == c = length . filter ((c ==) . valid)
-
--- | Given a DNA string, returns a map from a nucleotide to its frequency
--- in the given string, throwing an exception for any invalid nucleotide.
-nucleotideCounts :: DNA -> Map Nucleotide Frequency
-nucleotideCounts =
-  fromListWith (+)
-    .
-    -- (zip "ACGT" (repeat 0) ++) .
-    ([('A', 0), ('C', 0), ('G', 0), ('T', 0)] ++)
-    . map (flip (,) 1 . valid)
-
--- | Given a nucleotide, returns it if valid, otherwise throws an exception.
-valid :: Nucleotide -> Nucleotide
-valid c
-  | isValid c = c
-  | otherwise = throwInvalid c
-
--- | Given a nucleotide, returns @True@ if valid, otherwise @False@.
-isValid :: Nucleotide -> Bool
-isValid = (`elem` "ACGT")
-
--- | Given an invalid nucleotide, throwns an exception.
-throwInvalid :: Nucleotide -> e
-throwInvalid = error . ("invalid nucleotide " ++) . show
+emptyFrequencies :: Map Nucleotide Int
+emptyFrequencies = fromList [(A, 0), (C, 0), (G, 0), (T, 0)]

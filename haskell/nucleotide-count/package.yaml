@@ -1,22 +1,26 @@
 name: nucleotide-count
+author: Eric Bailey
+github: yurrriq/exercism
 version: 1.3.0.8
 
 dependencies:
-  - base
-  - containers
+- base
+- containers
+
+ghc-options:
+- -Wall
+- -Werror
+- -Wincomplete-patterns
+- -Wincomplete-uni-patterns
 
 library:
   exposed-modules: DNA
   source-dirs: src
-  ghc-options: -Wall
-  # dependencies:
-  # - foo       # List here the packages you
-  # - bar       # want to use in your solution.
 
 tests:
   test:
     main: Tests.hs
     source-dirs: test
     dependencies:
-      - nucleotide-count
-      - hspec
+    - nucleotide-count
+    - hspec
