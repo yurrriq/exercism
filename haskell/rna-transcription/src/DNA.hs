@@ -2,7 +2,7 @@
 
 -- |
 -- Module      : DNA
--- Copyright   : (c) Eric Bailey, 2015
+-- Copyright   : (c) Eric Bailey, 2015-2023
 -- License     : MIT
 --
 -- Maintainer  : Eric Bailey
@@ -12,18 +12,22 @@
 -- Transcription of DNA to RNA.
 module DNA
   ( toRNA,
-
-    -- * Usage
-    -- $usage
   )
 where
 
--- | Given a DNA strand, returns its RNA complement (per RNA transcription).
-toRNA :: String -> String
-toRNA = map (\case 'G' -> 'C'; 'C' -> 'G'; 'T' -> 'A'; 'A' -> 'U')
-
--- $usage
+-- | Given a DNA strand, return either the first invalid nucleotide found or the
+-- strand's RNA complement (per RNA transcription).
+--
 -- >>> toRNA "A"
--- "U"
+-- Right "U"
 -- >>> toRNA "GATTACA"
--- "CUAAUGU"
+-- Right "CUAAUGU"
+-- >>> toRNA "ACGTXXXCTTAA"
+-- Left 'X'
+toRNA :: String -> Either Char String
+toRNA = mapM $ \case
+  'G' -> Right 'C'
+  'C' -> Right 'G'
+  'T' -> Right 'A'
+  'A' -> Right 'U'
+  x -> Left x
