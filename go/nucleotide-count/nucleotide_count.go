@@ -16,7 +16,7 @@ const (
 )
 
 // DNA is a list of nucleotides. Choose a suitable data type.
-type DNA string
+type DNA []Nucleotide
 
 // ErrInvalidNucleotide is thrown when an invalid nucleotide is encountered.
 const ErrInvalidNucleotide NucleotideError = "Invalid nucleotide"
@@ -33,8 +33,7 @@ func (err NucleotideError) Error() string {
 // Returns an error if dna contains an invalid nucleotide.
 func (dna DNA) Counts() (Histogram, error) {
 	counts := Histogram{Adenine: 0, Cytosine: 0, Guanine: 0, Thymine: 0}
-	nucleotides := []rune(dna)
-	for _, nucleotide := range nucleotides {
+	for _, nucleotide := range dna {
 		switch nucleotide {
 		case 'A', 'C', 'G', 'T':
 			counts[Nucleotide(nucleotide)]++
