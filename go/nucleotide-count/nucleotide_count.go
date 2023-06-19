@@ -29,7 +29,7 @@ func NewNucleotide(roon rune) (nucleotide *Nucleotide, err error) {
 // DNA is a slice of runes.
 type DNA []rune
 
-// ErrInvalidNucleotide is thrown when an invalid nucleotide is encountered.
+// ErrInvalidNucleotide is returned when an invalid nucleotide is encountered.
 const ErrInvalidNucleotide NucleotideError = "Invalid nucleotide"
 
 // A NucleotideError is a string.
