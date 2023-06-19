@@ -26,7 +26,7 @@ func NewNucleotide(roon rune) (nucleotide *Nucleotide, err error) {
 	}
 }
 
-// DNA is a list of nucleotides. Choose a suitable data type.
+// DNA is a slice of runes.
 type DNA []rune
 
 // ErrInvalidNucleotide is thrown when an invalid nucleotide is encountered.
