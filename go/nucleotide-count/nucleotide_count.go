@@ -15,8 +15,19 @@ const (
 	Thymine             = 'T'
 )
 
+// NewNucleotide is a smart constructor to convert a rune to Nucleotide.
+func NewNucleotide(roon rune) (nucleotide *Nucleotide, err error) {
+	switch roon {
+	case 'A', 'C', 'G', 'T':
+		nucleotide := Nucleotide(roon)
+		return &nucleotide, nil
+	default:
+		return nil, ErrInvalidNucleotide
+	}
+}
+
 // DNA is a list of nucleotides. Choose a suitable data type.
-type DNA []Nucleotide
+type DNA []rune
 
 // ErrInvalidNucleotide is thrown when an invalid nucleotide is encountered.
 const ErrInvalidNucleotide NucleotideError = "Invalid nucleotide"
@@ -33,13 +44,12 @@ func (err NucleotideError) Error() string {
 // Returns an error if dna contains an invalid nucleotide.
 func (dna DNA) Counts() (Histogram, error) {
 	counts := Histogram{Adenine: 0, Cytosine: 0, Guanine: 0, Thymine: 0}
-	for _, nucleotide := range dna {
-		switch nucleotide {
-		case 'A', 'C', 'G', 'T':
-			counts[Nucleotide(nucleotide)]++
-		default:
-			return nil, ErrInvalidNucleotide
+	for _, roon := range dna {
+		nucleotide, err := NewNucleotide(roon)
+		if err != nil {
+			return nil, err
 		}
+		counts[*nucleotide]++
 	}
 
 	return counts, nil
