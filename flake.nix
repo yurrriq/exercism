@@ -28,11 +28,27 @@
   };
 
   outputs = { self, emacs-overlay, flake-utils, nixpkgs, pre-commit-hooks, treefmt-nix, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
+    {
+      overlays.haskell = _final: prev: {
+        haskellPackages = prev.haskellPackages.override {
+          overrides = _hfinal: hprev: {
+            digits = hprev.callCabal2nix "digits"
+              (prev.fetchFromGitHub {
+                owner = "yurrriq";
+                repo = "digits";
+                rev = "c3a2c2bacc4a2e2c51beefa2fdb90da9a5bddf6b";
+                hash = "sha256-/n2gf33zShj6LexHRplp975teCZyLAsg0rmXK9AHoK0=";
+              })
+              { };
+          };
+        };
+      };
+    } // flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {
           overlays = [
             emacs-overlay.overlay
+            self.overlays.haskell
           ];
           inherit system;
         };
@@ -78,6 +94,28 @@
               gotools
               revive
             ]);
+          });
+
+          haskell = self.devShells.${system}.default.overrideAttrs (super: {
+            buildInputs = super.buildInputs ++ (with pkgs; [
+              (
+                emacsWithPackagesFromUsePackage {
+                  alwaysEnsure = true;
+                  config = ./haskell/emacs.el;
+                }
+              )
+              cabal-install
+              ghc
+              ghcid
+              haskell-language-server
+            ] ++ (with haskellPackages; [
+              apply-refact
+              cabal-plan
+              hpack
+              hlint
+              ormolu
+              pointfree
+            ]));
           });
         };
 
