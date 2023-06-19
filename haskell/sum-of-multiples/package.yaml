@@ -1,21 +1,25 @@
 name: sum-of-multiples
+author: Eric Bailey
+github: yurrriq/exercism
 version: 1.5.0.10
 
 dependencies:
-  - base
+- base
+
+ghc-options:
+- -Wall
+- -Werror
+- -Wincomplete-patterns
+- -Wincomplete-uni-patterns
 
 library:
   exposed-modules: SumOfMultiples
   source-dirs: src
-  ghc-options: -Wall
-  # dependencies:
-  # - foo       # List here the packages you
-  # - bar       # want to use in your solution.
 
 tests:
   test:
     main: Tests.hs
     source-dirs: test
     dependencies:
-      - sum-of-multiples
-      - hspec
+    - sum-of-multiples
+    - hspec
