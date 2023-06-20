@@ -1,19 +1,24 @@
 # Grains
 
-Write a program that calculates the number of grains of wheat on a chessboard given that the number on each square doubles.
+Welcome to Grains on Exercism's Haskell Track.
+If you need help running the tests or submitting your code, check out `HELP.md`.
+
+## Instructions
+
+Calculate the number of grains of wheat on a chessboard given that the number
+on each square doubles.
 
 There once was a wise servant who saved the life of a prince. The king
 promised to pay whatever the servant could dream up. Knowing that the
 king loved chess, the servant told the king he would like to have grains
-of wheat. One grain on the first square of a chess board. Two grains on
-the next. Four on the third, and so on.
+of wheat. One grain on the first square of a chess board, with the number
+of grains doubling on each successive square.
 
-There are 64 squares on a chessboard.
+There are 64 squares on a chessboard (where square 1 has one grain, square 2 has two grains, and so on).
 
-Write a program that shows:
-- how many grains were on each square, and
-- the total number of grains
-
+Write code that shows:
+- how many grains were on a given square, and
+- the total number of grains on the chessboard
 
 ## For bonus points
 
@@ -26,17 +31,25 @@ are some additional things you could try:
 Then please share your thoughts in a comment on the submission. Did this
 experiment make the code better? Worse? Did you learn anything from it?
 
-Check out [Exercism
-Help](http://help.exercism.io/getting-started-with-haskell.html) for
-instructions to get started writing Haskell.
-
-## Running Tests
-
-Use `runhaskell` (included in the Haskell Platform) to compile and run your
-Haskell code.
-
-    $ runhaskell -Wall bob_test.hs
-
 ## Source
 
-JavaRanch Cattle Drive, exercise 6 [view source](http://www.javaranch.com/grains.jsp)
+### Created by
+
+- @etrepum
+
+### Contributed to by
+
+- @iHiD
+- @kytrinyx
+- @LarryRuane
+- @navossoc
+- @petertseng
+- @ppartarr
+- @qnikst
+- @rbasso
+- @sshine
+- @tejasbubane
+
+### Based on
+
+JavaRanch Cattle Drive, exercise 6 - https://www.javaranch.com/grains.jsp
