@@ -1,22 +1,26 @@
 name: saddle-points
+author: Eric Bailey
+github: yurrriq/exercism
 version: 1.5.0.8
 
 dependencies:
-  - array
-  - base
+- array
+- base
+
+ghc-options:
+- -Wall
+- -Werror
+- -Wincomplete-patterns
+- -Wincomplete-uni-patterns
 
 library:
   exposed-modules: Matrix
   source-dirs: src
-  ghc-options: -Wall
-  # dependencies:
-  # - foo       # List here the packages you
-  # - bar       # want to use in your solution.
 
 tests:
   test:
     main: Tests.hs
     source-dirs: test
     dependencies:
-      - saddle-points
-      - hspec
+    - saddle-points
+    - hspec
