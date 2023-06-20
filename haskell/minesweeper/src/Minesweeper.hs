@@ -14,35 +14,33 @@ import qualified Data.Set as Set
 import Linear (V2 (..))
 
 annotate :: [String] -> [String]
-annotate [] = []
-annotate [""] = [""]
 annotate rowStrings =
-  [ [unMine (annotatedBoard M.! V2 y x) | x <- [0 .. width - 1]]
+  [ [unMineCount (annotatedBoard M.! V2 y x) | x <- [0 .. width - 1]]
     | y <- [0 .. height - 1]
   ]
   where
     annotatedBoard = M.foldrWithKey go board board
+    board = mkBoard rowStrings
     go coords Nothing annotated =
       foldr (M.adjust (fmap succ)) annotated (neighborsOf' coords)
     go _ _ annotated = annotated
     neighborsOf' = neighborsInRange (pure 0, V2 (height - 1) (width - 1))
-    board = mkBoard rowStrings
     height = length rowStrings
     width = length (head rowStrings)
 
 mkBoard :: [String] -> Map (V2 Int) (Maybe Int)
 mkBoard = ifoldl' (ifoldl' . go) M.empty
   where
-    go y x minefield char = M.insert (V2 y x) (mine char) minefield
+    go y x minefield char = M.insert (V2 y x) (mineCount char) minefield
 
-mine :: Char -> Maybe Int
-mine '*' = Nothing
-mine _ = Just 0
+mineCount :: Char -> Maybe Int
+mineCount '*' = Nothing
+mineCount _ = Just 0
 
-unMine :: Maybe Int -> Char
-unMine Nothing = '*'
-unMine (Just 0) = ' '
-unMine (Just n) = intToDigit n
+unMineCount :: Maybe Int -> Char
+unMineCount Nothing = '*'
+unMineCount (Just 0) = ' '
+unMineCount (Just n) = intToDigit n
 
 neighborsInRange :: (Ix a, Num a) => (V2 a, V2 a) -> V2 a -> Set (V2 a)
 neighborsInRange range point = S.filter (inRange range) (neighborsOf point)
