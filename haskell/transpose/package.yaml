@@ -1,21 +1,34 @@
 name: transpose
+author: Eric Bailey
+github: yurrriq/exercism
 version: 1.1.0.2
 
 dependencies:
-  - base
+- base
+
+flags:
+  reddit:
+    default: False
+    description: Whether to try to follow the Reddit post instead
+    manual: True
+
+ghc-options:
+- -Wall
+- -Werror
+- -Wincomplete-patterns
+- -Wincomplete-uni-patterns
 
 library:
   exposed-modules: Transpose
   source-dirs: src
-  ghc-options: -Wall
-  # dependencies:
-  # - foo       # List here the packages you
-  # - bar       # want to use in your solution.
+  when:
+  - condition: flag(reddit)
+    cpp-options: -DREDDIT
 
 tests:
   test:
     main: Tests.hs
     source-dirs: test
     dependencies:
-      - transpose
-      - hspec
+    - transpose
+    - hspec
