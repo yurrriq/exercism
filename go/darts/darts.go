@@ -14,7 +14,7 @@ const (
 // Score takes the x and y coordinates of a point in the target and returns the
 // number of points earned by a dart landing at that point.
 func Score(x, y float64) (score int) {
-	distance := math.Sqrt(x*x + y*y)
+	distance := math.Hypot(x, y)
 	switch {
 	case distance > outerRing:
 		score = 0
