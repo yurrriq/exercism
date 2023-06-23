@@ -13,47 +13,43 @@ type Strings []string
 // Keep takes a int predicate and returns a slice of only those given ints for
 // which the predicate holds.
 func (ints Ints) Keep(pred func(int) bool) (filteredInts Ints) {
-	for _, n := range ints {
-		if pred(n) {
-			filteredInts = append(filteredInts, n)
-		}
-	}
-
-	return filteredInts
+	return keep(pred, ints)
 }
 
 // Discard takes a int predicate and returns a slice of only those given ints
 // for which the predicate does not hold.
 func (ints Ints) Discard(pred func(int) bool) (filteredInts Ints) {
-	for _, n := range ints {
-		if !pred(n) {
-			filteredInts = append(filteredInts, n)
-		}
-	}
-
-	return filteredInts
+	return discard(pred, ints)
 }
 
 // Keep takes a []int predicate and returns a slice of only those given []int
 // for which the predicate holds.
 func (lists Lists) Keep(pred func([]int) bool) (filteredLists Lists) {
-	for _, list := range lists {
-		if pred(list) {
-			filteredLists = append(filteredLists, list)
-		}
-	}
-
-	return filteredLists
+	return keep(pred, lists)
 }
 
 // Keep takes a string predicate and returns a slice of only those given strings
 // for which the predicate holds.
 func (strings Strings) Keep(pred func(string) bool) (filteredStrings Strings) {
-	for _, string := range strings {
-		if pred(string) {
-			filteredStrings = append(filteredStrings, string)
+	return keep(pred, strings)
+}
+
+func keep[S ~[]E, E any](pred func(E) bool, slice S) (filtered S) {
+	for _, element := range slice {
+		if pred(element) {
+			filtered = append(filtered, element)
 		}
 	}
 
-	return filteredStrings
+	return filtered
+}
+
+func discard[S ~[]E, E any](pred func(E) bool, slice S) (filtered S) {
+	return keep(negate(pred), slice)
+}
+
+func negate[E any](f func(E) bool) func(E) bool {
+	return func(x E) bool {
+		return !f(x)
+	}
 }
