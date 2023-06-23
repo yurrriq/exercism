@@ -1,15 +1,39 @@
-// This is a "stub" file.  It's a little start on your solution.
-// It's not a complete solution though; you have to write some code.
-
-// Package bob should have a package comment that summarizes what it's about.
-// https://golang.org/doc/effective_go.html#commentary
+// Package bob implements the Bob exercise.
 package bob
 
-// Hey should have a comment documenting it.
+import (
+	"strings"
+	"unicode"
+
+	"golang.org/x/exp/slices"
+)
+
+// Hey responds to a given remark as a lackadaisical teenager would.
 func Hey(remark string) string {
-	// Write some code here to pass the test suite.
-	// Then remove all the stock comments.
-	// They're here to help you get started but they only clutter a finished solution.
-	// If you leave them in, reviewers may protest!
-	return ""
+	trimmedRemark := strings.TrimFunc(remark, unicode.IsSpace)
+	switch {
+	case trimmedRemark == "":
+		return "Fine. Be that way!"
+	case isForcefulQuestion(trimmedRemark):
+		return "Calm down, I know what I'm doing!"
+	case isQuestion(trimmedRemark):
+		return "Sure."
+	case isYelled(trimmedRemark):
+		return "Whoa, chill out!"
+	default:
+		return "Whatever."
+	}
+}
+
+func isForcefulQuestion(remark string) bool {
+	return isQuestion(remark) && isYelled(remark)
+}
+
+func isQuestion(remark string) bool {
+	return strings.HasSuffix(remark, "?")
+}
+
+func isYelled(remark string) bool {
+	return slices.ContainsFunc([]rune(remark), unicode.IsLetter) &&
+		remark == strings.ToUpper(remark)
 }
