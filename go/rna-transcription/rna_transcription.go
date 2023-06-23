@@ -3,22 +3,26 @@ package strand
 
 // ToRNA converts a given DNA string into its RNA complement.
 func ToRNA(dna string) string {
-	runes := []rune(dna)
-	rna := make([]rune, 0, len(runes))
-	for _, nucleotide := range runes {
-		switch nucleotide {
-		case 'G':
-			rna = append(rna, 'C')
-		case 'C':
-			rna = append(rna, 'G')
-		case 'T':
-			rna = append(rna, 'A')
-		case 'A':
-			rna = append(rna, 'U')
-		default:
-			panic("Invalid nucleotide")
-		}
+	length := len(dna)
+	rna := make([]byte, length)
+	for i := 0; i < length; i++ {
+		rna[i] = rnaComplement(dna[i])
 	}
 
 	return string(rna)
+}
+
+func rnaComplement(nucleotide byte) byte {
+	switch nucleotide {
+	case 'G':
+		return 'C'
+	case 'C':
+		return 'G'
+	case 'T':
+		return 'A'
+	case 'A':
+		return 'U'
+	default:
+		panic("Invalid nucleotide: " + string(nucleotide))
+	}
 }
