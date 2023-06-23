@@ -4,25 +4,33 @@ package bob
 import (
 	"strings"
 	"unicode"
-
-	"golang.org/x/exp/slices"
 )
 
 // Hey responds to a given remark as a lackadaisical teenager would.
 func Hey(remark string) string {
-	trimmedRemark := strings.TrimFunc(remark, unicode.IsSpace)
-	switch {
-	case trimmedRemark == "":
+	trimmedRemark := strings.TrimSpace(remark)
+
+	if isEmpty(trimmedRemark) {
 		return "Fine. Be that way!"
-	case isForcefulQuestion(trimmedRemark):
+	}
+
+	question := isQuestion(trimmedRemark)
+	yelled := isYelled(trimmedRemark)
+
+	switch {
+	case question && yelled:
 		return "Calm down, I know what I'm doing!"
-	case isQuestion(trimmedRemark):
+	case question:
 		return "Sure."
-	case isYelled(trimmedRemark):
+	case yelled:
 		return "Whoa, chill out!"
 	default:
 		return "Whatever."
 	}
+}
+
+func isEmpty(remark string) bool {
+	return remark == ""
 }
 
 func isForcefulQuestion(remark string) bool {
@@ -34,6 +42,6 @@ func isQuestion(remark string) bool {
 }
 
 func isYelled(remark string) bool {
-	return slices.ContainsFunc([]rune(remark), unicode.IsLetter) &&
-		remark == strings.ToUpper(remark)
+	return strings.IndexFunc(remark, unicode.IsLetter) != -1 &&
+		strings.ToUpper(remark) == remark
 }
