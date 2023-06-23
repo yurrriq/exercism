@@ -1,21 +1,59 @@
+// Package strain implements the Strain exercise.
 package strain
 
+// Ints is a slice of ints.
 type Ints []int
+
+// Lists is a slice of slices of ints.
 type Lists [][]int
+
+// Strings is a slice of strings.
 type Strings []string
 
-func (i Ints) Keep(filter func(int) bool) Ints {
-	panic("Please implement the Keep function")
+// Keep takes a int predicate and returns a slice of only those given ints for
+// which the predicate holds.
+func (ints Ints) Keep(pred func(int) bool) (filteredInts Ints) {
+	for _, n := range ints {
+		if pred(n) {
+			filteredInts = append(filteredInts, n)
+		}
+	}
+
+	return filteredInts
 }
 
-func (i Ints) Discard(filter func(int) bool) Ints {
-	panic("Please implement the Discard function")
+// Discard takes a int predicate and returns a slice of only those given ints
+// for which the predicate does not hold.
+func (ints Ints) Discard(pred func(int) bool) (filteredInts Ints) {
+	for _, n := range ints {
+		if !pred(n) {
+			filteredInts = append(filteredInts, n)
+		}
+	}
+
+	return filteredInts
 }
 
-func (l Lists) Keep(filter func([]int) bool) Lists {
-	panic("Please implement the Keep function")
+// Keep takes a []int predicate and returns a slice of only those given []int
+// for which the predicate holds.
+func (lists Lists) Keep(pred func([]int) bool) (filteredLists Lists) {
+	for _, list := range lists {
+		if pred(list) {
+			filteredLists = append(filteredLists, list)
+		}
+	}
+
+	return filteredLists
 }
 
-func (s Strings) Keep(filter func(string) bool) Strings {
-	panic("Please implement the Keep function")
+// Keep takes a string predicate and returns a slice of only those given strings
+// for which the predicate holds.
+func (strings Strings) Keep(pred func(string) bool) (filteredStrings Strings) {
+	for _, string := range strings {
+		if pred(string) {
+			filteredStrings = append(filteredStrings, string)
+		}
+	}
+
+	return filteredStrings
 }
