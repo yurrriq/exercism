@@ -9,18 +9,16 @@ const (
 
 // Score takes the x and y coordinates of a point in the target and returns the
 // number of points earned by a dart landing at that point.
-func Score(x, y float64) (score int) {
+func Score(x, y float64) int {
 	distanceSquared := x*x + y*y
 	switch {
 	case distanceSquared > outerRingSquared:
-		score = 0
+		return 0
 	case distanceSquared > middleRingSquared:
-		score = 1
+		return 1
 	case distanceSquared > innerRingSquared:
-		score = 5
+		return 5
 	default:
-		score = 10
+		return 10
 	}
-
-	return
 }
