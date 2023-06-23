@@ -1,26 +1,22 @@
 // Package darts implements the Darts exercise.
 package darts
 
-import (
-	"math"
-)
-
 const (
-	innerRing  = 1.0
-	middleRing = 5.0
-	outerRing  = 10.0
+	innerRingSquared  = 1.0
+	middleRingSquared = 25.0
+	outerRingSquared  = 100.0
 )
 
 // Score takes the x and y coordinates of a point in the target and returns the
 // number of points earned by a dart landing at that point.
 func Score(x, y float64) (score int) {
-	distance := math.Hypot(x, y)
+	distanceSquared := x*x + y*y
 	switch {
-	case distance > outerRing:
+	case distanceSquared > outerRingSquared:
 		score = 0
-	case distance > middleRing:
+	case distanceSquared > middleRingSquared:
 		score = 1
-	case distance > innerRing:
+	case distanceSquared > innerRingSquared:
 		score = 5
 	default:
 		score = 10
