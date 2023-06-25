@@ -1,6 +1,8 @@
 // Package resistorcolorduo implements the Resistor Color Duo exercise.
 package resistorcolorduo
 
+const ignoreBandsAfterSecond = true
+
 // Value returns the resistance value of a resistor with given colors.
 func Value(colors []string) int {
 	length := len(colors)
@@ -8,16 +10,16 @@ func Value(colors []string) int {
 		return -1
 	}
 
-	// Ignore bands beyond the second.
-	length = 2
+	if ignoreBandsAfterSecond {
+		length = 2
+	}
 
 	resistances := make([]int, length)
 
 decode:
 	for resistance, color := range allColors() {
 		for i, band := range colors {
-			// Ignore bands beyond the second.
-			if i > 1 {
+			if ignoreBandsAfterSecond && i > 1 {
 				continue decode
 			}
 			if band == color {
@@ -28,10 +30,6 @@ decode:
 
 	totalResistance := 0
 	for i, resistance := range resistances {
-		// Ignore bands beyond the second.
-		if i > 1 {
-			continue
-		}
 		totalResistance += resistance * ipow(10, length-1-i)
 	}
 
