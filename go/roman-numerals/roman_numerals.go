@@ -2,7 +2,8 @@
 package romannumerals
 
 import (
-	"errors"
+	"bytes"
+	"fmt"
 	"strings"
 )
 
@@ -15,19 +16,19 @@ type conversion struct {
 // string representation.
 func ToRomanNumeral(input int) (string, error) {
 	if input < 1 || input > 3999 {
-		return "", errors.New("Out of bounds")
+		return "", fmt.Errorf("%d is not within 1 and 3999, inclusive", input)
 	}
 
 	toConvert := input
-	var builder strings.Builder
+	buffer := bytes.NewBufferString("")
 	for _, conv := range arabicToRoman() {
 		if conv.arabic <= toConvert {
-			builder.WriteString(strings.Repeat(conv.roman, toConvert/conv.arabic))
+			buffer.WriteString(strings.Repeat(conv.roman, toConvert/conv.arabic))
 			toConvert %= conv.arabic
 		}
 	}
 
-	return builder.String(), nil
+	return buffer.String(), nil
 }
 
 func arabicToRoman() []conversion {
