@@ -1,32 +1,30 @@
 // Package isbn implements the ISBN Verifier exercise.
 package isbn
 
-import (
-	"unicode"
-)
-
 // IsValidISBN validates a book identification number.
 func IsValidISBN(isbn string) bool {
-	checksum := 0
-	k := 10
-	for i, roon := range []rune(isbn) {
-		if roon == '-' && (i == 1 || i == 5 || i == 11) {
-			continue
-		}
+	checksum, position := 0, 10
 
-		if 'X' == roon && k == 1 {
-			checksum += 10 * k
-			k--
-			continue
-		}
-
-		if !unicode.IsDigit(roon) || k < 1 {
+	for i, char := range []byte(isbn) {
+		if position < 1 {
+			return false
+		} else if digit, ok := digitToInt(char); ok {
+			checksum += digit * position
+			position--
+		} else if char == 'X' && position == 1 {
+			checksum += 10 * position
+			position--
+		} else if !(char == '-' && (i == 1 || i == 5 || i == 11)) {
 			return false
 		}
-
-		checksum += (int(roon) - '0') * k
-		k--
 	}
 
-	return (k == 0) && checksum%11 == 0
+	return (position == 0) && checksum%11 == 0
+}
+
+func digitToInt(char byte) (digit int, ok bool) {
+	if char < '0' || char > '9' {
+		return digit, ok
+	}
+	return int(char - '0'), true
 }
