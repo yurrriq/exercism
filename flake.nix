@@ -68,6 +68,20 @@
         };
 
         devShells = {
+          c = self.devShells.${system}.default.overrideAttrs (super: {
+            nativeBuildInputs = super.buildInputs ++ (with pkgs; [
+              ccls
+              (
+                emacsWithPackagesFromUsePackage {
+                  alwaysEnsure = true;
+                  config = ./c/emacs.el;
+                }
+              )
+              gcc
+              indent
+            ]);
+          });
+
           default = with pkgs; mkShell {
             FONTCONFIG_FILE = makeFontsConf {
               fontDirectories = [
