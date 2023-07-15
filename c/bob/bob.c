@@ -6,17 +6,18 @@
 extern char *strdup(const char *);
 extern size_t strlen(const char *);
 
-bool is_question(char *str);
-bool is_yelled(char *str);
-char *trim(char *str);
-char *rtrim(char *str);
-char *ltrim(char *str);
+bool is_empty(const char *str);
+bool is_question(const char *str);
+bool is_yelled(const char *str);
+char *trim(const char *str);
+char *rtrim(const char *str);
+char *ltrim(const char *str);
 
-char *hey_bob(char *greeting)
+const char *hey_bob(const char *greeting)
 {
-    char *trimmed = trim(greeting);
+    const char *trimmed = trim(greeting);
 
-    if (trimmed[0] == '\0')
+    if (is_empty(trimmed))
         return "Fine. Be that way!";
 
     bool question = is_question(trimmed);
@@ -38,12 +39,17 @@ char *hey_bob(char *greeting)
     return "";
 }
 
-bool is_question(char *str)
+bool is_empty(const char *str)
+{
+    return !str || *str == '\0';
+}
+
+bool is_question(const char *str)
 {
     return str[strlen(str) - 1] == '?';
 }
 
-bool is_yelled(char *str)
+bool is_yelled(const char *str)
 {
     if (str == NULL)
         return true;
@@ -62,7 +68,7 @@ bool is_yelled(char *str)
     return has_letter;
 }
 
-char *trim(char *str)
+char *trim(const char *str)
 {
     char *tmp = rtrim(str);
     char *trimmed = ltrim(tmp);
@@ -71,7 +77,7 @@ char *trim(char *str)
     return trimmed;
 }
 
-char *rtrim(char *str)
+char *rtrim(const char *str)
 {
     while (isspace(*str))
         str++;
@@ -79,11 +85,11 @@ char *rtrim(char *str)
     return strdup(str);
 }
 
-char *ltrim(char *str)
+char *ltrim(const char *str)
 {
     char *rstr = strdup(str);
     if (rstr == NULL)
-        return str;
+        return rstr;
 
     char *end = rstr + strlen(str) - 1;
     while (end > rstr && isspace(*end))

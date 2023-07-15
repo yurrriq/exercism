@@ -1,6 +1,6 @@
 #ifndef BOB_H
 #define BOB_H
 
-char *hey_bob(char *greeting);
+char const *hey_bob(char const *greeting);
 
 #endif
