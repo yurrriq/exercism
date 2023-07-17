@@ -1,0 +1,137 @@
+\doxysection{allergies.\+h File Reference}
+\hypertarget{allergies_8h}{}\label{allergies_8h}\index{allergies.h@{allergies.h}}
+
+
+Determine and compute lists of allergies.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structallergen__list__t}{allergen\+\_\+list\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5f}{allergen\+\_\+t}} \{ \newline
+\mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fae6fe56dedce73ecdbabb3263275d08bb}{ALLERGEN\+\_\+\+EGGS}} = 0
+, \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fac6b566e7e3f87b940247623a13021b86}{ALLERGEN\+\_\+\+PEANUTS}}
+, \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fa032908d55efa8a4ad38fda6742ae796f}{ALLERGEN\+\_\+\+SHELLFISH}}
+, \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fab10adf702a81a368e640e03a375cd66f}{ALLERGEN\+\_\+\+STRAWBERRIES}}
+, \newline
+\mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fac0dd8d62b9b4cdbc92208949cb2adafe}{ALLERGEN\+\_\+\+TOMATOES}}
+, \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5faf72225dfa3d0d653f0c9c0de653c797c}{ALLERGEN\+\_\+\+CHOCOLATE}}
+, \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fad6b650e5566485e0422106f05e2491e4}{ALLERGEN\+\_\+\+POLLEN}}
+, \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fa1449d5e67e74141d2ea1187a5f410ca9}{ALLERGEN\+\_\+\+CATS}}
+, \newline
+\mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fafcc34dc0dc69538268c7e9f950717461}{ALLERGEN\+\_\+\+COUNT}}
+ \}
+\begin{DoxyCompactList}\small\item\em Possible allergens. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{allergies_8h_ac2c0f668e2341afd26969343b2ee2a7f}{is\+\_\+allergic\+\_\+to}} (const \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5f}{allergen\+\_\+t}} item, const uint16\+\_\+t score)
+\item 
+\mbox{\hyperlink{structallergen__list__t}{allergen\+\_\+list\+\_\+t}} \mbox{\hyperlink{allergies_8h_a92e9d1c97eb281ecf34c5b13e9736a15}{get\+\_\+allergens}} (const uint16\+\_\+t score)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Determine and compute lists of allergies. 
+
+\begin{DoxyAuthor}{Author}
+Eric Bailey 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2023-\/07-\/16 
+\end{DoxyDate}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5f}\label{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5f} 
+\index{allergies.h@{allergies.h}!allergen\_t@{allergen\_t}}
+\index{allergen\_t@{allergen\_t}!allergies.h@{allergies.h}}
+\doxysubsubsection{\texorpdfstring{allergen\_t}{allergen\_t}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5f}{allergen\+\_\+t}}}
+
+
+
+Possible allergens. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ALLERGEN\_EGGS@{ALLERGEN\_EGGS}!allergies.h@{allergies.h}}\index{allergies.h@{allergies.h}!ALLERGEN\_EGGS@{ALLERGEN\_EGGS}}}\Hypertarget{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fae6fe56dedce73ecdbabb3263275d08bb}\label{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fae6fe56dedce73ecdbabb3263275d08bb} 
+ALLERGEN\+\_\+\+EGGS&Eggs. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ALLERGEN\_PEANUTS@{ALLERGEN\_PEANUTS}!allergies.h@{allergies.h}}\index{allergies.h@{allergies.h}!ALLERGEN\_PEANUTS@{ALLERGEN\_PEANUTS}}}\Hypertarget{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fac6b566e7e3f87b940247623a13021b86}\label{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fac6b566e7e3f87b940247623a13021b86} 
+ALLERGEN\+\_\+\+PEANUTS&Peanuts. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ALLERGEN\_SHELLFISH@{ALLERGEN\_SHELLFISH}!allergies.h@{allergies.h}}\index{allergies.h@{allergies.h}!ALLERGEN\_SHELLFISH@{ALLERGEN\_SHELLFISH}}}\Hypertarget{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fa032908d55efa8a4ad38fda6742ae796f}\label{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fa032908d55efa8a4ad38fda6742ae796f} 
+ALLERGEN\+\_\+\+SHELLFISH&Shellfish. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ALLERGEN\_STRAWBERRIES@{ALLERGEN\_STRAWBERRIES}!allergies.h@{allergies.h}}\index{allergies.h@{allergies.h}!ALLERGEN\_STRAWBERRIES@{ALLERGEN\_STRAWBERRIES}}}\Hypertarget{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fab10adf702a81a368e640e03a375cd66f}\label{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fab10adf702a81a368e640e03a375cd66f} 
+ALLERGEN\+\_\+\+STRAWBERRIES&Strawberries. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ALLERGEN\_TOMATOES@{ALLERGEN\_TOMATOES}!allergies.h@{allergies.h}}\index{allergies.h@{allergies.h}!ALLERGEN\_TOMATOES@{ALLERGEN\_TOMATOES}}}\Hypertarget{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fac0dd8d62b9b4cdbc92208949cb2adafe}\label{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fac0dd8d62b9b4cdbc92208949cb2adafe} 
+ALLERGEN\+\_\+\+TOMATOES&Tomatoes. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ALLERGEN\_CHOCOLATE@{ALLERGEN\_CHOCOLATE}!allergies.h@{allergies.h}}\index{allergies.h@{allergies.h}!ALLERGEN\_CHOCOLATE@{ALLERGEN\_CHOCOLATE}}}\Hypertarget{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5faf72225dfa3d0d653f0c9c0de653c797c}\label{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5faf72225dfa3d0d653f0c9c0de653c797c} 
+ALLERGEN\+\_\+\+CHOCOLATE&Chocolate. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ALLERGEN\_POLLEN@{ALLERGEN\_POLLEN}!allergies.h@{allergies.h}}\index{allergies.h@{allergies.h}!ALLERGEN\_POLLEN@{ALLERGEN\_POLLEN}}}\Hypertarget{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fad6b650e5566485e0422106f05e2491e4}\label{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fad6b650e5566485e0422106f05e2491e4} 
+ALLERGEN\+\_\+\+POLLEN&Pollen. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ALLERGEN\_CATS@{ALLERGEN\_CATS}!allergies.h@{allergies.h}}\index{allergies.h@{allergies.h}!ALLERGEN\_CATS@{ALLERGEN\_CATS}}}\Hypertarget{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fa1449d5e67e74141d2ea1187a5f410ca9}\label{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fa1449d5e67e74141d2ea1187a5f410ca9} 
+ALLERGEN\+\_\+\+CATS&Cats. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ALLERGEN\_COUNT@{ALLERGEN\_COUNT}!allergies.h@{allergies.h}}\index{allergies.h@{allergies.h}!ALLERGEN\_COUNT@{ALLERGEN\_COUNT}}}\Hypertarget{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fafcc34dc0dc69538268c7e9f950717461}\label{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fafcc34dc0dc69538268c7e9f950717461} 
+ALLERGEN\+\_\+\+COUNT&The number of possible allergens. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{allergies_8h_a92e9d1c97eb281ecf34c5b13e9736a15}\label{allergies_8h_a92e9d1c97eb281ecf34c5b13e9736a15} 
+\index{allergies.h@{allergies.h}!get\_allergens@{get\_allergens}}
+\index{get\_allergens@{get\_allergens}!allergies.h@{allergies.h}}
+\doxysubsubsection{\texorpdfstring{get\_allergens()}{get\_allergens()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structallergen__list__t}{allergen\+\_\+list\+\_\+t}} get\+\_\+allergens (\begin{DoxyParamCaption}\item[{const uint16\+\_\+t}]{score }\end{DoxyParamCaption})}
+
+Compute a person\textquotesingle{}s full list of allergies.
+
+
+\begin{DoxyParams}{Parameters}
+{\em score} & The results of an allergy test.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The full list of allergies. 
+\end{DoxyReturn}
+\Hypertarget{allergies_8h_ac2c0f668e2341afd26969343b2ee2a7f}\label{allergies_8h_ac2c0f668e2341afd26969343b2ee2a7f} 
+\index{allergies.h@{allergies.h}!is\_allergic\_to@{is\_allergic\_to}}
+\index{is\_allergic\_to@{is\_allergic\_to}!allergies.h@{allergies.h}}
+\doxysubsubsection{\texorpdfstring{is\_allergic\_to()}{is\_allergic\_to()}}
+{\footnotesize\ttfamily bool is\+\_\+allergic\+\_\+to (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5f}{allergen\+\_\+t}}}]{item,  }\item[{const uint16\+\_\+t}]{score }\end{DoxyParamCaption})}
+
+Given an item and an allergy score, determine whether the person is allergic.
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & A potential allergen. \\
+\hline
+{\em score} & The results of an allergy test.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether the person is allergic to the @item. 
+\end{DoxyReturn}

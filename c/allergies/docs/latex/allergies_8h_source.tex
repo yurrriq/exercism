@@ -1,0 +1,34 @@
+\doxysection{allergies.\+h}
+\hypertarget{allergies_8h_source}{}\label{allergies_8h_source}\mbox{\hyperlink{allergies_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ ALLERGIES\_H}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ ALLERGIES\_H}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fae6fe56dedce73ecdbabb3263275d08bb}{ALLERGEN\_EGGS}}\ =\ 0,}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fac6b566e7e3f87b940247623a13021b86}{ALLERGEN\_PEANUTS}},}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fa032908d55efa8a4ad38fda6742ae796f}{ALLERGEN\_SHELLFISH}},}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fab10adf702a81a368e640e03a375cd66f}{ALLERGEN\_STRAWBERRIES}},}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fac0dd8d62b9b4cdbc92208949cb2adafe}{ALLERGEN\_TOMATOES}},}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5faf72225dfa3d0d653f0c9c0de653c797c}{ALLERGEN\_CHOCOLATE}},}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fad6b650e5566485e0422106f05e2491e4}{ALLERGEN\_POLLEN}},}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fa1449d5e67e74141d2ea1187a5f410ca9}{ALLERGEN\_CATS}},}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fafcc34dc0dc69538268c7e9f950717461}{ALLERGEN\_COUNT}},}
+\DoxyCodeLine{00034\ \}\ \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5f}{allergen\_t}};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structallergen__list__t_a2dad931c62b05f0afffb7dc24bf0ba49}{count}};}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{bool}\ allergens[\mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5fafcc34dc0dc69538268c7e9f950717461}{ALLERGEN\_COUNT}}];}
+\DoxyCodeLine{00048\ \}\ \mbox{\hyperlink{structallergen__list__t}{allergen\_list\_t}};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{allergies_8h_ac2c0f668e2341afd26969343b2ee2a7f}{is\_allergic\_to}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{allergies_8h_a6f5a9ac7feb4f1ae4d31ee6837333d5f}{allergen\_t}}\ item,\ \textcolor{keyword}{const}\ uint16\_t\ score);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \mbox{\hyperlink{structallergen__list__t}{allergen\_list\_t}}\ \mbox{\hyperlink{allergies_8h_a92e9d1c97eb281ecf34c5b13e9736a15}{get\_allergens}}(\textcolor{keyword}{const}\ uint16\_t\ score);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
