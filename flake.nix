@@ -71,6 +71,7 @@
           c = self.devShells.${system}.default.overrideAttrs (super: {
             nativeBuildInputs = super.buildInputs ++ (with pkgs; [
               ccls
+              doxygen
               (
                 emacsWithPackagesFromUsePackage {
                   alwaysEnsure = true;
