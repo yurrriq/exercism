@@ -12,7 +12,7 @@ var searchData=
   ['allergen_5ft_9',['allergen_t',['../allergies_8h.html#a6f5a9ac7feb4f1ae4d31ee6837333d5f',1,'allergies.h']]],
   ['allergen_5ftomatoes_10',['ALLERGEN_TOMATOES',['../allergies_8h.html#a6f5a9ac7feb4f1ae4d31ee6837333d5fac0dd8d62b9b4cdbc92208949cb2adafe',1,'allergies.h']]],
   ['allergens_11',['allergens',['../structallergen__list__t.html#a92ee430567bc18da44e0c4ce8b11041c',1,'allergen_list_t']]],
-  ['allergies_12',['Allergies',['../md_README.html',1,'']]],
+  ['allergies_12',['Allergies',['../md_allergies_2README.html',1,'']]],
   ['allergies_2ec_13',['allergies.c',['../allergies_8c.html',1,'']]],
   ['allergies_2eh_14',['allergies.h',['../allergies_8h.html',1,'']]]
 ];
