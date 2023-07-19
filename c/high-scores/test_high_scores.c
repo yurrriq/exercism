@@ -37,14 +37,12 @@ static void test_latest_score(void)
 
 static void test_personal_best(void)
 {
-   TEST_IGNORE();   // delete this line to run test
    const int scores[] = { 40, 100, 70 };
    TEST_ASSERT_EQUAL_INT(personal_best(scores, ARRAY_SIZE(scores)), 100);
 }
 
 static void test_personal_top_three_from_a_list_of_scores(void)
 {
-   TEST_IGNORE();
    const int scores[] = { 10, 30, 90, 30, 100, 20, 10, 0, 30, 40, 40, 70, 70 };
    const int expected[] = { 100, 90, 70 };
    check_personal_top_three(scores, ARRAY_SIZE(scores), expected,
@@ -53,7 +51,6 @@ static void test_personal_top_three_from_a_list_of_scores(void)
 
 static void test_personal_top_highest_to_lowest(void)
 {
-   TEST_IGNORE();
    const int scores[] = { 20, 10, 30 };
    const int expected[] = { 30, 20, 10 };
    check_personal_top_three(scores, ARRAY_SIZE(scores), expected,
@@ -62,7 +59,6 @@ static void test_personal_top_highest_to_lowest(void)
 
 static void test_personal_top_when_there_is_a_tie(void)
 {
-   TEST_IGNORE();
    const int scores[] = { 40, 20, 40, 30 };
    const int expected[] = { 40, 40, 30 };
    check_personal_top_three(scores, ARRAY_SIZE(scores), expected,
@@ -71,7 +67,6 @@ static void test_personal_top_when_there_is_a_tie(void)
 
 static void test_personal_top_when_there_are_less_than_3(void)
 {
-   TEST_IGNORE();
    const int scores[] = { 30, 70 };
    const int expected[] = { 70, 30 };
    check_personal_top_three(scores, ARRAY_SIZE(scores), expected,
@@ -80,7 +75,6 @@ static void test_personal_top_when_there_are_less_than_3(void)
 
 static void test_personal_top_when_there_is_only_one(void)
 {
-   TEST_IGNORE();
    const int scores[] = { 40 };
    const int expected[] = { 40 };
    check_personal_top_three(scores, ARRAY_SIZE(scores), expected,
