@@ -10,7 +10,13 @@ ghc-options:
 - -Wincomplete-uni-patterns
 
 dependencies:
-- base
+- name: base
+  mixin:
+  - hiding (Prelude)
+- name: relude
+  mixin:
+  - (Relude as Prelude)
+  - ''
 
 library:
   exposed-modules: Say
