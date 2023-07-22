@@ -6,10 +6,10 @@
 # output: {boolean} whether or not the command is valid
 #
 def is_valid_command:
-  split("\\W"; null) | first | ascii_downcase | .== "chatbot"
+  test("^chatbot\\W"; "i")
 ;
 
-# Given a certain message, help the Chatbot get rid of all the 
+# Given a certain message, help the Chatbot get rid of all the
 # "encrypted" emojis throught the message.
 # - an "encrypted emoji" is the string "emoji" followed by digits
 #
@@ -17,6 +17,10 @@ def is_valid_command:
 # output: {string} the message without the emojis
 def remove_emoji:
   gsub("emoji[[:digit:]]+"; "")
+;
+
+def is_phone_number:
+  test("\\(\\+[[:digit:]]{2}\\) [[:digit:]]{3}-[[:digit:]]{3}-[[:digit:]]{3}")
 ;
 
 # Given a certain phone number, help the Chatbot recognize
@@ -27,7 +31,7 @@ def remove_emoji:
 # input: {string} number
 # output: {string} the Chatbot response to the phone validation
 def check_phone_number:
-  if test("\\(\\+[[:digit:]]{2}\\) [[:digit:]]{3}-[[:digit:]]{3}-[[:digit:]]{3}") then
+  if is_phone_number then
     "Thanks! Your phone number is OK."
   else
     "Oops, it seems like I can't reach out to \((.))."
@@ -41,7 +45,7 @@ def check_phone_number:
 # input: {string} userInput
 # output: {array} all the domains in the input
 def get_domains:
-  split("\\s"; null) | map(select(test("\\w+\\.\\w+")))
+  [scan("\\w+\\.\\w+")]
 ;
 
 # Greet the user using their name
