@@ -1,1 +1,6 @@
-"Remove this line and implement your solution" | halt_error
+.value |
+if type == "string" then
+  explode | reverse | implode
+else
+  reverse
+end
