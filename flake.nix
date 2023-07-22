@@ -89,15 +89,18 @@
                 (nerdfonts.override { fonts = [ "Iosevka" ]; })
               ];
             };
-            buildInputs = [
+            nativeBuildInputs = [
               exercism
               rnix-lsp
             ];
             inherit (self.checks.${system}.pre-commit-check) shellHook;
           };
 
-          go = self.devShells.${system}.default.overrideAttrs (super: {
-            buildInputs = super.buildInputs ++ (with pkgs; [
+          go = pkgs.mkShell {
+            inputsFrom = [
+              self.devShells.${system}.default
+            ];
+            nativeBuildInputs = with pkgs; [
               (
                 emacsWithPackagesFromUsePackage {
                   alwaysEnsure = true;
@@ -108,11 +111,14 @@
               gopls
               gotools
               revive
-            ]);
-          });
+            ];
+          };
 
-          haskell = self.devShells.${system}.default.overrideAttrs (super: {
-            buildInputs = super.buildInputs ++ (with pkgs; [
+          haskell = pkgs.mkShell {
+            inputsFrom = [
+              self.devShells.${system}.default
+            ];
+            nativeBuildInputs = with pkgs; [
               (
                 emacsWithPackagesFromUsePackage {
                   alwaysEnsure = true;
@@ -130,8 +136,8 @@
               hlint
               ormolu
               pointfree
-            ]));
-          });
+            ]);
+          };
 
           jq = pkgs.mkShell {
             inputsFrom = [
