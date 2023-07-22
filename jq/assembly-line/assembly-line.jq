@@ -1,12 +1,14 @@
 def production_rate_per_hour:
-  if (1 <= . and . <= 4) then
+  if 0 <= . and . <= 4 then
     . * 1.0
-  elif (5 <= . and . <= 8) then
+  elif 5 <= . and . <= 8 then
     . * 0.9
-  elif (. == 9) then
+  elif . == 9 then
     . * 0.8
-  else
+  elif . == 10 then
     . * 0.77
+  else
+    "Invalid speed \(.)\n" | halt_error
   end |
   . * 221
 ;
