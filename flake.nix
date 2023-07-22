@@ -132,6 +132,16 @@
               pointfree
             ]));
           });
+
+          jq = pkgs.mkShell {
+            inputsFrom = [
+              self.devShells.${system}.default
+            ];
+            nativeBuildInputs = with pkgs; [
+              bats
+              jq
+            ];
+          };
         };
 
         formatter = treefmt-nix.lib.mkWrapper pkgs {
