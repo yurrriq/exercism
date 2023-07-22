@@ -1,6 +1,6 @@
 def trim: sub("^\\s+"; "") | sub("\\s+$"; "");
 
-def parse_line: capture("\\[(?<level>[[:alpha:]]+)\\]: (?<message>.+)");
+def parse_line: capture("\\[(?<level>[[:upper:]]+)\\]: (?<message>.+)");
 
 def message: parse_line | .message | trim;
 
