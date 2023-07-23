@@ -1,14 +1,4 @@
-def distance_from_origin:
-  .x * .x + .y * .y | sqrt
-;
-
-distance_from_origin as $distance |
-if $distance > 10 then
-  0
-elif $distance > 5 then
-  1
-elif $distance > 1 then
-  5
-else
-  10
-end
+hypot(.x; .y) as $distance |
+[[10, 0], [5, 1], [1, 5]] |
+map(select($distance > first) | last) |
+first // 10
