@@ -3,8 +3,6 @@
 load bats-extra
 
 @test 'Color codes:Black' {
-    #[[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f resistor-color.jq << 'END_INPUT'
         {
           "property": "colorCode",
@@ -20,8 +18,6 @@ END_INPUT
 }
 
 @test 'Color codes:White' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f resistor-color.jq << 'END_INPUT'
         {
           "property": "colorCode",
@@ -37,8 +33,6 @@ END_INPUT
 }
 
 @test 'Color codes:Orange' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f resistor-color.jq << 'END_INPUT'
         {
           "property": "colorCode",
@@ -54,8 +48,6 @@ END_INPUT
 }
 
 @test 'Colors' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f resistor-color.jq << 'END_INPUT'
         {
           "property": "colors",
