@@ -1,4 +1,4 @@
-def known_colors:
+def colors:
   [ "black"
   , "brown"
   , "red"
@@ -12,28 +12,20 @@ def known_colors:
   ]
 ;
 
+def prefixes:
+  [ ""
+  , "kilo"
+  , "mega"
+  , "giga"
+  ]
+;
+
 def value:
-  .colors as $colors |
-  (
-    (known_colors | index($colors[0]) * 10) +
-    (known_colors | index($colors[1]))
-  ) *
-  (pow(10; (known_colors | index($colors[2]))))
+  . as $color | colors | index($color)
 ;
 
-def label_ohms:
-  . as $value |
-  if $value == 0 then
-    {value: 0, unit: "ohms"}
-  else
-    [ [1000000000, "gigaohms"]
-    , [1000000, "megaohms"]
-    , [1000, "kiloohms"]
-    ] |
-    map(select($value % first == 0)) |
-    first // [1, "ohms"] |
-    {value: ($value / first), unit: last}
-  end
-;
-
-value | label_ohms
+.colors | map(value) as [$tens, $ones, $zeros] |
+{
+  value: ((10 * $tens + $ones) * pow(10; ($zeros + 1) % 3 - 1)),
+  unit: (prefixes[($zeros + 1) / 3 | floor] + "ohms")
+}
