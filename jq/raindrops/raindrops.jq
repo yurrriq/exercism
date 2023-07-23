@@ -1,23 +1,30 @@
-.number as $number |
-[] |
-if remainder($number; 3) == 0 then
-  . += ["Pling"]
-else
+def pling:
+  if remainder(.; 3) == 0 then
+    "Pling"
+  else
+    ""
+  end
+;
+
+def plang:
+  if remainder(.; 5) == 0 then
+    "Plang"
+  else
+    ""
+  end
+;
+
+def plong:
+  if remainder(.; 7) == 0 then
+    "Plong"
+  else
+    ""
+  end
+;
+
+.number | "\(pling)\(plang)\(plong)" as $sound |
+if $sound == "" then
   .
-end |
-if remainder($number; 5) == 0 then
-  . += ["Plang"]
 else
-  .
-end |
-if remainder($number; 7) == 0 then
-  . += ["Plong"]
-else
-  .
-end |
-if . == [] then
-  [$number | tostring]
-else
-  .
-end |
-join("")
+  $sound
+end
