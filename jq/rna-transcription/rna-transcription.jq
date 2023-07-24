@@ -1,2 +1,18 @@
+def transcription:
+  {
+    "G": "C",
+    "C": "G",
+    "T": "A",
+    "A": "U"
+  }
+;
+
+def transcribe:
+  transcription[.]
+;
+
 def toRna:
-  "Implement this function" | halt_error;
+  split("") |
+  map(transcribe) |
+  join("")
+;

@@ -3,8 +3,6 @@
 load bats-extra
 
 @test 'Empty RNA sequence' {
-    #[[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r 'include "./rna-transcription"; .dna | toRna' << 'END_INPUT'
         {
           "dna": ""
@@ -17,8 +15,6 @@ END_INPUT
 }
 
 @test 'RNA complement of cytosine is guanine' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r 'include "./rna-transcription"; .dna | toRna' << 'END_INPUT'
         {
           "dna": "C"
@@ -31,8 +27,6 @@ END_INPUT
 }
 
 @test 'RNA complement of guanine is cytosine' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r 'include "./rna-transcription"; .dna | toRna' << 'END_INPUT'
         {
           "dna": "G"
@@ -45,8 +39,6 @@ END_INPUT
 }
 
 @test 'RNA complement of thymine is adenine' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r 'include "./rna-transcription"; .dna | toRna' << 'END_INPUT'
         {
           "dna": "T"
@@ -59,8 +51,6 @@ END_INPUT
 }
 
 @test 'RNA complement of adenine is uracil' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r 'include "./rna-transcription"; .dna | toRna' << 'END_INPUT'
         {
           "dna": "A"
@@ -73,8 +63,6 @@ END_INPUT
 }
 
 @test 'RNA complement' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r 'include "./rna-transcription"; .dna | toRna' << 'END_INPUT'
         {
           "dna": "ACGTGGTCTTAA"
