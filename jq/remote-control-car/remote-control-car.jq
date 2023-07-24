@@ -7,7 +7,7 @@ def new_remote_control_car:
 ;
 
 def new_remote_control_car($nickname):
-  new_remote_control_car | .nickname = $nickname
+  new_remote_control_car + {$nickname}
 ;
 
 def display_distance:
@@ -15,16 +15,18 @@ def display_distance:
 ;
 
 def display_battery:
+  "Battery " +
   if .battery_percentage == 0 then
-    "Battery empty"
+    "empty"
   else
-    "Battery at \(.battery_percentage)%"
+    "at \(.battery_percentage)%"
   end
 ;
 
 def drive:
   if .battery_percentage >= 1 then
-    .battery_percentage -= 1 | .distance_driven_in_meters += 20
+    .battery_percentage -= 1 |
+    .distance_driven_in_meters += 20
   else
     .
   end
