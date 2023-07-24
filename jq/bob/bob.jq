@@ -1,14 +1,14 @@
-def trim: sub("^\\s+"; "") | sub("\\s+$"; "");
-
 def is_question:
-  endswith("?");
+  test("\\?\\s*$");
+
+def is_silent:
+  test("^\\s*$");
 
 def is_yelled:
-  test("[[:alpha:]]") and (test("[[:lower:]]") | not);
+  test("[[:upper:]]") and (test("[[:lower:]]") | not);
 
 .heyBob |
-trim |
-if . == "" then
+if is_silent then
   "Fine. Be that way!"
 elif is_question and is_yelled then
   "Calm down, I know what I'm doing!"
