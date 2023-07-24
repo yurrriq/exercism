@@ -7,12 +7,6 @@ def transcription:
   }
 ;
 
-def transcribe:
-  transcription[.]
-;
-
 def toRna:
-  split("") |
-  map(transcribe) |
-  join("")
+  gsub("(?<nucleotide>[GCTA])"; transcription[.nucleotide])
 ;
