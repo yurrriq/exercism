@@ -24,11 +24,10 @@ def choose_vehicle:
 # output: {number} expected resell price in the dealership
 
 def resell_price:
-  . as $vehicle |
-  if $vehicle.age < 3 then
+  (if .age < 3 then
     0.8
-  elif $vehicle.age <= 10 then
+  elif .age <= 10 then
     0.7
   else
     0.5
-  end * $vehicle.original_price;
+  end) * .original_price;
