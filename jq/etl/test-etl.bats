@@ -3,8 +3,6 @@
 load bats-extra
 
 @test 'single letter' {
-    #[[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f etl.jq << 'END_INPUT'
         {
           "legacy": {
@@ -21,8 +19,6 @@ END_INPUT
 }
 
 @test 'single score with multiple letters' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f etl.jq << 'END_INPUT'
         {
           "legacy": {
@@ -43,8 +39,6 @@ END_INPUT
 }
 
 @test 'multiple scores with multiple letters' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f etl.jq << 'END_INPUT'
         {
           "legacy": {
@@ -66,8 +60,6 @@ END_INPUT
 }
 
 @test 'multiple scores with differing numbers of letters' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f etl.jq << 'END_INPUT'
         {
           "legacy": {
