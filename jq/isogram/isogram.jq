@@ -1,1 +1,5 @@
-"Remove this line and implement your solution" | halt_error
+.phrase |
+gsub("\\W"; "") |
+ascii_downcase |
+explode |
+sort == unique
