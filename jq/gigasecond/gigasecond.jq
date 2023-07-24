@@ -1,5 +1,5 @@
-def gigasecond:
-  1e9
+def date_only_format:
+  "%Y-%m-%d"
 ;
 
 def full_time_format:
@@ -7,7 +7,6 @@ def full_time_format:
 ;
 
 .moment |
-(try strptime("%Y-%m-%d")) // (strptime(full_time_format)) |
-mktime + gigasecond |
-gmtime |
+(try strptime(date_only_format)) // (strptime(full_time_format)) |
+mktime + 1e9 |
 strftime(full_time_format)
