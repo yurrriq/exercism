@@ -19,5 +19,6 @@ def planets:
   }
 ;
 
-.seconds / seconds_in_year / (planets[.planet] // ("not a planet" | halt_error)) |
+(planets[.planet] // ("not a planet" | halt_error)) as $orbital_period |
+.seconds / seconds_in_year / $orbital_period |
 two_decimal
