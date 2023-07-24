@@ -3,8 +3,6 @@
 load bats-extra
 
 @test 'empty strand' {
-    #[[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f nucleotide-count.jq << 'END_INPUT'
         {
           "strand": ""
@@ -17,8 +15,6 @@ END_INPUT
 }
 
 @test 'can count one nucleotide in single-character input' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f nucleotide-count.jq << 'END_INPUT'
         {
           "strand": "G"
@@ -31,8 +27,6 @@ END_INPUT
 }
 
 @test 'strand with repeated nucleotide' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f nucleotide-count.jq << 'END_INPUT'
         {
           "strand": "GGGGGGG"
@@ -45,8 +39,6 @@ END_INPUT
 }
 
 @test 'strand with multiple nucleotides' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f nucleotide-count.jq << 'END_INPUT'
         {
           "strand": "AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC"
@@ -59,8 +51,6 @@ END_INPUT
 }
 
 @test 'strand with invalid nucleotides' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f nucleotide-count.jq << 'END_INPUT'
         {
           "strand": "AGXXACT"
