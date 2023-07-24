@@ -1,5 +1,1 @@
-.phrase |
-gsub("\\W"; "") |
-ascii_downcase |
-explode |
-sort == unique
+.phrase | test("([[:alpha:]]).*\\1"; "gi") | not
