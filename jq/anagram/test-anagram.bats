@@ -3,8 +3,6 @@
 load bats-extra
 
 @test 'no matches' {
-    #[[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f anagram.jq << 'END_INPUT'
         {
           "subject": "diaper",
@@ -23,8 +21,6 @@ END_INPUT
 }
 
 @test 'detects two anagrams' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f anagram.jq << 'END_INPUT'
         {
           "subject": "solemn",
@@ -42,8 +38,6 @@ END_INPUT
 }
 
 @test 'does not detect anagram subsets' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f anagram.jq << 'END_INPUT'
         {
           "subject": "good",
@@ -60,8 +54,6 @@ END_INPUT
 }
 
 @test 'detects anagram' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f anagram.jq << 'END_INPUT'
         {
           "subject": "listen",
@@ -80,8 +72,6 @@ END_INPUT
 }
 
 @test 'detects three anagrams' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f anagram.jq << 'END_INPUT'
         {
           "subject": "allergy",
@@ -102,8 +92,6 @@ END_INPUT
 }
 
 @test 'detects multiple anagrams with different case' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f anagram.jq << 'END_INPUT'
         {
           "subject": "nose",
@@ -120,8 +108,6 @@ END_INPUT
 }
 
 @test 'does not detect non-anagrams with identical checksum' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f anagram.jq << 'END_INPUT'
         {
           "subject": "mass",
@@ -137,8 +123,6 @@ END_INPUT
 }
 
 @test 'detects anagrams case-insensitively' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f anagram.jq << 'END_INPUT'
         {
           "subject": "Orchestra",
@@ -156,8 +140,6 @@ END_INPUT
 }
 
 @test 'detects anagrams using case-insensitive subject' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f anagram.jq << 'END_INPUT'
         {
           "subject": "Orchestra",
@@ -175,8 +157,6 @@ END_INPUT
 }
 
 @test 'detects anagrams using case-insensitive possible matches' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f anagram.jq << 'END_INPUT'
         {
           "subject": "orchestra",
@@ -194,8 +174,6 @@ END_INPUT
 }
 
 @test 'does not detect an anagram if the original word is repeated' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f anagram.jq << 'END_INPUT'
         {
           "subject": "go",
@@ -211,8 +189,6 @@ END_INPUT
 }
 
 @test 'anagrams must use all letters exactly once' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f anagram.jq << 'END_INPUT'
         {
           "subject": "tapper",
@@ -228,8 +204,6 @@ END_INPUT
 }
 
 @test 'words are not anagrams of themselves' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f anagram.jq << 'END_INPUT'
         {
           "subject": "BANANA",
@@ -245,8 +219,6 @@ END_INPUT
 }
 
 @test 'words are not anagrams of themselves even if letter case is partially different' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f anagram.jq << 'END_INPUT'
         {
           "subject": "BANANA",
@@ -262,8 +234,6 @@ END_INPUT
 }
 
 @test 'words are not anagrams of themselves even if letter case is completely different' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f anagram.jq << 'END_INPUT'
         {
           "subject": "BANANA",
@@ -279,8 +249,6 @@ END_INPUT
 }
 
 @test 'words other than themselves can be anagrams' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -c -f anagram.jq << 'END_INPUT'
         {
           "subject": "LISTEN",
