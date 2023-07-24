@@ -3,8 +3,6 @@
 load bats-extra
 
 @test 'stating something' {
-    #[[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "Tom-ay-to, tom-aaaah-to."
@@ -17,8 +15,6 @@ END_INPUT
 }
 
 @test 'shouting' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "WATCH OUT!"
@@ -31,8 +27,6 @@ END_INPUT
 }
 
 @test 'shouting gibberish' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "FCECDFCAAB"
@@ -45,8 +39,6 @@ END_INPUT
 }
 
 @test 'asking a question' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "Does this cryogenic chamber make me look fat?"
@@ -59,8 +51,6 @@ END_INPUT
 }
 
 @test 'asking a numeric question' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "You are, what, like 15?"
@@ -73,8 +63,6 @@ END_INPUT
 }
 
 @test 'asking gibberish' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "fffbbcbeab?"
@@ -87,8 +75,6 @@ END_INPUT
 }
 
 @test 'talking forcefully' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "Hi there!"
@@ -101,8 +87,6 @@ END_INPUT
 }
 
 @test 'using acronyms in regular speech' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "It's OK if you don't want to go work for NASA."
@@ -115,8 +99,6 @@ END_INPUT
 }
 
 @test 'forceful question' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "WHAT'S GOING ON?"
@@ -129,8 +111,6 @@ END_INPUT
 }
 
 @test 'shouting numbers' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "1, 2, 3 GO!"
@@ -143,8 +123,6 @@ END_INPUT
 }
 
 @test 'no letters' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "1, 2, 3"
@@ -157,8 +135,6 @@ END_INPUT
 }
 
 @test 'question with no letters' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "4?"
@@ -171,8 +147,6 @@ END_INPUT
 }
 
 @test 'shouting with special characters' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "ZOMG THE %^*@#$(*^ ZOMBIES ARE COMING!!11!!1!"
@@ -185,8 +159,6 @@ END_INPUT
 }
 
 @test 'shouting with no exclamation mark' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "I HATE THE DENTIST"
@@ -199,8 +171,6 @@ END_INPUT
 }
 
 @test 'statement containing question mark' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "Ending with ? means a question."
@@ -213,8 +183,6 @@ END_INPUT
 }
 
 @test 'non-letters with question' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": ":) ?"
@@ -227,8 +195,6 @@ END_INPUT
 }
 
 @test 'prattling on' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "Wait! Hang on. Are you going to be OK?"
@@ -241,8 +207,6 @@ END_INPUT
 }
 
 @test 'silence' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": ""
@@ -255,8 +219,6 @@ END_INPUT
 }
 
 @test 'prolonged silence' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "          "
@@ -269,8 +231,6 @@ END_INPUT
 }
 
 @test 'alternate silence' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "\t\t\t\t\t\t\t\t\t\t"
@@ -283,8 +243,6 @@ END_INPUT
 }
 
 @test 'multiple line question' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "\nDoes this cryogenic chamber make me look fat?\nNo."
@@ -297,8 +255,6 @@ END_INPUT
 }
 
 @test 'starting with whitespace' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "         hmmmmmmm..."
@@ -311,8 +267,6 @@ END_INPUT
 }
 
 @test 'ending with whitespace' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "Okay if like my  spacebar  quite a bit?   "
@@ -325,8 +279,6 @@ END_INPUT
 }
 
 @test 'other whitespace' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "\n\r \t"
@@ -339,8 +291,6 @@ END_INPUT
 }
 
 @test 'non-question ending with whitespace' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f bob.jq << 'END_INPUT'
         {
           "heyBob": "This is a statement ending with whitespace      "
