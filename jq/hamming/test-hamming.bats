@@ -3,8 +3,6 @@
 load bats-extra
 
 @test 'empty strands' {
-    #[[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f hamming.jq << 'END_INPUT'
         {
           "strand1": "",
@@ -18,8 +16,6 @@ END_INPUT
 }
 
 @test 'single letter identical strands' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f hamming.jq << 'END_INPUT'
         {
           "strand1": "A",
@@ -33,8 +29,6 @@ END_INPUT
 }
 
 @test 'single letter different strands' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f hamming.jq << 'END_INPUT'
         {
           "strand1": "G",
@@ -48,8 +42,6 @@ END_INPUT
 }
 
 @test 'long identical strands' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f hamming.jq << 'END_INPUT'
         {
           "strand1": "GGACTGAAATCTG",
@@ -63,8 +55,6 @@ END_INPUT
 }
 
 @test 'long different strands' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f hamming.jq << 'END_INPUT'
         {
           "strand1": "GGACGGATTCTG",
@@ -78,8 +68,6 @@ END_INPUT
 }
 
 @test 'disallow first strand longer' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f hamming.jq << 'END_INPUT'
         {
           "strand1": "AATG",
@@ -93,8 +81,6 @@ END_INPUT
 }
 
 @test 'disallow second strand longer' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f hamming.jq << 'END_INPUT'
         {
           "strand1": "ATA",
@@ -108,8 +94,6 @@ END_INPUT
 }
 
 @test 'disallow empty first strand' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f hamming.jq << 'END_INPUT'
         {
           "strand1": "",
@@ -123,8 +107,6 @@ END_INPUT
 }
 
 @test 'disallow empty second strand' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r -f hamming.jq << 'END_INPUT'
         {
           "strand1": "G",
