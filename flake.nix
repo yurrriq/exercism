@@ -68,8 +68,11 @@
         };
 
         devShells = {
-          c = self.devShells.${system}.default.overrideAttrs (super: {
-            nativeBuildInputs = super.buildInputs ++ (with pkgs; [
+          c = pkgs.mkShell {
+            inputsFrom = [
+              self.devShells.${system}.default
+            ];
+            nativeBuildInputs = with pkgs; [
               ccls
               doxygen
               (
@@ -80,8 +83,8 @@
               )
               gcc
               indent
-            ]);
-          });
+            ];
+          };
 
           default = with pkgs; mkShell {
             FONTCONFIG_FILE = makeFontsConf {
