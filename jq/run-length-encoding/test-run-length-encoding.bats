@@ -3,8 +3,6 @@
 load bats-extra
 
 @test 'run-length encode a string:empty string' {
-    #[[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r '
                 include "./run-length-encoding";
                 if .property == "encode" then
@@ -29,8 +27,6 @@ END_INPUT
 }
 
 @test 'run-length encode a string:single characters only are encoded without count' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r '
                 include "./run-length-encoding";
                 if .property == "encode" then
@@ -55,8 +51,6 @@ END_INPUT
 }
 
 @test 'run-length encode a string:string with no single characters' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r '
                 include "./run-length-encoding";
                 if .property == "encode" then
@@ -81,8 +75,6 @@ END_INPUT
 }
 
 @test 'run-length encode a string:single characters mixed with repeated characters' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r '
                 include "./run-length-encoding";
                 if .property == "encode" then
@@ -107,8 +99,6 @@ END_INPUT
 }
 
 @test 'run-length encode a string:multiple whitespace mixed in string' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r '
                 include "./run-length-encoding";
                 if .property == "encode" then
@@ -133,8 +123,6 @@ END_INPUT
 }
 
 @test 'run-length encode a string:lowercase characters' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r '
                 include "./run-length-encoding";
                 if .property == "encode" then
@@ -159,8 +147,6 @@ END_INPUT
 }
 
 @test 'run-length decode a string:empty string' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r '
                 include "./run-length-encoding";
                 if .property == "encode" then
@@ -185,8 +171,6 @@ END_INPUT
 }
 
 @test 'run-length decode a string:single characters only' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r '
                 include "./run-length-encoding";
                 if .property == "encode" then
@@ -211,8 +195,6 @@ END_INPUT
 }
 
 @test 'run-length decode a string:string with no single characters' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r '
                 include "./run-length-encoding";
                 if .property == "encode" then
@@ -237,8 +219,6 @@ END_INPUT
 }
 
 @test 'run-length decode a string:single characters with repeated characters' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r '
                 include "./run-length-encoding";
                 if .property == "encode" then
@@ -263,8 +243,6 @@ END_INPUT
 }
 
 @test 'run-length decode a string:multiple whitespace mixed in string' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r '
                 include "./run-length-encoding";
                 if .property == "encode" then
@@ -289,8 +267,6 @@ END_INPUT
 }
 
 @test 'run-length decode a string:lowercase string' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r '
                 include "./run-length-encoding";
                 if .property == "encode" then
@@ -315,8 +291,6 @@ END_INPUT
 }
 
 @test 'encode and then decode:encode followed by decode gives original string' {
-    [[ $BATS_RUN_SKIPPED == "true" ]] || skip
-
     run jq -r '
                 include "./run-length-encoding";
                 if .property == "encode" then
