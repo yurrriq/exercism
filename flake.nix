@@ -148,6 +148,12 @@
             ];
             nativeBuildInputs = with pkgs; [
               bats
+              (
+                emacsWithPackagesFromUsePackage {
+                  alwaysEnsure = true;
+                  config = ./jq/emacs.el;
+                }
+              )
               jq
             ];
           };
