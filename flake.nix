@@ -157,6 +157,27 @@
               jq
             ];
           };
+
+          purescript = pkgs.mkShell {
+            inputsFrom = [
+              self.devShells.${system}.default
+            ];
+
+            nativeBuildInputs = with pkgs; [
+              dhall
+              dhall-lsp-server
+              (
+                emacsWithPackagesFromUsePackage {
+                  alwaysEnsure = true;
+                  config = ./purescript/emacs.el;
+                }
+              )
+              nodePackages.purescript-language-server
+              nodejs_latest
+              purescript
+              spago
+            ];
+          };
         };
 
         formatter = treefmt-nix.lib.mkWrapper pkgs {
@@ -180,6 +201,7 @@
                 "TemplateHaskell"
               ];
             };
+            purs-tidy.enable = true;
             rufo.enable = true;
             rustfmt.enable = true;
           };
