@@ -1,7 +1,6 @@
 module HelloWorld
   ( helloWorld
-  )
-  where
+  ) where
 
 -- | Just say "Hello, World!".
 helloWorld :: String

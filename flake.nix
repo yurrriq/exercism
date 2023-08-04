@@ -211,6 +211,12 @@
                 "**/test**"
               ];
             };
+            purs-tidy = {
+              includes = [
+                "purescript/*/src/**/*.purs"
+                "purescript/*/test/**/*.purs"
+              ];
+            };
           };
         };
       }
