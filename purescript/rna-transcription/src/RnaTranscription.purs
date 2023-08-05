@@ -2,8 +2,18 @@ module RnaTranscription
   ( toRNA
   ) where
 
-import Data.Maybe (Maybe)
-import Effect.Exception.Unsafe (unsafeThrow)
+import Control.Semigroupoid ((<<<))
+import Data.Functor (map)
+import Data.Maybe (Maybe(..))
+import Data.String.CodeUnits (fromCharArray, toCharArray)
+import Data.Traversable (traverse)
 
 toRNA :: String -> Maybe String
-toRNA = unsafeThrow "You need to implement this function."
+toRNA = map fromCharArray <<< traverse transcribeNucleotide <<< toCharArray
+
+transcribeNucleotide :: Char -> Maybe Char
+transcribeNucleotide 'G' = Just 'C'
+transcribeNucleotide 'C' = Just 'G'
+transcribeNucleotide 'T' = Just 'A'
+transcribeNucleotide 'A' = Just 'U'
+transcribeNucleotide _ = Nothing
