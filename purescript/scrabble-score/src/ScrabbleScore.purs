@@ -24,7 +24,7 @@ scoreLetter letter = fromMaybe 0 (lookup letter points)
 points :: Map Char Int
 points = Map.fromFoldable $ concatMap go legend
   where
-  go (Tuple n cs) = map (\c -> Tuple c n) (toCharArray cs)
+  go (Tuple n cs) = map (flip Tuple n) (toCharArray cs)
 
 legend :: Array (Tuple Int String)
 legend =
