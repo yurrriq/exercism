@@ -12,8 +12,10 @@ toRNA :: String -> Maybe String
 toRNA = map fromCharArray <<< traverse transcribeNucleotide <<< toCharArray
 
 transcribeNucleotide :: Char -> Maybe Char
-transcribeNucleotide 'G' = Just 'C'
-transcribeNucleotide 'C' = Just 'G'
-transcribeNucleotide 'T' = Just 'A'
-transcribeNucleotide 'A' = Just 'U'
-transcribeNucleotide _ = Nothing
+transcribeNucleotide nucleotide =
+  case nucleotide of
+    'G' -> Just 'C'
+    'C' -> Just 'G'
+    'T' -> Just 'A'
+    'A' -> Just 'U'
+    _ -> Nothing
