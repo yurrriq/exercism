@@ -5,8 +5,9 @@ module Triangle
 
 import Prelude
 import Data.Either (Either(..))
-import Data.Generic.Rep (class Generic)
-import Data.Show.Generic (genericShow)
+
+-- import Data.Generic.Rep (class Generic)
+-- import Data.Show.Generic (genericShow)
 
 data Triangle
   = Equilateral
@@ -15,10 +16,15 @@ data Triangle
 
 derive instance eqTriangle :: Eq Triangle
 
-derive instance genericTriangle :: Generic Triangle _
+-- derive instance genericTriangle :: Generic Triangle _
+
+-- instance showTriangle :: Show Triangle where
+--   show = genericShow
 
 instance showTriangle :: Show Triangle where
-  show = genericShow
+  show Equilateral = "Equilateral"
+  show Isosceles = "Isosceles"
+  show Scalene = "Scalene"
 
 triangleKind :: Int -> Int -> Int -> Either String Triangle
 triangleKind a b c
