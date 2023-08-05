@@ -4,8 +4,9 @@ module Triangle
   ) where
 
 import Prelude
-import Data.Either (Either)
-import Effect.Exception.Unsafe (unsafeThrow)
+import Data.Either (Either(..))
+import Data.Generic.Rep (class Generic)
+import Data.Show.Generic (genericShow)
 
 data Triangle
   = Equilateral
@@ -14,8 +15,20 @@ data Triangle
 
 derive instance eqTriangle :: Eq Triangle
 
+derive instance genericTriangle :: Generic Triangle _
+
 instance showTriangle :: Show Triangle where
-  show = unsafeThrow "You need to implement `show`."
+  show = genericShow
 
 triangleKind :: Int -> Int -> Int -> Either String Triangle
-triangleKind = unsafeThrow "You need to implement `triangleKind`."
+triangleKind a b c
+  | a <= 0 || b <= 0 || c <= 0 =
+      Left "Invalid lengths"
+  | a == b && b == c =
+      Right Equilateral
+  | a + b < c || a + c < b || b + c < a =
+      Left "Violates inequality"
+  | a == b || a == c || b == c =
+      Right Isosceles
+  | otherwise =
+      Right Scalene
