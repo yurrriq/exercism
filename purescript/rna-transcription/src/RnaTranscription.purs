@@ -2,8 +2,8 @@ module RnaTranscription
   ( toRNA
   ) where
 
-import Control.Semigroupoid ((<<<))
-import Data.Functor (map)
+import Prelude
+
 import Data.Maybe (Maybe(..))
 import Data.String.CodeUnits (fromCharArray, toCharArray)
 import Data.Traversable (traverse)
