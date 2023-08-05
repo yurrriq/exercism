@@ -4,28 +4,27 @@ module ScrabbleScore
 
 import Prelude
 
-import Data.Array (concatMap, filter, head)
+import Data.Array (concatMap)
+import Data.Foldable (foldl)
 import Data.Map (Map, lookup)
 import Data.Map as Map
 import Data.Maybe (fromMaybe)
-import Data.Foldable (foldl)
-import Data.Tuple (Tuple(..))
 import Data.String (toUpper)
-import Data.String.CodePoints (CodePoint, fromCodePointArray, toCodePointArray)
-import Data.CodePoint.Unicode (isLetter)
+import Data.String.CodeUnits (toCharArray)
+import Data.Tuple (Tuple(..))
 
 scoreWord :: String -> Int
-scoreWord = foldl go 0 <<< filter isLetter <<< toCodePointArray
+scoreWord = foldl go 0 <<< toCharArray <<< toUpper
   where
-  go score letter = score + scoreLetter letter
+  go wordScore = (wordScore + _) <<< scoreLetter
 
-scoreLetter :: CodePoint -> Int
-scoreLetter letter = fromMaybe 0 (flip lookup points =<< maybeUpperLetter)
+scoreLetter :: Char -> Int
+scoreLetter letter = fromMaybe 0 (lookup letter points)
+
+points :: Map Char Int
+points = Map.fromFoldable $ concatMap go legend
   where
-  maybeUpperLetter = head (toCodePointArray (toUpper (fromCodePointArray [ letter ])))
-
-points :: Map CodePoint Int
-points = Map.fromFoldable $ concatMap (\(Tuple n cs) -> map (\c -> Tuple c n) (toCodePointArray cs)) legend
+  go (Tuple n cs) = map (\c -> Tuple c n) (toCharArray cs)
 
 legend :: Array (Tuple Int String)
 legend =
