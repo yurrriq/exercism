@@ -68,6 +68,16 @@
         };
 
         devShells = {
+          awk = pkgs.mkShell {
+            inputsFrom = [
+              self.devShells.${system}.default
+            ];
+            nativeBuildInputs = with pkgs; [
+              bats
+              gawk
+            ];
+          };
+
           c = pkgs.mkShell {
             inputsFrom = [
               self.devShells.${system}.default
