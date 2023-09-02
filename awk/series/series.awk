@@ -1,24 +1,12 @@
-BEGIN {
-    if (len <= 0) {
-        print "invalid length"
-        exit 1
-    }
+@include "assert"
 
-    getline input
+{
+    assert(NF, "series cannot be empty")
+    assert(len > 0 && len <= length(), "invalid length")
 
-    if (length(input) == 0) {
-        print "series cannot be empty"
-        exit 1
-    } else if (length(input) < len) {
-        print "invalid length"
-        exit 1
-    } else if (length(input) == len) {
-        print input
-    } else {
-        for (i = 1; i <= length(input) - len + 1; i++) {
-            if (i > 1)
-                printf " "
-            printf substr(input, i, len)
-        }
+    for (i = 0; i <= length() - len; i++) {
+        if (i > 0)
+            printf " "
+        printf substr($0, i + 1, len)
     }
 }
