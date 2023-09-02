@@ -1,17 +1,14 @@
-# These variables are initialized on the command line (using '-v'):
-# -direction
+@load "ordchr"
 
 BEGIN {
-    uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    lowers = "abcdefghijklmnopqrstuvwxyz"
+    a = ord("a")
+    z = ord("z")
 }
 
 function cipher(char) {
     switch (char) {
-    case /[[:upper:]]/:
-        return substr(lowers, 27 - index(uppers, char), 1)
     case /[[:lower:]]/:
-        return substr(lowers, 27 - index(lowers, char), 1)
+        return chr(a + (z - ord(char)))
     case /[[:digit:]]/:
         return char
     default:
@@ -27,6 +24,7 @@ function transcode(str) {
 }
 
 {
+    $0 = tolower($0)
     switch (direction) {
     case "encode":
         encoded = transcode($0)
