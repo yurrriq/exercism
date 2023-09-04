@@ -1,4 +1,3 @@
-BEGIN {
-    print "Implement this solution" > "/dev/stderr"
-    exit 1
+{
+    print (($0%400 == 0) || ($0%4 == 0 && $0%100 != 0)) ? "true" : "false"
 }
