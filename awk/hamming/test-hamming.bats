@@ -11,7 +11,6 @@ teardown() {
 }
 
 @test 'empty strands' {
-  #[[ $BATS_RUN_SKIPPED == "true" ]] || skip
   populate_test_file '' ''
   run gawk -f hamming.awk input.txt
   assert_success
@@ -19,7 +18,6 @@ teardown() {
 }
 
 @test 'single letter identical strands' {
-  [[ $BATS_RUN_SKIPPED == "true" ]] || skip
   populate_test_file 'A' 'A'
   run gawk -f hamming.awk input.txt
   assert_success
@@ -27,7 +25,6 @@ teardown() {
 }
 
 @test 'single letter different strands' {
-  [[ $BATS_RUN_SKIPPED == "true" ]] || skip
   populate_test_file 'G' 'T'
   run gawk -f hamming.awk input.txt
   assert_success
@@ -35,7 +32,6 @@ teardown() {
 }
 
 @test 'long identical strands' {
-  [[ $BATS_RUN_SKIPPED == "true" ]] || skip
   populate_test_file 'GGACTGAAATCTG' 'GGACTGAAATCTG'
   run gawk -f hamming.awk input.txt
   assert_success
@@ -43,7 +39,6 @@ teardown() {
 }
 
 @test 'long different strands' {
-  [[ $BATS_RUN_SKIPPED == "true" ]] || skip
   populate_test_file 'GGACGGATTCTG' 'AGGACGGATTCT'
   run gawk -f hamming.awk input.txt
   assert_success
@@ -51,7 +46,6 @@ teardown() {
 }
 
 @test 'disallow first strand longer' {
-  [[ $BATS_RUN_SKIPPED == "true" ]] || skip
   populate_test_file 'AATG' 'AAA'
   run gawk -f hamming.awk input.txt
   assert_failure
@@ -59,7 +53,6 @@ teardown() {
 }
 
 @test 'disallow second strand longer' {
-  [[ $BATS_RUN_SKIPPED == "true" ]] || skip
   populate_test_file 'ATA' 'AGTG'
   run gawk -f hamming.awk input.txt
   assert_failure
@@ -67,7 +60,6 @@ teardown() {
 }
 
 @test 'disallow empty first strand' {
-  [[ $BATS_RUN_SKIPPED == "true" ]] || skip
   populate_test_file '' 'G'
   run gawk -f hamming.awk input.txt
   assert_failure
@@ -75,7 +67,6 @@ teardown() {
 }
 
 @test 'disallow empty second strand' {
-  [[ $BATS_RUN_SKIPPED == "true" ]] || skip
   populate_test_file 'G' ''
   run gawk -f hamming.awk input.txt
   assert_failure
