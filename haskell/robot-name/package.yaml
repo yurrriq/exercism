@@ -20,8 +20,9 @@ library:
   ghc-options: -Wall
   dependencies:
   - containers
+  - lens
+  - monad-loops
   - random
-  - stm
 
 tests:
   test:

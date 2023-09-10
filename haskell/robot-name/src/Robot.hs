@@ -1,3 +1,7 @@
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE FunctionalDependencies #-}
+{-# LANGUAGE TemplateHaskell #-}
+
 -- |
 -- Module      : Robot
 -- Copyright   : (c) Eric Bailey, 2015-2023
@@ -17,67 +21,55 @@ module Robot
   )
 where
 
-import Control.Concurrent.STM
-  ( TVar,
-    atomically,
-    newTVarIO,
-    readTVarIO,
-    writeTVar,
-  )
+import Control.Lens (views)
+import Control.Lens.TH (makeFields)
+import Control.Monad.Loops (iterateUntil)
 import Control.Monad.State (StateT, gets, liftIO, modify)
+import Data.IORef (IORef, atomicWriteIORef, newIORef, readIORef)
 import Data.Set (Set)
 import qualified Data.Set as Set
 import System.Random (randomRIO)
 
--- | A robot has a name that can be read ('robotName') and reset ('resetName').
-newtype Robot = Robot {_robotName :: TVar String}
+type RobotFactory a = StateT RunState IO a
 
 type RunState = Set String
 
 initialState :: RunState
 initialState = Set.empty
 
-type RobotFactory a = StateT RunState IO a
+-- | A robot has a name that can be read ('robotName') and reset ('resetName').
+newtype Robot = Robot {_robotName :: IORef String}
 
--- | Creates a 'Robot' and gives it a random name.
+makeFields ''Robot
+
+-- | Create a 'Robot' and give it a random name.
 mkRobot :: RobotFactory Robot
 mkRobot =
   do
-    name <- randomName
-    robot <- Robot <$> liftIO (newTVarIO name)
-    modify (Set.insert name)
+    robot <- Robot <$> liftIO (newIORef mempty)
+    resetName robot
     pure robot
 
--- | Given a 'Robot' @r@, generates a random name and atomically overwrites
--- @r@'s name.
+-- | Given a 'Robot' @r@, generate a random name and atomically overwrite @r@'s
+-- name.
 resetName :: Robot -> RobotFactory ()
-resetName = (randomName >>=) . resetName'
-  where
-    resetName' = (liftIO . atomically) .: (writeTVar . _robotName)
+resetName robot =
+  do
+    modify . Set.delete =<< liftIO (robotName robot)
+    newName <- randomName
+    modify (Set.insert newName)
+    liftIO (views name (`atomicWriteIORef` newName) robot)
 
--- | Given a 'Robot', atomically reads and returns its name.
+-- | Given a 'Robot', return its name.
 robotName :: Robot -> IO String
-robotName = readTVarIO . _robotName
+robotName = views name readIORef
 
--- | Generates a random robot name, such as RX837 or BC811.
+-- | Generate a random robot name, such as RX837 or BC811.
 randomName :: RobotFactory String
 randomName =
-  do
-    isUsed <- gets (flip Set.member)
-    name <- mapM randomRIO [a, a, d, d, d]
-    if isUsed name
-      then randomName
-      else pure name
+  flip iterateUntil (mapM randomRIO format)
+    =<< gets (flip Set.notMember)
   where
-    a = ('A', 'Z')
-    d = ('0', '9')
-
--- | From "Data.Function.Pointless"
---
--- > (f .: g) x y = f (g x y)
---
--- or,
---
--- > f .: g = curry (f . uncurry g)
-(.:) :: (c -> d) -> (a -> b -> c) -> a -> b -> d
-(.:) = (.) . (.)
+    format = [letter, letter, digit, digit, digit]
+    letter = ('A', 'Z')
+    digit = ('0', '9')
