@@ -4,18 +4,16 @@
   inputs = {
     emacs-overlay = {
       inputs = {
-        flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
         nixpkgs-stable.follows = "nixpkgs-stable";
       };
       url = "github:nix-community/emacs-overlay";
     };
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/release-23.05";
-    pre-commit-hooks = {
+    pre-commit-hooks-nix = {
       inputs = {
-        flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
         nixpkgs-stable.follows = "nixpkgs-stable";
       };
@@ -27,44 +25,39 @@
     };
   };
 
-  outputs = { self, emacs-overlay, flake-utils, nixpkgs, pre-commit-hooks, treefmt-nix, ... }:
-    {
-      overlays.haskell = _final: prev: {
-        haskellPackages = prev.haskellPackages.override {
-          overrides = _hfinal: hprev: {
-            digits = hprev.callCabal2nix "digits"
-              (prev.fetchFromGitHub {
-                owner = "yurrriq";
-                repo = "digits";
-                rev = "c3a2c2bacc4a2e2c51beefa2fdb90da9a5bddf6b";
-                hash = "sha256-/n2gf33zShj6LexHRplp975teCZyLAsg0rmXK9AHoK0=";
-              })
-              { };
-          };
-        };
-      };
-    } // flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs {
+  outputs = inputs@{ flake-parts, nixpkgs, self, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        inputs.pre-commit-hooks-nix.flakeModule
+        inputs.treefmt-nix.flakeModule
+      ];
+
+      systems = [
+        "x86_64-linux"
+      ];
+
+      perSystem = { config, pkgs, system, ... }: {
+        _module.args.pkgs = import nixpkgs {
           overlays = [
-            emacs-overlay.overlay
-            self.overlays.haskell
+            inputs.emacs-overlay.overlay
+            (
+              _final: prev: {
+                haskellPackages = prev.haskellPackages.override {
+                  overrides = _hfinal: hprev: {
+                    digits = hprev.callCabal2nix "digits"
+                      (prev.fetchFromGitHub {
+                        owner = "yurrriq";
+                        repo = "digits";
+                        rev = "c3a2c2bacc4a2e2c51beefa2fdb90da9a5bddf6b";
+                        hash = "sha256-/n2gf33zShj6LexHRplp975teCZyLAsg0rmXK9AHoK0=";
+                      })
+                      { };
+                  };
+                };
+              }
+            )
           ];
           inherit system;
-        };
-      in
-      {
-        checks = {
-          pre-commit-check = pre-commit-hooks.lib.${system}.run {
-            src = ./.;
-            hooks = {
-              revive.enable = true;
-              treefmt.enable = true;
-            };
-            settings = {
-              treefmt.package = self.formatter.${system};
-            };
-          };
         };
 
         devShells = {
@@ -106,7 +99,7 @@
               exercism
               rnix-lsp
             ];
-            inherit (self.checks.${system}.pre-commit-check) shellHook;
+            inherit (config.pre-commit.devShell) shellHook;
           };
 
           go = pkgs.mkShell {
@@ -190,8 +183,18 @@
           };
         };
 
-        formatter = treefmt-nix.lib.mkWrapper pkgs {
-          projectRootFile = "flake.nix";
+        pre-commit.settings.hooks = {
+          revive = {
+            enable = true;
+            excludes = [
+              "go/*/*_test.go"
+            ];
+          };
+          treefmt.enable = true;
+        };
+
+        treefmt = {
+          projectRootFile = ./flake.nix;
           programs = {
             black.enable = true;
             clang-format.enable = true;
@@ -200,7 +203,7 @@
               enable = true;
               print-width = 80;
             };
-            gofmt.enable = true;
+            gofumpt.enable = true;
             hlint.enable = true;
             nixpkgs-fmt.enable = true;
             # TODO: ocamlformat.enable = true;
@@ -221,6 +224,23 @@
                 "**/test**"
               ];
             };
+            gofumpt = {
+              excludes = [
+                "go/*/*_test.go"
+              ];
+            };
+            hlint = {
+              excludes = [
+                "haskell/**/*_test.hs"
+                "haskell/*/test/*.hs"
+              ];
+            };
+            ormolu = {
+              excludes = [
+                "haskell/*/*_test.hs"
+                "haskell/*/test/*.hs"
+              ];
+            };
             purs-tidy = {
               includes = [
                 "purescript/*/src/**/*.purs"
@@ -229,6 +249,6 @@
             };
           };
         };
-      }
-    );
+      };
+    };
 }
