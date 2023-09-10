@@ -75,7 +75,9 @@ do_luhn([C | Cs], O, E) when $0 =< C, C =< $9 ->
         (fun
             (X) when X > 9 -> X - 9;
             (X) -> X
-        end)(parity(P) * C0)
+        end)(
+            parity(P) * C0
+        )
     end,
     do_luhn(Cs, E + F(odd), O + F(even));
 do_luhn([_ | Cs], O, E) ->

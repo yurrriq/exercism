@@ -8,73 +8,98 @@
 -include_lib("erl_exercism/include/exercism.hrl").
 -include_lib("eunit/include/eunit.hrl").
 
-
-
-
 '1_empty_string_test_'() ->
-    {"empty string",
-     ?_assertEqual([], run_length_encoding:encode([]))}.
+    {"empty string", ?_assertEqual([], run_length_encoding:encode([]))}.
 
 '2_single_characters_only_are_encoded_without_count_test_'() ->
-    {"single characters only are encoded without "
-     "count",
-     ?_assertEqual("XYZ",
-		   run_length_encoding:encode("XYZ"))}.
+    {
+        "single characters only are encoded without "
+        "count",
+        ?_assertEqual(
+            "XYZ",
+            run_length_encoding:encode("XYZ")
+        )
+    }.
 
 '3_string_with_no_single_characters_test_'() ->
     {"string with no single characters",
-     ?_assertEqual("2A3B4C",
-		   run_length_encoding:encode("AABBBCCCC"))}.
+        ?_assertEqual(
+            "2A3B4C",
+            run_length_encoding:encode("AABBBCCCC")
+        )}.
 
 '4_single_characters_mixed_with_repeated_characters_test_'() ->
-    {"single characters mixed with repeated "
-     "characters",
-     ?_assertEqual("12WB12W3B24WB",
-		   run_length_encoding:encode("WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWW"
-					      "WWWWWWWB"))}.
+    {
+        "single characters mixed with repeated "
+        "characters",
+        ?_assertEqual(
+            "12WB12W3B24WB",
+            run_length_encoding:encode(
+                "WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWW"
+                "WWWWWWWB"
+            )
+        )
+    }.
 
 '5_multiple_whitespace_mixed_in_string_test_'() ->
     {"multiple whitespace mixed in string",
-     ?_assertEqual("2 hs2q q2w2 ",
-		   run_length_encoding:encode("  hsqq qww  "))}.
+        ?_assertEqual(
+            "2 hs2q q2w2 ",
+            run_length_encoding:encode("  hsqq qww  ")
+        )}.
 
 '6_lowercase_characters_test_'() ->
     {"lowercase characters",
-     ?_assertEqual("2a3b4c",
-		   run_length_encoding:encode("aabbbcccc"))}.
+        ?_assertEqual(
+            "2a3b4c",
+            run_length_encoding:encode("aabbbcccc")
+        )}.
 
 '7_empty_string_test_'() ->
-    {"empty string",
-     ?_assertEqual([], run_length_encoding:decode([]))}.
+    {"empty string", ?_assertEqual([], run_length_encoding:decode([]))}.
 
 '8_single_characters_only_test_'() ->
     {"single characters only",
-     ?_assertEqual("XYZ",
-		   run_length_encoding:decode("XYZ"))}.
+        ?_assertEqual(
+            "XYZ",
+            run_length_encoding:decode("XYZ")
+        )}.
 
 '9_string_with_no_single_characters_test_'() ->
     {"string with no single characters",
-     ?_assertEqual("AABBBCCCC",
-		   run_length_encoding:decode("2A3B4C"))}.
+        ?_assertEqual(
+            "AABBBCCCC",
+            run_length_encoding:decode("2A3B4C")
+        )}.
 
 '10_single_characters_with_repeated_characters_test_'() ->
     {"single characters with repeated characters",
-     ?_assertEqual("WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWW"
-		   "WWWWWWWB",
-		   run_length_encoding:decode("12WB12W3B24WB"))}.
+        ?_assertEqual(
+            "WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWW"
+            "WWWWWWWB",
+            run_length_encoding:decode("12WB12W3B24WB")
+        )}.
 
 '11_multiple_whitespace_mixed_in_string_test_'() ->
     {"multiple whitespace mixed in string",
-     ?_assertEqual("  hsqq qww  ",
-		   run_length_encoding:decode("2 hs2q q2w2 "))}.
+        ?_assertEqual(
+            "  hsqq qww  ",
+            run_length_encoding:decode("2 hs2q q2w2 ")
+        )}.
 
 '12_lowercase_string_test_'() ->
     {"lowercase string",
-     ?_assertEqual("aabbbcccc",
-		   run_length_encoding:decode("2a3b4c"))}.
+        ?_assertEqual(
+            "aabbbcccc",
+            run_length_encoding:decode("2a3b4c")
+        )}.
 
 '13_encode_followed_by_decode_gives_original_string_test_'() ->
-    {"encode followed by decode gives original "
-     "string",
-     ?_assertEqual("zzz ZZ  zZ",
-		   run_length_encoding:decode(run_length_encoding:encode("zzz ZZ  zZ")))}.
+    {
+        "encode followed by decode gives original "
+        "string",
+        ?_assertEqual(
+            "zzz ZZ  zZ",
+            run_length_encoding:decode(run_length_encoding:encode("zzz ZZ  zZ"))
+        )
+    }.
