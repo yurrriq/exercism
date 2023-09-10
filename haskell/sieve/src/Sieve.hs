@@ -13,10 +13,10 @@ primesUpTo n
   where
     composites = union [multiples p | p <- primesUpTo n]
 
-multiples :: Integral a => a -> [a]
+multiples :: (Integral a) => a -> [a]
 multiples n = [n * n, n * n + n ..]
 
-minus :: Integral a => [a] -> [a] -> [a]
+minus :: (Integral a) => [a] -> [a] -> [a]
 xxs@(x : xs) `minus` yys@(y : ys) =
   case compare x y of
     LT -> x : (xs `minus` yys)
@@ -25,7 +25,7 @@ xxs@(x : xs) `minus` yys@(y : ys) =
 [] `minus` _ = []
 xs `minus` [] = xs
 
-union :: Integral a => [[a]] -> [a]
+union :: (Integral a) => [[a]] -> [a]
 union = foldr merge []
   where
     merge (x : xs) ys = x : merge' xs ys

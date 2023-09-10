@@ -15,5 +15,5 @@ slices n xs =
 
 infixr 9 <.>
 
-(<.>) :: Functor m => (b -> c) -> (a -> m b) -> a -> m c
+(<.>) :: (Functor m) => (b -> c) -> (a -> m b) -> a -> m c
 (f <.> g) a = f <$> g a

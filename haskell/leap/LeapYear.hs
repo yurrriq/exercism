@@ -11,7 +11,7 @@
 module LeapYear (isLeapYear) where
 
 -- | Given a year, returns @True@ if it is a leap year, otherwise @False@.
-isLeapYear :: Integral a => a -> Bool
+isLeapYear :: (Integral a) => a -> Bool
 isLeapYear year
   | 400 `divides` year = True
   | 100 `divides` year = False
@@ -19,5 +19,5 @@ isLeapYear year
   | otherwise = False
 
 -- | Returns @True@ if @ d | n@, otherwise @False@.
-divides :: Integral a => a -> a -> Bool
+divides :: (Integral a) => a -> a -> Bool
 d `divides` n = n `rem` d == 0

@@ -89,13 +89,13 @@ toIntegral = fromJust . toIntegralSized
 --                          Helper functions
 -- ====================================================================
 
-sumDigits :: Integral a => a -> a
+sumDigits :: (Integral a) => a -> a
 sumDigits = uncurry (+) . (`divMod` 10)
 
 -- | Given two numbers, returns @True@ if the first divides the second,
 -- otherwise @False@.
-divides :: Integral a => a -> a -> Bool
+divides :: (Integral a) => a -> a -> Bool
 d `divides` n = n `rem` d == 0
 
-rem10 :: Integral a => a -> a
+rem10 :: (Integral a) => a -> a
 rem10 = (`rem` 10)

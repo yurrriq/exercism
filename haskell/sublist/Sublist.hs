@@ -33,7 +33,7 @@ data Sublist
 -- |
 -- Given two lists, returns a 'Sublist' based on
 -- the first list compared to the second.
-sublist :: Eq a => [a] -> [a] -> Sublist
+sublist :: (Eq a) => [a] -> [a] -> Sublist
 sublist a b
   | a == b = Equal
   | a `isInfixOf` b = Sublist

@@ -12,7 +12,7 @@
 -- Computing the prime factors of a given natural number.
 module PrimeFactors where
 
-primeFactors :: Integral a => a -> [a]
+primeFactors :: (Integral a) => a -> [a]
 primeFactors = flip go primes
   where
     go n pps@(p : ps)
@@ -23,21 +23,21 @@ primeFactors = flip go primes
       | otherwise = undefined
     go _ [] = undefined
 
-divides :: Integral a => a -> a -> Bool
+divides :: (Integral a) => a -> a -> Bool
 d `divides` n = n `rem` d == 0
 
 -- Adapted from "The Genuine Sieve of Eratosthenes" by Melissa O'Neill
 -- http://www.cs.hmc.edu/~oneill/papers/Sieve-JFP.pdf
 
-primes :: Integral a => [a]
+primes :: (Integral a) => [a]
 primes = 2 : ([3 ..] `minus` composites)
   where
     composites = union [multiples p | p <- primes]
 
-multiples :: Integral a => a -> [a]
+multiples :: (Integral a) => a -> [a]
 multiples n = map (n *) [n ..]
 
-minus :: Integral a => [a] -> [a] -> [a]
+minus :: (Integral a) => [a] -> [a] -> [a]
 xxs@(x : xs) `minus` yys@(y : ys) = case compare x y of
   LT -> x : (xs `minus` yys)
   EQ -> xs `minus` ys
@@ -45,7 +45,7 @@ xxs@(x : xs) `minus` yys@(y : ys) = case compare x y of
 [] `minus` _ = undefined
 _ `minus` [] = undefined
 
-union :: Integral a => [[a]] -> [a]
+union :: (Integral a) => [[a]] -> [a]
 union = foldr merge []
   where
     merge (x : xs) ys = x : merge' xs ys

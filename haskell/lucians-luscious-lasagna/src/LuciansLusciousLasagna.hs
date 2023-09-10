@@ -17,7 +17,7 @@ where
 --
 -- >>> expectedMinutesInOven
 -- 40
-expectedMinutesInOven :: Num a => a
+expectedMinutesInOven :: (Num a) => a
 expectedMinutesInOven = 40
 {-# SPECIALIZE INLINE expectedMinutesInOven :: Int #-}
 
@@ -25,10 +25,10 @@ expectedMinutesInOven = 40
 --
 -- >>> preparationTimeInMinutes 3
 -- 6
-preparationTimeInMinutes :: Num a => a -> a
+preparationTimeInMinutes :: (Num a) => a -> a
 preparationTimeInMinutes = (2 *)
 {-# SPECIALIZE INLINE preparationTimeInMinutes :: Int -> Int #-}
 
-elapsedTimeInMinutes :: Num a => a -> a -> a
+elapsedTimeInMinutes :: (Num a) => a -> a -> a
 elapsedTimeInMinutes = (+) . preparationTimeInMinutes
 {-# SPECIALIZE INLINE elapsedTimeInMinutes :: Int -> Int -> Int #-}

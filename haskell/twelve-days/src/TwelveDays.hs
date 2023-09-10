@@ -98,5 +98,5 @@ ordinal 12 = "twelfth"
 ordinal n = numeral n <> "th"
 
 -- | Convert an 'Int' into a 'Finite', throwing an error if the input is out of bounds.
-finiteInt :: KnownNat n => Int -> Finite n
+finiteInt :: (KnownNat n) => Int -> Finite n
 finiteInt n = finite (fromIntegral n)

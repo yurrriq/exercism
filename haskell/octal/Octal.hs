@@ -19,7 +19,7 @@ import Data.Function (on)
 import Data.Function.Pointless ((.:))
 import Data.List (uncons)
 
-readOct :: Integral a => String -> a
+readOct :: (Integral a) => String -> a
 readOct = lgo 0
   where
     lgo !acc = maybe acc go . uncons
@@ -28,7 +28,7 @@ readOct = lgo 0
           where
             f = curry $ (8 *) *** fromDigit >>> uncurry (+)
 
-fromDigit :: Integral a => Char -> a
+fromDigit :: (Integral a) => Char -> a
 fromDigit = boolAp (badInput "Invalid digit") go valid
   where
     go = fromIntegral . (subtract `on` fromEnum) '0'
@@ -44,11 +44,11 @@ showOct = boolAp (badInput "Negative number") (`rgo` "") (>= 0)
         f = snd >>> toDigit >>> (: acc)
         g = liftM2 rgo fst f
 
-toDigit :: Integral a => a -> Char
+toDigit :: (Integral a) => a -> Char
 toDigit = toEnum . (fromEnum '0' +) . fromIntegral
 
 boolAp :: (a -> b) -> (a -> b) -> (a -> Bool) -> a -> b
 boolAp = ap .: liftM2 bool
 
-badInput :: Show a => String -> a -> t
+badInput :: (Show a) => String -> a -> t
 badInput reason input = error (reason ++ ": " ++ show input)

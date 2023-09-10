@@ -61,7 +61,7 @@ matrix (x, y) v
 
 -- | Given a string representing a 'Matrix', with rows delimited by newlines and
 -- columns delimited by whitespace, create and return the 'Matrix'.
-fromString :: Read a => String -> Matrix a
+fromString :: (Read a) => String -> Matrix a
 fromString = fromList . map readRow . lines
   where
     readRow = (\case [] -> []; (x, xs) : _ -> x : readRow xs) . reads

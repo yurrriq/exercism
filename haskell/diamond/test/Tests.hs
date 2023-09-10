@@ -185,7 +185,7 @@ genAlphaChar = elements ['A' .. 'Z']
 genDiamond :: Gen (Maybe [String])
 genDiamond = (fmap . fmap . fmap) convertString $ diamond <$> genAlphaChar
 
-forAllDiamond :: Testable prop => ([String] -> prop) -> Property
+forAllDiamond :: (Testable prop) => ([String] -> prop) -> Property
 forAllDiamond p = forAll genDiamond $ maybe discard p
 
 shrinkNonAlphaChar :: Char -> String

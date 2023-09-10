@@ -94,7 +94,7 @@ aliquotSum n = sum [d | d <- [1 .. n - 1], d .|. n]
 --
 -- >>> 9 .|. 108
 -- True
-(.|.) :: Integral a => a -> a -> Bool
+(.|.) :: (Integral a) => a -> a -> Bool
 d .|. n = n `rem` d == 0
 
 infixr 2 .|.

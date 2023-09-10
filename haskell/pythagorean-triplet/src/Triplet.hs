@@ -31,5 +31,5 @@ pythagoreanTriplets minFactor maxFactor =
     guard (isPythagorean triplet)
     pure triplet
 
-square :: Integral a => a -> a
+square :: (Integral a) => a -> a
 square = join (*)

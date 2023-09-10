@@ -25,12 +25,12 @@ data CustomSet a
   | Nil
   deriving (Eq, Show)
 
-instance Ord a => Monoid (CustomSet a) where
+instance (Ord a) => Monoid (CustomSet a) where
   mempty = empty
   mconcat = unions
   mappend = (<>)
 
-instance Ord a => Semigroup (CustomSet a) where
+instance (Ord a) => Semigroup (CustomSet a) where
   (<>) = union
 
 instance Foldable CustomSet where
@@ -45,7 +45,7 @@ instance Foldable CustomSet where
   foldl = foldl
   {-# INLINE foldl #-}
 
-delete :: Ord a => a -> CustomSet a -> CustomSet a
+delete :: (Ord a) => a -> CustomSet a -> CustomSet a
 delete !_ Nil = Nil
 delete x (Node y setA setB)
   | x < y = Node y (delete x setA) setB
@@ -60,10 +60,10 @@ empty :: CustomSet a
 empty = Nil
 {-# INLINE empty #-}
 
-fromList :: Ord a => [a] -> CustomSet a
+fromList :: (Ord a) => [a] -> CustomSet a
 fromList = Foldable.foldr insert Nil
 
-insert :: Ord a => a -> CustomSet a -> CustomSet a
+insert :: (Ord a) => a -> CustomSet a -> CustomSet a
 insert x Nil = Node x Nil Nil
 insert x set@(Node y setA setB)
   | x < y = Node y (insert x setA) setB
@@ -76,7 +76,7 @@ intersection _setA _setB = error "You need to implement this function."
 isDisjointFrom :: CustomSet a -> CustomSet a -> Bool
 isDisjointFrom _setA _setB = error "You need to implement this function."
 
-isSubsetOf :: Ord a => CustomSet a -> CustomSet a -> Bool
+isSubsetOf :: (Ord a) => CustomSet a -> CustomSet a -> Bool
 isSubsetOf Nil _ = True
 isSubsetOf _ Nil = False
 isSubsetOf (Node x Nil Nil) setB = member x setB
@@ -84,7 +84,7 @@ isSubsetOf setA setB
   | setA == setB = True
   | otherwise = error "NYI"
 
-member :: Ord a => a -> CustomSet a -> Bool
+member :: (Ord a) => a -> CustomSet a -> Bool
 member _ Nil = False
 member x (Node y setA setB)
   | x < y = member x setA
@@ -111,7 +111,7 @@ toAscList = foldr (:) []
 -- toDescList :: CustomSet a -> [a]
 -- toDescList = foldl (flip (:)) []
 
-union :: Ord a => CustomSet a -> CustomSet a -> CustomSet a
+union :: (Ord a) => CustomSet a -> CustomSet a -> CustomSet a
 union setA Nil = setA
 union setA (Node x Nil Nil) = insert x setA
 union (Node x Nil Nil) setB = insert x setB

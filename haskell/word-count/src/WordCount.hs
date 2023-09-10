@@ -32,7 +32,7 @@ isQuote :: Char -> Bool
 isQuote '\'' = True
 isQuote _ = False
 
-(<||>) :: Applicative f => f Bool -> f Bool -> f Bool
+(<||>) :: (Applicative f) => f Bool -> f Bool -> f Bool
 (<||>) = liftA2 (||)
 
 infixr 2 <||>

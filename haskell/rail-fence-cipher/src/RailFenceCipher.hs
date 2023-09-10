@@ -20,7 +20,7 @@ decode numRails ciphertext = zipSort indices ciphertext
 -- | Sort a list by its corresponding indices.
 --
 -- > zipSort [3,5,2,4,1] ['a'..] == "ecadb"
-zipSort :: Ord b => [b] -> [a] -> [a]
+zipSort :: (Ord b) => [b] -> [a] -> [a]
 zipSort indices list = map snd (sortOn fst (zip indices list))
 
 -- | The list @[1 .. n] ++ [n - 1, n - 2 .. 2]@ repeated.

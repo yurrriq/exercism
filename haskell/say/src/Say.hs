@@ -119,5 +119,5 @@ sayQuotRem divisor sayQuot glue sayRem number =
 integerLog1000 :: Integer -> Integer
 integerLog1000 n = floor (logBase 10 (fromInteger n :: Double) / 3)
 
-glueWith :: Semigroup a => a -> a -> a -> a
+glueWith :: (Semigroup a) => a -> a -> a -> a
 glueWith sep lhs rhs = lhs <> sep <> rhs

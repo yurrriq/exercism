@@ -35,37 +35,37 @@ complex = uncurry (:+)
 
 ------------------------------------------------------------ [ Unary operators ]
 
-conjugate :: Num a => Complex a -> Complex a
+conjugate :: (Num a) => Complex a -> Complex a
 conjugate (a :+ b) = a :+ negate b
 
-abs :: Floating a => Complex a -> a
+abs :: (Floating a) => Complex a -> a
 abs (a :+ b) = sqrt (sqr a + sqr b)
   where
     sqr x = x * x
 
-real :: Num a => Complex a -> a
+real :: (Num a) => Complex a -> a
 real (a :+ _) = a
 
-imaginary :: Num a => Complex a -> a
+imaginary :: (Num a) => Complex a -> a
 imaginary (_ :+ b) = b
 
-exp :: Floating a => Complex a -> Complex a
+exp :: (Floating a) => Complex a -> Complex a
 exp (a :+ b) = expA * cos b :+ expA * sin b
   where
     expA = P.exp a
 
 ----------------------------------------------------------- [ Binary operators ]
 
-mul :: Num a => Complex a -> Complex a -> Complex a
+mul :: (Num a) => Complex a -> Complex a -> Complex a
 mul (a :+ b) (c :+ d) = (a * c - b * d) :+ (b * c + a * d)
 
-add :: Num a => Complex a -> Complex a -> Complex a
+add :: (Num a) => Complex a -> Complex a -> Complex a
 add (a :+ b) (c :+ d) = (a + c) :+ (b + d)
 
-sub :: Num a => Complex a -> Complex a -> Complex a
+sub :: (Num a) => Complex a -> Complex a -> Complex a
 sub x y = add x (negate <$> y)
 
-div :: Fractional a => Complex a -> Complex a -> Complex a
+div :: (Fractional a) => Complex a -> Complex a -> Complex a
 div (a :+ b) (c :+ d) = (a * c + b * d) :+ (b * c - a * d) <&> (/ x)
   where
     x = c * c + d * d
