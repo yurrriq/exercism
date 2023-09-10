@@ -1,11 +1,10 @@
 %% -*- erlang -*-
-{application, hamming,
- [{description, ""},
-  {vsn, "0.0.1"},
-  {modules,
-   [hamming]},
-  {registered, []},
-  {applications,
-   [kernel, stdlib]},
-  {included_applications, []},
-  {env, []}]}.
+{application, hamming, [
+    {description, ""},
+    {vsn, "0.0.1"},
+    {modules, [hamming]},
+    {registered, []},
+    {applications, [kernel, stdlib]},
+    {included_applications, []},
+    {env, []}
+]}.

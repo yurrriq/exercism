@@ -1,11 +1,10 @@
 %% -*- erlang -*-
-{application, 'anagram',
- [{description, ""},
-  {vsn, "0.0.1"},
-  {modules,
-   ['anagram']},
-  {registered, []},
-  {applications,
-   [kernel, stdlib]},
-  {included_applications, []},
-  {env, []}]}.
+{application, 'anagram', [
+    {description, ""},
+    {vsn, "0.0.1"},
+    {modules, ['anagram']},
+    {registered, []},
+    {applications, [kernel, stdlib]},
+    {included_applications, []},
+    {env, []}
+]}.

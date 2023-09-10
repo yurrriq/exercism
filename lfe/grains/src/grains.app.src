@@ -1,11 +1,10 @@
 %% -*- erlang -*-
-{application, 'grains',
- [{description, ""},
-  {vsn, "0.0.1"},
-  {modules,
-   ['grains']},
-  {registered, []},
-  {applications,
-   [kernel, stdlib]},
-  {included_applications, []},
-  {env, []}]}.
+{application, 'grains', [
+    {description, ""},
+    {vsn, "0.0.1"},
+    {modules, ['grains']},
+    {registered, []},
+    {applications, [kernel, stdlib]},
+    {included_applications, []},
+    {env, []}
+]}.
