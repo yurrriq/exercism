@@ -1,8 +1,9 @@
 package isogram
 
 import (
-	mapset "github.com/deckarep/golang-set/v2"
 	"unicode"
+
+	mapset "github.com/deckarep/golang-set/v2"
 )
 
 func IsIsogram(word string) bool {

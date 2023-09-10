@@ -4,8 +4,10 @@ import (
 	"strconv"
 )
 
-var numbers = []int{3, 5, 7}
-var words = []string{"Pling", "Plang", "Plong"}
+var (
+	numbers = []int{3, 5, 7}
+	words   = []string{"Pling", "Plang", "Plong"}
+)
 
 func Convert(number int) (result string) {
 	for i, divisor := range numbers {
