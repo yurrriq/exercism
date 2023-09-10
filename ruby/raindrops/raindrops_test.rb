@@ -1,5 +1,5 @@
-require 'minitest/autorun'
-require_relative 'raindrops'
+require "minitest/autorun"
+require_relative "raindrops"
 
 # Common test data version: 1.0.0 9db5371
 class RaindropsTest < Minitest::Test

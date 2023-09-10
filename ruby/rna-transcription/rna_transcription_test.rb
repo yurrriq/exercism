@@ -1,38 +1,38 @@
-require 'minitest/autorun'
-require_relative 'rna_transcription'
+require "minitest/autorun"
+require_relative "rna_transcription"
 
 # Common test data version: 1.0.0 0b20fff
 class RnaTranscriptionTest < Minitest::Test
   def test_rna_complement_of_cytosine_is_guanine
-    assert_equal 'G', Complement.of_dna('C')
+    assert_equal "G", Complement.of_dna("C")
   end
 
   def test_rna_complement_of_guanine_is_cytosine
-    assert_equal 'C', Complement.of_dna('G')
+    assert_equal "C", Complement.of_dna("G")
   end
 
   def test_rna_complement_of_thymine_is_adenine
-    assert_equal 'A', Complement.of_dna('T')
+    assert_equal "A", Complement.of_dna("T")
   end
 
   def test_rna_complement_of_adenine_is_uracil
-    assert_equal 'U', Complement.of_dna('A')
+    assert_equal "U", Complement.of_dna("A")
   end
 
   def test_rna_complement
-    assert_equal 'UGCACCAGAAUU', Complement.of_dna('ACGTGGTCTTAA')
+    assert_equal "UGCACCAGAAUU", Complement.of_dna("ACGTGGTCTTAA")
   end
 
   def test_dna_correctly_handles_invalid_input
-    assert_equal '', Complement.of_dna('U')
+    assert_equal "", Complement.of_dna("U")
   end
 
   def test_dna_correctly_handles_completely_invalid_input
-    assert_equal '', Complement.of_dna('XXX')
+    assert_equal "", Complement.of_dna("XXX")
   end
 
   def test_dna_correctly_handles_partially_invalid_input
-    assert_equal '', Complement.of_dna('ACGTXXXCTTAA')
+    assert_equal "", Complement.of_dna("ACGTXXXCTTAA")
   end
 
   # Problems in exercism evolve over time, as we find better ways to ask
