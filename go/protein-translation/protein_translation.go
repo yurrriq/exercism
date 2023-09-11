@@ -1,3 +1,4 @@
+// Package protein has functionality to translate RNA sequences into proteins.
 package protein
 
 import (
@@ -5,18 +6,24 @@ import (
 	"sort"
 )
 
-var ErrStop = errors.New("STOP")
+var (
+	// ErrInvalidBase indicates the codon was invalid.
+	ErrInvalidBase = errors.New("invalid base")
 
-var ErrInvalidBase = errors.New("invalid base")
+	// ErrStop indicates the translation was stopped.
+	ErrStop = errors.New("STOP")
+)
 
+// FromRNA maps RNA codons to their matching proteins and returns either the
+// list of proteins or returns an error for an invalid codon.
 func FromRNA(rna string) ([]string, error) {
-	codons := make([]string, 0)
+	proteins := make([]string, 0)
 	for {
 		if len(rna) < 3 {
 			break
 		}
 
-		aminoAcid, err := FromCodon(rna[:3])
+		protein, err := FromCodon(rna[:3])
 		if err == ErrInvalidBase {
 			return []string{}, err
 		}
@@ -25,7 +32,7 @@ func FromRNA(rna string) ([]string, error) {
 			break
 		}
 
-		codons = append(codons, aminoAcid)
+		proteins = append(proteins, protein)
 		rna = rna[3:]
 	}
 
@@ -33,43 +40,34 @@ func FromRNA(rna string) ([]string, error) {
 		return []string{}, ErrInvalidBase
 	}
 
-	return codons, nil
+	return proteins, nil
 }
 
-func FromCodon(codon string) (string, error) {
-	protein, ok := aminoAcids()[codon]
-	if !ok {
-		return "", ErrInvalidBase
+// FromCodon either translates a codon to a protein or returns an error for a
+// stop codon or invalid codon.
+func FromCodon(codon string) (protein string, err error) {
+	switch codon {
+	case "AUG":
+		protein = "Methionine"
+	case "UUU", "UUC":
+		protein = "Phenylalanine"
+	case "UUA", "UUG":
+		protein = "Leucine"
+	case "UCU", "UCC", "UCA", "UCG":
+		protein = "Serine"
+	case "UAU", "UAC":
+		protein = "Tyrosine"
+	case "UGU", "UGC":
+		protein = "Cysteine"
+	case "UGG":
+		protein = "Tryptophan"
+	case "UAA", "UAG", "UGA":
+		err = ErrStop
+	default:
+		err = ErrInvalidBase
 	}
 
-	if protein == "STOP" {
-		return "", ErrStop
-	}
-
-	return protein, nil
-}
-
-func aminoAcids() map[string]string {
-	codons := make(map[string]string)
-	codons["AUG"] = "Methionine"
-	codons["UUU"] = "Phenylalanine"
-	codons["UUC"] = codons["UUU"]
-	codons["UUA"] = "Leucine"
-	codons["UUG"] = codons["UUA"]
-	codons["UCU"] = "Serine"
-	codons["UCC"] = codons["UCU"]
-	codons["UCA"] = codons["UCU"]
-	codons["UCG"] = codons["UCU"]
-	codons["UAU"] = "Tyrosine"
-	codons["UAC"] = codons["UAU"]
-	codons["UGU"] = "Cysteine"
-	codons["UGC"] = codons["UGU"]
-	codons["UGG"] = "Tryptophan"
-	codons["UAA"] = "STOP"
-	codons["UAG"] = codons["UAA"]
-	codons["UGA"] = codons["UAA"]
-
-	return codons
+	return protein, err
 }
 
 func reverse[T comparable](s []T) {
