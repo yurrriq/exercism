@@ -1,28 +1,40 @@
-// This is a "stub" file.  It's a little start on your solution.
-// It's not a complete solution though; you have to write some code.
-
-// Package triangle should have a package comment that summarizes what it's about.
-// https://golang.org/doc/effective_go.html#commentary
+// Package triangle classifies triangles.
 package triangle
 
-
-// Notice KindFromSides() returns this type. Pick a suitable data type.
-type Kind
+// Kind represents the classifications of a triangle.
+type Kind int
 
 const (
-    // Pick values for the following identifiers used by the test program.
-    NaT // not a triangle
-    Equ // equilateral
-    Iso // isosceles
-    Sca // scalene
+	// NaT is not a triangle.
+	NaT Kind = iota
+	// Equ is an equilateral triangle.
+	Equ
+	// Iso is an isosceles triangle.
+	Iso
+	// Sca is a scalene triangle.
+	Sca
 )
 
-// KindFromSides should have a comment documenting it.
+// KindFromSides classifies a triangle by its sides.
 func KindFromSides(a, b, c float64) Kind {
-	// Write some code here to pass the test suite.
-	// Then remove all the stock comments.
-	// They're here to help you get started but they only clutter a finished solution.
-	// If you leave them in, reviewers may protest!
-	var k Kind
-	return k
+	if a <= 0 || b <= 0 || c <= 0 {
+		return NaT
+	}
+
+	if a >= b+c || b >= c+a || c >= a+b {
+		return NaT
+	}
+
+	if a == b {
+		if b == c {
+			return Equ
+		}
+		return Iso
+	}
+
+	if a == c || b == c {
+		return Iso
+	}
+
+	return Sca
 }
