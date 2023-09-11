@@ -187,7 +187,7 @@
           revive = {
             enable = true;
             excludes = [
-              "go/*/*_test.go"
+              ".+_test.go$"
             ];
           };
           treefmt.enable = true;
