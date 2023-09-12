@@ -1,21 +1,25 @@
 name: pig-latin
+author: Eric Bailey
+github: yurrriq/exercism
 version: 1.2.0.7
 
+ghc-options:
+- -Wall
+- -Werror
+- -Wincomplete-patterns
+- -Wincomplete-uni-patterns
+
 dependencies:
-  - base
+- base
 
 library:
   exposed-modules: PigLatin
   source-dirs: src
-  ghc-options: -Wall
-  # dependencies:
-  # - foo       # List here the packages you
-  # - bar       # want to use in your solution.
 
 tests:
   test:
     main: Tests.hs
     source-dirs: test
     dependencies:
-      - pig-latin
-      - hspec
+    - pig-latin
+    - hspec
