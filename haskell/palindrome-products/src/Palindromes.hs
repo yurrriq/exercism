@@ -4,32 +4,38 @@ module Palindromes
   )
 where
 
-import Data.Bits ((.&.))
+import Control.Monad (guard)
 import Data.List (tails)
-import Data.Map.Strict (Map)
-import qualified Data.Map.Strict as Map
+import Data.Maybe (listToMaybe)
 
 largestPalindrome :: Integer -> Integer -> Maybe (Integer, [(Integer, Integer)])
-largestPalindrome minFactor maxFactor =
-  Map.lookupMax $ palindromeProductsWithin minFactor maxFactor
+largestPalindrome from to =
+  do
+    let palindromeProducts = palindromeProductsWithin from to
+    guard (not (null palindromeProducts))
+    pure (maximum palindromeProducts)
 
 smallestPalindrome :: Integer -> Integer -> Maybe (Integer, [(Integer, Integer)])
-smallestPalindrome minFactor maxFactor =
-  Map.lookupMin $ palindromeProductsWithin minFactor maxFactor
-
-palindromeProductsWithin :: Integer -> Integer -> Map Integer [(Integer, Integer)]
-palindromeProductsWithin minFactor maxFactor =
-  Map.fromListWith (++) $
-    [ (xy, [(x, y)])
-      | x : ys <- tails [minFactor .. maxFactor],
-        y <- x : ys,
-        let xy = x * y,
-        isPalindrome (show xy)
-    ]
+smallestPalindrome from to = listToMaybe (palindromeProductsWithin from to)
 
 isPalindrome :: Eq a => [a] -> Bool
-isPalindrome xs = fward == bward
-  where
-    fward = take (q + (r .&. 1)) xs
-    bward = reverse $ drop q xs
-    (q, r) = length xs `divMod` 2
+isPalindrome xs = xs == reverse xs
+
+palindromeProductsWithin :: Integer -> Integer -> [(Integer, [(Integer, Integer)])]
+palindromeProductsWithin from to =
+  do
+    x : ys <- tails [from .. to]
+    y <- x : ys
+    let xy = x * y
+    guard (isPalindrome (show xy))
+    let products = productsWithin from to xy
+    guard (not (null products))
+    pure (xy, products)
+
+productsWithin :: Integer -> Integer -> Integer -> [(Integer, Integer)]
+productsWithin from to n =
+  do
+    x <- [from .. to]
+    let (y, r) = n `divMod` x
+    guard (r == 0 && from <= y && y <= to)
+    pure (x, y)

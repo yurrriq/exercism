@@ -15,8 +15,6 @@ ghc-options:
 library:
   exposed-modules: Palindromes
   source-dirs: src
-  dependencies:
-  - containers
 
 tests:
   test:
