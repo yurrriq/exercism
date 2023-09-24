@@ -5,37 +5,41 @@ module Palindromes
 where
 
 import Control.Monad (guard)
-import Data.List (tails)
+import Data.List (sortBy)
 import Data.Maybe (listToMaybe)
 
 largestPalindrome :: Integer -> Integer -> Maybe (Integer, [(Integer, Integer)])
 largestPalindrome from to =
-  do
-    let palindromeProducts = palindromeProductsWithin from to
-    guard (not (null palindromeProducts))
-    pure (maximum palindromeProducts)
+  fmap (factorsWithin from to) . listToMaybe $
+    concatMap
+      (sortBy (flip compare) . flip palindromeProductsWithin to)
+      [to, to - 1 .. from]
 
 smallestPalindrome :: Integer -> Integer -> Maybe (Integer, [(Integer, Integer)])
-smallestPalindrome from to = listToMaybe (palindromeProductsWithin from to)
+smallestPalindrome from to =
+  fmap (factorsWithin from to) . listToMaybe $
+    concatMap
+      (palindromeProductsWithin from)
+      [from .. to]
 
 isPalindrome :: Eq a => [a] -> Bool
 isPalindrome xs = xs == reverse xs
 
-palindromeProductsWithin :: Integer -> Integer -> [(Integer, [(Integer, Integer)])]
+palindromeProductsWithin :: Integer -> Integer -> [Integer]
 palindromeProductsWithin from to =
   do
-    x : ys <- tails [from .. to]
-    y <- x : ys
+    x <- [from .. to]
+    let y = from + to - x
     let xy = x * y
     guard (isPalindrome (show xy))
-    let products = productsWithin from to xy
-    guard (not (null products))
-    pure (xy, products)
+    pure xy
 
-productsWithin :: Integer -> Integer -> Integer -> [(Integer, Integer)]
-productsWithin from to n =
-  do
-    x <- [from .. to]
-    let (y, r) = n `divMod` x
-    guard (r == 0 && from <= y && y <= to)
-    pure (x, y)
+factorsWithin :: Integer -> Integer -> Integer -> (Integer, [(Integer, Integer)])
+factorsWithin from to n =
+  ( n,
+    do
+      x <- [from .. to]
+      let (y, r) = n `divMod` x
+      guard (r == 0 && from <= y && y <= to && x <= y)
+      pure (x, y)
+  )

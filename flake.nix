@@ -30,6 +30,7 @@
       imports = [
         inputs.pre-commit-hooks-nix.flakeModule
         inputs.treefmt-nix.flakeModule
+        ./haskell/flake-module.nix
       ];
 
       systems = [
@@ -40,22 +41,6 @@
         _module.args.pkgs = import nixpkgs {
           overlays = [
             inputs.emacs-overlay.overlay
-            (
-              _final: prev: {
-                haskellPackages = prev.haskellPackages.override {
-                  overrides = _hfinal: hprev: {
-                    digits = hprev.callCabal2nix "digits"
-                      (prev.fetchFromGitHub {
-                        owner = "yurrriq";
-                        repo = "digits";
-                        rev = "c3a2c2bacc4a2e2c51beefa2fdb90da9a5bddf6b";
-                        hash = "sha256-/n2gf33zShj6LexHRplp975teCZyLAsg0rmXK9AHoK0=";
-                      })
-                      { };
-                  };
-                };
-              }
-            )
           ];
           inherit system;
         };
@@ -120,31 +105,6 @@
             ];
           };
 
-          haskell = pkgs.mkShell {
-            inputsFrom = [
-              self.devShells.${system}.default
-            ];
-            nativeBuildInputs = with pkgs; [
-              (
-                emacsWithPackagesFromUsePackage {
-                  alwaysEnsure = true;
-                  config = ./haskell/emacs.el;
-                }
-              )
-              cabal-install
-              ghc
-              ghcid
-              haskell-language-server
-            ] ++ (with haskellPackages; [
-              apply-refact
-              cabal-plan
-              hpack
-              hlint
-              ormolu
-              pointfree
-            ]);
-          };
-
           jq = pkgs.mkShell {
             inputsFrom = [
               self.devShells.${system}.default
@@ -204,16 +164,8 @@
               print-width = 80;
             };
             gofumpt.enable = true;
-            hlint.enable = true;
             nixpkgs-fmt.enable = true;
             # TODO: ocamlformat.enable = true;
-            ormolu = {
-              enable = true;
-              ghcOpts = [
-                "OverloadedStrings"
-                "TemplateHaskell"
-              ];
-            };
             purs-tidy.enable = true;
             rufo.enable = true;
             rustfmt.enable = true;
@@ -227,18 +179,6 @@
             gofumpt = {
               excludes = [
                 "go/*/*_test.go"
-              ];
-            };
-            hlint = {
-              excludes = [
-                "haskell/**/*_test.hs"
-                "haskell/*/test/*.hs"
-              ];
-            };
-            ormolu = {
-              excludes = [
-                "haskell/*/*_test.hs"
-                "haskell/*/test/*.hs"
               ];
             };
             purs-tidy = {
