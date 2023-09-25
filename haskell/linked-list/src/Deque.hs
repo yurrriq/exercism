@@ -1,18 +1,38 @@
-module Deque (Deque, mkDeque, pop, push, shift, unshift) where
+{-# LANGUAGE RecordWildCards #-}
 
-data Deque a = Dummy
+module Deque
+  ( Deque,
+    mkDeque,
+    pop,
+    push,
+    shift,
+    unshift,
+  )
+where
+
+import Data.Functor (($>))
+import Data.IORef (IORef, modifyIORef, newIORef, readIORef, writeIORef)
+import Data.List (uncons)
+
+data Deque a = Deque
+  { front :: IORef [a],
+    back :: IORef [a]
+  }
 
 mkDeque :: IO (Deque a)
-mkDeque = error "You need to implement this function."
+mkDeque = Deque <$> newIORef [] <*> newIORef []
 
 pop :: Deque a -> IO (Maybe a)
-pop deque = error "You need to implement this function."
+pop Deque {..} = readIORef front >>= maybe popBack doPop . uncons
+  where
+    popBack = readIORef back >>= maybe (pure Nothing) doPop . uncons . reverse
+    doPop (x, xs) = writeIORef front xs $> Just x
 
 push :: Deque a -> a -> IO ()
-push deque x = error "You need to implement this function."
+push Deque {..} x = modifyIORef front (x :)
 
 unshift :: Deque a -> a -> IO ()
-unshift deque x = error "You need to implement this function."
+unshift Deque {..} x = modifyIORef back (x :)
 
 shift :: Deque a -> IO (Maybe a)
-shift deque = error "You need to implement this function."
+shift Deque {..} = pop (Deque back front)
