@@ -3,15 +3,11 @@ module Proverb
   )
 where
 
-import Data.List (intercalate)
-
 recite :: [String] -> String
 recite [] = ""
-recite inputs@(input : _)
-  | null proverb = "And all for the want of a " <> input <> "."
-  | otherwise = intercalate "\n" $ proverb ++ [recite [input]]
+recite [input] = "And all for the want of a " <> input <> "."
+recite inputs@(input : _) =
+  concatMap mkLine (zip inputs (tail inputs)) <> recite [input]
   where
-    proverb =
-      [ "For want of a " <> want <> " the " <> loss <> " was lost."
-        | (want, loss) <- zip inputs (tail inputs)
-      ]
+    mkLine (want, loss) =
+      "For want of a " <> want <> " the " <> loss <> " was lost.\n"
