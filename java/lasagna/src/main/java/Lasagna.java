@@ -1,5 +1,5 @@
 public class Lasagna {
-    public int expectedMinutesInOven() {
+    public static int expectedMinutesInOven() {
         return 40;
     }
 
@@ -7,7 +7,7 @@ public class Lasagna {
         return this.expectedMinutesInOven() - actualMinutesInOven;
     }
 
-    public int preparationTimeInMinutes(int numberOfLayers) {
+    public static int preparationTimeInMinutes(int numberOfLayers) {
         return 2 * numberOfLayers;
     }
 
