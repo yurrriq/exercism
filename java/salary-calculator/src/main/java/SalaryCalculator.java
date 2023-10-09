@@ -2,6 +2,7 @@ import java.lang.Math;
 
 public class SalaryCalculator {
     private static final double baseSalary = 1000, maxTotalCompensation = 2000;
+
     private static final int daysSkippedAllowance = 5;
     private static final double truancyPenalty = 0.15;
 
@@ -26,5 +27,5 @@ public class SalaryCalculator {
         salary = baseSalary * SalaryCalculator.multiplierPerDaysSkipped(daysSkipped);
         bonus = bonusForProductSold(productsSold);
         return Math.min(maxTotalCompensation, salary + bonus);
-    } 
+    }
 }
