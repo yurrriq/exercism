@@ -1,17 +1,24 @@
+import java.lang.Math;
+
 public class SalaryCalculator {
-    public double multiplierPerDaysSkipped(int daysSkipped) {
-        throw new UnsupportedOperationException("Please implement the SalaryCalculator.multiplierPerDaysSkipped() method");
+    private static final double SALARY_BASE = 1000, SALARY_MAX = 2000;
+
+    public static double multiplierPerDaysSkipped(int daysSkipped) {
+        return daysSkipped > 5 ? 0.85 : 1;
     }
 
-    public int multiplierPerProductsSold(int productsSold) {
-        throw new UnsupportedOperationException("Please implement the SalaryCalculator.multiplierPerProductsSold() method");
+    public static int multiplierPerProductsSold(int productsSold) {
+        return productsSold > 20 ? 13 : 10;
     }
 
-    public double bonusForProductSold(int productsSold) {
-        throw new UnsupportedOperationException("Please implement the SalaryCalculator.bonusForProductSold() method");
+    public static double bonusForProductSold(int productsSold) {
+        return productsSold * SalaryCalculator.multiplierPerProductsSold(productsSold);
     }
 
-    public double finalSalary(int daysSkipped, int productsSold) {
-        throw new UnsupportedOperationException("Please implement the SalaryCalculator.finalSalary() method");
+    public static double finalSalary(int daysSkipped, int productsSold) {
+        double salary, bonus;
+        salary = SALARY_BASE * SalaryCalculator.multiplierPerDaysSkipped(daysSkipped);
+        bonus = bonusForProductSold(productsSold);
+        return Math.min(SALARY_MAX, salary + bonus);
     } 
 }
