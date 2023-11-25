@@ -32,6 +32,7 @@
         inputs.treefmt-nix.flakeModule
         ./haskell/flake-module.nix
         ./java/flake-module.nix
+        ./mips/flake-module.nix
       ];
 
       systems = [
