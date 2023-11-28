@@ -1,63 +1,46 @@
 # Raindrops
 
-Convert a number to a string, the contents of which depend on the number's factors.
+Welcome to Raindrops on Exercism's OCaml Track.
+If you need help running the tests or submitting your code, check out `HELP.md`.
 
-- If the number has 3 as a factor, output 'Pling'.
-- If the number has 5 as a factor, output 'Plang'.
-- If the number has 7 as a factor, output 'Plong'.
-- If the number does not have 3, 5, or 7 as a factor,
-  just pass the number's digits straight through.
+## Instructions
+
+Your task is to convert a number into a string that contains raindrop sounds corresponding to certain potential factors.
+A factor is a number that evenly divides into another number, leaving no remainder.
+The simplest way to test if one number is a factor of another is to use the [modulo operation][modulo].
+
+The rules of `raindrops` are that if a given number:
+
+- has 3 as a factor, add 'Pling' to the result.
+- has 5 as a factor, add 'Plang' to the result.
+- has 7 as a factor, add 'Plong' to the result.
+- _does not_ have any of 3, 5, or 7 as a factor, the result should be the digits of the number.
 
 ## Examples
 
-- 28's factors are 1, 2, 4, **7**, 14, 28.
-  - In raindrop-speak, this would be a simple "Plong".
-- 30's factors are 1, 2, **3**, **5**, 6, 10, 15, 30.
-  - In raindrop-speak, this would be a "PlingPlang".
-- 34 has four factors: 1, 2, 17, and 34.
-  - In raindrop-speak, this would be "34".
+- 28 has 7 as a factor, but not 3 or 5, so the result would be "Plong".
+- 30 has both 3 and 5 as factors, but not 7, so the result would be "PlingPlang".
+- 34 is not factored by 3, 5, or 7, so the result would be "34".
 
-## Getting Started
-For installation and learning resources, refer to the
-[exercism help page](http://exercism.io/languages/ocaml).
-
-## Installation
-To work on the exercises, you will need `Opam` and `Core`. Consult [opam](https://opam.ocaml.org) website for instructions on how to install `opam` for your OS. Once `opam` is installed open a terminal window and run the following command to install core:
-
-```bash
-opam install core
-```
-
-To run the tests you will need `OUnit`. Install it using `opam`:
-
-```bash
-opam install ounit
-```
-
-## Running Tests
-A Makefile is provided with a default target to compile your solution and run the tests. At the command line, type:
-
-```bash
-make
-```
-
-## Interactive Shell
-`utop` is a command line program which allows you to run Ocaml code interactively. The easiest way to install it is via opam:
-```bash
-opam install utop
-```
-Consult [utop](https://github.com/diml/utop/blob/master/README.md) for more detail.
-
-## Feedback, Issues, Pull Requests
-The [exercism/ocaml](https://github.com/exercism/ocaml) repository on
-GitHub is the home for all of the Ocaml exercises.
-
-If you have feedback about an exercise, or want to help implementing a new
-one, head over there and create an issue.  We'll do our best to help you!
+[modulo]: https://en.wikipedia.org/wiki/Modulo_operation
 
 ## Source
 
-A variation on a famous interview question intended to weed out potential candidates. [http://jumpstartlab.com](http://jumpstartlab.com)
+### Created by
 
-## Submitting Incomplete Solutions
-It's possible to submit an incomplete solution so you can see how others have completed the exercise.
+- @dvberkel
+
+### Contributed to by
+
+- @daveyarwood
+- @iHiD
+- @kytrinyx
+- @marionebl
+- @Peaupote
+- @sbl
+- @sshine
+- @stevejb71
+
+### Based on
+
+A variation on FizzBuzz, a famous technical interview question that is intended to weed out potential candidates. That question is itself derived from Fizz Buzz, a popular children's game for teaching division. - https://en.wikipedia.org/wiki/Fizz_buzz
