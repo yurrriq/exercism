@@ -33,6 +33,7 @@
         ./haskell/flake-module.nix
         ./java/flake-module.nix
         ./mips/flake-module.nix
+        ./ocaml/flake-module.nix
       ];
 
       systems = [
