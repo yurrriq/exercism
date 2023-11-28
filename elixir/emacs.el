@@ -16,7 +16,7 @@
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 (global-set-key (kbd "s-u") 'revert-buffer)
 
-(set-face-attribute 'default nil :family "Iosevka" :height 110)
+(set-face-attribute 'default nil :family "Iosevka Custom" :height 110)
 
 (eval-when-compile
   (require 'use-package))

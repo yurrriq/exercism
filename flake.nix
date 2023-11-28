@@ -39,10 +39,31 @@
         "x86_64-linux"
       ];
 
+      flake = {
+        overlays = {
+          iosevka-custom = final: prev: {
+            # https://typeof.net/Iosevka/customizer
+            iosevka-custom = prev.iosevka.override {
+              privateBuildPlan = ''
+                [buildPlans.iosevka-custom]
+                family = "Iosevka Custom"
+                spacing = "normal"
+                serifs = "sans"
+                export-glyph-names = true
+                [buildPlans.iosevka-custom.ligations]
+                inherits = "dlig"
+              '';
+              set = "custom";
+            };
+          };
+        };
+      };
+
       perSystem = { config, pkgs, system, ... }: {
         _module.args.pkgs = import nixpkgs {
           overlays = [
             inputs.emacs-overlay.overlay
+            self.overlays.iosevka-custom
           ];
           inherit system;
         };
@@ -78,9 +99,7 @@
 
           default = with pkgs; mkShell {
             FONTCONFIG_FILE = makeFontsConf {
-              fontDirectories = [
-                (nerdfonts.override { fonts = [ "Iosevka" ]; })
-              ];
+              fontDirectories = [ iosevka-custom ];
             };
             nativeBuildInputs = [
               exercism
