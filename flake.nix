@@ -59,7 +59,7 @@
         };
       };
 
-      perSystem = { config, pkgs, system, ... }: {
+      perSystem = { config, pkgs, self', system, ... }: {
         _module.args.pkgs = import nixpkgs {
           overlays = [
             inputs.emacs-overlay.overlay
@@ -71,7 +71,7 @@
         devShells = {
           awk = pkgs.mkShell {
             inputsFrom = [
-              self.devShells.${system}.default
+              self'.devShells.default
             ];
             nativeBuildInputs = with pkgs; [
               bats
@@ -81,7 +81,7 @@
 
           c = pkgs.mkShell {
             inputsFrom = [
-              self.devShells.${system}.default
+              self'.devShells.default
             ];
             nativeBuildInputs = with pkgs; [
               ccls
@@ -110,7 +110,7 @@
 
           go = pkgs.mkShell {
             inputsFrom = [
-              self.devShells.${system}.default
+              self'.devShells.default
             ];
             nativeBuildInputs = with pkgs; [
               (
@@ -128,7 +128,7 @@
 
           jq = pkgs.mkShell {
             inputsFrom = [
-              self.devShells.${system}.default
+              self'.devShells.default
             ];
             nativeBuildInputs = with pkgs; [
               bats
@@ -144,7 +144,7 @@
 
           purescript = pkgs.mkShell {
             inputsFrom = [
-              self.devShells.${system}.default
+              self'.devShells.default
             ];
 
             nativeBuildInputs = with pkgs; [
