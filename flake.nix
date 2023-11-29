@@ -42,7 +42,7 @@
 
       flake = {
         overlays = {
-          iosevka-custom = final: prev: {
+          iosevka-custom = _final: prev: {
             # https://typeof.net/Iosevka/customizer
             iosevka-custom = prev.iosevka.override {
               privateBuildPlan = ''

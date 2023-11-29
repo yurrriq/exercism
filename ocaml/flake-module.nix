@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  perSystem = { config, pkgs, self', system, ... }: {
+  perSystem = { config, pkgs, self', ... }: {
     devShells.ocaml = pkgs.mkShell {
       inputsFrom = [
         self'.devShells.default
