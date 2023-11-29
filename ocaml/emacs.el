@@ -43,6 +43,8 @@
   :config
   (direnv-mode))
 
+(use-package dune)
+
 (use-package editorconfig
   :config
   (editorconfig-mode 1))
@@ -102,6 +104,12 @@
   :demand
   :config (nyan-mode 1))
 
+(use-package ocamlformat
+  :init
+  (add-hook 'before-save-hook 'ocamlformat-before-save)
+  :config
+  (setq ocamlformat-enable 'enable-outside-detected-project))
+
 (use-package paredit
   :hook (emacs-lisp-mode . paredit-mode))
 
@@ -116,7 +124,8 @@
   (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command))
 
 (use-package tuareg
-  :mode ("\\.ml\\'" "\\.mli\\'"))
+  :mode (("\\.ml[ily]?$" . tuareg-mode)
+         ("\\.topml$" . tuareg-mode)))
 
 (use-package whitespace-cleanup-mode
   :config (global-whitespace-cleanup-mode t))

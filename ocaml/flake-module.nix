@@ -13,8 +13,6 @@
             config = ./emacs.el;
           }
         )
-        ocamlformat
-        # pkg-config
       ] ++ (with ocamlPackages; [
         base
         core
@@ -22,6 +20,7 @@
         findlib
         ocaml
         ocaml-lsp
+        ocamlformat
         odoc
         ounit
         utop
