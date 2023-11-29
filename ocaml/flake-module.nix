@@ -22,6 +22,7 @@
         findlib
         ocaml
         ocaml-lsp
+        odoc
         ounit
         utop
       ]);

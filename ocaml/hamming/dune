@@ -1,5 +1,5 @@
 (library
- (name hamming)
+ (public_name hamming)
  (libraries base)
  (modules hamming))
 
