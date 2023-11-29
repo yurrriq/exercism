@@ -1,16 +1,14 @@
-(executable
+(library
+ (name hamming)
+ (libraries base)
+ (modules hamming))
+
+(test
  (name test)
- (libraries base ounit2))
-
-(alias
-  (name    runtest)
-  (deps    (:x test.exe))
-  (action  (run %{x})))
-
-(alias
-  (name    buildtest)
-  (deps    (:x test.exe)))
+ (libraries base hamming ounit2)
+ (modules test))
 
 (env
-  (dev
-    (flags (:standard -warn-error -A))))
+ (dev
+  (flags
+   (:standard -warn-error -A))))
