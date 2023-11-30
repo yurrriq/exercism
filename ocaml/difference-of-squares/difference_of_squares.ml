@@ -1,8 +1,6 @@
-let square_of_sum _ = 
-    failwith "'square_of_sum' is missing"
+let square_of_sum n =
+  let square x = x * x in
+  square (n * (n + 1) / 2)
 
-let sum_of_squares _ =
-    failwith "'sum_of_squares' is missing"
-
-let difference_of_squares _ =
-    failwith "'difference_of_squares' is missing"
+let sum_of_squares n = n * (n + 1) * ((2 * n) + 1) / 6
+let difference_of_squares n = square_of_sum n - sum_of_squares n

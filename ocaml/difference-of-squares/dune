@@ -1,16 +1,13 @@
-(executable
+(library
+ (public_name difference_of_squares)
+ (libraries base)
+ (modules difference_of_squares))
+
+(test
  (name test)
- (libraries base ounit2))
-
-(alias
-  (name    runtest)
-  (deps    (:x test.exe))
-  (action  (run %{x})))
-
-(alias
-  (name    buildtest)
-  (deps    (:x test.exe)))
+ (libraries base difference_of_squares ounit2)
+ (modules test))
 
 (env
-  (dev
-    (flags (:standard -warn-error -A))))
+ (dev
+  (flags (:standard -warn-error -A))))
