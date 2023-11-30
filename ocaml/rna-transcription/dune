@@ -1,15 +1,12 @@
-(executable
+(library
+ (public_name rna_transcription)
+ (libraries base)
+ (modules rna_transcription))
+
+(test
  (name test)
- (libraries base ounit2))
-
-(alias
-  (name    runtest)
-  (deps    (:x test.exe))
-  (action  (run %{x})))
-
-(alias
-  (name    buildtest)
-  (deps    (:x test.exe)))
+ (libraries base ounit2 rna_transcription)
+ (modules test))
 
 (env
   (dev
