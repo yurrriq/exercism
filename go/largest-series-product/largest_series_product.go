@@ -5,6 +5,7 @@
 package lsproduct
 
 import (
+	"errors"
 	"strconv"
 )
 
@@ -28,21 +29,28 @@ func (err LSPError) Error() string {
 }
 
 // LargestSeriesProduct computes the largest product of a series of span digits.
-func LargestSeriesProduct(digits string, span int) (int64, error) {
+func LargestSeriesProduct(digits string, span int) (maxProduct int64, err error) {
 	if span == 0 {
-		return 1, nil
+		maxProduct = 1
+		return
 	}
 
 	if span < 0 {
-		return 0, ErrSpanNegative
+		err = ErrSpanNegative
+		return
 	}
 
 	if span > len(digits) {
-		return 0, ErrSpanTooLarge
+		err = ErrSpanTooLarge
+		return
 	}
 
-	var maxProduct int64
-	for _, chunk := range chunksOf([]rune(digits), span) {
+	chunks, err := ChunksOf([]rune(digits), span)
+	if err != nil {
+		return
+	}
+
+	for _, chunk := range chunks {
 		var spanProduct int64 = 1
 		for _, digit := range chunk {
 			i64, err := strconv.ParseInt(string(digit), 10, 64)
@@ -60,10 +68,15 @@ func LargestSeriesProduct(digits string, span int) (int64, error) {
 	return maxProduct, nil
 }
 
-func chunksOf(roons []rune, n int) [][]rune {
-	chunks := [][]rune{}
-	for i := range roons[:len(roons)-n+1] {
-		chunks = append(chunks, roons[i:i+n])
+// ChunksOf splits a slice into chunks of chunkSize, which must be positive.
+func ChunksOf[A any](slice []A, chunkSize int) (chunks [][]A, err error) {
+	if chunkSize <= 0 {
+		return nil, errors.New("chunkSize must be positive")
 	}
-	return chunks
+
+	for i := range slice[:len(slice)-chunkSize+1] {
+		chunks = append(chunks, slice[i:i+chunkSize])
+	}
+
+	return
 }
