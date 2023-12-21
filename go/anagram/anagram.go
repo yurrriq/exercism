@@ -8,25 +8,41 @@ import (
 
 // Detect returns the subset of candidates that are anagrams of a given target.
 func Detect(target string, candidates []string) (anagrams []string) {
-	loweredTarget, loweredSortedTarget := normalize(target)
+	targetLowered := strings.ToLower(target)
+	targetSortedRunes := sortedRunes(targetLowered)
+
 	for _, candidate := range candidates {
-		loweredCandidate, loweredSortedCandidate := normalize(candidate)
-		if isAnagram(loweredTarget, loweredSortedTarget, loweredCandidate, loweredSortedCandidate) {
+		if isAnagram(targetLowered, targetSortedRunes, candidate) {
 			anagrams = append(anagrams, candidate)
 		}
 	}
 	return
 }
 
-func isAnagram(loweredLeft, loweredSortedLeft, loweredRight, loweredSortedRight string) bool {
-	return loweredLeft != loweredRight && loweredSortedLeft == loweredSortedRight
+func isAnagram(targetLowered string, targetSortedRunes []rune, candidate string) bool {
+	candidateLowered := strings.ToLower(candidate)
+	if targetLowered == candidateLowered {
+		return false
+	}
+
+	candidateSortedRunes := sortedRunes(candidateLowered)
+	if len(targetSortedRunes) != len(candidateSortedRunes) {
+		return false
+	}
+
+	for i, r := range targetSortedRunes {
+		if candidateSortedRunes[i] != r {
+			return false
+		}
+	}
+
+	return true
 }
 
-func normalize(word string) (string, string) {
-	lowered := strings.ToLower(word)
-	loweredSorted := []rune(lowered)
-	sort.Slice(loweredSorted, func(i, j int) bool {
-		return loweredSorted[i] < loweredSorted[j]
+func sortedRunes(word string) []rune {
+	sorted := []rune(word)
+	sort.Slice(sorted, func(i, j int) bool {
+		return sorted[i] < sorted[j]
 	})
-	return lowered, string(loweredSorted)
+	return sorted
 }
