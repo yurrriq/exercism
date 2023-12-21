@@ -1,4 +1,6 @@
-// Package wordcount implements the Word Count exercism from Exercism.
+// Package wordcount implements [the Word Count exercise] from Exercism.
+//
+// [the Word Count exercise]: https://exercism.org/tracks/go/exercises/word-count
 package wordcount
 
 import (
@@ -6,20 +8,20 @@ import (
 	"strings"
 )
 
+// WordRegexp is a regular expression that matches a word, i.e. one or more word
+// characters, possibly followed by an apostrophe and one or more word
+// characters.
+var WordRegexp = regexp.MustCompile(`\w+(?:'\w+)?`)
+
 // Frequency is a map from word to the number of occurrences.
 type Frequency map[string]int
 
-// WordCount computes the frequency of words in a given a phrase.
+// WordCount computes the [Frequency] of words in a given phrase.
 func WordCount(phrase string) Frequency {
-	nonAlphanumeric := regexp.MustCompile(`[^[:alpha:][:digit:]']+`)
-	words := nonAlphanumeric.Split(strings.ToLower(phrase), -1)
+	words := WordRegexp.FindAllString(strings.ToLower(phrase), -1)
 	frequency := Frequency{}
 	for _, word := range words {
-		normalizedWord := strings.Trim(strings.ToLower(word), `'`)
-		if len(normalizedWord) == 0 {
-			continue
-		}
-		frequency[normalizedWord]++
+		frequency[word]++
 	}
 	return frequency
 }
