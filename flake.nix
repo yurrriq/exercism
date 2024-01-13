@@ -102,11 +102,13 @@
             FONTCONFIG_FILE = makeFontsConf {
               fontDirectories = [ iosevka-custom ];
             };
+            inputsFrom = [
+              config.pre-commit.devShell
+            ];
             nativeBuildInputs = [
               exercism
               rnix-lsp
             ];
-            inherit (config.pre-commit.devShell) shellHook;
           };
 
           go = pkgs.mkShell {
