@@ -10,3 +10,6 @@ trim_trailing_whitespace = true
 
 [*.go]
 indent_style = tab
+
+[emacs.el]
+indent_size = 2

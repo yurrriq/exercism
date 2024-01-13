@@ -54,7 +54,11 @@
 
 (use-package flycheck)
 
-(use-package go-mode)
+(use-package go-mode
+  :init
+  (add-hook 'go-mode-hook
+    (lambda ()
+      (add-hook 'before-save-hook #'gofmt-before-save nil t))))
 
 (use-package hl-todo
   :demand
