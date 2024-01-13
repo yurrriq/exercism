@@ -38,19 +38,19 @@ Ensure both positions are valid.
     create((Row2, Col2)),
 /*PL
 
-Queens in the same row can attack each other.
+Queens that share the same row, ...
 
 \PL*/
     ( Row1 #= Row2
 /*PL
 
-Queens in the same column can attack each other.
+... column, ...
 
 \PL*/
     ; Col1 #= Col2
 /*PL
 
-Queens that share the same diagonal can attack each other.
+... or diagonal can attack each other.
 
 \PL*/
     ; abs(Row1 - Row2) #= abs(Col1 - Col2)
