@@ -60,8 +60,6 @@
   :demand
   :config (global-hl-todo-mode t))
 
-(setq lsp-keymap-prefix "C-l")
-
 (use-package lsp-mode
   :hook (erlang-mode . lsp-deferred)
   :commands (lsp lsp-deferred)
@@ -69,6 +67,7 @@
   (lsp-eldoc-render-all t)
   (lsp-idle-delay 0.6)
   (lsp-modeline-code-actions-enable nil)
+  (lsp-keymap-prefix "C-l")
   :config
   (advice-add 'lsp :before #'direnv-update-environment)
   (add-to-list 'lsp-language-id-configuration '(nix-mode . "nix"))
@@ -99,7 +98,7 @@
   :hook (emacs-lisp-mode . paredit-mode))
 
 (use-package rainbow-delimiters
-  :hook (emacs-lisp-mode . rainbow-delimiters-mode))
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package smex
   :demand
