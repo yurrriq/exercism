@@ -34,6 +34,7 @@
         ./java/flake-module.nix
         ./mips/flake-module.nix
         ./ocaml/flake-module.nix
+        ./prolog/flake-module.nix
       ];
 
       systems = [
