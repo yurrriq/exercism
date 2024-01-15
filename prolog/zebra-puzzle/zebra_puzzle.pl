@@ -2,14 +2,14 @@
 
 \PrologDialect{swiprolog}
 
-\Predicate next_to/2(?X, ?Y, ?List).
+\Predicate adjacent_to/2(?X, ?Y, ?List).
 
 The element \emph{X} is next to \emph{Y} in \emph{List}, i.e. \emph{Y} directly
 follows \emph{X} or \emph{X} directly follows \emph{Y}.  Not to be confused with
 \href{https://www.swi-prolog.org/pldoc/doc_for?object=nextto/3}{nextto/3}.
 
 \PL*/
-next_to(X, Y, List) :-
+adjacent_to(X, Y, List) :-
     ( nextto(X, Y, List)
     ; nextto(Y, X, List)
     ).
@@ -88,13 +88,13 @@ puzzle(Houses) :-
 the fox.
 
 \PL*/
-    next_to(house(_, _, _, _, chesterfield), house(_, _, fox, _, _), Houses),
+    adjacent_to(house(_, _, _, _, chesterfield), house(_, _, fox, _, _), Houses),
 /*PL
 
 \item Kools are smoked in the house next to the house where the horse is kept.
 
 \PL*/
-    next_to(house(_, _, _, _, kool), house(_, _, horse, _, _), Houses),
+    adjacent_to(house(_, _, _, _, kool), house(_, _, horse, _, _), Houses),
 /*PL
 
 \item The Lucky Strike smoker drinks orange juice.
@@ -112,7 +112,7 @@ the fox.
 \item The Norwegian lives next to the blue house.
 
 \PL*/
-    next_to(house(norwegian, _, _, _, _), house(_, blue, _, _, _), Houses).
+    adjacent_to(house(norwegian, _, _, _, _), house(_, blue, _, _, _), Houses).
 /*PL
 
 \end{enumerate}
