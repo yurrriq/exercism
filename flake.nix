@@ -30,6 +30,7 @@
       imports = [
         inputs.pre-commit-hooks-nix.flakeModule
         inputs.treefmt-nix.flakeModule
+        ./clojure/flake-module.nix
         ./haskell/flake-module.nix
         ./java/flake-module.nix
         ./mips/flake-module.nix
