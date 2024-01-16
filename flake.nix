@@ -36,6 +36,7 @@
         ./mips/flake-module.nix
         ./ocaml/flake-module.nix
         ./prolog/flake-module.nix
+        ./python/flake-module.nix
       ];
 
       systems = [
