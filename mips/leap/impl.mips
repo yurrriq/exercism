@@ -9,4 +9,24 @@
 .globl is_leap_year
 
 is_leap_year:
-        jr $ra
+	addi $t1, $zero, 400
+	div  $a0, $t1
+	mfhi $t0
+	beq  $t0, $zero, yes
+	addi $t2, $zero, 4
+	div  $a0, $t2
+	mfhi $t0
+	bne  $t0, $zero, no
+	addi $t3, $zero, 100
+	div  $a0, $t3
+	mfhi $t0
+	bne  $t0, $zero, yes
+	j    no
+
+yes:
+	addi $v0, $zero, 1
+	jr   $ra
+
+no:
+	move $v0, $zero
+	jr   $ra
