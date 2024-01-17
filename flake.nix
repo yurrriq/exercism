@@ -9,7 +9,15 @@
       };
       url = "github:nix-community/emacs-overlay";
     };
+    fenix = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/fenix";
+    };
     flake-parts.url = "github:hercules-ci/flake-parts";
+    naersk = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nmattia/naersk";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/release-23.05";
     pre-commit-hooks-nix = {
@@ -39,6 +47,7 @@
         ./ocaml/flake-module.nix
         ./prolog/flake-module.nix
         ./python/flake-module.nix
+        ./rust/flake-module.nix
       ];
 
       systems = [
@@ -69,6 +78,7 @@
         _module.args.pkgs = import nixpkgs {
           overlays = [
             inputs.emacs-overlay.overlay
+            inputs.fenix.overlays.default
             self.overlays.iosevka-custom
           ];
           inherit system;
