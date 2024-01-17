@@ -165,7 +165,8 @@
               nodePackages.purescript-language-server
               nodejs_latest
               purescript
-              spago
+              # FIXME
+              # spago
             ];
           };
         };
@@ -193,7 +194,7 @@
             gofumpt.enable = true;
             nixpkgs-fmt.enable = true;
             # TODO: ocamlformat.enable = true;
-            purs-tidy.enable = true;
+            # FIXME: purs-tidy.enable = true;
             rufo.enable = true;
             rustfmt.enable = true;
           };
@@ -208,12 +209,12 @@
                 "go/*/*_test.go"
               ];
             };
-            purs-tidy = {
-              includes = [
-                "purescript/*/src/**/*.purs"
-                "purescript/*/test/**/*.purs"
-              ];
-            };
+            # purs-tidy = {
+            #   includes = [
+            #     "purescript/*/src/**/*.purs"
+            #     # "purescript/*/test/**/*.purs"
+            #   ];
+            # };
           };
         };
       };
