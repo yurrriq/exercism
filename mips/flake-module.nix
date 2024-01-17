@@ -1,12 +1,12 @@
 { ... }:
 
 {
-  perSystem = { config, pkgs, self', system, ... }: {
+  perSystem = { pkgs, self', ... }: {
     apps.mips.program = pkgs.writeShellApplication {
       name = "mips";
       runtimeInputs = with pkgs; [
         mars-mips
-        openjdk19_headless
+        openjdk21_headless
       ];
       text = ''
         java -jar ${pkgs.mars-mips}/share/java/mars-mips/mars-mips.jar "$@"
@@ -22,8 +22,6 @@
         mars-mips
         openjdk19_headless
       ];
-
-      inherit (config.pre-commit.devShell) shellHook;
     };
   };
 }
