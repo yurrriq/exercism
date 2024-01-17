@@ -11,17 +11,18 @@
 is_leap_year:
 	li $v0, 0           # default false
 
-	rem  $t0, $a0, 4
-	bnez $t0, no        # $a0 % 4 != 0 ~> not leap year
-
 	rem  $t0, $a0, 100
-	bnez $t0, yes       # $a0 % 100 != 0 ~> leap year
+	beqz $t0, century
 
+	rem  $t0, $a0, 4
+	beqz $t0, yes       # $a0 % 100 != 0 && $a0 % 4 == 0 ~> leap year
+
+century:
 	rem  $t0, $a0, 400
-	bnez $t0, no        # $a0 % 400 != 0 ~> not leap year
+	bnez $t0, done      # $a0 % 100 == 0 && $a0 % 400 != 0 ~> not leap year
 
 yes:
 	li $v0, 1
 
-no:
+done:
 	jr $ra
