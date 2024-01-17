@@ -26,7 +26,7 @@ getSolution :: [FilePath] -> IO FilePath
 getSolution = return . fromJust . find isSolution
   where
     isSolution :: FilePath -> Bool
-    isSolution p = ".hs" `isSuffixOf` p && (not . isSuffixOf "_test.hs") p
+    isSolution p = ".hs" `isSuffixOf` p && not ("_test.hs" `isSuffixOf`) p
 
 withTemporaryDirectory_ :: FilePath -> IO a -> IO a
 withTemporaryDirectory_ fp f =

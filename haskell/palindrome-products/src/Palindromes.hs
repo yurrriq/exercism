@@ -22,7 +22,7 @@ smallestPalindrome from to =
       (palindromeProductsWithin from)
       [from .. to]
 
-isPalindrome :: Eq a => [a] -> Bool
+isPalindrome :: (Eq a) => [a] -> Bool
 isPalindrome xs = xs == reverse xs
 
 palindromeProductsWithin :: Integer -> Integer -> [Integer]

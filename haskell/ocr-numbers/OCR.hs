@@ -51,7 +51,7 @@ convert = intercalate "," . map lineToDigits . toLines
     allRows = chunksOf 4
 
 gridToDigit :: M.Map Grid Digit
-gridToDigit = M.fromList $ flip zip digits $ grids
+gridToDigit = M.fromList $ zip grids digits
   where
     digits = ['0' .. '9']
     grids =
