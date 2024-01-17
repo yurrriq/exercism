@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  perSystem = { config, pkgs, self', system, ... }: {
+  perSystem = { config, pkgs, self', ... }: {
     devShells.haskell = pkgs.mkShell {
       inputsFrom = [
         self'.devShells.default
@@ -19,14 +19,11 @@
         haskell-language-server
       ] ++ (with haskellPackages; [
         apply-refact
-        cabal-plan
         hpack
         hlint
         ormolu
         pointfree
       ]);
-
-      inherit (config.pre-commit.devShell) shellHook;
     };
 
     treefmt = {
