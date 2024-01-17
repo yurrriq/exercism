@@ -1,7 +1,6 @@
 defmodule NucleotideCount do
   @nucleotides [?A, ?C, ?G, ?T]
 
-
   @doc """
   Counts individual nucleotides in a NucleotideCount strand.
 
@@ -22,7 +21,6 @@ defmodule NucleotideCount do
   defp do_count(nucleotide, nucleotide, count), do: count + 1
   defp do_count(_, _, count), do: count
 
-
   @doc """
   Returns a summary of counts by nucleotide.
 
@@ -33,9 +31,8 @@ defmodule NucleotideCount do
   """
   @spec histogram([char]) :: map
   def histogram(strand) do
-    List.foldl(strand, Map.new(@nucleotides, &({&1, 0})), &do_histogram/2)
+    List.foldl(strand, Map.new(@nucleotides, &{&1, 0}), &do_histogram/2)
   end
-
 
   @spec do_histogram(char, map) :: map
   defp do_histogram(nucleotide, acc) do

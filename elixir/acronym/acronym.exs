@@ -5,7 +5,7 @@ defmodule Acronym do
   """
   @spec abbreviate(String.t()) :: String.t()
   def abbreviate(string) do
-    tokenize(string) |> Enum.map(&ffirst_capital/1) |> Enum.join
+    tokenize(string) |> Enum.map(&ffirst_capital/1) |> Enum.join()
   end
 
   @doc """
@@ -13,7 +13,7 @@ defmodule Acronym do
   capitalized.
   """
   @spec ffirst_capital([String.t()]) :: String.t()
-  def ffirst_capital([string]), do: String.first(string) |> String.upcase
+  def ffirst_capital([string]), do: String.first(string) |> String.upcase()
 
   @word_or_camel ~r/\p{Lu}+\p{Ll}*|\p{L}+/u
 

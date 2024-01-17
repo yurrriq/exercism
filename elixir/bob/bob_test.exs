@@ -4,7 +4,7 @@ else
   Code.load_file("bob.exs")
 end
 
-ExUnit.start
+ExUnit.start()
 
 defmodule TeenagerTest do
   use ExUnit.Case, async: true

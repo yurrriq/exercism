@@ -4,7 +4,7 @@ defmodule Words do
 
   Words are compared case-insensitively.
   """
-  @spec count(String.t) :: map()
+  @spec count(String.t()) :: map()
   def count(sentence), do: words(sentence) |> Enum.reduce(%{}, &inc_counter/2)
 
   @non_separator ~r/[^\p{L}\d-]+/u

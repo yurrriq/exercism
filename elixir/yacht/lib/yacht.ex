@@ -42,14 +42,14 @@ defmodule Yacht do
 
   def score(:little_straight, dice) do
     case Enum.sort(dice) do
-      [1,2,3,4,5] -> 30
+      [1, 2, 3, 4, 5] -> 30
       _ -> 0
     end
   end
 
   def score(:big_straight, dice) do
     case Enum.sort(dice) do
-      [2,3,4,5,6] -> 30
+      [2, 3, 4, 5, 6] -> 30
       _ -> 0
     end
   end

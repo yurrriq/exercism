@@ -4,8 +4,8 @@ else
   Code.load_file("acronym.exs")
 end
 
-ExUnit.start
-ExUnit.configure exclude: :pending, trace: true
+ExUnit.start()
+ExUnit.configure(exclude: :pending, trace: true)
 
 defmodule AnagramTest do
   use ExUnit.Case

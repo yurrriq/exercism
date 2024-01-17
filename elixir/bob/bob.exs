@@ -48,11 +48,12 @@ defmodule Teenager do
   @doc "Given some input, returns a lackadaisical response."
   def hey(input) do
     import Prompt
+
     cond do
       question?(input) -> "Sure."
-      silent?(input)   -> "Fine. Be that way!"
-      yelled?(input)   -> "Whoa, chill out!"
-      true             -> "Whatever."
+      silent?(input) -> "Fine. Be that way!"
+      yelled?(input) -> "Whoa, chill out!"
+      true -> "Whatever."
     end
   end
 end
