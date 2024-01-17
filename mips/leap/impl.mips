@@ -4,29 +4,24 @@
 # | -------- | --------- | ------- | ------------------------------------------------ |
 # | `$a0`    | input     | integer | year to check                                    |
 # | `$v0`    | output    | boolean | input is leap year (`0` = `false`, `1` = `true`) |
-# | `$t0-9`  | temporary | any     | used for temporary storage                       |
+# | `$t0`    | remainder | integer | used for temporary storage                       |
 
 .globl is_leap_year
 
 is_leap_year:
-	addi $t1, $zero, 400
-	div  $a0, $t1
-	mfhi $t0
-	beq  $t0, $zero, yes
-	addi $t2, $zero, 4
-	div  $a0, $t2
-	mfhi $t0
-	bne  $t0, $zero, no
-	addi $t3, $zero, 100
-	div  $a0, $t3
-	mfhi $t0
-	bne  $t0, $zero, yes
-	j    no
+	li $v0, 0           # default false
+
+	rem  $t0, $a0, 4
+	bnez $t0, no        # $a0 % 4 != 0 ~> not leap year
+
+	rem  $t0, $a0, 100
+	bnez $t0, yes       # $a0 % 100 != 0 ~> leap year
+
+	rem  $t0, $a0, 400
+	bnez $t0, no        # $a0 % 400 != 0 ~> not leap year
 
 yes:
-	addi $v0, $zero, 1
-	jr   $ra
+	li $v0, 1
 
 no:
-	move $v0, $zero
-	jr   $ra
+	jr $ra
