@@ -32,6 +32,7 @@
         inputs.treefmt-nix.flakeModule
         ./clojure/flake-module.nix
         ./elixir/flake-module.nix
+        ./erlang/flake-module.nix
         ./haskell/flake-module.nix
         ./java/flake-module.nix
         ./mips/flake-module.nix
@@ -188,10 +189,6 @@
             black.enable = true;
             clang-format.enable = true;
             deadnix.enable = true;
-            erlfmt = {
-              enable = true;
-              print-width = 80;
-            };
             gofumpt.enable = true;
             nixpkgs-fmt.enable = true;
             # TODO: ocamlformat.enable = true;
