@@ -14,6 +14,12 @@
       url = "github:nix-community/fenix";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
+    gleam-mode = {
+      flake = false;
+      submodules = true;
+      type = "git";
+      url = "https://github.com/gleam-lang/gleam-mode";
+    };
     naersk = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nmattia/naersk";
@@ -41,6 +47,7 @@
         ./clojure/flake-module.nix
         ./elixir/flake-module.nix
         ./erlang/flake-module.nix
+        ./gleam/flake-module.nix
         ./haskell/flake-module.nix
         ./java/flake-module.nix
         ./mips/flake-module.nix

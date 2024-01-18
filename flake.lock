@@ -136,6 +136,24 @@
         "type": "github"
       }
     },
+    "gleam-mode": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1678469577,
+        "narHash": "sha256-gX6x7G22XP5E9nySvAiz8NQZDI9xVTUN5j+Gxnuzjjk=",
+        "ref": "refs/heads/main",
+        "rev": "399cb373d4c55e97157de25807fbd0eba0ac0639",
+        "revCount": 43,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/gleam-lang/gleam-mode"
+      },
+      "original": {
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/gleam-lang/gleam-mode"
+      }
+    },
     "naersk": {
       "inputs": {
         "nixpkgs": [
@@ -237,6 +255,7 @@
         "emacs-overlay": "emacs-overlay",
         "fenix": "fenix",
         "flake-parts": "flake-parts",
+        "gleam-mode": "gleam-mode",
         "naersk": "naersk",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
