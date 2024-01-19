@@ -1,26 +1,29 @@
 (ns coordinate-transformation)
 
-(defn translate2d 
-  "Returns a function making use of a closure to
-   perform a repeatable 2d translation of a coordinate pair."
+(defn translate2d
+  "Return a function to translate a coordinate pair."
   [dx dy]
-  )
+  (fn [x y]
+    (mapv + [x y] [dx dy])))
 
-(defn scale2d 
-  "Returns a function making use of a closure to
-   perform a repeatable 2d scale of a coordinate pair."
+(defn scale2d
+  "Return a function to scale a coordinate pair."
   [sx sy]
-  )
+  (fn [x y]
+    (mapv * [x y] [sx sy])))
 
 (defn compose-transform
-  "Create a composition function that returns a function that 
-   combines two functions to perform a repeatable transformation."
+  "Compose two coordinate pair transformations left to right."
   [f g]
-  )
+  (fn [x y]
+    (apply g (f x y))))
 
 (defn memoize-transform
-  "Returns a function that memoizes the last result.
-   If the arguments are the same as the last call,
-   the memoized result is returned."
+  "Memoize the last result of a coordinate pair transformation."
   [f]
-  )
+  (let [transforms (atom {:x nil, :y nil, :result nil})]
+    (fn [x y]
+      (let [{x' :x, y' :y :as previous} @transforms]
+        (:result (if (and (= x x') (= y y'))
+                   previous
+                   (swap! transforms assoc :x x :y y :result (f x y))))))))
