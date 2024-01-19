@@ -1,21 +1,25 @@
-(ns annalyns-infiltration)
+(ns annalyns-infiltration
+  "The Annalyn's Infiltration exercise")
 
-(defn can-fast-attack?
-  "Returns true if a fast-attack can be made, false otherwise."
-  [knight-awake?]
-  )
+(def can-fast-attack?
+  "Determine if a fast attack can be made."
+  not)
 
 (defn can-spy?
-  "Returns true if the kidnappers can be spied upon, false otherwise."
+  "Determine if the kidnappers can be spied upon."
   [knight-awake? archer-awake? prisoner-awake?]
-  )
+  (or knight-awake? archer-awake? prisoner-awake?))
 
 (defn can-signal-prisoner?
-  "Returns true if the prisoner can be signalled, false otherwise."
+  "Determine if the prisoner can be signaled."
   [archer-awake? prisoner-awake?]
-  )
+  (and prisoner-awake? (not archer-awake?)))
 
 (defn can-free-prisoner?
-  "Returns true if prisoner can be freed, false otherwise."
+  "Determine if the prisoner can be freed."
   [knight-awake? archer-awake? prisoner-awake? dog-present?]
-  )
+  (if dog-present?
+    (not archer-awake?)
+    (and prisoner-awake?
+         (not (or knight-awake?
+                  archer-awake?)))))
