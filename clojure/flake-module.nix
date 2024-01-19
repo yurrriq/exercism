@@ -13,6 +13,7 @@
             config = ./emacs.el;
           }
         )
+        cljfmt
         clojure
         clojure-lsp
         leiningen
