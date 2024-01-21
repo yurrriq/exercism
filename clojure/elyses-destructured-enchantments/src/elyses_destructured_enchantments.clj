@@ -1,30 +1,32 @@
 (ns elyses-destructured-enchantments)
 
 (defn first-card
-  "Returns the first card from deck."
-  [deck]
-)
+  "Return the first card from the deck."
+  [[first-card & _]]
+  first-card)
 
 (defn second-card
-  "Returns the second card from deck."
-  [deck]
-)
+  "Return the second card from the deck."
+  [[_ second-card & _]]
+  second-card)
 
 (defn swap-top-two-cards
-  "Returns the deck with first two items reversed."
-  [deck]
-)
+  "Return the deck with first two cards reversed."
+  [[first-card second-card & other-cards]]
+  (concat [second-card first-card] other-cards))
 
 (defn discard-top-card
-  "Returns a sequence containing the first card and
+  "Return a sequence containing the first card and
    a sequence of the remaining cards in the deck."
-  [deck]
-)
+  [[card & other-cards]]
+  [card other-cards])
 
 (def face-cards
   ["jack" "queen" "king"])
 
 (defn insert-face-cards
   "Returns the deck with face cards between its head and tail."
-  [deck]
-)
+  [[card & other-cards]]
+  (if (nil? card)
+    face-cards
+    (concat [card] face-cards other-cards)))
