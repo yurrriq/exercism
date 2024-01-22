@@ -2,19 +2,19 @@
   "The Armstrong Numbers exercise from Exercism"
   (:require [clojure.math :as math]))
 
-(defn- armstrong-accum
+(defn- armstrong-xform
   [k]
-  (fn [acc c]
-    (-> (Character/digit c 10)
-        (math/pow k)
-        (+ acc))))
+  (comp
+    (map #(Character/digit % 10))
+    (map #(math/pow % k))))
 
 (defn armstrong?
   "Determine whether `n` is an Armstrong number."
   [n]
   (or (zero? n)
-      (-> (inc (int (math/floor (math/log10 n))))
-          armstrong-accum
-          (reduce 0 (str n))
-          int
-          (= n))))
+      (let [k (inc (int (math/floor (math/log10 n))))]
+        (->> (str n)
+            (map (comp #(math/pow % k) #(Character/digit % 10)))
+            (reduce + 0)
+            int
+            (= n)))))
