@@ -1,2 +1,4 @@
+import unicode
+
 proc reverse*(s: string): string =
-  discard
+  s.reversed
