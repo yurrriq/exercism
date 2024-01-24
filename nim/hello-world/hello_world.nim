@@ -1,2 +1,2 @@
 proc hello*: string =
-  "Goodbye, Mars!"
+  "Hello, World!"
