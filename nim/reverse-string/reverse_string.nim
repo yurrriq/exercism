@@ -1,4 +1,4 @@
-import unicode
+from std/sequtils import foldl
 
 proc reverse*(s: string): string =
-  s.reversed
+  foldl(s, b & a, "")
