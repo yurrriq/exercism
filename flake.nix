@@ -210,6 +210,7 @@
             nixpkgs-fmt.enable = true;
             # TODO: ocamlformat.enable = true;
             # FIXME: purs-tidy.enable = true;
+            prettier.enable = true;
             rufo.enable = true;
             rustfmt.enable = true;
           };
