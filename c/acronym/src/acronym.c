@@ -4,7 +4,7 @@
 
 static int is_word_start(char current, char previous)
 {
-    return isalpha(current) && (!isalpha(previous));
+    return isalpha(current) && (previous != '\'') && (!isalpha(previous));
 }
 
 static int word_count(const char phrase[])

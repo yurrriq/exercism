@@ -97,13 +97,17 @@ static int word_count(const char phrase[])
 
 \section{Determining the start of a word}
 
-The \cee{current} character starts a word if, and only if, it is alphabetic and
-the \cee{previous} character is not.
+The \cee{current} character starts a word if, and only if:
+\begin{itemize}
+  \item it is alphabetic, and
+  \item the \cee{previous} character is not an apostrophe, and
+  \item the \cee{previous} character is nonalphabetic
+\end{itemize}
 
 <<Define the [[is_word_start]] function.>>=
 static int is_word_start(char current, char previous)
 {
-    return isalpha(current) && (!isalpha(previous));
+    return isalpha(current) && (previous != '\'') && (!isalpha(previous));
 }
 @ %def is_word_start
 

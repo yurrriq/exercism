@@ -1,60 +1,29 @@
+### If you wish to use extra libraries (math.h for instance),
+### add their flags here (-lm in our case) in the "LIBS" variable.
+
+LIBS = -lm
+
+###
 CFLAGS  = -std=c99
 CFLAGS += -g
 CFLAGS += -Wall
 CFLAGS += -Wextra
 CFLAGS += -pedantic
 CFLAGS += -Werror
+CFLAGS += -Wmissing-declarations
+CFLAGS += -DUNITY_SUPPORT_64 -DUNITY_OUTPUT_COLOR
 
-VFLAGS  = --quiet
-VFLAGS += --tool=memcheck
-VFLAGS += --leak-check=full
-VFLAGS += --error-exitcode=1
+ASANFLAGS  = -fsanitize=address
+ASANFLAGS += -fno-common
+ASANFLAGS += -fno-omit-frame-pointer
 
-cpif   ?= | cpif
-NW_SRC := $(wildcard src/*.nw)
-C_SRC  := ${NW_SRC:.nw=.c}
-PDF    := ${NW_SRC:.nw=.pdf}
+.PHONY: memcheck
+memcheck: ./src/*.c ./src/*.h
+	@echo Compiling $@
+	@$(CC) $(ASANFLAGS) $(CFLAGS) test-framework/unity.c ./src/*.c -o memcheck.out $(LIBS)
+	@./memcheck.out
+	@echo "Memory check passed"
 
-latexmk_flags = -cd -pdf
-
-ifneq (,$(findstring B,$(MAKEFLAGS)))
-latexmk_flags += -gg
-endif
-
-
-.PHONY: all test clean test/test_%.c
-
-all: test
-
-.SUFFIXES: .nw .c .out .tex .pdf
-
-.nw.c:
-	notangle $< ${cpif} $@
-
-.nw.tex:
-	@ noweave -autodefs c -n -delay -index $< ${cpif} $@
-
-.tex.pdf:
-	latexmk ${latexmk_flags} $<
-
-
-all: test ${PDF}
-
-
+.PHONY: clean
 clean:
-	@ rm -fR **/*~ **/*.o **/*.out **/*.out.dSYM
-
-
-src/%.out: src/%.c test/vendor/unity.c test/test_%.c
-	@ rm -fR $@
-	@ echo Compiling $@
-	@ cc $(CFLAGS) $^ -o $@
-	@ echo valgrind $(VFLAGS) $@
-	@ $@
-
-
-test: ${C_SRC:.c=.out}
-
-
-test/test_%.c:
-	@ sed -i '/TEST_IGNORE/d' $@
+	rm -rf *.o *.out *.out.dSYM

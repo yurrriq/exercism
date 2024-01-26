@@ -1,92 +1,119 @@
-#include "vendor/unity.h"
+#include "../test-framework/unity.h"
 #include "../src/acronym.h"
 #include <stdlib.h>
 #include <string.h>
 
+static char *actual = NULL;
 void setUp(void)
 {
 }
 
 void tearDown(void)
 {
+   if (actual)
+      free(actual);
+   actual = NULL;
 }
 
-void test_abbreviation(char *phrase, char *expected)
+static void check_abbreviation(char *phrase, char *expected)
 {
-   char *actual = abbreviate(phrase);
+   actual = abbreviate(phrase);
    TEST_ASSERT_EQUAL_STRING(expected, actual);
-   free(actual);
 }
 
-void test_null_string(void)
+static void test_null_string(void)
 {
    char *phrase = NULL;
    char *expected = NULL;
-   test_abbreviation(phrase, expected);
+   check_abbreviation(phrase, expected);
 }
 
-void test_empty_string(void)
+static void test_empty_string(void)
 {
    char *phrase = "";
    char *expected = NULL;
-   test_abbreviation(phrase, expected);
+   check_abbreviation(phrase, expected);
 }
 
-void test_basic_abbreviation(void)
+static void test_basic_abbreviation(void)
 {
    char *phrase = "Portable Network Graphics";
    char *expected = "PNG";
-   test_abbreviation(phrase, expected);
+   check_abbreviation(phrase, expected);
 }
 
-void test_lower_case_words(void)
+static void test_lowercase_words(void)
 {
    char *phrase = "Ruby on Rails";
    char *expected = "ROR";
-   test_abbreviation(phrase, expected);
+   check_abbreviation(phrase, expected);
 }
 
-void test_punctuation(void)
+static void test_punctuation(void)
 {
    char *phrase = "First In, First Out";
    char *expected = "FIFO";
-   test_abbreviation(phrase, expected);
+   check_abbreviation(phrase, expected);
 }
 
-void test_all_caps_words(void)
-{
-   char *phrase = "PHP: Hypertext Preprocessor";
-   char *expected = "PHP";
-   test_abbreviation(phrase, expected);
-}
-
-void test_non_acronym_all_caps_words(void)
+static void test_all_caps_words(void)
 {
    char *phrase = "GNU Image Manipulation Program";
    char *expected = "GIMP";
-   test_abbreviation(phrase, expected);
+   check_abbreviation(phrase, expected);
 }
 
-void test_hyphenated(void)
+static void test_punctuation_without_whitespace(void)
 {
    char *phrase = "Complementary metal-oxide semiconductor";
    char *expected = "CMOS";
-   test_abbreviation(phrase, expected);
+   check_abbreviation(phrase, expected);
+}
+
+static void test_long_abbreviation(void)
+{
+   char *phrase = "Rolling On The Floor Laughing So Hard "
+                  "That My Dogs Came Over And Licked Me";
+   char *expected = "ROTFLSHTMDCOALM";
+   check_abbreviation(phrase, expected);
+}
+
+static void test_consecutive_delimiters_abbreviation(void)
+{
+   char *phrase = "Something - I made up from thin air";
+   char *expected = "SIMUFTA";
+   check_abbreviation(phrase, expected);
+}
+
+static void test_apostrophes(void)
+{
+   char *phrase = "Halley's Comet";
+   char *expected = "HC";
+   check_abbreviation(phrase, expected);
+}
+
+static void test_underscore_emphasis(void)
+{
+   char *phrase = "The Road _Not_ Taken";
+   char *expected = "TRNT";
+   check_abbreviation(phrase, expected);
 }
 
 int main(void)
 {
-   UnityBegin("test/test_acronym.c");
+   UnityBegin("test_acronym.c");
 
-   RUN_TEST(test_basic_abbreviation);
    RUN_TEST(test_null_string);
    RUN_TEST(test_empty_string);
-   RUN_TEST(test_lower_case_words);
+   RUN_TEST(test_basic_abbreviation);
+   RUN_TEST(test_lowercase_words);
    RUN_TEST(test_punctuation);
    RUN_TEST(test_all_caps_words);
-   RUN_TEST(test_non_acronym_all_caps_words);
-   RUN_TEST(test_hyphenated);
+   RUN_TEST(test_punctuation_without_whitespace);
+   RUN_TEST(test_long_abbreviation);
+   RUN_TEST(test_consecutive_delimiters_abbreviation);
+   RUN_TEST(test_apostrophes);
+   RUN_TEST(test_underscore_emphasis);
 
-   UnityEnd();
-   return 0;
+   return UnityEnd();
 }
