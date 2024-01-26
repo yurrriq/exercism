@@ -1,0 +1,5 @@
+*/*_tests.erl linguist-vendored
+*/rebar.config -linguist-detectable
+*/rebar.lock linguist-generated
+*/test/* linguist-vendored
+*/src/*.app.src linguist-vendored
