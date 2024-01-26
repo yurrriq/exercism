@@ -62,6 +62,19 @@
   :demand
   :config (global-hl-todo-mode t))
 
+(use-package ligature
+  :config
+  (ligature-set-ligatures
+   'prog-mode
+   '("-<<" "-<" "-<-" "<--" "<---" "<<-" "<-" "->" "->>" "-->" "--->" "->-" ">-" ">>-"
+     "=<<" "=<" "=<=" "<==" "<<=" "<=" "=>" "=>>" "==>" "===>" "=>=" ">=" ">>="
+     "<->" "<-->" "<--->" "<---->" "<=>" "<==>" "<===>" "<====>" "::" ":::" "__"
+     "<~~" "</" "</>" "/>" "~~>" "==" "!=" "/=" "~=" "<>" "===" "!==" "!===" "=/=" "=!="
+     "<:" ":=" "*=" "*+" "<*" "<*>" "*>" "<|" "<|>" "|>" "<." "<.>" ".>" "+*" "=*" "=:" ":>"
+     "(*" "*)" "/*" "*/" "[|" "|]" "{|" "|}" "++" "+++" "\\/" "/\\" "|-" "-|" "<!--" "<!---")
+   )
+  (global-ligature-mode t))
+
 (use-package lsp-mode
   :hook
   (c-mode . lsp-deferred)
@@ -100,11 +113,31 @@
 
 (use-package nix-mode)
 
+(eval-and-compile
+  ;; https://www.emacswiki.org/emacs/ThreadMacroFromClojure
+  (defmacro -> (&rest body)
+    (let ((result (pop body)))
+      (dolist (form body result)
+        (setq result (append (list (car form) result) (cdr form))))))
+
+  (defun yurrriq/noweb-load-path ()
+    (-> (executable-find "noweb")
+        (file-name-directory)
+        (directory-file-name)
+        (file-name-directory)
+        (file-name-concat "share" "emacs" "site-lisp")
+        (file-name-as-directory))))
+
+  (use-package noweb-mode
+    :load-path (lambda () (list (yurrriq/noweb-load-path)))
+    :mode ("\\.nw\\'")
+    :demand)
+
 (use-package paredit
   :hook (emacs-lisp-mode . paredit-mode))
 
 (use-package rainbow-delimiters
-  :hook (emacs-lisp-mode . rainbow-delimiters-mode))
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package smex
   :demand
