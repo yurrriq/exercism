@@ -33,7 +33,6 @@
 #include "isogram.h"
 <<Include headers.>>
 
-
 <<Define the [[is_isogram]] function.>>
 @
 \end{marginfigure}

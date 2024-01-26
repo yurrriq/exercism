@@ -30,7 +30,6 @@ all: test
 
 .nw.c:
 	notangle $< ${cpif} $@
-	indent -kr -nut $@
 
 .nw.tex:
 	@ noweave -autodefs c -n -delay -index $< ${cpif} $@

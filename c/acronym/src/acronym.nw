@@ -32,12 +32,9 @@
 #include "acronym.h"
 <<Include headers.>>
 
-
 <<Define the [[is_word_start]] function.>>
 
-
 <<Define the [[word_count]] function.>>
-
 
 <<Define the [[abbreviate]] function.>>
 @

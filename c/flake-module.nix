@@ -16,7 +16,6 @@
           }
         )
         gcc
-        indent
         noweb
         # python3Packages.pygments
         (
