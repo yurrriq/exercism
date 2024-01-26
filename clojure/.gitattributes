@@ -1,0 +1,3 @@
+*/test*/* linguist-vendored
+*/deps.edn linguist-vendored
+*/project.clj -linguist-detectable
