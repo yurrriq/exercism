@@ -11,7 +11,7 @@ string reverse_string(string str)
         return str;
     }
 
-    for (int i = 0, j = str.size() - 1; i != j; ++i, --j) {
+    for (size_t i = 0, j = str.size() - 1; i != j; ++i, --j) {
         swap(str[i], str[j]);
     }
 
