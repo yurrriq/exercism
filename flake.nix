@@ -46,6 +46,7 @@
         inputs.treefmt-nix.flakeModule
         ./clojure/flake-module.nix
         ./c/flake-module.nix
+        ./cpp/flake-module.nix
         ./elixir/flake-module.nix
         ./erlang/flake-module.nix
         ./gleam/flake-module.nix
