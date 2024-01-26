@@ -45,6 +45,7 @@
         inputs.pre-commit-hooks-nix.flakeModule
         inputs.treefmt-nix.flakeModule
         ./clojure/flake-module.nix
+        ./c/flake-module.nix
         ./elixir/flake-module.nix
         ./erlang/flake-module.nix
         ./gleam/flake-module.nix
@@ -99,24 +100,6 @@
             nativeBuildInputs = with pkgs; [
               bats
               gawk
-            ];
-          };
-
-          c = pkgs.mkShell {
-            inputsFrom = [
-              self'.devShells.default
-            ];
-            nativeBuildInputs = with pkgs; [
-              ccls
-              doxygen
-              (
-                emacsWithPackagesFromUsePackage {
-                  alwaysEnsure = true;
-                  config = ./c/emacs.el;
-                }
-              )
-              gcc
-              indent
             ];
           };
 
