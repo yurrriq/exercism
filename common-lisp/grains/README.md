@@ -11,9 +11,9 @@ the next. Four on the third, and so on.
 There are 64 squares on a chessboard.
 
 Write a program that shows:
+
 - how many grains were on each square, and
 - the total number of grains
-
 
 ## For bonus points
 
@@ -25,7 +25,6 @@ are some additional things you could try:
 
 Then please share your thoughts in a comment on the submission. Did this
 experiment make the code better? Worse? Did you learn anything from it?
-
 
 ## Source
 

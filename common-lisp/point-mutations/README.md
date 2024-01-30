@@ -32,7 +32,6 @@ The Hamming distance is only defined for sequences of equal length. Hence you
 may assume that only sequences of equal length will be passed to your hamming
 distance function.
 
-
 ## Source
 
 The Calculating Point Mutations problem at Rosalind [view source](http://rosalind.info/problems/hamm/)

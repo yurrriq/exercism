@@ -2,7 +2,7 @@
 
 Write a program that will calculate the date that someone turned or will celebrate their 1 Gs anniversary.
 
-A gigasecond is one billion (10**9) seconds.
+A gigasecond is one billion (10\*\*9) seconds.
 
 Check out
 [Exercism Help](http://help.exercism.io/getting-started-with-lisp.html)

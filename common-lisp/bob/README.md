@@ -28,7 +28,6 @@ specification.
 
 Have fun!
 
-
 Check out
 [Exercism Help](http://help.exercism.io/getting-started-with-lisp.html)
 for instructions to get started writing Common Lisp. That page will
