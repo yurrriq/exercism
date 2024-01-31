@@ -57,6 +57,7 @@
         ./ocaml/flake-module.nix
         ./prolog/flake-module.nix
         ./python/flake-module.nix
+        ./r/flake-module.nix
         ./rust/flake-module.nix
       ];
 
