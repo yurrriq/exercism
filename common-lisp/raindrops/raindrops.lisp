@@ -1,25 +1,30 @@
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (ql:quickload :alexandria))
+
 (defpackage :raindrops
-  (:use :cl)
+  (:use :cl :alexandria)
   (:export :convert))
 
 (in-package :raindrops)
 
-(defconstant number->sound
+(defconstant +raindrops+
   '((3 . "Pling")
     (5 . "Plang")
     (7 . "Plong")))
 
-(defun divides-p (d n)
-  (zerop (rem n d)))
+(defun dividesp (divisor number)
+  "Returns true if number is divisible by divisor; otherwise returns false."
+  (zerop (rem number divisor)))
 
 (defun convert (number)
-  "Convert a number to a string of raindrop sounds."
-  (let ((sounds (reduce (lambda (sounds divisor-sound)
-                          (if (divides-p (car divisor-sound) number)
-                              (concatenate 'string sounds (cdr divisor-sound))
-                              sounds))
-                        number->sound
-                        :initial-value "")))
-    (if (= 0 (length sounds))
-        (format nil "~d" number)
-        sounds)))
+  "Converts a number to a string of raindrop sounds."
+  (labels ((makes-sound-p (divisor)
+             (dividesp divisor number))
+           (collect-sounds (divisor-sound sounds)
+             (if (makes-sound-p (car divisor-sound))
+                 (cons (cdr divisor-sound) sounds)
+                 sounds)))
+    (if-let ((sounds (reduce #'collect-sounds +raindrops+
+                             :from-end t :initial-value '())))
+      (apply #'concatenate 'string sounds)
+      (write-to-string number))))
