@@ -1,5 +1,11 @@
 defmodule Raindrops do
-  @moduledoc """
+  @raindrops %{
+    7 => "Plong",
+    5 => "Plang",
+    3 => "Pling"
+  }
+
+  @doc """
   Returns a string based on raindrop factors.
 
   - If the number contains 3 as a prime factor, output 'Pling'.
@@ -8,13 +14,6 @@ defmodule Raindrops do
   - If the number does not contain 3, 5, or 7 as a prime factor,
     just pass the number's digits straight through.
   """
-
-  @raindrops %{
-    7 => "Plong",
-    5 => "Plang",
-    3 => "Pling"
-  }
-
   @spec convert(pos_integer) :: String.t()
   def convert(number) do
     @raindrops
