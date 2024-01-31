@@ -15,7 +15,7 @@ defmodule Raindrops do
     3 => "Pling"
   }
 
-  defguard divides(divisor, number) when rem(number, divisor) == 0
+  defguardp divides(divisor, number) when rem(number, divisor) == 0
 
   @spec convert(pos_integer) :: String.t()
   def convert(number) do
