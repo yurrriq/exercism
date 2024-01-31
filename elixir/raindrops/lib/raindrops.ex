@@ -1,5 +1,5 @@
 defmodule Raindrops do
-  @doc """
+  @moduledoc """
   Returns a string based on raindrop factors.
 
   - If the number contains 3 as a prime factor, output 'Pling'.
@@ -15,8 +15,6 @@ defmodule Raindrops do
     3 => "Pling"
   }
 
-  defguardp divides(divisor, number) when rem(number, divisor) == 0
-
   @spec convert(pos_integer) :: String.t()
   def convert(number) do
     @raindrops
@@ -24,7 +22,7 @@ defmodule Raindrops do
     |> format_sounds(number)
   end
 
-  defp do_convert({divisor, sound}, number) when divides(divisor, number), do: [sound]
+  defp do_convert({divisor, sound}, number) when rem(number, divisor) == 0, do: [sound]
   defp do_convert(_, _), do: []
 
   defp format_sounds([], number), do: Integer.to_string(number)
