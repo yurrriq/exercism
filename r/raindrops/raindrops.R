@@ -1,21 +1,10 @@
+sounds <- c(Pling = 3, Plang = 5, Plong = 7)
+
 raindrops <- function(number) {
-    sounds <- vector()
-
-    if (number%%3 == 0) {
-        sounds <- append(sounds, "Pling")
-    }
-
-    if (number%%5 == 0) {
-        sounds <- append(sounds, "Plang")
-    }
-
-    if (number%%7 == 0) {
-        sounds <- append(sounds, "Plong")
-    }
-
-    if (length(sounds) == 0) {
-        sprintf("%d", number)
+    output <- paste0(names(sounds[number%%sounds == 0]), collapse = "")
+    if (nchar(output) != 0) {
+        output
     } else {
-        paste(sounds, collapse = "")
+        as.character(number)
     }
 }
