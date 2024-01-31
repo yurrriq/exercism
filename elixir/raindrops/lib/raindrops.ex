@@ -9,31 +9,24 @@ defmodule Raindrops do
     just pass the number's digits straight through.
   """
 
-  @raindrops [
-    {3, "Pling"},
-    {5, "Plang"},
-    {7, "Plong"}
-  ]
+  @raindrops %{
+    7 => "Plong",
+    5 => "Plang",
+    3 => "Pling"
+  }
+
+  defguard divides(divisor, number) when rem(number, divisor) == 0
 
   @spec convert(pos_integer) :: String.t()
   def convert(number) do
-    do_convert(number, [], @raindrops)
+    @raindrops
+    |> Enum.flat_map(&do_convert(&1, number))
+    |> format_sounds(number)
   end
 
-  defp do_convert(number, [], []), do: Integer.to_string(number)
+  defp do_convert({divisor, sound}, number) when divides(divisor, number), do: [sound]
+  defp do_convert(_, _), do: []
 
-  defp do_convert(_, sounds, []) do
-    sounds
-    |> Enum.reverse()
-    |> Enum.join("")
-  end
-
-  defp do_convert(number, sounds, [{divisor, sound} | raindrops])
-       when rem(number, divisor) == 0 do
-    do_convert(number, [sound | sounds], raindrops)
-  end
-
-  defp do_convert(number, sounds, [_ | raindrops]) do
-    do_convert(number, sounds, raindrops)
-  end
+  defp format_sounds([], number), do: Integer.to_string(number)
+  defp format_sounds(sounds, _), do: Enum.join(sounds)
 end
