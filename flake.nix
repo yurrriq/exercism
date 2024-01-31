@@ -44,8 +44,9 @@
       imports = [
         inputs.pre-commit-hooks-nix.flakeModule
         inputs.treefmt-nix.flakeModule
-        ./clojure/flake-module.nix
         ./c/flake-module.nix
+        ./clojure/flake-module.nix
+        ./common-lisp/flake-module.nix
         ./cpp/flake-module.nix
         ./elixir/flake-module.nix
         ./erlang/flake-module.nix
