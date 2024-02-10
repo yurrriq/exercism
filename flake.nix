@@ -41,25 +41,22 @@
 
   outputs = inputs@{ flake-parts, nixpkgs, self, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [
-        inputs.pre-commit-hooks-nix.flakeModule
-        inputs.treefmt-nix.flakeModule
-        ./c/flake-module.nix
-        ./clojure/flake-module.nix
-        ./common-lisp/flake-module.nix
-        ./cpp/flake-module.nix
-        ./elixir/flake-module.nix
-        ./erlang/flake-module.nix
-        ./gleam/flake-module.nix
-        ./haskell/flake-module.nix
-        ./java/flake-module.nix
-        ./mips/flake-module.nix
-        ./ocaml/flake-module.nix
-        ./prolog/flake-module.nix
-        ./python/flake-module.nix
-        ./r/flake-module.nix
-        ./rust/flake-module.nix
-      ];
+      imports =
+        let
+          inherit (builtins) readDir;
+          inherit (nixpkgs.lib) foldlAttrs pathIsRegularFile;
+          collectFlakeModules = acc: name: type:
+            let flakeModule = ./. + "/${name}/flake-module.nix"; in
+            if type == "directory" && pathIsRegularFile flakeModule
+            then
+              [ flakeModule ] ++ acc
+            else
+              acc;
+        in
+        [
+          inputs.pre-commit-hooks-nix.flakeModule
+          inputs.treefmt-nix.flakeModule
+        ] ++ foldlAttrs collectFlakeModules [ ] (builtins.readDir ./.);
 
       systems = [
         "x86_64-linux"
