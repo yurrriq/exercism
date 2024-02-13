@@ -1,0 +1,10 @@
+{
+  "editor.fontFamily": "'Iosevka Custom'",
+  "editor.minimap.enabled": false,
+  "files.autoSave": "afterDelay",
+  "julia.enableTelemetry": false,
+  "julia.symbolCacheDownload": true,
+  "window.menuBarVisibility": "toggle",
+  "workbench.activityBar.location": "hidden",
+  "workbench.colorTheme": "Monokai"
+}

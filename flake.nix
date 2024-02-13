@@ -4,6 +4,7 @@
   inputs = {
     emacs-overlay = {
       inputs = {
+        flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
         nixpkgs-stable.follows = "nixpkgs-stable";
       };
@@ -13,7 +14,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/fenix";
     };
+    flake-compat.url = "github:edolstra/flake-compat";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-utils.url = "github:numtide/flake-utils";
     gleam-mode = {
       flake = false;
       submodules = true;
@@ -24,10 +27,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nmattia/naersk";
     };
+    nix-vscode-extensions = {
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+      url = "github:nix-community/nix-vscode-extensions";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/release-23.05";
     pre-commit-hooks-nix = {
       inputs = {
+        flake-compat.follows = "flake-compat";
+        flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
         nixpkgs-stable.follows = "nixpkgs-stable";
       };
