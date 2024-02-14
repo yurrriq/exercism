@@ -16,7 +16,18 @@ const conversions = (
     (1, "I")
 )
 
-function to_roman(number)
+"""
+    to_roman(number::Integer)
+
+Return the Roman numeral for a given `number` as a `String`.
+
+# Examples
+```jldoctest
+julia> to_roman(42)
+"XLII"
+```
+"""
+function to_roman(number::Integer) :: String
     if number ∉ 1:3999
         error(@sprintf("%d ∉ 1:3999", number))
     end
