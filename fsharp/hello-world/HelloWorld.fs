@@ -1,7 +1,7 @@
 //             DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
 //                     Version 2, December 2004
 //
-//  Copyright (C) 2016 Eric Bailey <eric@ericb.me>
+//  Copyright (C) 2016, 2024, Eric Bailey <eric@ericb.me>
 //
 //  Everyone is permitted to copy and distribute verbatim or modified
 //  copies of this license document, and changing it is allowed as long
@@ -15,8 +15,4 @@
 
 module HelloWorld
 
-/// Given an optional `name`, return a personalized greeting.
-/// If `name` is `None`, default to `"World"`.
-let rec hello = function
-  | Some(n) -> "Hello, " + n + "!"
-  | None    -> hello (Some "World")
+let hello = "Hello, World!"
