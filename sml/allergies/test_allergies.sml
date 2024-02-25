@@ -1,4 +1,4 @@
-use "allergies.sml";
+use "allergies.sml"
 
 val test_cases = [
     (   0, []             ),
@@ -17,7 +17,7 @@ val test_cases = [
     ( 192, [Pollen, Cats]        ),
     ( 255, [Eggs, Peanuts, Shellfish, Strawberries,
             Tomatoes, Chocolate, Pollen, Cats] )
-];
+]
 
 fun run_tests [] = []
   | run_tests ((input,expected)::ts) =

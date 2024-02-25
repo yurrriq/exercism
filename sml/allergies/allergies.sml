@@ -7,7 +7,9 @@ datatype allergen = Eggs
                   | Pollen
                   | Cats
 
-(* fromEnum = fn : allergen -> int *)
+(*!
+ * fromEnum allergen coverts an allergen to an int.
+ *)
 fun fromEnum Eggs         = 0
   | fromEnum Peanuts      = 1
   | fromEnum Shellfish    = 2
@@ -19,11 +21,13 @@ fun fromEnum Eggs         = 0
 
 
 local
-    open Word;
+    open Word
     infix 8 >>
     infix 7 andb
 in
-(* isAllergicTo = fn : allergen -> int -> bool *)
+(*!
+ * isAllergicTo score allergen determines if score indicates an allergy to allergen.
+ *)
 fun isAllergicTo i a =
   let fun testBit w j = (0wx1 = ((w >> (Word.fromInt j)) andb 0wx1))
   in
