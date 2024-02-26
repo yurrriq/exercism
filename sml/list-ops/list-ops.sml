@@ -1,23 +1,24 @@
-fun concat (lists: int list list): int list =
-  raise Fail "'concat' is not implemented"
+fun reverse xs =
+  foldl (fn (x, acc) => x :: acc) [] xs
 
-fun reverse (list: int list): int list =
-  raise Fail "'reverse' is not implemented"
+fun filter (pred, xs) =
+  foldr (fn (x, ys) => if pred x then x :: ys else ys) [] xs
 
-fun filter (function: int -> bool, list: int list): int list =
-  raise Fail "'filter' is not implemented"
+fun map (f, xs) =
+  foldr (fn (x, acc) => f x :: acc) [] xs
 
-fun map (function: int -> int, list: int list): int list =
-  raise Fail "'map' is not implemented"
+fun append (xs, ys) =
+  foldr op:: ys xs
 
-fun append (list1: int list, list2: int list): int list =
-  raise Fail "'append' is not implemented"
+fun length xs =
+  foldl (fn (_, acc) => acc + 1) 0 xs
 
-fun length (ns: int list): int =
-  raise Fail "'length' is not implemented"
+fun foldl (_, init, []) = init
+  | foldl (f, init, (x :: xs)) =
+      foldl (f, (f (init, x)), xs)
 
-fun foldl (function: int * int -> int, initial: int, list: int list): int =
-  raise Fail "'foldl' is not implemented"
+fun foldr (_, init, []) = init
+  | foldr (f, init, (x :: xs)) =
+      f (x, foldr (f, init, xs))
 
-fun foldr (function: int * int -> int, initial: int, list: int list): int =
-  raise Fail "'foldr' is not implemented"
+fun concat xxs = foldr (append, [], xxs)
