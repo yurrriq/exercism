@@ -1,15 +1,27 @@
-// This is a "stub" file.  It's a little start on your solution.
-// It's not a complete solution though; you have to write some code.
-
-// Package acronym should have a package comment that summarizes what it's about.
-// https://golang.org/doc/effective_go.html#commentary
+// Package acronym implements the Acronym exercise.
 package acronym
 
-// Abbreviate should have a comment documenting it.
-func Abbreviate(s string) string {
-	// Write some code here to pass the test suite.
-	// Then remove all the stock comments.
-	// They're here to help you get started but they only clutter a finished solution.
-	// If you leave them in, reviewers may protest!
-	return ""
+import (
+	"unicode"
+)
+
+// Abbreviate converts a longName into its acronym.
+func Abbreviate(longName string) string {
+	if len(longName) == 0 {
+		return longName
+	}
+
+	roons := []rune(longName)
+	acronym := []rune{unicode.ToUpper(roons[0])}
+	for i, roon := range roons[1:] {
+		if isWordStart(roon, roons[i]) {
+			acronym = append(acronym, unicode.ToUpper(roon))
+		}
+	}
+
+	return string(acronym)
+}
+
+func isWordStart(current rune, previous rune) bool {
+	return unicode.IsLetter(current) && previous != '\'' && !unicode.IsLetter(previous)
 }
