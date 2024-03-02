@@ -2,24 +2,23 @@
 package acronym
 
 import (
+	"strings"
 	"unicode"
 )
 
 // Abbreviate converts a longName into its acronym.
 func Abbreviate(longName string) string {
-	if len(longName) == 0 {
-		return longName
-	}
-
-	roons := []rune(longName)
-	acronym := []rune{unicode.ToUpper(roons[0])}
-	for i, roon := range roons[1:] {
-		if isWordStart(roon, roons[i]) {
-			acronym = append(acronym, unicode.ToUpper(roon))
-		}
-	}
-
-	return string(acronym)
+	previous := ' '
+	return strings.Map(
+		func(current rune) rune {
+			if isWordStart(current, previous) {
+				previous = current
+				return unicode.ToTitle(current)
+			}
+			previous = current
+			return -1
+		},
+		longName)
 }
 
 func isWordStart(current rune, previous rune) bool {
