@@ -41,13 +41,16 @@ func Ability() (score int) {
 }
 
 // GenerateCharacter creates a new Character with random scores for abilities
-func GenerateCharacter() (character Character) {
-	character.Strength = Ability()
-	character.Dexterity = Ability()
-	character.Constitution = Ability()
-	character.Intelligence = Ability()
-	character.Wisdom = Ability()
-	character.Charisma = Ability()
+func GenerateCharacter() Character {
+	character := Character{
+		Strength:     Ability(),
+		Dexterity:    Ability(),
+		Constitution: Ability(),
+		Intelligence: Ability(),
+		Wisdom:       Ability(),
+		Charisma:     Ability(),
+	}
+
 	character.Hitpoints = 10 + Modifier(character.Constitution)
 
 	return character
