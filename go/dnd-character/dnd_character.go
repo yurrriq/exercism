@@ -6,6 +6,7 @@ package dndcharacter
 import (
 	"math"
 	"math/rand"
+	"time"
 )
 
 // Character represents a D&D character with six abilities and hit points.
@@ -26,37 +27,37 @@ func Modifier(score int) int {
 
 // Ability uses randomness to generate the score for an ability
 func Ability() (score int) {
-	lowestRoll := rollDie(6)
-	for i := 0; i < 3; i++ {
-		roll := rollDie(6)
-		if roll < lowestRoll {
-			score += lowestRoll
-			lowestRoll = roll
-		} else {
-			score += roll
-		}
+	src := rand.NewSource(time.Now().UnixNano())
+	rng := rand.New(src)
+
+	lowestRoll := math.MaxInt
+	for i := 0; i < 4; i++ {
+		roll := rollDie(rng, 6)
+		score += roll
+		lowestRoll = min(lowestRoll, roll)
 	}
 
-	return score
+	return score - lowestRoll
 }
 
 // GenerateCharacter creates a new Character with random scores for abilities
 func GenerateCharacter() Character {
+	constitution := Ability()
+
 	character := Character{
 		Strength:     Ability(),
 		Dexterity:    Ability(),
-		Constitution: Ability(),
+		Constitution: constitution,
 		Intelligence: Ability(),
 		Wisdom:       Ability(),
 		Charisma:     Ability(),
+		Hitpoints:    10 + Modifier(constitution),
 	}
-
-	character.Hitpoints = 10 + Modifier(character.Constitution)
 
 	return character
 }
 
 // rollDie simulates rolling a d-sided die.
-func rollDie(d int) int {
-	return rand.Intn(d) + 1
+func rollDie(rng *rand.Rand, d int) int {
+	return rng.Intn(d) + 1
 }
