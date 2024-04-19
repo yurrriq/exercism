@@ -29,5 +29,5 @@ func Atbash(message string) string {
 		clusterLength++
 	}
 
-	return strings.TrimSpace(builder.String())
+	return builder.String()
 }
