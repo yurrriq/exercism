@@ -5,19 +5,20 @@ module Palindromes
 where
 
 import Control.Monad (guard)
-import Data.List (sortBy)
 import Data.Maybe (listToMaybe)
 
-largestPalindrome :: Integer -> Integer -> Maybe (Integer, [(Integer, Integer)])
+type ProductWithFactorPairs = (Integer, [(Integer, Integer)])
+
+largestPalindrome :: Integer -> Integer -> Maybe ProductWithFactorPairs
 largestPalindrome from to =
-  fmap (factorsWithin from to) . listToMaybe $
+  listToMaybe $
     concatMap
-      (sortBy (flip compare) . flip palindromeProductsWithin to)
+      (`palindromeProductsWithin` to)
       [to, to - 1 .. from]
 
-smallestPalindrome :: Integer -> Integer -> Maybe (Integer, [(Integer, Integer)])
+smallestPalindrome :: Integer -> Integer -> Maybe ProductWithFactorPairs
 smallestPalindrome from to =
-  fmap (factorsWithin from to) . listToMaybe $
+  listToMaybe $
     concatMap
       (palindromeProductsWithin from)
       [from .. to]
@@ -25,16 +26,16 @@ smallestPalindrome from to =
 isPalindrome :: (Eq a) => [a] -> Bool
 isPalindrome xs = xs == reverse xs
 
-palindromeProductsWithin :: Integer -> Integer -> [Integer]
+palindromeProductsWithin :: Integer -> Integer -> [ProductWithFactorPairs]
 palindromeProductsWithin from to =
   do
     x <- [from .. to]
     let y = from + to - x
     let xy = x * y
     guard (isPalindrome (show xy))
-    pure xy
+    pure (factorsWithin from to xy)
 
-factorsWithin :: Integer -> Integer -> Integer -> (Integer, [(Integer, Integer)])
+factorsWithin :: Integer -> Integer -> Integer -> ProductWithFactorPairs
 factorsWithin from to n =
   ( n,
     do
