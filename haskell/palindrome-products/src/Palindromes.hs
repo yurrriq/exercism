@@ -7,7 +7,9 @@ where
 import Control.Monad (guard)
 import Data.Maybe (listToMaybe)
 
-type ProductWithFactorPairs = (Integer, [(Integer, Integer)])
+type ProductWithFactorPairs = (Integer, FactorPairs)
+
+type FactorPairs = [(Integer, Integer)]
 
 largestPalindrome :: Integer -> Integer -> Maybe ProductWithFactorPairs
 largestPalindrome from to =
@@ -23,9 +25,6 @@ smallestPalindrome from to =
       (palindromeProductsWithin from)
       [from .. to]
 
-isPalindrome :: (Eq a) => [a] -> Bool
-isPalindrome xs = xs == reverse xs
-
 palindromeProductsWithin :: Integer -> Integer -> [ProductWithFactorPairs]
 palindromeProductsWithin from to =
   do
@@ -33,14 +32,15 @@ palindromeProductsWithin from to =
     let y = from + to - x
     let xy = x * y
     guard (isPalindrome (show xy))
-    pure (factorsWithin from to xy)
+    pure (xy, factorPairsWithin from to xy)
 
-factorsWithin :: Integer -> Integer -> Integer -> ProductWithFactorPairs
-factorsWithin from to n =
-  ( n,
-    do
-      x <- [from .. to]
-      let (y, r) = n `divMod` x
-      guard (r == 0 && from <= y && y <= to && x <= y)
-      pure (x, y)
-  )
+isPalindrome :: (Eq a) => [a] -> Bool
+isPalindrome xs = xs == reverse xs
+
+factorPairsWithin :: Integer -> Integer -> Integer -> FactorPairs
+factorPairsWithin from to n =
+  do
+    x <- [from .. to]
+    let (y, r) = n `divMod` x
+    guard (r == 0 && from <= y && y <= to && x <= y)
+    pure (x, y)
