@@ -1,13 +1,14 @@
 import Combinatorics: partitions
 
 function combinations_in_cage(n, k)
-    collect(Iterators.map(sort, Iterators.filter(allunique, partitions(n, k))))
+    collect(filtermap(sort, allunique, partitions(n, k)))
 end
 
 function combinations_in_cage(n, k, restrictions)
-    filter(ys -> not_any_in(restrictions, ys), combinations_in_cage(n, k))
+    filter(not_any_in(restrictions), combinations_in_cage(n, k))
 end
 
-function not_any_in(xs, ys)
-    !any(x -> x in ys, xs)
-end
+filtermap(f, pred, xs) = Iterators.map(f, Iterators.filter(pred, xs))
+
+not_any_in(xs) = ys -> not_any_in(xs, ys)
+not_any_in(xs, ys) = !any(in(xs), ys)
