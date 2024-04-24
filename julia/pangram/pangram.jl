@@ -1,10 +1,6 @@
 """
-    ispangram(input)
+    ispangram(input::String)::Bool
 
 Return `true` if `input` contains every alphabetic character (case insensitive).
-
 """
-function ispangram(input)
-
-end
-
+ispangram(input::String)::Bool = 'a':'z' ⊆ Set(lowercase(input))
