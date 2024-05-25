@@ -69,14 +69,14 @@ func NewVigenere(key string) Cipher {
 }
 
 func (v vigenere) Encode(message string) string {
-	return cipher(id, v.key, message)
+	return cipher(1, v.key, message)
 }
 
 func (v vigenere) Decode(message string) string {
-	return cipher(negate, v.key, message)
+	return cipher(-1, v.key, message)
 }
 
-func cipher(f func(int) int, key string, message string) string {
+func cipher(m int, key string, message string) string {
 	if message == "" || key == "" {
 		return ""
 	}
@@ -90,7 +90,7 @@ func cipher(f func(int) int, key string, message string) string {
 		if !unicode.IsLetter(roon) {
 			continue
 		}
-		distance := f(letterToInt(keyRunes[i%keyLength]))
+		distance := m * letterToInt(keyRunes[i%keyLength])
 		ciphered = append(ciphered, shiftRune(distance, unicode.ToLower(roon)))
 		i++
 	}
@@ -115,12 +115,4 @@ func abs(n int) int {
 
 func mod(a, n int) int {
 	return (a%n + n) % n
-}
-
-func negate(i int) int {
-	return -i
-}
-
-func id[T any](x T) T {
-	return x
 }
