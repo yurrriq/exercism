@@ -84,18 +84,19 @@ func cipher(m int, key string, message string) string {
 	keyRunes := []rune(key)
 	keyLength := len(keyRunes)
 
-	ciphered := []rune{}
+	var ciphered strings.Builder
+	ciphered.Grow(len(message))
 	var i int
 	for _, roon := range message {
 		if !unicode.IsLetter(roon) {
 			continue
 		}
 		distance := m * letterToInt(keyRunes[i%keyLength])
-		ciphered = append(ciphered, shiftRune(distance, unicode.ToLower(roon)))
+		ciphered.WriteRune(shiftRune(distance, unicode.ToLower(roon)))
 		i++
 	}
 
-	return string(ciphered)
+	return ciphered.String()
 }
 
 func shiftRune(distance int, roon rune) rune {
