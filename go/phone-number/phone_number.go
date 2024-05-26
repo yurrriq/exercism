@@ -5,8 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"regexp"
-	"strings"
-	"unicode"
 )
 
 // Number attempts to sanitizes a phone number.
@@ -16,13 +14,7 @@ func Number(phoneNumber string) (sanitizedNumber string, err error) {
 
 	switch len(digits) {
 	case 10:
-		var result strings.Builder
-		for _, roon := range phoneNumber {
-			if unicode.IsDigit(roon) {
-				result.WriteRune(roon)
-			}
-		}
-		sanitizedNumber = result.String()
+		sanitizedNumber = digits
 	case 11:
 		if digits[0] != '1' {
 			return "", errors.New("Unknown country code")
@@ -56,7 +48,7 @@ func AreaCode(phoneNumber string) (string, error) {
 		return "", err
 	}
 
-	return sanitizedNumber[0:3], nil
+	return sanitizedNumber[:3], nil
 }
 
 // Format attempts to normlize a phone number.
@@ -67,9 +59,9 @@ func Format(phoneNumber string) (string, error) {
 	}
 
 	sanitizedNumber = fmt.Sprintf("(%s) %s-%s",
-		sanitizedNumber[0:3],
+		sanitizedNumber[:3],
 		sanitizedNumber[3:6],
-		sanitizedNumber[6:10],
+		sanitizedNumber[6:],
 	)
 	return sanitizedNumber, err
 }
