@@ -1,4 +1,9 @@
-module ReverseString (reverseString) where
+module ReverseString
+  ( reverseString,
+  )
+where
+
+import Data.List (foldl')
 
 reverseString :: String -> String
-reverseString str = error "You need to implement this function."
+reverseString = foldl' (flip (:)) ""
