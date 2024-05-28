@@ -7,9 +7,9 @@ module StateOfTicTacToe
 where
 
 import Control.Applicative ((<|>))
-import Control.Lens (FoldableWithIndex (ifoldl'), over)
+import Control.Arrow (first, second)
+import Control.Lens (ifoldl')
 import Data.Bits (popCount, shiftL, (.&.), (.|.))
-import Linear (V2 (..), _x, _y)
 import Text.Trifecta (Parser, Result (..), char, count, newline, parseString)
 
 data GameState
@@ -29,7 +29,7 @@ data GamePlayer
 gameState :: [String] -> GameState
 gameState input = maybe Impossible go (parseStringMay (grid 3) (unlines input))
   where
-    go (V2 xs os)
+    go (xs, os)
       | numOs > numXs || abs (numXs - numOs) > 1 || (wonX && wonO) = Impossible
       | wonX = WinX
       | wonO = WinO
@@ -42,12 +42,12 @@ gameState input = maybe Impossible go (parseStringMay (grid 3) (unlines input))
         wonO = isWinner os
 
 -- | Parse a k-by-k Tic Tac Toe board, representing the Xs and Os as bit maps.
-grid :: Int -> Parser (V2 Int)
-grid k = ifoldl' (ifoldl' . go) (pure 0) <$> count k (row <* newline)
+grid :: Int -> Parser (Int, Int)
+grid k = ifoldl' (ifoldl' . go) (0, 0) <$> count k (row <* newline)
   where
     go y x acc = \case
-      Just X -> over _x (shiftL 1 (k * y + x) .|.) acc
-      Just O -> over _y (shiftL 1 (k * y + x) .|.) acc
+      Just X -> first (shiftL 1 (k * y + x) .|.) acc
+      Just O -> second (shiftL 1 (k * y + x) .|.) acc
       Nothing -> acc
     row = count k square
 

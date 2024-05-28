@@ -16,7 +16,6 @@ library:
   ghc-options: -Wall
   dependencies:
     - lens
-    - linear
     - trifecta
 
 tests:
