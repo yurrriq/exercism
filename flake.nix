@@ -129,24 +129,6 @@
             ];
           };
 
-          go = pkgs.mkShell {
-            inputsFrom = [
-              self'.devShells.default
-            ];
-            nativeBuildInputs = with pkgs; [
-              (
-                emacsWithPackagesFromUsePackage {
-                  alwaysEnsure = true;
-                  config = ./go/emacs.el;
-                }
-              )
-              go
-              gopls
-              gotools
-              revive
-            ];
-          };
-
           jq = pkgs.mkShell {
             inputsFrom = [
               self'.devShells.default
@@ -187,12 +169,6 @@
         };
 
         pre-commit.settings.hooks = {
-          revive = {
-            enable = true;
-            excludes = [
-              ".+_test.go$"
-            ];
-          };
           treefmt.enable = true;
         };
 
@@ -202,7 +178,6 @@
             black.enable = true;
             clang-format.enable = true;
             deadnix.enable = true;
-            gofumpt.enable = true;
             nixpkgs-fmt.enable = true;
             # TODO: ocamlformat.enable = true;
             # FIXME: purs-tidy.enable = true;
@@ -214,11 +189,6 @@
             clang-format = {
               excludes = [
                 "**/test**"
-              ];
-            };
-            gofumpt = {
-              excludes = [
-                "go/*/*_test.go"
               ];
             };
             # purs-tidy = {
