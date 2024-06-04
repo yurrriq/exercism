@@ -31,7 +31,7 @@ including tracking state when evaulating **Reverse Polish notation**.
 ## 1. Overview
 
 [Reverse Polish notation](https://en.wikipedia.org/wiki/Reverse_Polish_notation) (RPN) is a way of writing mathematical expressions.
-Unlike in traditional infix notation, RPN operators *follow* their operands.
+Unlike in traditional infix notation, RPN operators _follow_ their operands.
 For example, instead of writing:
 
 ```

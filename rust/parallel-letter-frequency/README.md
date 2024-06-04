@@ -24,7 +24,7 @@ effect different size inputs have on the performance of each. Can you
 surpass the benchmark using concurrent programming techniques?
 
 As of this writing, test::Bencher is unstable and only available on
-*nightly* Rust. Run the benchmarks with Cargo:
+_nightly_ Rust. Run the benchmarks with Cargo:
 
 ```
 cargo bench

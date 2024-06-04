@@ -9,7 +9,7 @@ Macros are a powerful part of a Rust programmer's toolkit, and [macros by exampl
 
 ## Context
 
-What is a macro? [Wikipedia](https://en.wikipedia.org/wiki/Macro_(computer_science)) describes it thus:
+What is a macro? [Wikipedia](<https://en.wikipedia.org/wiki/Macro_(computer_science)>) describes it thus:
 
 > A macro (short for "macroinstruction", from Greek μακρός 'long') in computer science is a rule or pattern that specifies how a certain input sequence (often a sequence of characters) should be mapped to a replacement output sequence (also often a sequence of characters) according to a defined procedure. The mapping process that instantiates (transforms) a macro use into a specific sequence is known as macro expansion.
 

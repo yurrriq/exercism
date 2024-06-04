@@ -78,6 +78,7 @@ The GitHub [track repository][github] is the home for all of the Rust exercises.
 If you want to know more about Exercism, take a look at the [contribution guide].
 
 ## Submitting Incomplete Solutions
+
 It's possible to submit an incomplete solution so you can see how others have completed the exercise.
 
 [help-page]: https://exercism.org/tracks/rust/learning
