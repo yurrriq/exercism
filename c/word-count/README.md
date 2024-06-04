@@ -18,7 +18,6 @@ Make sure you have read the
 the basic information on setting up the development environment expected
 by the exercises.
 
-
 ## Passing the Tests
 
 Get the first test compiling, linking and passing by following the [three
@@ -47,4 +46,5 @@ low-level algorithms or facilities by hand.
 This is a classic toy problem, but we were reminded of it by seeing it in the Go Tour.
 
 ## Submitting Incomplete Solutions
+
 It's possible to submit an incomplete solution so you can see how others have completed the exercise.

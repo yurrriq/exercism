@@ -21,7 +21,6 @@ Make sure you have read the
 the basic information on setting up the development environment expected
 by the exercises.
 
-
 ## Passing the Tests
 
 Get the first test compiling, linking and passing by following the [three
@@ -47,7 +46,8 @@ low-level algorithms or facilities by hand.
 
 ## Source
 
-This is an exercise to introduce users to using Exercism [http://en.wikipedia.org/wiki/%22Hello,_world!%22_program](http://en.wikipedia.org/wiki/%22Hello,_world!%22_program)
+This is an exercise to introduce users to using Exercism [http://en.wikipedia.org/wiki/%22Hello,\_world!%22_program](http://en.wikipedia.org/wiki/%22Hello,_world!%22_program)
 
 ## Submitting Incomplete Solutions
+
 It's possible to submit an incomplete solution so you can see how others have completed the exercise.
