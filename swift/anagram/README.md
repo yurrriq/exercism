@@ -12,7 +12,6 @@ Go through the project setup instructions for Xcode using Swift:
 
 http://help.exercism.io/getting-started-with-swift.html
 
-
 ## Source
 
 Inspired by the Extreme Startup game [view source](https://github.com/rchatley/extreme_startup)

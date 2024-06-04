@@ -3,6 +3,7 @@
 We are going to do the `Transform` step of an Extract-Transform-Load.
 
 ### ETL
+
 Extract-Transform-Load (ETL) is a fancy way of saying, "We have some crufty, legacy data over in this system, and now we need it in this shiny new system over here, so
 we're going to migrate this."
 
@@ -11,6 +12,7 @@ once." That's then typically followed by much forehead slapping and
 moaning about how stupid we could possibly be.)
 
 ### The goal
+
 We're going to extract some scrabble scores from a legacy system.
 
 The old system stored a list of letters per score:
@@ -38,6 +40,7 @@ Your mission, should you choose to accept it, is to write a program that
 transforms the legacy data format to the shiny new format.
 
 ### Notes
+
 Note that both the old and the new system use strings to represent
 letters, even in languages that have a separate data type for
 characters.
@@ -52,7 +55,6 @@ game while being scored at 9 in the Latin-language version.
 Go through the project setup instructions for Xcode using Swift:
 
 http://help.exercism.io/getting-started-with-swift.html
-
 
 ## Source
 

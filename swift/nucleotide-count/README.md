@@ -32,7 +32,6 @@ Go through the project setup instructions for Xcode using Swift:
 
 http://help.exercism.io/getting-started-with-swift.html
 
-
 ## Source
 
 The Calculating DNA Nucleotides_problem at Rosalind [view source](http://rosalind.info/problems/dna/)

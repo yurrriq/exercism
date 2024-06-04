@@ -22,7 +22,6 @@ Go through the project setup instructions for Xcode using Swift:
 
 http://help.exercism.io/getting-started-with-swift.html
 
-
 ## Source
 
 A debugging session with Paul Blackwell at gSchool. [view source](http://gschool.it)
