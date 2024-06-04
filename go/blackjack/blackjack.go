@@ -1,6 +1,10 @@
+// Package blackjack implements the [Blackjack] exercism from Exercism.
+//
+// [Backjack]: https://exercism.org/tracks/go/exercises/blackjack
 package blackjack
 
-// Return the integer value of a card following the blackjack ruleset.
+// ParseCard returns the integer value of a card following the blackjack
+// ruleset.
 func ParseCard(card string) int {
 	switch card {
 	case "ace":
@@ -34,8 +38,8 @@ func ParseCard(card string) int {
 	}
 }
 
-// Return the decision for the first turn, given two cards of the player and one
-// card of the dealer.
+// FirstTurn returns the decision for the first turn, given two cards of the
+// player and one card of the dealer.
 func FirstTurn(card1, card2, dealerCard string) string {
 	playerHand := ParseCard(card1) + ParseCard(card2)
 	dealerHand := ParseCard(dealerCard)
