@@ -1,12 +1,19 @@
+// Package airportrobot implements the [Airport Robot] exercise from Exercism.
+//
+// [Airport Robot]: https://exercism.org/tracks/go/exercises/airport-robot
 package airportrobot
 
-import "fmt"
+import (
+	"fmt"
+)
 
+// A Greeter can greet people in their native language.
 type Greeter interface {
 	LanguageName() string
 	Greet(visitorName string) string
 }
 
+// SayHello greets a visitor.
 func SayHello(visitorName string, greeter Greeter) string {
 	return fmt.Sprintf("I can speak %s: %s",
 		greeter.LanguageName(),
@@ -14,22 +21,28 @@ func SayHello(visitorName string, greeter Greeter) string {
 	)
 }
 
+// Italian is a Greeter.
 type Italian struct{}
 
-func (_ Italian) LanguageName() string {
+// LanguageName returns Italian.
+func (Italian) LanguageName() string {
 	return "Italian"
 }
 
-func (_ Italian) Greet(visitorName string) string {
+// Greet a visitor in Italian.
+func (Italian) Greet(visitorName string) string {
 	return fmt.Sprintf("Ciao %s!", visitorName)
 }
 
+// Portuguese is a Greeter.
 type Portuguese struct{}
 
-func (_ Portuguese) LanguageName() string {
+// LanguageName returns Portuguese.
+func (Portuguese) LanguageName() string {
 	return "Portuguese"
 }
 
-func (_ Portuguese) Greet(visitorName string) string {
+// Greet a visitor in Portuguese.
+func (Portuguese) Greet(visitorName string) string {
 	return fmt.Sprintf("Olá %s!", visitorName)
 }
