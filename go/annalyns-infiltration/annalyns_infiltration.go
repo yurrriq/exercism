@@ -1,3 +1,6 @@
+// Package annalyn implements the [Annalyn's Infiltration] exercise from Exercism.
+//
+// [Annalyn's Infiltration]: https://exercism.org/tracks/go/exercises/annalyns-infiltration
 package annalyn
 
 // CanFastAttack can be executed only when the knight is sleeping
