@@ -1,3 +1,6 @@
+// Package chessboard implements the [Chessboard] exercise.
+//
+// [Chessboard]: https://exercism.org/tracks/go/exercises/chessboard
 package chessboard
 
 // File represents whether squares in a vertical column are occupied by a piece.
