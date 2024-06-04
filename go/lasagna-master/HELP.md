@@ -19,22 +19,22 @@ This command will upload your solution to the Exercism website and print the sol
 
 It's possible to submit an incomplete solution which allows you to:
 
-- See how others have completed the exercise
-- Request help from a mentor
+-   See how others have completed the exercise
+-   Request help from a mentor
 
 ## Need to get help?
 
 If you'd like help solving the exercise, check the following pages:
 
-- The [Go track's documentation](https://exercism.org/docs/tracks/go)
-- [Exercism's support channel on gitter](https://gitter.im/exercism/support)
-- The [Frequently Asked Questions](https://exercism.org/docs/using/faqs)
+-   The [Go track's documentation](https://exercism.org/docs/tracks/go)
+-   [Exercism's support channel on gitter](https://gitter.im/exercism/support)
+-   The [Frequently Asked Questions](https://exercism.org/docs/using/faqs)
 
 Should those resources not suffice, you could submit your (incomplete) solution to request mentoring.
 
 To get help if you're having trouble, you can use one of the following resources:
 
-- [How to Write Go Code](https://golang.org/doc/code.html)
-- [Effective Go](https://golang.org/doc/effective_go.html)
-- [Go Resources](http://golang.org/help)
-- [StackOverflow](http://stackoverflow.com/questions/tagged/go)
+-   [How to Write Go Code](https://golang.org/doc/code.html)
+-   [Effective Go](https://golang.org/doc/effective_go.html)
+-   [Go Resources](http://golang.org/help)
+-   [StackOverflow](http://stackoverflow.com/questions/tagged/go)

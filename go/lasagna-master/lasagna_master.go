@@ -1,19 +1,22 @@
+// Package lasagna implements the [Lasagna Master] exercism from Exercism.
+//
+// [Lasagna Master]: https://exercism.org/tracks/go/exercises/lasagna-master
 package lasagna
 
-// Calculate the time needed to prepare the lasagna, based on the amount of
-// layers and preparation time in minutes per layer.
+// PreparationTime calculates the time needed to prepare the lasagna, based on
+// the amount of layers and preparation time in minutes per layer.
 func PreparationTime(layers []string, timePerLayernumberOfLayers int) int {
 	if timePerLayernumberOfLayers == 0 {
 		return 2 * len(layers)
-	} else {
-		return timePerLayernumberOfLayers * len(layers)
 	}
+
+	return timePerLayernumberOfLayers * len(layers)
 }
 
-// Compute the amounts of noodles and sauce needed.
+// Quantities computes the amounts of noodles and sauce needed.
 func Quantities(layers []string) (int, float64) {
-	var noodles int = 0
-	var sauce float64 = 0.
+	var noodles int
+	var sauce float64
 	for _, layer := range layers {
 		if layer == "noodles" {
 			noodles += 50
@@ -25,14 +28,15 @@ func Quantities(layers []string) (int, float64) {
 	return noodles, sauce
 }
 
-// Add the secret ingredient, i.e. the ingredient on the friend's list.
+// AddSecretIngredient adds the secret ingredient, i.e. the ingredient on the
+// friend's list.
 func AddSecretIngredient(friendsList []string, myList []string) []string {
 	myList[len(myList)-1] = friendsList[len(friendsList)-1]
 	return myList
 }
 
-// Given the quantities needed for two portions, scale the recipe to the desired
-// number of portions.
+// ScaleRecipe scales a recipe to the desired number of portions, given the
+// quantities needed for two portions.
 func ScaleRecipe(quantities []float64, portions int) []float64 {
 	scaledQuantities := make([]float64, len(quantities))
 	for i, quantity := range quantities {

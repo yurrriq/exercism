@@ -227,8 +227,8 @@ Since you want to cook for more people next time, you want to calculate the amou
 
 Implement a function `ScaleRecipe` that takes two parameters.
 
-- A slice of `float64` amounts needed for 2 portions.
-- The number of portions you want to cook.
+-   A slice of `float64` amounts needed for 2 portions.
+-   The number of portions you want to cook.
 
 The function should return a slice of `float64` of the amounts needed for the desired number of portions.
 You want to keep the original recipe though.
@@ -244,8 +244,8 @@ scaledQuantities := ScaleRecipe(quantities, 4)
 
 ### Created by
 
-- @bobtfish
+-   @bobtfish
 
 ### Contributed to by
 
-- @sougat818
+-   @sougat818
