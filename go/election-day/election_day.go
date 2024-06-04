@@ -1,9 +1,14 @@
+// Package electionday implements the [Election Day] exercise.
+//
+// [Election Day]: https://exercism.org/tracks/go/exercises/election-day
 package electionday
 
-import "fmt"
+import (
+	"fmt"
+)
 
-// NewVoteCounter returns a new vote counter with
-// a given number of initial votes.
+// NewVoteCounter returns a new vote counter with a given number of initial
+// votes.
 func NewVoteCounter(initialVotes int) *int {
 	voteCounter := &initialVotes
 	return voteCounter
@@ -13,9 +18,9 @@ func NewVoteCounter(initialVotes int) *int {
 func VoteCount(counter *int) int {
 	if counter != nil {
 		return *counter
-	} else {
-		return 0
 	}
+
+	return 0
 }
 
 // IncrementVoteCount increments the value in a vote counter.
@@ -38,5 +43,5 @@ func DisplayResult(result *ElectionResult) string {
 
 // DecrementVotesOfCandidate decrements by one the vote count of a candidate in a map.
 func DecrementVotesOfCandidate(results map[string]int, candidate string) {
-	results[candidate] -= 1
+	results[candidate]--
 }
