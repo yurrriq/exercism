@@ -4,6 +4,7 @@
 
 Each exercise contains a test file.
 Run the tests using the `bats` program.
+
 ```bash
 bats test-hello-world.bats
 ```
@@ -15,12 +16,15 @@ See the [Testing on the Bash track][bash] page for instructions to install `bats
 
 The bats file is a bash script, with some special functions recognized by the `bats` command.
 You'll see some tests that look like
+
 ```sh
 gawk -f some-exercise.awk <<< "some,input,here"
 ```
+
 That `<<<` syntax is a bash [Here String][here-string].
 It sends the string on the right-hand side into the standard input of the program on the left-hand side.
 It is ([approximately][so]) the same as
+
 ```sh
 echo "some,input,here" | gawk -f some-exercise.awk
 ```
@@ -44,17 +48,21 @@ annotations prepending other tests.
 ## Overriding skips
 
 To run all tests, including the ones with `skip` annotations, you can run:
+
 ```bash
 BATS_RUN_SKIPPED=true bats test-some-exercise.bats
 ```
 
 It can be convenient to use a wrapper function to save on typing: in `bash` you can do:
+
 ```bash
 bats() {
     BATS_RUN_SKIPPED=true command bats *.bats
 }
 ```
+
 Then run tests with just:
+
 ```bash
 bats
 ```
@@ -86,12 +94,11 @@ Should those resources not suffice, you could submit your (incomplete) solution 
 
 Places to look for help for AWK questions:
 
-* [Stack Overflow `awk` tag][so].
-* check the Resources section of the [Stack Overflow `awk` tag into page][so-info].
-* raise an issue at the [exercism/awk][github] Github repository.
-* IRC: `irc://irc.liberachat.net/#awk`, `irc://irc.liberachat.net/#exercism`
-    * see [Libera.chat][libera] if you're unfamiliar with IRC.
-
+- [Stack Overflow `awk` tag][so].
+- check the Resources section of the [Stack Overflow `awk` tag into page][so-info].
+- raise an issue at the [exercism/awk][github] Github repository.
+- IRC: `irc://irc.liberachat.net/#awk`, `irc://irc.liberachat.net/#exercism`
+  - see [Libera.chat][libera] if you're unfamiliar with IRC.
 
 [so]: https://stackoverflow.com/tags/awk
 [so-info]: https://stackoverflow.com/tags/awk/info
