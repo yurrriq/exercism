@@ -1,6 +1,11 @@
+// Package expenses implements the [Expenses] exercise.
+//
+// [Expenses]: https://exercism.org/tracks/go/exercises/expenses
 package expenses
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // Record represents an expense record.
 type Record struct {
