@@ -1,3 +1,6 @@
+// Package armstrong implements the [Armstrong Numbers] exercise.
+//
+// [Armstrong Numbers]: https://exercism.org/tracks/go/exercises/armstrong-numbers
 package armstrong
 
 import (
@@ -5,6 +8,8 @@ import (
 	"strconv"
 )
 
+// IsNumber determines if a given number is the sum of its own digits, each
+// raised to the power of the number of digits.
 func IsNumber(n int) bool {
 	if n == 0 {
 		return true
