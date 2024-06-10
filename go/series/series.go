@@ -5,19 +5,20 @@ package series
 
 // All returns all substrings of of s with length n.
 func All(n int, s string) []string {
-	if len(s) < n {
-		return []string{}
+	substrings := make([]string, 0, len(s)-n+1)
+	for i := 0; i <= len(s)-n; i++ {
+		substrings = append(substrings, s[i:i+n])
 	}
 
-	return append([]string{UnsafeFirst(n, s)}, All(n, s[1:])...)
+	return substrings
 }
 
 // First returns the first substring of s with length n, when possible.
 func First(n int, s string) (first string, ok bool) {
-	if len(s) >= n {
-		return s[:n], true
+	if n > len(s) {
+		return s, false
 	}
-	return s, false
+	return UnsafeFirst(n, s), true
 }
 
 // UnsafeFirst returns the first substring of s with length n.
