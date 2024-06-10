@@ -12,6 +12,14 @@ func All(n int, s string) []string {
 	return append([]string{UnsafeFirst(n, s)}, All(n, s[1:])...)
 }
 
+// First returns the first substring of s with length n, when possible.
+func First(n int, s string) (first string, ok bool) {
+	if len(s) >= n {
+		return s[:n], true
+	}
+	return s, false
+}
+
 // UnsafeFirst returns the first substring of s with length n.
 func UnsafeFirst(n int, s string) string {
 	return s[:n]
