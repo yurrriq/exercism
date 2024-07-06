@@ -1,15 +1,12 @@
-(executable
+(library
+ (public_name binary_search)
+ (libraries base)
+ (modules binary_search))
+
+(test
  (name test)
- (libraries base ounit2))
-
-(alias
-  (name    runtest)
-  (deps    (:x test.exe))
-  (action  (run %{x})))
-
-(alias
-  (name    buildtest)
-  (deps    (:x test.exe)))
+ (libraries base ounit2 binary_search)
+ (modules test))
 
 (env
   (dev
