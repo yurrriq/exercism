@@ -1,1 +1,7 @@
-(lang dune 1.1)
+(lang dune 3.0)
+
+(package
+ (name reverse_string)
+ (depends
+  base
+  ounit2))

@@ -1,15 +1,12 @@
-(executable
+(library
+ (public_name reverse_string)
+ (libraries base)
+ (modules reverse_string))
+
+(test
  (name test)
- (libraries base ounit2))
-
-(alias
-  (name    runtest)
-  (deps    (:x test.exe))
-  (action  (run %{x})))
-
-(alias
-  (name    buildtest)
-  (deps    (:x test.exe)))
+ (libraries base ounit2 reverse_string)
+ (modules test))
 
 (env
   (dev
