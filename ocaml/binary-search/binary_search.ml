@@ -1,13 +1,11 @@
-let rec find haystack needle =
-  let len = Array.length haystack in
-  if len == 0 then Error "value not in array"
-  else
-    let pivot = Array.length haystack / 2 in
-    let middle = haystack.(pivot) in
-    if needle < middle then find (Array.sub haystack 0 pivot) needle
-    else if needle > middle then
-      let pos = pivot + 1 in
-      Array.sub haystack pos (len - pos)
-      |> (Fun.flip find) needle
-      |> Result.map (( + ) (pivot + 1))
-    else Ok pivot
+let find haystack needle =
+  let rec find_between left right =
+    if left > right then Error "value not in array"
+    else
+      let pivot = (left + right) / 2 in
+      let middle = haystack.(pivot) in
+      if needle < middle then find_between left (pivot - 1)
+      else if needle > middle then find_between (pivot + 1) right
+      else Ok pivot
+  in
+  find_between 0 (Array.length haystack - 1)
