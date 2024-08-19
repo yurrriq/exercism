@@ -1,6 +1,4 @@
-using Test
-
-include("nucleotide-count.jl")
+using NucleotideCount, Test
 
 @testset verbose = true "tests" begin
     @testset "empty strand" begin

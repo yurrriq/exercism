@@ -1,0 +1,7 @@
+name = "NucleotideCount"
+uuid = "e2ce03de-627d-4db7-9e7a-2b0010b406e2"
+authors = ["Eric Bailey <eric@ericb.me>"]
+version = "0.1.0"
+
+[deps]
+ThreadsX = "ac1d9e8a-700a-412c-b207-f0111f4b6c0d"
