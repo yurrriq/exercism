@@ -24,5 +24,9 @@
         )
       ];
     };
+
+    treefmt.programs.prettier.excludes = [
+      "julia/*/docs/build/**"
+    ];
   };
 }

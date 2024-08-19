@@ -1,6 +1,4 @@
-using Test
-
-include("difference-of-squares.jl")
+using DifferenceOfSquares, Test
 
 @testset verbose = true "tests" begin
     @testset "Square the sum of the numbers up to the given number" begin

@@ -1,3 +1,7 @@
+module DifferenceOfSquares
+
+export square_of_sum, sum_of_squares, difference
+
 @doc raw"""
     square_of_sum(n::Integer)::Integer
 
@@ -43,3 +47,5 @@ Subtract the sum of squares from square of the sum of the first `n` positive int
 ```
 """
 difference(n::Integer)::Integer = evalpoly(n, (0, -2, -3, 2, 3)) ÷ 12
+
+end # module DifferenceOfSquares

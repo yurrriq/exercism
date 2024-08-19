@@ -1,0 +1,3 @@
+[deps]
+DifferenceOfSquares = "7f21bb05-b868-444c-8e28-144be641f848"
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"

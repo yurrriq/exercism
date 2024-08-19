@@ -1,0 +1,4 @@
+name = "DifferenceOfSquares"
+uuid = "7f21bb05-b868-444c-8e28-144be641f848"
+authors = ["Eric Bailey <eric@ericb.me>"]
+version = "0.1.0"
