@@ -1,4 +1,5 @@
-using Printf: @sprintf
+const rule_1 = r"^(?:[aeiou]|xr|yt)"
+const rules_342 = r"^(?<prefix>[^aeiou]*qu|[^aeiou]+(?=y)|[^aeiou]+)(?<suffix>\w+)"
 
 
 """
@@ -9,10 +10,6 @@ Translate a `phrase` from English to Pig Latin.
 function translate(phrase::AbstractString)::String
     join(map(translate_word, split(phrase, " ")), " ")
 end
-
-
-rule_1 = r"^(?:[aeiou]|xr|yt)"
-rules_342 = r"^(?<prefix>[^aeiou]*qu|[^aeiou]+(?=y)|[^aeiou]+)(?<suffix>\w+)"
 
 
 """
