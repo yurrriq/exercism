@@ -1,3 +1,6 @@
+using Printf: @sprintf
+
+
 """
     translate(phrase::AbstractString)::String
 
@@ -8,30 +11,19 @@ function translate(phrase::AbstractString)::String
 end
 
 
+rule_1 = r"^(?:[aeiou]|xr|yt)"
+rules_342 = r"^(?<prefix>[^aeiou]*qu|[^aeiou]+(?=y)|[^aeiou]+)(?<suffix>\w+)"
+
+
 """
     translate_word(word::AbstractString)::String
 
 Translate a `word` from English to Pig Latin.
 """
 function translate_word(word::AbstractString)::String
-    if occursin(r"^(?:xr|yt|[aeiou]+)\w+$", word)
-        return word * "ay"
+    translated = word
+    if !occursin(rule_1, word)
+        translated = replace(word, rules_342 => s"\g<suffix>\g<prefix>")
     end
-
-    m = match(r"^([^aeiouy]*q)u(\w+)$", word)
-    if m ≠ nothing
-        return join(reverse(m.captures), "") * "uay"
-    end
-
-    m = match(r"^y(\w+)$", word)
-    if m ≠ nothing
-        return m.captures[1] * "yay"
-    end
-
-    m = match(r"^([^aeiouy]+)(y?\w+)$", word)
-    if m ≠ nothing
-        return join(reverse(m.captures), "") * "ay"
-    end
-
-    throw(DomainError(word, "word of unknown pattern"))
+    translated * "ay"
 end
