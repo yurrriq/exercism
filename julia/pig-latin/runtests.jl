@@ -33,15 +33,15 @@ include("pig-latin.jl")
         @testset "word beginning with p" begin
             @test translate("pig") == "igpay"
         end
-    
+
         @testset "word beginning with k" begin
             @test translate("koala") == "oalakay"
         end
-    
+
         @testset "word beginning with x" begin
             @test translate("xenon") == "enonxay"
         end
-    
+
         @testset "word beginning with q without a following u" begin
             @test translate("qat") == "atqay"
         end
@@ -51,23 +51,23 @@ include("pig-latin.jl")
         @testset "word beginning with ch" begin
             @test translate("chair") == "airchay"
         end
-    
+
         @testset "word beginning with qu" begin
             @test translate("queen") == "eenquay"
         end
-    
+
         @testset "word beginning with qu and a preceding consonant" begin
             @test translate("square") == "aresquay"
         end
-    
+
         @testset "word beginning with th" begin
             @test translate("therapy") == "erapythay"
         end
-    
+
         @testset "word beginning with thr" begin
             @test translate("thrush") == "ushthray"
         end
-    
+
         @testset "word beginning with sch" begin
             @test translate("school") == "oolschay"
         end
@@ -77,7 +77,7 @@ include("pig-latin.jl")
         @testset "word beginning with yt" begin
             @test translate("yttria") == "yttriaay"
         end
-    
+
         @testset "word beginning with xr" begin
             @test translate("xray") == "xrayay"
         end
@@ -87,16 +87,16 @@ include("pig-latin.jl")
         @testset "y is treated like a consonant at the beginning of a word" begin
             @test translate("yellow") == "ellowyay"
         end
-    
+
         @testset "y is treated like a vowel at the end of a consonant cluster" begin
             @test translate("rhythm") == "ythmrhay"
         end
-    
+
         @testset "y as second letter in two letter word" begin
             @test translate("my") == "ymay"
         end
     end
-    
+
     @testset "phrases are translated" begin
         @testset "a whole phrase" begin
             @test translate("quick fast run") == "ickquay astfay unray"
