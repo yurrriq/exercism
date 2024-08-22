@@ -1,0 +1,16 @@
+name = "RotationalCipher"
+uuid = "e68ba115-aab0-466c-9bb2-e917b2f00064"
+authors = ["Eric Bailey <eric@ericb.me>"]
+version = "1.0.0"
+
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+
+[compat]
+julia = "1.6.7"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
