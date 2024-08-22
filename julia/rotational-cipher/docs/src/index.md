@@ -7,7 +7,3 @@ DocTestSetup = :(using RotationalCipher)
 ```@docs
 rotate
 ```
-
-```@docs
-shiftwrapped
-```

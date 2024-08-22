@@ -1,9 +1,9 @@
 module RotationalCipher
 
-export rotate, shiftwrapped
+export rotate
 
 
-for i in range(1, 26)
+for i in range(0, 26)
     @eval export $(Symbol("@R$(i)_str"))
     @eval macro $(Symbol("R$(i)_str"))(s)
         rotate($i, s)
@@ -20,8 +20,8 @@ Rotate a string `input` by `n`.
 julia> R5"omg"
 "trl"
 
-julia> rotate(0, 'c')
-'c': ASCII/Unicode U+0063 (category Ll: Letter, lowercase)
+julia> R0"c"
+"c"
 
 julia> R26"Cool"
 "Cool"
@@ -38,45 +38,22 @@ function rotate(n::Integer, input::AbstractString)::String
         return input
     end
 
-    io = IOBuffer()
-    foreach(char -> write(io, rotate(n, char)), input)
-    String(take!(io))
+    map(char -> rotate(n, char), input)
 end
 
 
 """
     rotate(n::Integer, char::AbstractChar)::Char
 
-Rotate a character by `n`.
+Rotate an ASCII letter by `n`.
 """
 function rotate(n::Integer, char::AbstractChar)::Char
-    if islowercase(char)
-        shiftwrapped(n, 'a', char)
-    elseif isuppercase(char)
-        shiftwrapped(n, 'A', char)
-    else
-        char
+    if !(isascii(char) && isletter(char))
+        return char
     end
-end
 
-
-"""
-    shiftwrapped(n::Integer, pivot::AbstractChar, char::AbstractChar)::Char
-
-Shift a letter by `n % 26`, wrapping around `pivot`.
-
-```jldoctest
-julia> shiftwrapped(42, 'A', 'C')
-'S': ASCII/Unicode U+0053 (category Lu: Letter, uppercase)
-```
-"""
-function shiftwrapped(n::Integer, pivot::AbstractChar, char::AbstractChar)::Char
-    shiftwrapped(n, Int(pivot), Int(char))
-end
-
-
-function shiftwrapped(n::Integer, pivot::Integer, char::Integer)::Char
-    Char(pivot + (char - pivot + n) % 26)
+    pivot = islowercase(char) ? 'a' : 'A'
+    pivot + (char - pivot + n) % 26
 end
 
 end # module RotationalCipher
