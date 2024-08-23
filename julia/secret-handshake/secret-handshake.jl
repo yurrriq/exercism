@@ -1,5 +1,3 @@
-using .Iterators: reverse
-
 const actions = ["wink", "double blink", "close your eyes", "jump"]
 
 function secret_handshake(code)
