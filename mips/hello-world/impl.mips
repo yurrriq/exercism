@@ -6,10 +6,11 @@
 
 .data
 
-msg: .asciiz "Hello, World!"
+msg:
+	.asciiz "Hello, World!"
 
-.text
+	.text
 
 hello:
-        la $v0, msg
-        jr $ra
+	la $v0, msg
+	jr $ra

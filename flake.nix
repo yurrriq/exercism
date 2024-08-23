@@ -36,15 +36,14 @@
       url = "github:nix-community/nix-vscode-extensions";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/release-23.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/release-24.05";
     pre-commit-hooks-nix = {
       inputs = {
         flake-compat.follows = "flake-compat";
-        flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
         nixpkgs-stable.follows = "nixpkgs-stable";
       };
-      url = "github:cachix/pre-commit-hooks.nix";
+      url = "github:cachix/git-hooks.nix";
     };
     treefmt-nix = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -77,20 +76,52 @@
 
       flake = {
         overlays = {
+          default =
+            let
+              inherit (nixpkgs) lib;
+            in
+            lib.composeManyExtensions
+              (lib.attrValues
+                (lib.filterAttrs (name: _: name != "default") self.overlays));
+
           iosevka-custom = _final: prev: {
             # https://typeof.net/Iosevka/customizer
             iosevka-custom = prev.iosevka.override {
               privateBuildPlan = ''
-                [buildPlans.iosevka-custom]
+                [buildPlans.Iosevkacustom]
                 family = "Iosevka Custom"
                 spacing = "normal"
                 serifs = "sans"
-                export-glyph-names = true
-                [buildPlans.iosevka-custom.ligations]
+                exportGlyphNames = true
+                [buildPlans.Iosevkacustom.weights.Regular]
+                shape = 400
+                menu = 400
+                css = 400
+                [buildPlans.Iosevkacustom.weights.Bold]
+                shape = 700
+                menu = 700
+                css = 700
+                [buildPlans.Iosevkacustom.slopes.Upright]
+                angle = 0
+                shape = "upright"
+                menu = "upright"
+                css = "normal"
+                [buildPlans.Iosevkacustom.slopes.Italic]
+                angle = 9.4
+                shape = "italic"
+                menu = "italic"
+                css = "italic"
+                [buildPlans.Iosevkacustom.ligations]
                 inherits = "dlig"
+                [buildPlans.Iosevkacustom.variants.design]
+                lower-lambda = "curly-tailed-turn"
               '';
               set = "custom";
             };
+          };
+
+          treefmt = _final: prev: {
+            treefmt = prev.treefmt1;
           };
         };
       };
@@ -100,7 +131,7 @@
           overlays = [
             inputs.emacs-overlay.overlay
             inputs.fenix.overlays.default
-            self.overlays.iosevka-custom
+            self.overlays.default
           ];
           inherit system;
         };
@@ -125,7 +156,7 @@
             ];
             nativeBuildInputs = [
               exercism
-              rnix-lsp
+              nixd
             ];
           };
 

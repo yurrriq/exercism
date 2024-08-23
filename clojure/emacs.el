@@ -74,12 +74,7 @@
   (lsp-idle-delay 0.6)
   (lsp-modeline-code-actions-enable nil)
   :config
-  (advice-add 'lsp :before #'direnv-update-environment)
-  (add-to-list 'lsp-language-id-configuration '(nix-mode . "nix"))
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection '("rnix-lsp"))
-                    :major-modes '(nix-mode)
-                    :server-id 'nix)))
+  (advice-add 'lsp :before #'direnv-update-environment))
 
 (use-package lsp-origami
   :hook ((origami-mode . lsp-origami-mode)
