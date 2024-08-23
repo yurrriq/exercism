@@ -4,6 +4,15 @@
   "files.autoSave": "afterDelay",
   "julia.enableTelemetry": false,
   "julia.symbolCacheDownload": true,
+  "nix.enableLanguageServer": true,
+  "nix.serverPath": "nixd",
+  "nix.serverSettings": {
+    "nixd": {
+      "formatting": {
+        "command": ["nixpkgs-fmt"]
+      }
+    }
+  },
   "window.menuBarVisibility": "toggle",
   "workbench.activityBar.location": "hidden",
   "workbench.colorTheme": "Monokai"

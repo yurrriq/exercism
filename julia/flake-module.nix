@@ -9,17 +9,17 @@
 
       nativeBuildInputs = with pkgs; [
         julia
+        nixpkgs-fmt
         (
           vscode-with-extensions.override {
             vscode = vscodium;
-            vscodeExtensions = (with vscode-extensions; [
-              bbenoist.nix
-            ]) ++ (with inputs.nix-vscode-extensions.extensions.${system}; [
-              vscode-marketplace.editorconfig.editorconfig
-              vscode-marketplace.julialang.language-julia
-              vscode-marketplace.mkhl.direnv
-              vscode-marketplace.tuttieee.emacs-mcx
-            ]);
+            vscodeExtensions = with inputs.nix-vscode-extensions.extensions.${system}.vscode-marketplace; [
+              editorconfig.editorconfig
+              jnoortheen.nix-ide
+              julialang.language-julia
+              mkhl.direnv
+              tuttieee.emacs-mcx
+            ];
           }
         )
       ];
