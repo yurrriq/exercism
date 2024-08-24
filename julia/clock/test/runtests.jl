@@ -1,6 +1,4 @@
-using Dates, Test
-
-include("clock.jl")
+using Clocks, Dates, Test
 
 @testset verbose = true "tests" begin
     @testset "Create a new clock with an initial time" begin
