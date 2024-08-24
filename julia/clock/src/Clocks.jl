@@ -12,31 +12,26 @@ end
 Clock() = Clock(Mod{24}(0), Mod{60}(0))
 
 function Clock(hour::Integer, minute::Integer)
-    Clock() + Dates.Hour(hour) + Dates.Minute(minute)
+    h, m = fldmod((hour * 60 + minute) % 1440, 60)
+    Clock(Mod{24}(h), Mod{60}(m))
 end
 
-function Base.show(io::IO, clock::Clock)
+Base.show(io::IO, clock::Clock) =
     @printf(io, "\"%02d:%02d\"", value(clock.hour), value(clock.minute))
-end
 
-function Base.:+(x::Clock, y::Clock)::Clock
+Base.:+(x::Clock, y::Clock) =
     x + Dates.Hour(value(y.hour)) + Dates.Minute(value(y.minute))
-end
 
-function Base.:-(x::Clock, y::Clock)::Clock
-    x - Dates.Hour(value(y.hour)) - Dates.Minute(value(y.minute))
-end
+Base.:-(x::Clock, y::Clock) =
+    Clock(value(x.hour - y.hour), x.minute - y.minute)
 
-function Base.:+(clock::Clock, hours::Dates.Hour)::Clock
+Base.:+(clock::Clock, hours::Dates.Hour) =
     Clock(clock.hour + hours.value, clock.minute)
-end
 
 Base.:-(clock::Clock, hours::Dates.Hour) = clock + -hours
 
-function Base.:+(clock::Clock, minutes::Dates.Minute)::Clock
-    h, m = fldmod((value(clock.minute) + minutes.value) % 1440, 60)
-    Clock(clock.hour + h, Mod{60}(m))
-end
+Base.:+(clock::Clock, minutes::Dates.Minute) =
+    Clock(value(clock.hour), value(clock.minute) + minutes.value)
 
 Base.:-(clock::Clock, minutes::Dates.Minute) = clock + -minutes
 
