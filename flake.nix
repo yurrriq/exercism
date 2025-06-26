@@ -4,7 +4,6 @@
   inputs = {
     emacs-overlay = {
       inputs = {
-        flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
         nixpkgs-stable.follows = "nixpkgs-stable";
       };
@@ -29,7 +28,6 @@
     };
     nix-vscode-extensions = {
       inputs = {
-        flake-compat.follows = "flake-compat";
         flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
       };
@@ -119,10 +117,6 @@
               set = "custom";
             };
           };
-
-          treefmt = _final: prev: {
-            treefmt = prev.treefmt1;
-          };
         };
       };
 
@@ -204,7 +198,6 @@
         };
 
         treefmt = {
-          projectRootFile = ./flake.nix;
           programs = {
             black.enable = true;
             clang-format.enable = true;
