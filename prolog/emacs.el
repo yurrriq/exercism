@@ -108,6 +108,8 @@
 (use-package paredit
   :hook (emacs-lisp-mode . paredit-mode))
 
+(use-package pdf-tools)
+
 (use-package polymode
   :config
   (define-hostmode poly-prolog-hostmode
