@@ -19,7 +19,7 @@
 (global-set-key (kbd "s-u") 'revert-buffer)
 
 (set-face-attribute 'default nil :family "Iosevka Custom" :height 110)
-(add-to-list 'auto-mode-alist '("\\.pl$" . prolog-mode))
+(add-to-list 'auto-mode-alist '("\\.plt$" . prolog-mode))
 
 (eval-when-compile
   (require 'use-package))
@@ -60,7 +60,8 @@
   :config (global-hl-todo-mode t))
 
 (use-package lsp-mode
-  :hook ((prolog-mode . lsp-deferred))
+  :hook ((latex-mode . lsp-deferred)
+         (prolog-mode . lsp-deferred))
   :commands (lsp lsp-deferred)
   :config
   (advice-add 'lsp :before #'direnv-update-environment)
@@ -106,6 +107,21 @@
 
 (use-package paredit
   :hook (emacs-lisp-mode . paredit-mode))
+
+(use-package polymode
+  :config
+  (define-hostmode poly-prolog-hostmode
+    :mode 'prolog-mode)
+  (define-innermode poly-prolog-latex-innermode
+    :mode 'latex-mode
+    :head-matcher "/\\*"
+    :tail-matcher "\\*/"
+    :head-mode 'host
+    :tail-mode 'host)
+  (define-polymode poly-prolog-mode
+    :hostmode 'poly-prolog-hostmode
+    :innermodes '(poly-prolog-latex-innermode))
+  (add-to-list 'auto-mode-alist '("\\.pl$" . poly-prolog-mode)))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))

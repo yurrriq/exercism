@@ -14,6 +14,7 @@
           }
         )
         swi-prolog
+        texlab
         (
           texlive.combine {
             inherit (texlive) scheme-small
