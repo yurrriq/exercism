@@ -39,7 +39,6 @@
       inputs = {
         flake-compat.follows = "flake-compat";
         nixpkgs.follows = "nixpkgs";
-        nixpkgs-stable.follows = "nixpkgs-stable";
       };
       url = "github:cachix/git-hooks.nix";
     };

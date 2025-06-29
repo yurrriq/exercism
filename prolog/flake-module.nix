@@ -13,7 +13,7 @@
             config = ./emacs.el;
           }
         )
-        swiProlog
+        swi-prolog
         (
           texlive.combine {
             inherit (texlive) scheme-small
