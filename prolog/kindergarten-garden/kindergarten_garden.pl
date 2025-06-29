@@ -3,7 +3,6 @@
 \PrologDialect{swiprolog}
 
 \Predicate plant/2(?Plant, ?Encoding).
-\label{pred:plant/2}
 
 Four different types of seeds are planted:
 
@@ -27,7 +26,6 @@ plant(violets, 'V').
 /*PL
 
 \Predicate find_child_plants/3(?Child, ?FirstRow, ?SecondRow, ?Children, ?Plants).
-\label{pred:find_child_plants/3}
 
 Find \verb|Child|'s \verb|Plants|, given the two rows of plants and list of
 \verb|Children|. \\
@@ -50,7 +48,6 @@ find_child_plants(Child, [_, _  |FirstRow], [_, _  |SecondRow],
 /*PL
 
 \Predicate garden/3(?Garden, ?Child, ?Plants).
-\label{pred:garden/3}
 
 Determine which \verb|Plants| in the \verb|Garden| belong to the given
 \verb|Child|.
