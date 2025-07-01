@@ -1,0 +1,1 @@
+anagram(Word, Candidates, Anagrams).
