@@ -19,16 +19,18 @@ decode (a, b) cipherText =
   invertMod @26 (fromIntegral a) <&> \a' ->
     cipherText >>= \c ->
       decodeLetter (fromEnum a', b) c
-        <|> (guard (isDigit c) $> c)
+        <|> handleDigit c
 
 encode :: (Int, Int) -> String -> Maybe String
 encode (a, b) plainText =
   guard (gcd a 26 == 1)
-    $> ( unwords . chunksOf 5 $
-           do
-             c <- plainText
-             encodeLetter (a, b) c <|> handleDigit c
-       )
+    $> format
+      ( plainText >>= \c ->
+          encodeLetter (a, b) c
+            <|> handleDigit c
+      )
+  where
+    format = unwords . chunksOf 5
 
 decodeLetter :: (Alternative t) => (Int, Int) -> Char -> t Char
 decodeLetter (a', b) c =
