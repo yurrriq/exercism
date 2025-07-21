@@ -11,7 +11,7 @@ True if \verb|Code| is the encoding of \verb|Color|.
 
 %! color_code(+Color:string, -Code:int) is semidet.
 %
-% True if =Color= is the encoding of =Color=.
+% True if =Code= is the encoding of =Color=.
 color_code("black",  0).
 color_code("brown",  1).
 color_code("red",    2).
