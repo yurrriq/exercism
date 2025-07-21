@@ -1,16 +1,23 @@
 name: affine-cipher
 version: 1.0.0.0
+author: Eric Bailey
+github: yurrriq/exercism
 
 dependencies:
   - base
 
+ghc-options:
+  - -Wall
+  - -Werror
+  - -Wincomplete-patterns
+  - -Wincomplete-uni-patterns
+
 library:
   exposed-modules: Affine
   source-dirs: src
-  ghc-options: -Wall
-  # dependencies:
-  # - foo       # List here the packages you
-  # - bar       # want to use in your solution.
+  dependencies:
+    - extra
+    - mod
 
 tests:
   test:
