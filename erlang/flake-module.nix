@@ -15,7 +15,7 @@
         )
         erlfmt
         erlang-ls
-        erlang_nox
+        beamMinimalPackages.erlang
         rebar3
       ];
     };
