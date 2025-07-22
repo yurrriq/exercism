@@ -5,7 +5,7 @@
 end
 
 aliquotsum(n) =
-    sum(d for d ∈ 1:(n-1) if iszero(n % d))
+    sum(d for d ∈ 1:n÷2 if iszero(n % d))
 
 function classify(n)
     n ≤ 0 && throw(DomainError(n, "must be positive"))
