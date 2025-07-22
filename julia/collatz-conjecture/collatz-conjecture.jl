@@ -1,16 +1,5 @@
-import Base: iterate, eltype, IteratorSize, IteratorEltype
-
-struct CollatzIterator{T<:Integer}
-    n::T
-end
-
-function iterate(ci::CollatzIterator, state=ci.n)
-    next = iseven(state) ? state ÷ 2 : 3state + 1
-    (next, next)
-end
-
-function collatz_steps(n)
+function collatz_steps(n; steps=0)
     n < 1 && throw(DomainError(n, "must be positive"))
-    isone(n) && return zero(n)
-    1 + sum(1 for _ ∈ Iterators.takewhile(≠(1), CollatzIterator(n)))
+    isone(n) && return steps
+    collatz_steps(iseven(n) ? n ÷ 2 : 3n + 1; steps=steps + 1)
 end
