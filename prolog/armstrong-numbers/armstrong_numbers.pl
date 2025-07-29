@@ -3,10 +3,16 @@
 %!  armstrong_number(+Number:int) is det.
 %
 %   True if =Number= is an Armstrong number in base 10.
-armstrong_number(0) :- !.
 armstrong_number(Number) :-
+    armstrong_number(10, Number).
+
+%!  armstrong_number(+Number:int, +Base:int) is det.
+%
+%   True if =Number= is an Armstrong number in base =Base=.
+armstrong_number(_, 0) :- !.
+armstrong_number(Base, Number) :-
     must_be(positive_integer, Number),
-    digits(10, Number, Digits),
+    digits(Base, Number, Digits),
     length(Digits, Length),
     maplist({Length}/[Digit, Power]>>(Power is Digit^Length), Digits, Powers),
     sum_list(Powers, Number).
