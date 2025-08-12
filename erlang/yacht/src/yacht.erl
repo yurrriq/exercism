@@ -72,8 +72,10 @@ score(_Dice, _Category) ->
     {error, invalid_roll}.
 
 -spec pips([1..6], 1..6) -> non_neg_integer().
-pips(Dice, N) ->
-    lists:foldl(do_pips(N), 0, Dice).
+pips(Dice = [_, _, _, _, _], N) ->
+    lists:foldl(do_pips(N), 0, Dice);
+pips(_Dice, _N) ->
+    {error, invalid_roll}.
 
 do_pips(N) ->
     fun
