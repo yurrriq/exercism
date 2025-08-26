@@ -1,0 +1,7 @@
+:def pf \str -> return $ ":! pointfree \"" ++ str ++ "\""
+:set +s
+:set +t
+:set -XDataKinds
+:set -XTypeApplications
+:set -haddock
+:set -w
