@@ -12,6 +12,7 @@ dependencies:
   - finite-typelits
   - refined
   - trifecta
+  - vector-sized
 
 language: GHC2021
 

@@ -10,6 +10,9 @@ module Poker.Types where
 import Control.Applicative ((<|>))
 import Control.Arrow ((>>>))
 import Data.Finitary (Finitary (..))
+import Data.Finite (Finite)
+import Data.Vector.Sized (Vector)
+import Data.Word (Word16)
 import GHC.Generics (Generic)
 import GHC.TypeLits (Nat)
 import Refined (FromTo, Refined, refine, refineFail, unrefine)
@@ -105,15 +108,24 @@ suit =
     <|> (Spades <$ char 'S')
 
 data Hand
-  = HighCard Int
-  | OnePair Rank Int
+  = HighCard Word16
+  | OnePair Rank Word16
   | TwoPairs Rank Rank Rank
   | ThreeOfAKind Rank Rank Rank
   | Straight Rank
-  | Flush Int
+  | Flush Word16
   | FullHouse Rank Rank
   | FourOfAKind Rank Rank
   | StraightFlush Rank
   | RoyalFlush
   deriving stock (Eq, Ord, Generic, Show)
+  deriving anyclass (Finitary)
+
+data HandAnalysis
+  = HandAnalysis
+  { ranks :: Word16,
+    rankFrequencies :: Vector 13 (Finite 5),
+    suitFrequencies :: Vector 4 (Finite 6)
+  }
+  deriving stock (Eq, Generic, Show)
   deriving anyclass (Finitary)
