@@ -1,0 +1,8 @@
+:def pf \str -> return $ ":! pointfree \"" ++ str ++ "\""
+:set +s
+:set +t
+:set -XDataKinds
+:set -XTypeApplications
+:set -fplugin GHC.TypeLits.KnownNat.Solver
+:set -haddock
+:set -w

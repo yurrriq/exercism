@@ -1,17 +1,27 @@
 name: two-bucket
 version: 1.0.0.0
 
+author: Eric Bailey
+github: yurrriq/exercism
+
 dependencies:
   - base
-  - mtl
+  - finitary
+  - finite-typelits
+  - ghc-typelits-knownnat
+  - search-algorithms
+
+language: GHC2021
+
+ghc-options:
+  - -Wall
+  - -Werror
+  - -Wincomplete-patterns
+  - -Wincomplete-uni-patterns
 
 library:
   exposed-modules: TwoBucket
   source-dirs: src
-  ghc-options: -Wall
-  # dependencies:
-  # - foo       # List here the packages you
-  # - bar       # want to use in your solution.
 
 tests:
   test:
