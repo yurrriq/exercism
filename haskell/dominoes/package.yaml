@@ -1,16 +1,24 @@
 name: dominoes
 version: 2.1.0.9
 
+author: Eric Bailey
+github: yurrriq/exercism
+
 dependencies:
   - base
+  - refined
+
+language: GHC2021
+
+ghc-options:
+  - -Wall
+  - -Werror
+  - -Wincomplete-patterns
+  - -Wincomplete-uni-patterns
 
 library:
   exposed-modules: Dominoes
   source-dirs: src
-  ghc-options: -Wall
-  # dependencies:
-  # - foo       # List here the packages you
-  # - bar       # want to use in your solution.
 
 tests:
   test:
