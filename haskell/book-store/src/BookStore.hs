@@ -1,7 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveAnyClass #-}
-{-# LANGUAGE DerivingStrategies #-}
-
 module BookStore
   ( Book (..),
     total,
@@ -9,11 +5,8 @@ module BookStore
 where
 
 import Algorithm.Search (dijkstra)
-import Data.Finitary (Finitary (Cardinality), toFinite)
-import Data.Finite (getFinite)
 import Data.IntMultiSet (IntMultiSet, (\\))
 import Data.IntMultiSet qualified as IMS
-import GHC.Generics (Generic)
 
 data Book
   = First
@@ -21,10 +14,9 @@ data Book
   | Third
   | Fourth
   | Fifth
-  deriving stock (Eq, Generic, Show)
-  deriving anyclass (Finitary)
+  deriving (Eq, Enum, Show)
 
-total :: forall a. (Finitary a, Cardinality a ~ 5) => [a] -> Int
+total :: [Book] -> Int
 total =
   maybe 0 fst
     . dijkstra purchases cost IMS.null
@@ -47,9 +39,9 @@ total =
 
 allSets :: [IntMultiSet]
 allSets =
-  IMS.fromDistinctAscList [1 .. 5]
+  IMS.fromDistinctAscList [0 .. 4]
     : concatMap
-      (map IMS.fromDistinctAscList . flip choose [1 .. 5])
+      (map IMS.fromDistinctAscList . flip choose [0 .. 4])
       [2, 3, 4]
 
 -- | All \(k\)-combinations of the natural numbers \(1\) through \(n\).
@@ -58,8 +50,5 @@ choose 0 _ = [[]]
 choose _ [] = []
 choose k (x : xs) = map (return x `mappend`) (choose (k - 1) xs) ++ choose k xs
 
-fromBooks :: forall a. (Finitary a, Cardinality a ~ 5) => [a] -> IntMultiSet
-fromBooks = IMS.fromList . map toInt
-
-toInt :: forall a. (Finitary a, Cardinality a ~ 5) => a -> Int
-toInt = (+ 1) . fromIntegral . getFinite . toFinite
+fromBooks :: [Book] -> IntMultiSet
+fromBooks = IMS.fromList . map fromEnum

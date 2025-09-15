@@ -6,8 +6,6 @@ github: yurrriq/exercism
 
 dependencies:
   - base
-  - finitary
-  - finite-typelits
   - multiset
   - search-algorithms
 
