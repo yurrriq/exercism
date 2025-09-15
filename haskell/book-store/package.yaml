@@ -1,16 +1,27 @@
 name: book-store
 version: 1.0.0.0
 
+author: Eric Bailey
+github: yurrriq/exercism
+
 dependencies:
   - base
+  - finitary
+  - finite-typelits
+  - multiset
+  - search-algorithms
+
+language: GHC2021
 
 library:
   exposed-modules: BookStore
   source-dirs: src
-  ghc-options: -Wall
-  # dependencies:
-  # - foo       # List here the packages you
-  # - bar       # want to use in your solution.
+
+ghc-options:
+  - -Wall
+  - -Werror
+  - -Wincomplete-patterns
+  - -Wincomplete-uni-patterns
 
 tests:
   test:
