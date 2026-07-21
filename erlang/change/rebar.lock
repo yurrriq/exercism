@@ -1,0 +1,11 @@
+{"1.2.0",
+[{<<"erl_exercism">>,{pkg,<<"erl_exercism">>,<<"0.1.2">>},0},
+ {<<"parse_trans">>,{pkg,<<"parse_trans">>,<<"3.1.0">>},1}]}.
+[
+{pkg_hash,[
+ {<<"erl_exercism">>, <<"15EC52FDE539CAB6DF57ABC5AD73D8DD99B6BE406FF67E106A597FACEA7CDCFA">>},
+ {<<"parse_trans">>, <<"1BAD3B959941CC53FFD6F4769A5D2666F9CDF179B2D62826636497D3FBAD9EC0">>}]},
+{pkg_hash_ext,[
+ {<<"erl_exercism">>, <<"056B45BFC9870A6473FB0CE63B8461942E4F2ABEBE76794E29CE8D791DF97278">>},
+ {<<"parse_trans">>, <<"816C49661A6CA0495538D5669EB04383AAFB4EEC2C3D32557C410CB2B4B2020A">>}]}
+].
